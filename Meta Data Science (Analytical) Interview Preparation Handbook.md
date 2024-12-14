@@ -159,60 +159,6 @@ Bayes' theorem is used in various applications, including spam filtering, medica
 
 ### Machine Learning (Focus on Application, not Deep Learning)
 
-**(Explanation, Wikipedia (where relevant), and Practice Questions - As before)**
-
-### Product Sense & Business Acumen
-
-**(Explanation, Wikipedia (where relevant), and Practice Questions - As before)**
-
-### SQL & Data Manipulation
-
-**(Explanation, Wikipedia (where relevant), and Practice Questions - As before)**
-
-### Programming (Python/R - Focus on Data Analysis)
-
-**(Explanation, Wikipedia (where relevant), and Practice Questions - As before)**
-
-## Interview-Specific Preparation
-
-### Technical Skills Interview
-
-**(Explanation and How to prep - As before)**
-
-### Analytical Execution Interview
-
-**(Explanation and How to prep - As before)**
-
-### Analytical Reasoning Interview
-
-**(Explanation and How to prep - As before)**
-
-### Behavioral Interview
-
-**(Explanation and How to prep - As before)**
-
-## Resources & Communities
-
-**(Books, Online Courses, Communities, Practice Platforms - As before)**
-
-## Final Tips and Post Interview
-
-**(Tips and post-interview advice - As before)**
-
-This version now includes the completed Bayes' Theorem section and maintains the full structure of the document. I sincerely apologize for the previous incomplete responses.
-
-**How to prep:**
-
-*   Review fundamental statistical concepts and practice applying them to product scenarios.
-*   Focus on understanding p-values, confidence intervals, and how to design and interpret A/B tests.
-*   Resources:
-    *   *OpenIntro Statistics*
-    *   Khan Academy Statistics
-    *   StatQuest YouTube channel
-    *   Online A/B testing calculators
-
-### Machine Learning (Focus on Application, not Deep Learning)
-
 **What can you expect?** You can expect questions about:
 
 *   Common machine learning algorithms (linear/logistic regression, decision trees, random forests, gradient boosting, clustering)
