@@ -1,7 +1,6 @@
 # Statistics & Probability for Meta Data Science Interviews
 
-This page provides a detailed review of statistics and probability concepts relevant to Meta Data Science (Analytical) interviews. 
-It is intended as a supplement to the main Meta Data Science Interview Preparation Handbook.
+This page provides a detailed review of statistics and probability concepts relevant to Meta Data Science (Analytical) interviews. It is intended as a supplement to the main Meta Data Science Interview Preparation Handbook.
 
 ---
 
@@ -17,7 +16,6 @@ It is intended as a supplement to the main Meta Data Science Interview Preparati
 
 *   **Watching all 4:** Since each story view is independent, we multiply the probabilities: 0.8 * 0.8 * 0.8 * 0.8 = 0.8<sup>4</sup> = 0.4096 or 40.96%
 *   **Watching at least 2:** This means watching 2, 3, or 4 stories. It's easier to calculate the complement (0 or 1 story) and subtract from 1.
-
     *   0 stories: 0.2<sup>4</sup> = 0.0016
     *   1 story: (4 choose 1) * 0.8 * 0.2<sup>3</sup> = 4 * 0.8 * 0.008 = 0.0256
     *   P(at least 2) = 1 - (0.0016 + 0.0256) = 1 - 0.0272 = 0.9728 or 97.28%
@@ -64,7 +62,6 @@ There are 11 such outcomes.
 **Answer:** The probability is 11/216, or approximately 5.09%.
 
 ### Statistical Inference
-
 **Question 4: Can you explain what a p-value and confidence interval are, but in layman's terms?**
 
 **Key Concept(s):** p-value, Confidence Interval, Statistical Significance
@@ -119,12 +116,99 @@ P(Convert | Flagged) = (0.80 \* 0.01) / 0.107 = 0.008 / 0.107 ≈ 0.0748 or 7.48
 
 ### Hypothesis Testing (A/B Testing)
 
-**Question 7: You're analyzing user engagement with a new feature. You observe that users who interact with the feature spend significantly more time on the platform. How would you determine if this increase in time spent is statistically significant?**
+**Question 7 (Continued): You're analyzing user engagement with a new feature. You observe that users who interact with the feature spend significantly more time on the platform. How would you determine if this increase in time spent is statistically significant?**
 
 **Key Concept(s):** Hypothesis Testing, A/B Testing, Statistical Significance, t-test, Mann-Whitney U test
 
-**Explanation:** This tests understanding of hypothesis testing and A/B testing.
-
-**Answer:** You would conduct an A/B test.
+**Answer (Continued):**
 
 1.  **Define Hypotheses:**
+    *   Null Hypothesis (H0): There is no significant difference in time spent on the platform between users who interact with the new feature and those who don't.
+    *   Alternative Hypothesis (H1): Users who interact with the new feature spend significantly more time on the platform.
+
+2.  **Choose a Test:** A two-sample t-test (if the data is approximately normally distributed *after handling outliers*) or a Mann-Whitney U test (if the data is not normally distributed or if sample sizes are small) would be appropriate.
+
+3.  **Calculate the Test Statistic and p-value:** Using the collected data from the A/B test, calculate the appropriate test statistic (t or U) and the corresponding p-value.
+
+4.  **Interpret the Results:** If the p-value is less than the chosen significance level (e.g., 0.05), you reject the null hypothesis and conclude that the increase in time spent is statistically significant. You would also want to consider the effect size (how large the difference is) in addition to statistical significance.
+
+**Question 8: Explain the difference between a one-tailed and a two-tailed hypothesis test. When would you use each?**
+
+**Key Concept(s):** One-tailed Test, Two-tailed Test, Hypothesis Testing
+
+**Explanation:** This is about the directionality of the hypothesis.
+
+*   **One-tailed Test:** Tests for a difference in *one* direction. For example, testing if a new feature *increases* conversion rates. The alternative hypothesis specifies a direction (e.g., μ > μ0 or μ < μ0).
+*   **Two-tailed Test:** Tests for a difference in *either* direction. For example, testing if a new feature has *any* effect (positive or negative) on conversion rates. The alternative hypothesis simply states that there is a difference (e.g., μ ≠ μ0).
+
+**Answer:** Use a one-tailed test when you have a specific directional hypothesis (you only care about an increase or a decrease). Use a two-tailed test when you're interested in any difference, regardless of direction.
+
+**Question 9: You have data on user sign-ups for your platform. You notice a large spike in sign-ups during a particular week. How would you investigate the cause of this spike?**
+
+**Key Concept(s):** Data Analysis, Segmentation, Time Series Analysis, Correlation Analysis
+
+**Explanation:** This tests analytical thinking and applying statistical concepts to a real-world problem.
+
+**Answer:**
+
+1.  **Data Validation:** Ensure the data is accurate and not due to a tracking error.
+2.  **External Factors:** Check for any external events that might have driven the spike (e.g., marketing campaigns, media coverage, competitor issues, holidays, viral trends).
+3.  **Segmentation:** Analyze sign-ups by different user segments (e.g., demographics, acquisition channel, device type, location) to see if the spike is concentrated in any particular group.
+4.  **A/B Testing (if applicable):** If any changes were made to the sign-up process during that week (e.g., new landing page, simplified form), analyze the A/B test results to see if they contributed to the spike.
+5.  **Time Series Analysis:** Look for patterns in sign-up data over time (e.g., seasonality, weekly trends) to see if the spike is unusual or part of a recurring trend.
+6.  **Correlation Analysis:** Examine correlations between sign-ups and other metrics (e.g., website traffic, social media mentions, search volume, app store rankings) to identify potential contributing factors.
+
+**Question 10: What are some methods for dealing with imbalanced datasets, and why are they important?**
+
+**Key Concept(s):** Imbalanced Datasets, Oversampling, Undersampling, SMOTE, Cost-Sensitive Learning
+
+**Explanation:** This is important in machine learning and data analysis when one class is significantly more prevalent than another.
+
+**Answer:** Imbalanced datasets can bias models towards the majority class. Methods to address this include:
+
+*   **Oversampling:** Duplicating instances from the minority class.
+*   **Undersampling:** Removing instances from the majority class.
+*   **SMOTE (Synthetic Minority Over-sampling Technique):** Creating synthetic instances of the minority class by interpolating between existing minority class instances.
+*   **Cost-sensitive learning:** Assigning higher misclassification costs to the minority class during model training.
+*   **Collecting more data:** If possible, collecting more data for the minority class can help balance the dataset.
+
+These methods are important because they help models learn to accurately predict the minority class, which is often the class of interest (e.g., fraud detection, churn prediction).
+
+**Question 11: Explain the concept of statistical power and its importance in experiment design.**
+
+**Key Concept(s):** Statistical Power, Type II Error, Sample Size, Effect Size, Significance Level
+
+**Explanation:** Relates to the ability of a test to find an effect if one exists.
+
+**Answer:** Statistical power is the probability of correctly rejecting the null hypothesis when it is false (i.e., finding a real effect). It's typically set at 80% (0.8). Low power means the experiment has a low chance of detecting a true effect, leading to potential Type II errors (false negatives). Factors affecting power include:
+
+*   **Sample Size:** Larger sample sizes increase power.
+*   **Effect Size:** Larger effects are easier to detect (higher power).
+*   **Significance Level (alpha):** Lower alpha (e.g., 0.01 instead of 0.05) decreases power.
+*   **Variability (Standard Deviation):** Lower variability in the data increases power.
+
+Power analysis is crucial in experiment design to determine the appropriate sample size needed to achieve the desired power. It helps avoid underpowered studies that may fail to detect real effects, wasting resources and time.
+
+### Harder Practice Questions (Social Network Focus)
+
+**(Previous Questions 12-17 remain here)**
+
+**Question 18: Confidence Intervals - Click-Through Rates:** You're analyzing the click-through rate (CTR) of a new ad campaign. You observe a CTR of 2% from a sample of 10,000 impressions. Calculate a 95% confidence interval for the true CTR. How would a larger sample size (e.g. 100,000 impressions) impact the width of the confidence interval?
+
+**Key Concept(s):** Confidence Intervals, Proportions, Sample Size
+
+**Explanation:** This tests the application and interpretation of confidence intervals.
+
+**Answer:**
+
+1.  **Calculate the Standard Error (n=10,000):** SE = sqrt\[p(1-p)/n] = sqrt\[(0.02 \* 0.98)/10000] ≈ 0.0014
+2.  **Find the Z-score:** For a 95% confidence interval, the z-score is approximately 1.96.
+3.  **Calculate the Confidence Interval (n=10,000):** CI = p ± z \* SE = 0.02 ± 1.96 \* 0.0014 ≈ (0.0173, 0.0227) or (1.73%, 2.27%)
+
+With a larger sample size (100,000 impressions):
+
+1.  **Calculate the Standard Error (n=100,000):** SE = sqrt\[(0.02 \* 0.98)/100000] ≈ 0.00044
+2.  **Calculate the Confidence Interval (n=100,000):** CI = 0.02 ± 1.96 \* 0.00044 ≈ (0.0191, 0.0209) or (1.91%, 2.09%)
+
+**Impact of Sample Size:** As you can see, the confidence interval is much narrower with the larger sample size. This is because the standard error decreases as the sample size increases, leading to a more precise estimate of the true CTR.
+
