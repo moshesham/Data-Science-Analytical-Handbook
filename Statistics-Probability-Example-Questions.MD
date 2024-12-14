@@ -212,3 +212,73 @@ With a larger sample size (100,000 impressions):
 
 **Impact of Sample Size:** As you can see, the confidence interval is much narrower with the larger sample size. This is because the standard error decreases as the sample size increases, leading to a more precise estimate of the true CTR.
 
+**Question 19: Combining Concepts - Outliers, Central Limit Theorem, and A/B Testing:** You are A/B testing a new algorithm for ranking posts in a user's feed. You are measuring the average time spent per session. You notice some users have extremely long session durations (potential outliers).
+
+1.  How would you handle these outliers before conducting your statistical test?
+2.  How does the Central Limit Theorem help you in this scenario, given that session durations are likely right-skewed?
+3.  What statistical test would you use to compare the average time spent between the control and treatment groups?
+
+**Key Concept(s):** Outliers, Central Limit Theorem, A/B Testing, t-test, Mann-Whitney U test
+
+**Explanation:** This question combines several important concepts.
+
+**Answer:**
+
+1.  **Handling Outliers:**
+    *   **Investigate:** Determine if the long session durations are due to errors (e.g., app crashes, background activity) or genuine user behavior (e.g., users leaving the app open).
+    *   **Transformation:** Consider a log transformation of the session duration data to reduce the influence of outliers and potentially normalize the distribution. This is often a good approach for right-skewed data like session durations.
+    *   **Winsorizing/Trimming:** Replace extreme values with less extreme values (Winsorizing) or remove them entirely (Trimming). This should be done cautiously and with a clear justification.
+2.  **Central Limit Theorem:** The Central Limit Theorem states that the distribution of the *sample means* of session duration will be approximately normal, even if individual session durations are right-skewed, *provided the sample size is large enough*. This is crucial because it allows you to use statistical tests that assume normality (like t-tests or z-tests) to make inferences about the *population mean* session duration, even though the original data is not normally distributed.
+3.  **Statistical Test:**
+    *   If the data is approximately normally distributed *after handling outliers/transformations* and the sample sizes are reasonably large, a two-sample t-test is appropriate.
+    *   If the data remains skewed even after transformation or if the sample size is small, the Mann-Whitney U test (a non-parametric test) is a better choice as it does not assume normality.
+
+**Question 20: Joint Probability and Conditional Probability - User Demographics and Feature Usage:** You have the following data about user demographics and usage of a new feature:
+
+| Demographic | Used Feature | Did Not Use Feature | Total |
+|---|---|---|---|
+| Age 18-24 | 300 | 200 | 500 |
+| Age 25-34 | 400 | 100 | 500 |
+| Total | 700 | 300 | 1000 |
+
+1.  What is the probability that a randomly selected user is aged 18-24 *and* used the feature?
+2.  What is the probability that a user used the feature *given* they are aged 25-34?
+3. Are age demographic and feature usage independent events?
+
+**Key Concept(s):** Joint Probability, Conditional Probability, Independence
+
+**Explanation:** This tests understanding of joint and conditional probabilities and how to assess independence.
+
+**Answer:**
+
+1.  **P(Age 18-24 and Used Feature):** 300/1000 = 0.3
+2.  **P(Used Feature | Age 25-34):** 400/500 = 0.8
+3.  **Independence:**
+    *   P(Age 18-24) = 500/1000 = 0.5
+    *   P(Used Feature) = 700/1000 = 0.7
+    *   If independent, P(Age 18-24 and Used Feature) should equal P(Age 18-24) \* P(Used Feature) = 0.5 * 0.7 = 0.35
+    *   Since 0.3 ≠ 0.35, the events are *not* independent.
+
+**Question 21: Confidence Intervals and A/B Testing for Engagement:** You run an A/B test on a new notification system designed to increase user engagement. You measure the average number of sessions per week. The control group (A) has a mean of 5.2 sessions with a standard deviation of 1.5, and the treatment group (B) has a mean of 5.5 sessions with a standard deviation of 1.6. Both groups have a sample size of 5000 users.
+
+1. Calculate a 95% confidence interval for the difference in means between the two groups.
+2. Based on the confidence interval, can you conclude that the new notification system significantly increased user engagement?
+
+**Key Concept(s):** Confidence Intervals, A/B Testing, Difference of Means, Standard Error
+
+**Explanation:** This tests understanding of confidence intervals in the context of A/B testing.
+
+**Answer:**
+
+1. **Calculate the Standard Error of the Difference:**
+   SE = sqrt((SD_A^2 / n_A) + (SD_B^2 / n_B)) = sqrt((1.5^2 / 5000) + (1.6^2 / 5000)) ≈ 0.031
+
+2. **Find the Z-score:** For a 95% confidence interval, the z-score is approximately 1.96.
+
+3. **Calculate the Confidence Interval for the Difference in Means:**
+   CI = (Mean_B - Mean_A) ± z * SE = (5.5 - 5.2) ± 1.96 * 0.031 = 0.3 ± 0.061 ≈ (0.239, 0.361)
+
+4. **Conclusion:** Since the confidence interval (0.239, 0.361) does *not* contain zero, we can conclude with 95% confidence that there is a statistically significant difference in the average number of sessions per week between the two groups. Because the entire interval is positive, we can say that the new notification system *significantly increased* user engagement (as measured by sessions per week).
+
+These additional questions provide more challenging scenarios and require a deeper understanding of the core statistical and probabilistic concepts relevant to data science interviews at Meta. Remember to not only provide the correct answers but also explain your reasoning clearly and concisely.
+
