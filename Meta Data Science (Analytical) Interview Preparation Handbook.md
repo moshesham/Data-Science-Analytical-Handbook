@@ -37,23 +37,101 @@ For more focused preparation:
 
 #### 1. Descriptive Statistics
 
-**(Explanation, Wikipedia, and Practice Questions - Same as before)**
+**Explanation:** Descriptive statistics summarize and describe the main features of a dataset. They provide a snapshot of the data's central tendency (where the data is centered) and dispersion (how spread out the data is). Key measures include:
+
+*   **Mean:** The average value (sum of all values divided by the number of values).
+*   **Median:** The middle value when the data is ordered.
+*   **Mode:** The most frequent value.
+*   **Variance:** The average of the squared differences from the mean.
+*   **Standard Deviation:** The square root of the variance, representing the typical deviation from the mean.
+
+These measures are crucial for understanding data distributions and identifying patterns or anomalies. For instance, comparing the mean and median can reveal skewness in the data. Standard deviation helps quantify the data's volatility or spread.
+
+**Wikipedia:** [Descriptive statistics](https://en.wikipedia.org/wiki/Descriptive_statistics)
+
+**Practice Questions:**
+
+1.  You have website session durations (in seconds): 10, 15, 20, 20, 25, 30, 60. Calculate the mean, median, mode, variance, and standard deviation.
+2.  A product has daily active users (DAU) for a week: 1000, 1200, 1100, 1300, 1050, 950, 1150. Calculate the average DAU and the standard deviation. What does the standard deviation tell you about the DAU?
+3.  Explain how outliers can affect the mean and median. Provide an example.
 
 #### 2. Probability Distributions
 
-**(Explanation, Wikipedia, and Practice Questions - Same as before)**
+**Explanation:** Probability distributions describe the likelihood of different outcomes in a random event. Key distributions relevant to data science include:
+
+*   **Normal Distribution:** A symmetric bell-shaped distribution, often used to model real-world phenomena. Many statistical tests assume normality.
+*   **Binomial Distribution:** Describes the probability of getting a certain number of successes in a fixed number of independent trials (e.g., the probability of getting *k* heads in *n* coin flips).
+*   **Poisson Distribution:** Describes the probability of a given number of events occurring in a fixed interval of time or space if these events occur with a known average rate and independently of the time since the last event (e.g., the number of website visits per hour).
+
+Understanding these distributions is essential for modeling random events, calculating probabilities, and performing statistical inference. For example, the normal distribution is used in hypothesis testing, while the Poisson distribution is used to model count data.
+
+**Wikipedia:** [Probability distribution](https://en.wikipedia.org/wiki/Probability_distribution), [Normal distribution](https://en.wikipedia.org/wiki/Normal_distribution), [Binomial distribution](https://en.wikipedia.org/wiki/Binomial_distribution), [Poisson distribution](https://en.wikipedia.org/wiki/Poisson_distribution)
+
+**Practice Questions:**
+
+1.  What is the probability of getting exactly 3 heads in 5 coin flips?
+2.  A website receives an average of 10 visits per hour. What is the probability of receiving exactly 15 visits in an hour?
+3.  Describe the characteristics of a normal distribution. What is the 68-95-99.7 rule (empirical rule)?
 
 #### 3. Hypothesis Testing
 
-**(Explanation, Wikipedia, and Practice Questions - Same as before)**
+**Explanation:** Hypothesis testing is a statistical method used to determine whether there is enough evidence to reject a null hypothesis (a statement of no effect or no difference). Key concepts include:
+
+*   **Null Hypothesis (H0):** The statement being tested (e.g., there is no difference between two groups).
+*   **Alternative Hypothesis (H1 or Ha):** The statement we are trying to find evidence for (e.g., there is a difference between two groups).
+*   **p-value:** The probability of observing the data (or more extreme data) if the null hypothesis is true. A small p-value (typically less than 0.05) suggests strong evidence against the null hypothesis.
+*   **Confidence Interval:** A range of values that is likely to contain the true population parameter with a certain level of confidence (e.g., a 95% confidence interval).
+*   **Statistical Power:** The probability of correctly rejecting the null hypothesis when it is false.
+
+A/B testing is a specific type of hypothesis testing used in product development to compare two versions of a feature or product.
+
+**Wikipedia:** [Hypothesis testing](https://en.wikipedia.org/wiki/Hypothesis_testing), [A/B testing](https://en.wikipedia.org/wiki/A/B_testing), [P-value](https://en.wikipedia.org/wiki/P-value), [Confidence interval](https://en.wikipedia.org/wiki/Confidence_interval), [Statistical power](https://en.wikipedia.org/wiki/Statistical_power)
+
+**Practice Questions:**
+
+1.  Explain the difference between a Type I error (false positive) and a Type II error (false negative) in hypothesis testing.
+2.  You are A/B testing two versions of a landing page. How would you set up the null and alternative hypotheses?
+3.  You conduct an A/B test and obtain a p-value of 0.03. What does this mean?
+4.  Explain what a confidence interval represents. How does the width of the confidence interval relate to the sample size?
 
 #### 4. Regression Analysis
 
-**(Explanation, Wikipedia, and Practice Questions - Same as before)**
+**Explanation:** Regression analysis is a statistical technique used to model the relationship between a dependent variable and one or more independent variables.
+
+*   **Linear Regression:** Used when the dependent variable is continuous. It models a linear relationship between the variables.
+*   **Logistic Regression:** Used when the dependent variable is categorical (e.g., binary outcome like click/no click). It models the probability of the outcome.
+
+Regression analysis helps predict outcomes, understand the strength and direction of relationships between variables, and identify important predictors.
+
+**Wikipedia:** [Regression analysis](https://en.wikipedia.org/wiki/Regression_analysis), [Linear regression](https://en.wikipedia.org/wiki/Linear_regression), [Logistic regression](https://en.wikipedia.org/wiki/Logistic_regression)
+
+**Practice Questions:**
+
+1.  When would you use linear regression versus logistic regression?
+2.  How do you interpret the coefficients in a linear regression model?
+3.  What are some common metrics for evaluating the performance of a regression model (e.g., R-squared, RMSE)?
 
 #### 5. Experimental Design
 
-**(Explanation, Wikipedia, and Practice Questions - Same as before)**
+**Explanation:** Experimental design involves carefully planning an experiment to ensure valid and reliable results. Key considerations include:
+
+*   **Randomization:** Randomly assigning participants to different groups to minimize bias.
+*   **Control Group:** A group that does not receive the treatment or intervention being tested.
+*   **Sample Size:** The number of participants in the experiment. A larger sample size generally leads to more statistical power.
+
+Proper experimental design is crucial for drawing causal inferences and avoiding confounding variables.
+
+**Wikipedia:** [Design of experiments](https://en.wikipedia.org/wiki/Design_of_experiments), [Randomization](https://en.wikipedia.org/wiki/Randomization), [Control group](https://en.wikipedia.org/wiki/Control_group), [Sample size determination](https://en.wikipedia.org/wiki/Sample_size_determination)
+
+**Practice Questions:**
+
+1.  Why is randomization important in experimental design?
+2.  What are some common threats to the validity of an experiment?
+3.  How do you determine the appropriate sample size for an A/B test?
+
+#### 6. Bayes' Theorem
+
+**Explanation:** Bayes' theorem describes how to update the probability of a hypothesis based on new evidence.
 
 #### 6. Bayes' Theorem
 
@@ -77,6 +155,7 @@ Bayes' theorem is used in various applications, including spam filtering, medica
 1.  Explain Bayes' theorem in your own words and provide a real-world example outside of the ones mentioned above.
 2.  A diagnostic test has a 95% accuracy rate (it correctly identifies the disease 95% of the time when it's present and correctly identifies no disease 95% of the time when it's absent). If the prevalence of a disease in the population is 1%, what is the probability that a person actually has the disease if they test positive? (This is a classic Bayes' theorem problem.)
 3. A social media platform uses a spam filter. The filter correctly identifies 99% of spam messages. It also incorrectly flags 0.1% of legitimate messages as spam. If 0.5% of all messages are actually spam, what is the probability that a message flagged as spam is truly spam?
+
 
 ### Machine Learning (Focus on Application, not Deep Learning)
 
