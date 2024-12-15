@@ -429,7 +429,9 @@ Given a table `UserActivity` (user_id, activity_date, activity_type), write a qu
 SELECT activity_date, activity_type, COUNT(DISTINCT user_id) AS num_users
 FROM UserActivity
 GROUP BY activity_date, activity_type;
+```
 
+```python
 import pandas as pd
 
 data = {'Name': ['Alice', 'Bob', 'Charlie', 'David', 'Eve'],
@@ -437,8 +439,10 @@ data = {'Name': ['Alice', 'Bob', 'Charlie', 'David', 'Eve'],
         'City': ['New York', 'London', 'New York', 'London', 'Paris']}
 df = pd.DataFrame(data)
 
+
 average_age_by_city = df.groupby('City')['Age'].mean()
 print(average_age_by_city)
+```
 
 ### Analytical Execution Interview (Data Analysis/Case Study)
 
