@@ -304,6 +304,7 @@ FROM Users u
 JOIN Orders o ON u.user_id = o.user_id
 WHERE u.signup_date BETWEEN '2023-01-01' AND '2023-01-31'
 GROUP BY u.user_id;
+```
 
 ## Programming (Python/R - Focus on Data Analysis)
 
