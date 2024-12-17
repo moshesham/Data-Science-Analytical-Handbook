@@ -23,6 +23,7 @@ This section provides complex SQL practice problems designed to simulate real-wo
 
 
 ---
+<div style="page-break-before: always;"></div> 
 
 ## Problem 1: Department Highest Salary (LeetCode 184)
 
@@ -67,6 +68,7 @@ This section provides complex SQL practice problems designed to simulate real-wo
 | Sales      | Henry    | 80000  |
 
 ---
+<div style="page-break-before: always;"></div> 
 
 ## Problem 2: Consecutive Numbers (LeetCode 180)
 
@@ -100,6 +102,7 @@ This section provides complex SQL practice problems designed to simulate real-wo
 
 
 ---
+<div style="page-break-before: always;"></div> 
 
 ## Problem 3: Customers Who Never Order (LeetCode 183)
 
@@ -141,6 +144,8 @@ This section provides complex SQL practice problems designed to simulate real-wo
 
 
 ---
+<div style="page-break-before: always;"></div> 
+
 ## Problem 4: Second Highest Salary (LeetCode 176)
 
 **Problem Statement:** Write an SQL query to get the second highest salary from the `Employee` table. If there is no second highest salary, then the query should return `null`.
@@ -169,6 +174,8 @@ This section provides complex SQL practice problems designed to simulate real-wo
 
 
 ---
+<div style="page-break-before: always;"></div> 
+
 ## Problem 5: Rising Temperature (LeetCode 197)
 
 **Problem Statement:** Write an SQL query to find all dates' `Id` with higher temperatures compared to its previous dates (yesterday's dates).
@@ -200,12 +207,11 @@ This section provides complex SQL practice problems designed to simulate real-wo
 
 
 ---
+<div style="page-break-before: always;"></div> 
 
-## Advanced SQL Practice Problems for Meta Data Science Interviews
 
-This section provides more complex SQL practice problems designed to simulate real-world scenarios at a social media company like Meta. These problems require a deeper understanding of SQL and analytical thinking.
 
-### Problem 6: Engagement Rate by Content Type
+## Problem 6: Engagement Rate by Content Type
 
 **Problem Statement:** You are a data scientist at a social media platform. The product team is considering investing in more video content. You need to analyze user engagement across different content types (photo, video, text) to determine if this is a worthwhile investment. Write an SQL query to calculate the average engagement rate (likes + comments + shares / impressions) for each content type, broken down by month.
 
@@ -257,7 +263,10 @@ This section provides more complex SQL practice problems designed to simulate re
 | 2024-02   | video        | 0.00133             |
 
 ---
-### Problem 7: Churn Rate by User Segment
+
+<div style="page-break-before: always;"></div> 
+
+## Problem 7: Churn Rate by User Segment
 
 **Problem Statement:** You are tasked with analyzing user churn. Calculate the churn rate for different user segments based on their signup date (users who signed up in the first half of the month vs. the second half). Churn is defined as users who were active in the previous month but did not have any activity in the current month.
 
@@ -299,7 +308,10 @@ This section provides more complex SQL practice problems designed to simulate re
 | Second Half    | 1.0        |
 
 ---
-### Problem 8: Average Time Between Posts
+
+<div style="page-break-before: always;"></div> 
+
+## Problem 8: Average Time Between Posts
 
 **Problem Statement:** Analyze how frequently users post. Calculate the average time (in days) between posts for users who have made at least two posts.
 
@@ -328,7 +340,10 @@ This section provides more complex SQL practice problems designed to simulate re
 | 101     | 3                      |
 
 ---
-### Problem 9: Most Popular Hashtags by Week
+
+<div style="page-break-before: always;"></div> 
+
+## Problem 9: Most Popular Hashtags by Week
 
 **Problem Statement:** Determine the most popular hashtags used each week. "Popularity" is defined by the number of posts containing the hashtag.
 
@@ -358,7 +373,10 @@ This section provides more complex SQL practice problems designed to simulate re
 | 2024-01-07 | #random    | 1          |
 
 ---
-### Problem 10: Retained Users by Cohort
+
+<div style="page-break-before: always;"></div> 
+
+## Problem 10: Retained Users by Cohort
 
 **Problem Statement:** Analyze user retention by cohort. A cohort is defined by the month a user signed up. Calculate the percentage of users from each cohort who are still active (have at least one activity) in the current month (let's assume it's March 2024 for this example).
 
@@ -410,7 +428,10 @@ This section provides more complex SQL practice problems designed to simulate re
 *   If a cohort has no users active in the current month, the retention rate should be 0.0.
 
 ---
-### Problem 11: Mutual Connections
+
+<div style="page-break-before: always;"></div> 
+
+## Problem 11: Mutual Connections
 
 **Problem Statement:** You are analyzing user connections on the platform. Write an SQL query to find all pairs of users who have at least three mutual connections.
 
@@ -451,7 +472,10 @@ This section provides more complex SQL practice problems designed to simulate re
 (Users 2, 3, and 4 have 3 mutual connections with user 5)
 
 ---
-### Problem 12: Average Post Engagement by User Age Group
+
+<div style="page-break-before: always;"></div> 
+
+## Problem 12: Average Post Engagement by User Age Group
 
 **Problem Statement:** You are analyzing post engagement based on user demographics. Calculate the average number of likes, comments, and shares per post for different user age groups (e.g., 18-24, 25-34, 35+).
 
@@ -483,7 +507,10 @@ This section provides more complex SQL practice problems designed to simulate re
 | 35+       | 8.7       | 1.5          | 0.8        |
 
 ---
-### Problem 13: Trending Topics Over Time
+
+<div style="page-break-before: always;"></div> 
+
+## Problem 13: Trending Topics Over Time
 
 **Problem Statement:** Identify trending topics on the platform over time. A topic is represented by a keyword. A topic is considered trending in a given week if its usage (number of posts containing the keyword) increases by at least 20% compared to the previous week.
 
@@ -505,7 +532,10 @@ This section provides more complex SQL practice problems designed to simulate re
 | 2024-01-07 | #newtopic  | 25.0             |
 
 ---
-### Problem 14: User Engagement Funnel
+
+<div style="page-break-before: always;"></div> 
+
+## Problem 14: User Engagement Funnel
 
 **Problem Statement:** Analyze the user engagement funnel for a specific feature (e.g., creating a story). Calculate the conversion rates between different stages of the funnel:
 
@@ -530,5 +560,3 @@ This section provides more complex SQL practice problems designed to simulate re
 | :------------------------- | :------------- |
 | Viewed Intro -> Started Creation | 60.0           |
 | Started Creation -> Posted Story | 75.0           |
-
-These problems involve more complex logic, multiple joins, window functions, and require careful consideration of edge cases and performance. They are designed to challenge candidates and assess their ability to handle real-world data analysis scenarios at scale.
