@@ -553,33 +553,70 @@ print(average_age_by_city)
 
 ### Analytical Execution Interview (Data Analysis/Case Study)
 
-**What to Expect:** This interview assesses your ability to conduct quantitative analysis, draw meaningful conclusions from data, and communicate your findings effectively. You'll typically be presented with a business problem or a dataset and asked to analyze it.
+**What to Expect:** This interview assesses your ability to conduct quantitative analysis, draw meaningful conclusions from data, and communicate your findings effectively. You'll typically be presented with a business problem or a dataset and asked to analyze it, focusing on hypothesis generation, quantitative analysis, goal setting aligned with business objectives, and adaptability to dynamic situations.
 
 **Key Areas:**
 
-*   **Data Analysis Techniques:** Applying statistical methods, data visualization, and other analytical techniques to solve business problems.
-*   **Data Interpretation:** Drawing meaningful insights and conclusions from data.
-*   **Communication:** Clearly and concisely communicating your findings to both technical and non-technical audiences.
+*   **Crafting Hypotheses and Statistical Knowledge:** Formulating strong, testable hypotheses, particularly for new features or data-driven decisions. Demonstrating a solid understanding of statistical concepts, including:
+    *   **Types of Hypotheses:** Null (H0) and Alternative (H1 or Ha).
+    *   **Framing Hypotheses:** Framing hypotheses in a testable way with quantifiable metrics.
+    *   **Prioritization:** Prioritizing hypotheses based on potential business impact and feasibility of testing.
+    *   **Key Statistical Concepts:** Law of Large Numbers, Central Limit Theorem, Linear Regression, descriptive statistics, common distributions, hypothesis testing, p-values, confidence intervals.
+*   **Proficiency in Quantitative Analysis:** Quantifying trade-offs, understanding the impact of features on relevant metrics, and using data to support your arguments. Examples of relevant metrics for social media: Engagement, Growth, Monetization. Example Calculation: "A 5% CTR increase on 1 million impressions translates to 50,000 additional clicks."
+*   **Goal Setting Aligned with Business Objectives:** Defining clear goals and success metrics that directly contribute to broader business objectives. Connecting metrics to business goals and considering business context. When setting up KPIs, consider:
+    *   **Success Metrics:** Metrics that directly measure the intended positive outcome of a change.
+    *   **Counter Metrics:** Metrics that could be negatively impacted by the change.
+    *   **Overall Ecosystem Stability Metrics:** Metrics that reflect the overall health of the platform and should remain stable.
+*   **Adapting Analytical Approaches in Dynamic Situations:** Demonstrating flexibility when facing data challenges, changing requirements, or confounding factors. Strategies include adjusting the approach, gathering data, reframing the problem, and communicating changes.
 
 **How to Prepare:**
 
-*   **Review Statistical Concepts:** Brush up on descriptive statistics, hypothesis testing, regression analysis, and experimental design.
-*   **Practice Data Analysis Case Studies:** Work through case studies from resources like McKinsey, BCG, and Bain.
-*   **Develop Strong Communication Skills:** Practice presenting your findings in a clear and structured manner. Use visualizations to support your arguments.
-*   **Think Critically:** Consider the limitations of your analysis and potential biases.
+*   **Master Foundational Statistical Concepts:** Focus on defining, applying, and explaining the limitations of the statistical concepts.
+*   **Practice with Case Studies:** Focus on hypothesis generation, quantitative analysis, and structured problem-solving.
+*   **Develop a Structured Approach to Trade-offs:** Use a structured framework (see table below).
+*   **Clear and Concise Communication:** Explain the "why" behind decisions, provide context, and use visualizations.
+*   **Share Behavioral Stories Demonstrating Adaptability:** Use the STAR method.
+*   **Familiarize Yourself with Meta's Context:** Research Meta's products, user base, and business objectives.
+*   **A/B Testing Deep Dive:** Understand sample size calculation, statistical significance, power, metrics to track, and interpreting results.
+*   **Other Experiment Types:** Be aware of quasi-experiments and observational studies.
+*   **Asking Clarifying Questions:** Practice asking clarifying questions to fully understand the problem, identify key assumptions, and uncover hidden requirements. This is crucial for focusing your analysis and ensuring you're solving the right problem.
+
+    | Option | Metric A | Impact on Metric A | Metric B | Impact on Metric B | Overall Assessment |
+    | :----- | :------- | :------------------ | :------- | :------------------ | :----------------- |
+    | A      | CTR      | +5%                 | Load Time | +20ms               | Acceptable Trade-off |
+    | B      | CTR      | +10%                | Load Time | +100ms              | Unacceptable Trade-off |
 
 **Example Scenario:**
 
 A social media platform has seen a recent decline in user engagement. How would you investigate the cause?
 
-**Possible Approach:**
+**Possible Approach (Enhanced):**
 
-1.  **Define Key Metrics:** Identify relevant metrics like daily/monthly active users, session duration, feature usage, and retention rate.
-2.  **Analyze Trends:** Analyze trends in these metrics over time to identify patterns and anomalies.
-3.  **Segment Users:** Segment users by demographics, behavior, and other factors to identify specific groups that are experiencing a decline in engagement.
-4.  **Formulate Hypotheses:** Develop hypotheses about the potential causes of the decline (e.g., a recent product change, increased competition, seasonal factors).
-5.  **Test Hypotheses:** Use data analysis and statistical methods (e.g., A/B testing, cohort analysis) to test your hypotheses.
-6.  **Communicate Findings:** Present your findings in a clear and concise manner, using visualizations to support your arguments.
+1.  **Clarifying Questions:** Before diving into analysis, ask clarifying questions:
+    *   "What is the timeframe of the decline?"
+    *   "Is the decline observed across all regions? markets?"
+    *   "Is the decline observed across all user segments or only specific ones?"
+    *   "Have there been any recent product changes or marketing campaigns?"
+    *   "While the user engagement has been declining, have the DAU and MAU metrics also been declining?"
+
+2.  **Define Key Metrics and Business Objectives:** Define "user engagement" with specific, measurable metrics (DAU, MAU, session duration, content creation rate, etc.). Connect these metrics to Meta's business objectives (ad revenue, user growth). Establish KPIs with the three categories:
+    *   **Success Metrics:** Increase in DAU by 5%, increase in average session duration by 10%.
+    *   **Counter Metrics:** Decrease in ad click-through rate, increase in user reports of bugs.
+    *   **Overall Ecosystem Stability Metrics:** Overall site load time, average number of posts per user.
+
+3.  **Craft Hypotheses:** Formulate testable hypotheses:
+    *   H0: The recent algorithm change had no impact on user engagement.
+    *   H1: The recent algorithm change led to a decrease in average session duration of more than 10%.
+    *   Consider other hypotheses related to competition, seasonality, or specific feature changes. Prioritize based on potential impact and testability.
+
+4.  **Analyze Trends and Segment Users:** Analyze trends, segmenting by demographics, behavior, and platform.
+
+5.  **Quantitative Analysis and Trade-off Evaluation:** Use A/B testing, cohort analysis, or regression. Quantify the impact of potential solutions. Use the trade-off table framework.
+
+6.  **Adapt to Dynamic Situations:** Discuss how you'd adapt if data quality issues arose, business priorities changed, or confounding factors were discovered.
+
+7.  **Communicate Findings and Recommendations:** Present findings clearly with visualizations. Provide data-driven recommendations aligned with business objectives and KPIs.
+
 
 ### Analytical Reasoning Interview (Product Sense/Metrics)
 
