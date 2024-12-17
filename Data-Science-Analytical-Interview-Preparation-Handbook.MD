@@ -257,109 +257,6 @@ Proper experimental design is crucial for drawing causal inferences and avoiding
 3.  How do you determine the appropriate sample size for an A/B test?
     *   Sample size calculation depends on factors such as the desired statistical power, significance level (alpha), minimum detectable effect size, and the variability of the metric being measured. Online calculators and statistical formulas can be used for this purpose.
 
-### 3. Hypothesis Testing
-
-**Explanation:** Hypothesis testing is a statistical method used to determine whether there is enough evidence to reject a null hypothesis (a statement of no effect or no difference). Key concepts include:
-
-*   **Null Hypothesis (H0):** The statement being tested (e.g., there is no difference between two groups, a new feature has no effect on conversion rate).
-*   **Alternative Hypothesis (H1 or Ha):** The statement we are trying to find evidence for (e.g., there is a difference between two groups, a new feature increases conversion rate).
-*   **p-value:** The probability of observing the data (or more extreme data) if the null hypothesis is true. A small p-value (typically less than 0.05) suggests strong evidence against the null hypothesis, leading to rejection of H0.
-*   **Confidence Interval:** A range of values that is likely to contain the true population parameter with a certain level of confidence (e.g., a 95% confidence interval means that if we repeated the experiment many times, 95% of the calculated intervals would contain the true population parameter).
-*   **Statistical Power:** The probability of correctly rejecting the null hypothesis when it is false (avoiding a Type II error). Power is influenced by sample size, effect size, and significance level (alpha).
-*   **Type I Error (False Positive):** Rejecting the null hypothesis when it is actually true.
-*   **Type II Error (False Negative):** Failing to reject the null hypothesis when it is actually false.
-*   **A/B testing:** A specific type of hypothesis testing used in product development to compare two versions of a feature or product to determine which performs better based on a specific metric.
-
-**Wikipedia:** [Hypothesis testing](https://en.wikipedia.org/wiki/Hypothesis_testing), [A/B testing](https://en.wikipedia.org/wiki/A/B_testing), [P-value](https://en.wikipedia.org/wiki/P-value), [Confidence interval](https://en.wikipedia.org/wiki/Confidence_interval), [Statistical power](https://en.wikipedia.org/wiki/Statistical_power)
-
-**Practice Questions:**
-
-1.  Explain the difference between a Type I error (false positive) and a Type II error (false negative) in hypothesis testing.
-    *   A Type I error is like convicting an innocent person (rejecting a true H0). A Type II error is like letting a guilty person go free (failing to reject a false H0).
-2.  You are A/B testing two versions of a landing page. How would you set up the null and alternative hypotheses?
-    *   H0: There is no difference in conversion rates between the two landing pages.
-    *   H1: There is a difference in conversion rates between the two landing pages (or H1: Version B has a higher conversion rate than Version A, if you have a directional hypothesis).
-3.  You conduct an A/B test and obtain a p-value of 0.03. What does this mean?
-    *   This means that if the null hypothesis (no difference between the pages) were true, there's only a 3% chance of observing the difference in conversion rates (or a more extreme difference) that you saw in your experiment. Since this is less than the typical significance level of 0.05, you would reject the null hypothesis and conclude that there is statistically significant evidence of a difference.
-4.  Explain what a confidence interval represents. How does the width of the confidence interval relate to the sample size?
-    *   A confidence interval is a range of values that we are reasonably confident contains the true population parameter. A larger sample size generally leads to a narrower confidence interval, providing a more precise estimate.
-
-### 4. Regression Analysis
-
-**Explanation:** Regression analysis is a statistical technique used to model the relationship between a dependent variable and one or more independent variables.
-
-*   **Linear Regression:** Used when the dependent variable is continuous. It models a linear relationship between the variables, expressed as y = mx + b (or a more complex form with multiple independent variables).
-*   **Logistic Regression:** Used when the dependent variable is categorical (e.g., binary outcome like click/no click, churn/no churn). It models the probability of the outcome using a sigmoid function.
-
-Regression analysis helps predict outcomes, understand the strength and direction of relationships between variables, and identify important predictors.
-
-**Wikipedia:** [Regression analysis](https://en.wikipedia.org/wiki/Regression_analysis), [Linear regression](https://en.wikipedia.org/wiki/Linear_regression), [Logistic regression](https://en.wikipedia.org/wiki/Logistic_regression)
-
-**Practice Questions:**
-
-1.  When would you use linear regression versus logistic regression?
-    *   Use linear regression when the dependent variable is continuous (e.g., house price, revenue). Use logistic regression when the dependent variable is categorical (e.g., whether a user clicks on an ad, whether a customer defaults on a loan).
-2.  How do you interpret the coefficients in a linear regression model?
-    *   The coefficient for an independent variable represents the change in the dependent variable for a one-unit change in that independent variable, holding all other variables constant.
-3.  What are some common metrics for evaluating the performance of a regression model (e.g., R-squared, RMSE)?
-    *   **R-squared:** Represents the proportion of variance in the dependent variable that is explained by the model.
-    *   **RMSE (Root Mean Squared Error):** Measures the average magnitude of the errors (the difference between predicted and actual values). Lower RMSE indicates better fit.
-
-### 5. Experimental Design
-
-**Explanation:** Experimental design involves carefully planning an experiment to ensure valid and reliable results. Key considerations include:
-
-*   **Randomization:** Randomly assigning participants to different groups to minimize bias and ensure that groups are comparable at the start of the experiment.
-*   **Control Group:** A group that does not receive the treatment or intervention being tested, serving as a baseline for comparison.
-*   **Treatment Group:** The group that receives the treatment or intervention.
-*   **Sample Size:** The number of participants in the experiment. A larger sample size generally leads to more statistical power and more precise estimates.
-*   **Confounding Variables:** Variables that are correlated with both the independent and dependent variables, potentially distorting the results. Proper experimental design aims to control for confounding variables.
-
-Proper experimental design is crucial for drawing causal inferences and avoiding spurious correlations.
-
-**Wikipedia:** [Design of experiments](https://en.wikipedia.org/wiki/Design_of_experiments), [Randomization](https://en.wikipedia.org/wiki/Randomization), [Control group](https://en.wikipedia.org/wiki/Control_group), [Sample size determination](https://en.wikipedia.org/wiki/Sample_size_determination)
-
-**Practice Questions:**
-
-1.  Why is randomization important in experimental design?
-    *   Randomization helps to distribute confounding variables evenly across groups, reducing bias and making it more likely that any observed differences between groups are due to the treatment.
-2.  What are some common threats to the validity of an experiment?
-    *   Selection bias (non-random assignment), attrition (participants dropping out), history effects (external events influencing the results), maturation (natural changes in participants over time), and testing effects (the act of being tested influencing subsequent tests).
-3.  How do you determine the appropriate sample size for an A/B test?
-    *   Sample size calculation depends on factors such as the desired statistical power, significance level (alpha), minimum detectable effect size, and the variability of the metric being measured. Online calculators and statistical formulas can be used for this purpose.
-
-Continuing from the previous sections, here's the next batch, covering the rest of Product Sense, SQL, and Programming:
-
-### Product Sense & Business Acumen (Continued)
-
-**Key Frameworks and Considerations:**
-
-*   **HEART Framework (Happiness, Engagement, Adoption, Retention, Task Success):** A framework for defining user-centered metrics.
-    *   **Happiness:** User satisfaction (e.g., surveys, NPS).
-    *   **Engagement:** User involvement (e.g., DAU/MAU, session duration).
-    *   **Adoption:** New user/feature uptake.
-    *   **Retention:** Returning users (e.g., churn rate).
-    *   **Task Success:** User efficiency in completing tasks.
-*   **North Star Metric:** A single metric that best captures the core value of your product.
-*   **Metrics Deep Dive:**
-    *   **Conversion Rate:** Percentage of users completing a desired action.
-    *   **Churn Rate:** Percentage of users stopping usage within a period.
-    *   **Customer Lifetime Value (CLTV):** Predicted revenue from a customer.
-    *   **Average Order Value (AOV):** Average revenue per order.
-
-**Practice Questions:**
-
-1.  How would you measure the success of a new feature launch on Facebook?
-    *   Consider metrics across the HEART framework. For example, adoption (number of users using the feature), engagement (frequency of use), and happiness (user feedback surveys).
-2.  How would you define the North Star Metric for a video streaming service like Netflix?
-    *   Possible North Star Metric: Total hours watched per month. This captures user engagement and value derived from the service.
-3. A social media platform notices a decline in daily active users. What metrics would you investigate to understand the cause?
-    * Look at metrics like:
-        *   Retention rate (day 1, day 7, day 30) to see if users are dropping off early.
-        *   Session duration and frequency to see if engagement has decreased.
-        *   Traffic sources to see if there's been a change in user acquisition.
-        *   Feature usage to see if core features are being used less.
-        *   Technical issues, bugs, or outages that might be affecting access or experience.
 
 ### SQL & Data Manipulation
 
@@ -490,7 +387,6 @@ While SQL is often the primary focus in data science interviews, demonstrating p
         plt.show()
         ```
 
-Continuing with the next section of the handbook:
 
 ## Interview-Specific Preparation
 
