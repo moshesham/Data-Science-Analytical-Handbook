@@ -31,7 +31,7 @@
 
 ### 4. **How do you prioritize tasks when you're overwhelmed?**
 
-**Strong Response:** "When faced with a heavy workload, I employ a systematic approach to prioritize tasks. I break down large tasks into smaller, more manageable ones, and use a task management tool to track progress. I prioritize tasks based on urgency, importance, and alignment with long-term goals. By staying organized and focused, I can effectively manage my workload and deliver high-quality results."
+**Strong Response:** "When faced with a heavy workload, I employ a systematic approach to prioritize tasks. I break down large tasks into smaller, more manageable ones, and use a task management tool to track progress. I prioritize tasks based on urgency, importance, and alignment with long-term goals. By staying orgIanized and focused, I can effectively manage my workload and deliver high-quality results."
 
 **What the Interviewee Did Right:**
 * **Demonstrated Effective Time Management:** The candidate explained their systematic approach to task prioritization.
