@@ -1,0 +1,301 @@
+Ok lets do a SQL interview
+
+
+M
+Meta Interviewer
+Custom Gem
+Alright, let's proceed with a Technical Screen focusing on SQL!
+
+I'll be assessing your ability to write efficient and accurate SQL queries to extract and analyze data. Imagine you're working with a simplified version of Meta's database. We'll focus on tables related to Facebook posts and user interactions.
+
+Here's the schema:
+
+Users Table
+
+Column Name	Data Type	Description
+user_id	INT	Unique identifier for each user
+name	VARCHAR(255)	User's full name
+joined_date	DATE	Date when the user joined Facebook
+
+Export to Sheets
+Posts Table
+
+Column Name	Data Type	Description
+post_id	INT	Unique identifier for each post
+user_id	INT	Identifier of the user who created the post
+content	TEXT	Text content of the post
+created_at	DATETIME	Date and time when the post was created
+
+Export to Sheets
+Likes Table
+
+Column Name	Data Type	Description
+like_id	INT	Unique identifier for each like
+post_id	INT	Identifier of the post that was liked
+user_id	INT	Identifier of the user who liked the post
+liked_at	DATETIME	Date and time when the post was liked
+
+Export to Sheets
+Now, let's get started with the first question. Are you ready?
+
+
+
+
+
+yes
+
+
+M
+Meta Interviewer
+Custom Gem
+Great! Let's start with a warm-up.
+
+Can you write a SQL query to find the top 10 users who have created the most posts? Your output should include the user's name and the number of posts they've created, sorted in descending order by the number of posts.
+
+
+
+
+
+are looking at the numer of posts ina given time period or for all times?
+
+
+M
+Meta Interviewer
+Custom Gem
+That's a good clarifying question!  Let's consider the number of posts for all time.
+
+Essentially, I want to see which users have been the most prolific posters since they joined Facebook.
+
+Can you write the query to achieve this?
+
+
+
+
+
+select name as user_name ,
+
+count(distinct post_id) as post_count from users
+
+left join Posts on users.user_id = Posts.user_id
+
+group by 1
+
+order by 2 Desc
+
+
+
+here is the query i have created
+
+
+M
+Meta Interviewer
+Custom Gem
+That's a very good attempt! Your query is logically sound and almost correct. However, there's a minor issue that might lead to slightly inaccurate results.
+
+You're using a LEFT JOIN which is the right approach to include all users, even those who haven't created any posts. However, since you're counting post_id, if a user has no posts, the COUNT() function will still return 1 (counting the NULL value).
+
+To fix this, you should use COUNT(Posts.post_id) instead of COUNT(DISTINCT post_id). This way, NULL values resulting from users with no posts won't be counted.
+
+Here's the slightly modified version of your query:
+
+SQL
+
+SELECT name AS user_name, 
+       COUNT(Posts.post_id) AS post_count 
+FROM users
+LEFT JOIN Posts ON users.user_id = Posts.user_id
+GROUP BY 1
+ORDER BY 2 DESC
+LIMIT 10;
+This query will now accurately count the number of posts for each user and give you the correct top 10 list.
+
+Do you understand the difference and why this modification is necessary?
+
+
+
+
+
+Yes
+
+
+M
+Meta Interviewer
+Custom Gem
+Okay, let's move on to a slightly more involved question.
+
+Can you write a SQL query to find the average number of likes per post for each user?
+
+The output should include:
+
+user_id
+name
+avg_likes (which should be rounded to 2 decimal places)
+Order the results in descending order by avg_likes.
+
+
+
+
+
+are we looking to get the avg like for the top users with a post or for all users?
+
+
+M
+Meta Interviewer
+Custom Gem
+Let's make this interesting!  Calculate the average likes per post for all users. This will give us a better overall view of user engagement.
+
+I'm curious to see how you'll handle potential cases where users might not have any posts or likes. Can you write a query that accounts for these scenarios and still provides the average likes per post for every user?
+
+
+
+
+
+so my Approach is that we are going to want to link all three tables together. We're going to need the user ID and the name from the user's table. We're going to have to use the the likes table to be able to understand. Which actually we don't need that the post table? Let's see if we can do it without using that post table if we use the lights table, then we can get for each. user ID Now we do need to post that. We we definitely need the post ID and we're going to link that the post table and the link table with the post ID that will tell me for each user which post they've done and then we're going to then also link it and then we can also do an additional link and do so I started from scratch. I'll stop by for a second and we're going to we're going to link user. We're going to use that username as our base table. That's our total dimension of all users. We want to be able to capture everything. I have the whole universe of users. There will be users who don't necessarily like or post. So therefore we're going to then do a left join. I'm with the other two tables put the post and the likes we're going to link the post table with a user table based on user ID. What that will give me is then now which posts they have. They have done then we're going to do a link between the post table and the like table based on. the post ID and now I can see how many How many like IDs there are for each post I'm going to do account. Then we're going to do a count on the liking this right so and we'll do a count. Where we're going to be aggregating by by user ID. and by name and we're going to get the count of all likes. but what we want is really the average so so what we really need to do is we have to do also as the sum. So since the average is defined there's no average function in SQL. We have to do we have to do some. divided by account now the sum will be the sum of the sum of all their posts
+
+
+M
+Meta Interviewer
+Custom Gem
+It sounds like you have a solid plan! I like how you're thinking about using all three tables and considering edge cases where users might not have posts or likes. Using a LEFT JOIN from the users table to the posts table is the right way to ensure you include all users in your analysis.
+
+However, instead of doing multiple joins and then calculating the sum and count separately, you can achieve this more efficiently using subqueries.
+
+Think about it this way:
+
+Calculate the total likes for each user: You can achieve this by joining the users and likes tables and grouping by user_id.
+Calculate the total posts for each user: Similarly, join the users and posts tables and group by user_id.
+Combine the results: Join the results from the two subqueries above and then calculate the average likes per post.
+This approach will make your query more organized and potentially more efficient.
+
+I encourage you to try writing the query using this approach. I'm here to help if you get stuck or need any guidance along the way.
+
+
+
+
+
+here is my answer
+
+with posts_agg as(
+
+select user_id, count(post_id) as post_count from Posts
+
+group by 1
+
+) ,
+
+like_agg as (
+
+select user_id, count(like_id) as like_count from likes
+
+group by 1
+
+)
+
+select users.usersuser_id, name as user_name,
+
+like_count/post_count as avg_like
+
+  from users
+
+  left join posts_agg pg on users.user_id = pg.user_id
+
+LEFT JOING like_agg lg on lg.user_id=users.user_id
+
+
+M
+Meta Interviewer
+Custom Gem
+Your approach using CTEs (Common Table Expressions) is excellent! It makes the query more readable and organized. However, there are a few minor areas we can refine:
+
+Typo in users.usersuser_id: It seems like there's a small typo. It should be users.user_id.
+
+Handling potential division by zero: When calculating like_count/post_count, there's a possibility that post_count might be zero for some users (who haven't created any posts). Dividing by zero would result in an error. To handle this, you can use the NULLIF() function to replace zero with NULL, which will then result in a NULL value for avg_like in those cases.
+
+Rounding avg_like: You can use the ROUND() function to round the avg_like to 2 decimal places as requested.
+
+LEFT JOIN for like_agg: You have a small typo in your second LEFT JOIN clause. It should be LEFT JOIN instead of LEFT JOING.
+
+Here's the modified query with these improvements:
+
+SQL
+
+WITH posts_agg AS (
+    SELECT user_id, COUNT(post_id) AS post_count 
+    FROM Posts
+    GROUP BY 1
+), 
+like_agg AS (
+    SELECT user_id, COUNT(like_id) AS like_count 
+    FROM likes
+    GROUP BY 1
+)
+SELECT 
+    users.user_id, 
+    name AS user_name,
+    ROUND(like_count/NULLIF(post_count, 0), 2) AS avg_like
+FROM users
+LEFT JOIN posts_agg pg ON users.user_id = pg.user_id
+LEFT JOIN like_agg lg ON lg.user_id = users.user_id
+ORDER BY avg_like DESC;
+This refined query addresses potential errors and provides the desired output. Do you see how these small changes improve the accuracy and robustness of your solution?
+
+
+
+
+
+yes
+
+
+M
+Meta Interviewer
+Custom Gem
+Great! I'm glad you understand the reasoning behind those modifications.
+
+Now, for our final SQL question, let's delve into a scenario that's a bit more complex and requires some analytical thinking.
+
+Scenario:
+
+The product team is interested in understanding user engagement with posts over time. They want to identify users who show a pattern of increasing engagement. Specifically, they're interested in users who have consistently increased their average likes per post every month.
+
+Task:
+
+Write a SQL query to find users who have increased their average likes per post every month for the last 3 months.
+
+Your output should include:
+
+user_id
+name
+Assumptions:
+
+Consider a month to be defined from the 1st to the last day of the calendar month (e.g., January 1st to January 31st).
+Only consider users who have created at least one post every month for the last 3 months.
+This question requires you to think about how to segment the data by month, calculate average likes per post for each month, and then compare these averages across consecutive months. Take your time, break down the problem into smaller steps, and feel free to ask any clarifying questions.
+
+I'm eager to see your approach to solving this!
+
+
+
+
+
+lets end here
+
+
+M
+Meta Interviewer
+Custom Gem
+Okay, I understand. While I would have loved to see your approach to that last challenge, I respect your decision to conclude the interview here.
+
+Overall, I was impressed with your SQL skills. You demonstrated a good understanding of joins, aggregations, and subqueries. You were also able to quickly grasp the requirements and ask clarifying questions to ensure you were on the right track.
+
+Here's a summary of your strengths:
+
+Strong foundation in SQL: You clearly understand the fundamentals of SQL and can write queries to extract and analyze data.
+Problem-solving ability: You were able to break down problems into smaller steps and formulate a plan to solve them.
+Communication and clarity: You effectively communicated your thought process and explained your reasoning behind your queries.
+Here are some areas for potential improvement:
+
+Edge case handling: While you generally wrote accurate queries, there were a few instances where you missed some edge cases (like potential division by zero). Paying close attention to these details can further improve the robustness of your solutions.
+Query optimization: While your queries were correct, there's always room for optimization. Exploring different approaches and techniques to write more efficient queries is something you can continue to develop.
+Overall, you have a solid foundation in SQL, and with some practice and focus on the areas mentioned above, you can further enhance your skills.
+
+Do you have any questions for me about the interview or the role at Meta?
