@@ -22,8 +22,9 @@ Thank you for having me. A 10% drop in DAU is definitely a serious concern. My i
 *   **Platform/Device Analysis:**  I'd also analyze the decline across different platforms (iOS, Android, Web) and device types. A drop specific to one platform could indicate a technical issue or a platform-specific competitor.
 *   **Time Series Analysis:**  It would be crucial to examine the trend of the decline over time. Was it a sudden drop, a gradual decline, or a fluctuating pattern? This can help us understand the potential cause. A sudden drop might suggest a specific event like an outage or negative press. A gradual decline may indicate a growing problem with user engagement or competition. We should also examine whether the decline is uniform across all days of the week or specific to weekends or weekdays, to find any patterns.
 
-![alt text](resources\problem_flow_diagram.png)
 
+Here is a breakown of my process:
+![alt text](../resources/problem_flow_diagram.png)
 
 **2. Investigating Potential Causes:**
 
@@ -124,7 +125,7 @@ We will continuously track the active user ratio for each user in both groups th
 Let's illustrate the statistical analysis with a concrete example using synthetic data.
 
 *   **Sample Data (Synthetic):**
-    *   Control Group (A): $n_A = 5000$ users, $x_A = 2500$ active users (as defined by our metric)
+    *   Control Group (A): $n_A = 5000$ users, $x_A = 2500$ active users
     *   Experimental Group (B): $n_B = 5000$ users, $x_B = 2750$ active users
 
 *   **1. Calculate Observed Proportions:**
@@ -144,11 +145,13 @@ Let's illustrate the statistical analysis with a concrete example using syntheti
 
     $Z = \frac{\hat{p}_B - \hat{p}_A}{SE} = \frac{0.55 - 0.5}{0.00707} \approx 7.07$
 
-*   **5. Calculate the p-value (Two-tailed Test):**
+*   **5. Calculate the p-value (One-tailed Test - Right-tailed):**
 
-    Using a Z-table or statistical software, we find the probability of getting a Z-score greater than 7.07. This probability is extremely small, practically 0. Therefore:
+    For a *one-tailed* (right-tailed) test, we only consider the probability of getting a Z-score *greater* than our calculated Z.
 
-    $p\text{-value} = 2 \times P(Z > |7.07|) \approx 0$
+    $p\text{-value} = P(Z > 7.07) \approx 0$
+
+    (This is because the probability of getting a Z-score this high is extremely close to zero.)
 
 *   **6. Make a Decision:**
 
@@ -160,7 +163,7 @@ Let's illustrate the statistical analysis with a concrete example using syntheti
 
 *   **7. Interpretation:**
 
-    We have strong statistical evidence to conclude that the modified algorithm has a statistically significant positive impact on the active user ratio. The observed increase from 50% to 55% is highly unlikely to have occurred by chance.
+    We have strong statistical evidence to conclude that the modified algorithm has a statistically significant *positive* impact on the active user ratio. The observed increase from 50% to 55% is highly unlikely to have occurred by chance.
 
     **Effect Size:**
 
@@ -169,6 +172,84 @@ Let's illustrate the statistical analysis with a concrete example using syntheti
     $\hat{p}_B - \hat{p}_A = 0.55 - 0.5 = 0.05$ or a 5% increase.
 
     This means the modified algorithm resulted in a 5 percentage point increase in the active user ratio. Whether this is a practically significant effect depends on business context and goals.
+
+
+**Alternative Experiment:**: **A/B Test of Algorithm Modification Focus on Average Session Duration**
+
+*   **Goal:** To determine if a modified algorithm, designed to increase engagement among the 18-24 age group in North America and Europe, can positively impact the *average session duration*, while not negatively impacting other demographics.
+
+*   **Target Population:** All Instagram users, with a focus on analyzing the impact across different age groups.
+
+*   **Control Group:** A randomly selected group of users across all demographics will continue to experience the current algorithm.
+
+*   **Experimental Group:** A randomly selected group of users across all demographics will experience the modified algorithm (as described in the previous response – focused on increased visibility of historically engaging content for the 18-24 demographic).
+
+*   **Primary Metric: Average Session Duration:**
+    *   **Definition:** The average time (in seconds or minutes) a user spends in a single app session.
+    *   **Calculation:** Total session time for all users in the group / Number of sessions in the group.
+
+*   **Secondary Metrics:**
+    *   **Number of Sessions per User:** To ensure the increase in session duration isn't simply due to users having fewer, but longer, sessions.
+    *   **Content Interaction Rate (Likes, Comments, Shares, Saves):** To check if longer sessions also lead to more interaction with content.
+    *   **Active User Ratio:** To ensure that the change in session duration does not negatively impact the number of active users.
+    *   **Churn Rate:** The proportion of users who become inactive during the experiment.
+
+*   **Hypotheses:**
+    *   **Null Hypothesis (H0):** The modified algorithm has no significant *positive* impact on average session duration. Mathematically: $\mu_B \le \mu_A$ or $\mu_B - \mu_A \le 0$
+    *   **Alternative Hypothesis (H1):** The modified algorithm has a statistically significant *positive* impact on average session duration. Mathematically: $\mu_B > \mu_A$ or $\mu_B - \mu_A > 0$
+        Where:
+        *   $\mu_A$ is the average session duration of the control group.
+        *   $\mu_B$ is the average session duration of the experimental group.
+
+*   **Statistical Analysis:**
+    *   We will use a one-tailed (right-tailed) two-sample Z-test if we can assume the session duration data is approximately normally distributed (after handling outliers). If the data is not normally distributed, a non-parametric test like the Mann-Whitney U test could be used. Given the large sample sizes we would use a Z test.
+    *   We will set a significance level ($\alpha$) of 0.05.
+    *   We will calculate the p-value and compare it to $\alpha$.
+    *   We will also calculate the effect size (e.g., Cohen's d) to quantify the magnitude of the difference.
+
+    Let's illustrate the statistical analysis with synthetic data.
+
+*   **Sample Data (Synthetic):**
+    *   Control Group (A): $n_A = 10000$ sessions, average session duration $\bar{x}_A = 300$ seconds, sample standard deviation $s_A = 100$ seconds.
+    *   Experimental Group (B): $n_B = 10000$ sessions, average session duration $\bar{x}_B = 315$ seconds, sample standard deviation $s_B = 105$ seconds.
+
+*   **1. Calculate the Pooled Standard Deviation:**
+
+    Since our sample sizes are large we use the sample standard deviations to calculate the standard error.
+
+*   **2. Calculate the Standard Error of the Difference (SE):**
+
+    $SE = \sqrt{\frac{s_A^2}{n_A} + \frac{s_B^2}{n_B}} = \sqrt{\frac{100^2}{10000} + \frac{105^2}{10000}} \approx \sqrt{1.0 + 1.1025} \approx 1.45$
+
+*   **3. Calculate the Z-score:**
+
+    $Z = \frac{\bar{x}_B - \bar{x}_A}{SE} = \frac{315 - 300}{1.45} \approx 10.34$
+
+*   **4. Calculate the p-value (One-tailed Test - Right-tailed):**
+
+    $p\text{-value} = P(Z > 10.34) \approx 0$ (Extremely close to zero)
+
+*   **5. Make a Decision:**
+
+    With $\alpha = 0.05$, since $p\text{-value} \approx 0 < 0.05$, we reject the null hypothesis.
+
+*   **6. Interpretation:**
+
+    There is very strong statistical evidence that the modified algorithm has a statistically significant *positive* impact on average session duration. The observed increase of 15 seconds is highly unlikely to have occurred by chance.
+
+    **Effect Size (Cohen's d):**
+
+    $d = \frac{\bar{x}_B - \bar{x}_A}{s_{pooled}}$
+
+    Where $s_{pooled} = \sqrt{\frac{(n_A - 1)s_A^2 + (n_B - 1)s_B^2}{n_A + n_B - 2}} \approx \sqrt{\frac{9999*10000 + 9999*11025}{19998}} \approx 102.5$
+
+    $d = \frac{315 - 300}{102.5} \approx 0.15$
+
+    This is considered a small effect size, indicating that while the increase is statistically significant, the practical impact on session duration might be modest.
+
+The key change is the focus on Average Session Duration as the primary metric and the corresponding use of a Z-test for means. The example calculation now uses means and standard deviations, and the effect size is calculated using Cohen's d, which is appropriate for comparing means. The interpretations are also adjusted to reflect the change in metric.
+
+![alt text](image.png)
 
 
 **5. Addressing Potential Concerns:**
@@ -353,3 +434,6 @@ This candidate's performance indicates a high level of competence and potential.
 
 **Interview Question:** You are a Data Scientist on the Workplace from Meta team. How would you approach investigating this decline in active user engagement within the financial services industry in EMEA? What are some of the key questions you would seek to answer, what data would you analyze, and what hypotheses would you form to explain this trend?
 
+
+
+[def]: resources\problem_flow_diagram.png
