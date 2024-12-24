@@ -22,6 +22,9 @@ Thank you for having me. A 10% drop in DAU is definitely a serious concern. My i
 *   **Platform/Device Analysis:**  I'd also analyze the decline across different platforms (iOS, Android, Web) and device types. A drop specific to one platform could indicate a technical issue or a platform-specific competitor.
 *   **Time Series Analysis:**  It would be crucial to examine the trend of the decline over time. Was it a sudden drop, a gradual decline, or a fluctuating pattern? This can help us understand the potential cause. A sudden drop might suggest a specific event like an outage or negative press. A gradual decline may indicate a growing problem with user engagement or competition. We should also examine whether the decline is uniform across all days of the week or specific to weekends or weekdays, to find any patterns.
 
+![alt text](resources\problem_flow_diagram.png)
+
+
 **2. Investigating Potential Causes:**
 
 *   **Recent Changes:** I'd work with product and engineering teams to create a timeline of any recent changes to the Instagram platform, including algorithm updates, feature launches/removals, UI/UX changes, and marketing campaigns. We need to understand if any of these changes correlate with the DAU decline.
@@ -115,7 +118,58 @@ To test Hypothesis 2, I propose running an A/B test with the following framework
 
 *   **Power Analysis:** Before launching the experiment, we will conduct a power analysis to determine the required sample size for each group. We'll aim for a power of at least 0.8 (80%), which means we have an 80% chance of detecting a true effect if one exists. The power analysis will take into account our desired significance level (0.05), estimated effect size (based on historical data or a pilot study), and the variability of our primary metric (active user ratio). Using these inputs, we can calculate the minimum sample size needed per group.
 
-*   **Data Collection:** We will continuously track the active user ratio for each user in both groups throughout the experiment. We will also collect data on the secondary metrics mentioned earlier. We will calculate the active user ratio weekly to monitor any trends and make adjustments if necessary (e.g., if we see a very large negative impact on the experimental group).
+*   **Data Collection and Example Mathematical Solution:**
+We will continuously track the active user ratio for each user in both groups throughout the experiment. We will also collect data on the secondary metrics mentioned earlier. We will calculate the active user ratio weekly to monitor any trends and make adjustments if necessary (e.g., if we see a very large negative impact on the experimental group).
+
+Let's illustrate the statistical analysis with a concrete example using synthetic data.
+
+*   **Sample Data (Synthetic):**
+    *   Control Group (A): $n_A = 5000$ users, $x_A = 2500$ active users (as defined by our metric)
+    *   Experimental Group (B): $n_B = 5000$ users, $x_B = 2750$ active users
+
+*   **1. Calculate Observed Proportions:**
+
+    *   $\hat{p}_A = \frac{x_A}{n_A} = \frac{2500}{5000} = 0.5$
+    *   $\hat{p}_B = \frac{x_B}{n_B} = \frac{2750}{5000} = 0.55$
+
+*   **2. Calculate the Pooled Proportion ($\hat{p}$):**
+
+    $\hat{p} = \frac{x_A + x_B}{n_A + n_B} = \frac{2500 + 2750}{5000 + 5000} = \frac{5250}{10000} = 0.525$
+
+*   **3. Calculate the Standard Error of the Difference (SE):**
+
+    $SE = \sqrt{\hat{p}(1 - \hat{p}) \left(\frac{1}{n_A} + \frac{1}{n_B}\right)} = \sqrt{0.525(1 - 0.525) \left(\frac{1}{5000} + \frac{1}{5000}\right)} \approx 0.00707$
+
+*   **4. Calculate the Z-score:**
+
+    $Z = \frac{\hat{p}_B - \hat{p}_A}{SE} = \frac{0.55 - 0.5}{0.00707} \approx 7.07$
+
+*   **5. Calculate the p-value (Two-tailed Test):**
+
+    Using a Z-table or statistical software, we find the probability of getting a Z-score greater than 7.07. This probability is extremely small, practically 0. Therefore:
+
+    $p\text{-value} = 2 \times P(Z > |7.07|) \approx 0$
+
+*   **6. Make a Decision:**
+
+    Our chosen significance level ($\alpha$) is 0.05. Since our calculated p-value (approximately 0) is much less than 0.05:
+
+    $0 < 0.05$
+
+    We reject the null hypothesis.
+
+*   **7. Interpretation:**
+
+    We have strong statistical evidence to conclude that the modified algorithm has a statistically significant positive impact on the active user ratio. The observed increase from 50% to 55% is highly unlikely to have occurred by chance.
+
+    **Effect Size:**
+
+    The absolute effect size is:
+
+    $\hat{p}_B - \hat{p}_A = 0.55 - 0.5 = 0.05$ or a 5% increase.
+
+    This means the modified algorithm resulted in a 5 percentage point increase in the active user ratio. Whether this is a practically significant effect depends on business context and goals.
+
 
 **5. Addressing Potential Concerns:**
 
