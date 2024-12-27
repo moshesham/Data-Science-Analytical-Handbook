@@ -639,27 +639,7 @@ This section focuses on aspects specific to Meta's interview process and technol
 
 ## Practice Problems
 
-This section provides some example practice problems.
-
-**(Remember to expand this with more problems and solutions)**
-
-*   **Statistics/Probability:**
-    *   A coin is flipped 10 times. What is the probability of getting exactly 5 heads?
-    *   Solution: Binomial distribution. (10 choose 5) * (0.5)^5 * (0.5)^5 = 0.246
-*   **SQL:**
-    *   Given a table `Users` (user_id, country) and `Purchases` (purchase_id, user_id, amount), write a query to find the total purchase amount per country.
-    *   Solution:
-
-    ```sql
-    SELECT u.country, SUM(p.amount) AS total_purchase_amount
-    FROM Users u
-    JOIN Purchases p ON u.user_id = p.user_id
-    GROUP BY u.country;
-    ```
-
-*   **Product Sense:**
-    *   How would you measure the success of a new feature designed to increase user retention on Instagram?
-    *   Solution: Look at metrics like Day 1, 7, 30 retention rates, churn rate, session frequency, time spent in the app, and feature usage. A/B test the feature to measure its impact on these metrics.
+[Extra Review Problems](https://github.com/moshesham/Data-Science-Analytical-Handbook/tree/main/Extra-Review-Problems) 
 
 ## Resources & Communities
 
