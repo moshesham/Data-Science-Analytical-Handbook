@@ -738,3 +738,5 @@ This section provides some example practice problems.
 *   **Follow Up:** Send thank-you notes to your interviewers after each interview.
 *   **Learn from the Process:** Regardless of the outcome, treat each interview as a learning experience. Reflect on your performance and identify areas for improvement.
 
+
+![Visitor Count](https://visitor-badge.laobi.icu/badge?page_id=moshesham)
