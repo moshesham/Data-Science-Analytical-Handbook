@@ -333,8 +333,8 @@ With a larger sample size (100,000 impressions):
 
 **Question 21: Confidence Intervals and A/B Testing for Engagement:** You run an A/B test on a new notification system designed to increase user engagement. You measure the average number of sessions per week. The control group (A) has a mean of 5.2 sessions with a standard deviation of 1.5, and the treatment group (B) has a mean of 5.5 sessions with a standard deviation of 1.6. Both groups have a sample size of 5000 users.
 
-1. Calculate a 95% confidence interval for the difference in means between the two groups.
-2. Based on the confidence interval, can you conclude that the new notification system significantly increased user engagement?
+1.  Calculate a 95% confidence interval for the difference in means between the two groups.
+2.  Based on the confidence interval, can you conclude that the new notification system significantly increased user engagement?
 
 **Key Concept(s):** Confidence Intervals, A/B Testing, Difference of Means, Standard Error
 
@@ -342,17 +342,46 @@ With a larger sample size (100,000 impressions):
 
 **Answer:**
 
-1. **Calculate the Standard Error of the Difference:**
-   \(SE = \sqrt{\frac{SD_A^2}{n_A} + \frac{SD_B^2}{n_B}} = \sqrt{\frac{1.5^2}{5000} + \frac{1.6^2}{5000}} \approx 0.031\)
+1.  **Calculate the Standard Error of the Difference (SE):**
 
-2. **Find the Z-score:** For a 95% confidence interval, the z-score is approximately 1.96.
+    The standard error of the difference between two means is calculated as:
 
-3. **Calculate the Confidence Interval for the Difference in Means:**
-   \(CI = (Mean_B - Mean_A) \pm z * SE = (5.5 - 5.2) \pm 1.96 * 0.031 = 0.3 \pm 0.061 \approx (0.239, 0.361)\)
+    $SE = \sqrt{\frac{SD_A^2}{n_A} + \frac{SD_B^2}{n_B}}$
 
-4. **Conclusion:** Since the confidence interval (0.239, 0.361) does *not* contain zero, we can conclude with 95% confidence that there is a statistically significant difference in the average number of sessions per week between the two groups. Because the entire interval is positive, we can say that the new notification system *significantly increased* user engagement (as measured by sessions per week).
+    Where:
 
-These additional questions provide more challenging scenarios and require a deeper understanding of the core statistical and probabilistic concepts relevant to data science interviews at Meta. Remember to not only provide the correct answers but also explain your reasoning clearly and concisely.
+    *   $SD_A$ is the standard deviation of group A.
+    *   $SD_B$ is the standard deviation of group B.
+    *   $n_A$ is the sample size of group A.
+    *   $n_B$ is the sample size of group B.
+
+    Plugging in the given values:
+
+    $SE = \sqrt{\frac{1.5^2}{5000} + \frac{1.6^2}{5000}} = \sqrt{\frac{2.25}{5000} + \frac{2.56}{5000}} = \sqrt{0.00045 + 0.000512} = \sqrt{0.000962} \approx 0.031$
+
+2.  **Find the Z-score:**
+
+    For a 95% confidence interval, the Z-score is approximately 1.96. This value corresponds to the point on the standard normal distribution where 95% of the data falls within $\pm$ 1.96 standard deviations of the mean.
+
+3.  **Calculate the Confidence Interval for the Difference in Means:**
+
+    The confidence interval for the difference in means is calculated as:
+
+    $CI = (\bar{x}_B - \bar{x}_A) \pm z \times SE$
+
+    Where:
+
+    *   $\bar{x}_A$ is the mean of group A.
+    *   $\bar{x}_B$ is the mean of group B.
+    *   $z$ is the Z-score corresponding to the desired confidence level.
+
+    Plugging in the values:
+
+    $CI = (5.5 - 5.2) \pm 1.96 \times 0.031 = 0.3 \pm 0.061 \approx (0.239, 0.361)$
+
+4.  **Conclusion:**
+
+    Since the 95% confidence interval (0.239, 0.361) does *not* contain zero, we can conclude with 95% confidence that there is a statistically significant difference in the average number of sessions per week between the two groups. Because the entire interval is positive, we can confidently state that the new notification system *significantly increased* user engagement, as measured by sessions per week. The average number of sessions per week in group B is likely to be between 0.239 and 0.361 sessions greater than in group A.
 
 <div style="page-break-after: always;"></div>
 

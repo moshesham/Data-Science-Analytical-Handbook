@@ -22,6 +22,10 @@ Thank you for having me. A 10% drop in DAU is definitely a serious concern. My i
 *   **Platform/Device Analysis:**  I'd also analyze the decline across different platforms (iOS, Android, Web) and device types. A drop specific to one platform could indicate a technical issue or a platform-specific competitor.
 *   **Time Series Analysis:**  It would be crucial to examine the trend of the decline over time. Was it a sudden drop, a gradual decline, or a fluctuating pattern? This can help us understand the potential cause. A sudden drop might suggest a specific event like an outage or negative press. A gradual decline may indicate a growing problem with user engagement or competition. We should also examine whether the decline is uniform across all days of the week or specific to weekends or weekdays, to find any patterns.
 
+
+Here is a breakown of my process:
+![alt text](../resources/problem_flow_diagram.png)
+
 **2. Investigating Potential Causes:**
 
 *   **Recent Changes:** I'd work with product and engineering teams to create a timeline of any recent changes to the Instagram platform, including algorithm updates, feature launches/removals, UI/UX changes, and marketing campaigns. We need to understand if any of these changes correlate with the DAU decline.
@@ -115,7 +119,138 @@ To test Hypothesis 2, I propose running an A/B test with the following framework
 
 *   **Power Analysis:** Before launching the experiment, we will conduct a power analysis to determine the required sample size for each group. We'll aim for a power of at least 0.8 (80%), which means we have an 80% chance of detecting a true effect if one exists. The power analysis will take into account our desired significance level (0.05), estimated effect size (based on historical data or a pilot study), and the variability of our primary metric (active user ratio). Using these inputs, we can calculate the minimum sample size needed per group.
 
-*   **Data Collection:** We will continuously track the active user ratio for each user in both groups throughout the experiment. We will also collect data on the secondary metrics mentioned earlier. We will calculate the active user ratio weekly to monitor any trends and make adjustments if necessary (e.g., if we see a very large negative impact on the experimental group).
+*   **Data Collection and Example Mathematical Solution:**
+We will continuously track the active user ratio for each user in both groups throughout the experiment. We will also collect data on the secondary metrics mentioned earlier. We will calculate the active user ratio weekly to monitor any trends and make adjustments if necessary (e.g., if we see a very large negative impact on the experimental group).
+
+Let's illustrate the statistical analysis with a concrete example using synthetic data.
+
+*   **Sample Data (Synthetic):**
+    *   Control Group (A): $n_A = 5000$ users, $x_A = 2500$ active users
+    *   Experimental Group (B): $n_B = 5000$ users, $x_B = 2750$ active users
+
+*   **1. Calculate Observed Proportions:**
+
+    *   $\hat{p}_A = \frac{x_A}{n_A} = \frac{2500}{5000} = 0.5$
+    *   $\hat{p}_B = \frac{x_B}{n_B} = \frac{2750}{5000} = 0.55$
+
+*   **2. Calculate the Pooled Proportion ($\hat{p}$):**
+
+    $\hat{p} = \frac{x_A + x_B}{n_A + n_B} = \frac{2500 + 2750}{5000 + 5000} = \frac{5250}{10000} = 0.525$
+
+*   **3. Calculate the Standard Error of the Difference (SE):**
+
+    $SE = \sqrt{\hat{p}(1 - \hat{p}) \left(\frac{1}{n_A} + \frac{1}{n_B}\right)} = \sqrt{0.525(1 - 0.525) \left(\frac{1}{5000} + \frac{1}{5000}\right)} \approx 0.00707$
+
+*   **4. Calculate the Z-score:**
+
+    $Z = \frac{\hat{p}_B - \hat{p}_A}{SE} = \frac{0.55 - 0.5}{0.00707} \approx 7.07$
+
+*   **5. Calculate the p-value (One-tailed Test - Right-tailed):**
+
+    For a *one-tailed* (right-tailed) test, we only consider the probability of getting a Z-score *greater* than our calculated Z.
+
+    $p\text{-value} = P(Z > 7.07) \approx 0$
+
+    (This is because the probability of getting a Z-score this high is extremely close to zero.)
+
+*   **6. Make a Decision:**
+
+    Our chosen significance level ($\alpha$) is 0.05. Since our calculated p-value (approximately 0) is much less than 0.05:
+
+    $0 < 0.05$
+
+    We reject the null hypothesis.
+
+*   **7. Interpretation:**
+
+    We have strong statistical evidence to conclude that the modified algorithm has a statistically significant *positive* impact on the active user ratio. The observed increase from 50% to 55% is highly unlikely to have occurred by chance.
+
+    **Effect Size:**
+
+    The absolute effect size is:
+
+    $\hat{p}_B - \hat{p}_A = 0.55 - 0.5 = 0.05$ or a 5% increase.
+
+    This means the modified algorithm resulted in a 5 percentage point increase in the active user ratio. Whether this is a practically significant effect depends on business context and goals.
+
+
+**Alternative Experiment:**: **A/B Test of Algorithm Modification Focus on Average Session Duration**
+
+*   **Goal:** To determine if a modified algorithm, designed to increase engagement among the 18-24 age group in North America and Europe, can positively impact the *average session duration*, while not negatively impacting other demographics.
+
+*   **Target Population:** All Instagram users, with a focus on analyzing the impact across different age groups.
+
+*   **Control Group:** A randomly selected group of users across all demographics will continue to experience the current algorithm.
+
+*   **Experimental Group:** A randomly selected group of users across all demographics will experience the modified algorithm (as described in the previous response – focused on increased visibility of historically engaging content for the 18-24 demographic).
+
+*   **Primary Metric: Average Session Duration:**
+    *   **Definition:** The average time (in seconds or minutes) a user spends in a single app session.
+    *   **Calculation:** Total session time for all users in the group / Number of sessions in the group.
+
+*   **Secondary Metrics:**
+    *   **Number of Sessions per User:** To ensure the increase in session duration isn't simply due to users having fewer, but longer, sessions.
+    *   **Content Interaction Rate (Likes, Comments, Shares, Saves):** To check if longer sessions also lead to more interaction with content.
+    *   **Active User Ratio:** To ensure that the change in session duration does not negatively impact the number of active users.
+    *   **Churn Rate:** The proportion of users who become inactive during the experiment.
+
+*   **Hypotheses:**
+    *   **Null Hypothesis (H0):** The modified algorithm has no significant *positive* impact on average session duration. Mathematically: $\mu_B \le \mu_A$ or $\mu_B - \mu_A \le 0$
+    *   **Alternative Hypothesis (H1):** The modified algorithm has a statistically significant *positive* impact on average session duration. Mathematically: $\mu_B > \mu_A$ or $\mu_B - \mu_A > 0$
+        Where:
+        *   $\mu_A$ is the average session duration of the control group.
+        *   $\mu_B$ is the average session duration of the experimental group.
+
+*   **Statistical Analysis:**
+    *   We will use a one-tailed (right-tailed) two-sample Z-test if we can assume the session duration data is approximately normally distributed (after handling outliers). If the data is not normally distributed, a non-parametric test like the Mann-Whitney U test could be used. Given the large sample sizes we would use a Z test.
+    *   We will set a significance level ($\alpha$) of 0.05.
+    *   We will calculate the p-value and compare it to $\alpha$.
+    *   We will also calculate the effect size (e.g., Cohen's d) to quantify the magnitude of the difference.
+
+    Let's illustrate the statistical analysis with synthetic data.
+
+*   **Sample Data (Synthetic):**
+    *   Control Group (A): $n_A = 10000$ sessions, average session duration $\bar{x}_A = 300$ seconds, sample standard deviation $s_A = 100$ seconds.
+    *   Experimental Group (B): $n_B = 10000$ sessions, average session duration $\bar{x}_B = 315$ seconds, sample standard deviation $s_B = 105$ seconds.
+
+*   **1. Calculate the Pooled Standard Deviation:**
+
+    Since our sample sizes are large we use the sample standard deviations to calculate the standard error.
+
+*   **2. Calculate the Standard Error of the Difference (SE):**
+
+    $SE = \sqrt{\frac{s_A^2}{n_A} + \frac{s_B^2}{n_B}} = \sqrt{\frac{100^2}{10000} + \frac{105^2}{10000}} \approx \sqrt{1.0 + 1.1025} \approx 1.45$
+
+*   **3. Calculate the Z-score:**
+
+    $Z = \frac{\bar{x}_B - \bar{x}_A}{SE} = \frac{315 - 300}{1.45} \approx 10.34$
+
+*   **4. Calculate the p-value (One-tailed Test - Right-tailed):**
+
+    $p\text{-value} = P(Z > 10.34) \approx 0$ (Extremely close to zero)
+
+*   **5. Make a Decision:**
+
+    With $\alpha = 0.05$, since $p\text{-value} \approx 0 < 0.05$, we reject the null hypothesis.
+
+*   **6. Interpretation:**
+
+    There is very strong statistical evidence that the modified algorithm has a statistically significant *positive* impact on average session duration. The observed increase of 15 seconds is highly unlikely to have occurred by chance.
+
+    **Effect Size (Cohen's d):**
+
+    $d = \frac{\bar{x}_B - \bar{x}_A}{s_{pooled}}$
+
+    Where $s_{pooled} = \sqrt{\frac{(n_A - 1)s_A^2 + (n_B - 1)s_B^2}{n_A + n_B - 2}} \approx \sqrt{\frac{9999*10000 + 9999*11025}{19998}} \approx 102.5$
+
+    $d = \frac{315 - 300}{102.5} \approx 0.15$
+
+    This is considered a small effect size, indicating that while the increase is statistically significant, the practical impact on session duration might be modest.
+
+The key change is the focus on Average Session Duration as the primary metric and the corresponding use of a Z-test for means. The example calculation now uses means and standard deviations, and the effect size is calculated using Cohen's d, which is appropriate for comparing means. The interpretations are also adjusted to reflect the change in metric.
+
+![alt text](image.png)
+
 
 **5. Addressing Potential Concerns:**
 

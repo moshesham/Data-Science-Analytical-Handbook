@@ -1,0 +1,74 @@
+You are absolutely correct. If the alternative hypothesis specifically states that the new feature will have a *positive* impact (i.e., increase the metric), then we should be using a *one-tailed* (specifically, a right-tailed) test. My apologies for the oversight.
+
+Here's the corrected version with a one-tailed test, focusing on the relevant changes:
+
+**(Previous sections remain the same)**
+
+... (Previous sections remain unchanged)
+
+**4. Proposed Experiment: A/B Test of Algorithm Modification**
+
+(The experiment design, target population, control/experimental groups, algorithm modification, metrics, hypotheses, statistical analysis, duration, power analysis, and addressing potential concerns remain the same.)
+
+*   **Hypotheses:**
+    *   **Null Hypothesis (H0):** The modified algorithm has no significant *positive* impact on the active user ratio compared to the current algorithm. Mathematically, $p_B \le p_A$ or $p_B - p_A \le 0$.
+    *   **Alternative Hypothesis (H1):** The modified algorithm has a statistically significant *positive* impact on the active user ratio compared to the current algorithm. Mathematically, $p_B > p_A$ or $p_B - p_A > 0$.
+
+... (Previous sections remain unchanged)
+
+**5. Data Collection and Example Mathematical Solution:**
+
+Let's illustrate the statistical analysis with a concrete example using synthetic data.
+
+*   **Sample Data (Synthetic):**
+    *   Control Group (A): $n_A = 5000$ users, $x_A = 2500$ active users
+    *   Experimental Group (B): $n_B = 5000$ users, $x_B = 2750$ active users
+
+*   **1. Calculate Observed Proportions:**
+
+    *   $\hat{p}_A = \frac{x_A}{n_A} = \frac{2500}{5000} = 0.5$
+    *   $\hat{p}_B = \frac{x_B}{n_B} = \frac{2750}{5000} = 0.55$
+
+*   **2. Calculate the Pooled Proportion ($\hat{p}$):**
+
+    $\hat{p} = \frac{x_A + x_B}{n_A + n_B} = \frac{2500 + 2750}{5000 + 5000} = \frac{5250}{10000} = 0.525$
+
+*   **3. Calculate the Standard Error of the Difference (SE):**
+
+    $SE = \sqrt{\hat{p}(1 - \hat{p}) \left(\frac{1}{n_A} + \frac{1}{n_B}\right)} = \sqrt{0.525(1 - 0.525) \left(\frac{1}{5000} + \frac{1}{5000}\right)} \approx 0.00707$
+
+*   **4. Calculate the Z-score:**
+
+    $Z = \frac{\hat{p}_B - \hat{p}_A}{SE} = \frac{0.55 - 0.5}{0.00707} \approx 7.07$
+
+*   **5. Calculate the p-value (One-tailed Test - Right-tailed):**
+
+    For a *one-tailed* (right-tailed) test, we only consider the probability of getting a Z-score *greater* than our calculated Z.
+
+    $p\text{-value} = P(Z > 7.07) \approx 0$
+
+    (This is because the probability of getting a Z-score this high is extremely close to zero.)
+
+*   **6. Make a Decision:**
+
+    Our chosen significance level ($\alpha$) is 0.05. Since our calculated p-value (approximately 0) is much less than 0.05:
+
+    $0 < 0.05$
+
+    We reject the null hypothesis.
+
+*   **7. Interpretation:**
+
+    We have strong statistical evidence to conclude that the modified algorithm has a statistically significant *positive* impact on the active user ratio. The observed increase from 50% to 55% is highly unlikely to have occurred by chance.
+
+    **Effect Size:** (Remains the same)
+
+    The absolute effect size is:
+
+    $\hat{p}_B - \hat{p}_A = 0.55 - 0.5 = 0.05$ or a 5% increase.
+
+    This means the modified algorithm resulted in a 5 percentage point increase in the active user ratio. Whether this is a practically significant effect depends on business context and goals.
+
+**(Post-experiment analysis and further considerations remain the same)**
+
+The key difference is in the p-value calculation and the interpretation in relation to the one-tailed hypothesis. We are now only concerned with whether the treatment group performed *better* than the control group, not just *differently*. This makes the test more powerful for detecting a positive effect if it exists.
