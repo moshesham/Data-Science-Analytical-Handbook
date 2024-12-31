@@ -434,6 +434,3 @@ This candidate's performance indicates a high level of competence and potential.
 
 **Interview Question:** You are a Data Scientist on the Workplace from Meta team. How would you approach investigating this decline in active user engagement within the financial services industry in EMEA? What are some of the key questions you would seek to answer, what data would you analyze, and what hypotheses would you form to explain this trend?
 
-
-
-[def]: resources\problem_flow_diagram.png
