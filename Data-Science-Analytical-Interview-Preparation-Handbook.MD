@@ -122,7 +122,7 @@ These measures are crucial for understanding data distributions and identifying 
         *   Standard deviation (σ) determines the spread: A larger standard deviation indicates a wider spread.
         *   Empirical Rule (68-95-99.7 rule): Approximately 68% of the data falls within 1 standard deviation of the mean, 95% within 2, and 99.7% within 3.
 
-    *   **Common Use Cases (Corrected):**
+    *   **Common Use Cases:**
         *   **Central Limit Theorem and A/B Testing:** When conducting A/B tests, we often compare the *means* of engagement metrics. Even if the individual user times are skewed, the *distribution of the difference in sample means* will approximate a normal distribution as the sample size increases (due to the CLT). This allows us to use t-tests or z-tests. *This is the primary way the normal distribution is relevant in this context.*
         *   **Transformations for Near-Normality:** In some cases, transformations (like log transformations) can be applied to engagement metrics to make their distributions *closer* to normal. This can be useful for certain statistical modeling techniques.
         *   **Underlying Processes:** While the overall distribution of engagement might be skewed, some *underlying processes* contributing to engagement might be normally distributed for specific user segments.
