@@ -411,6 +411,312 @@ This candidate demonstrated an exceptionally strong performance in the Analytica
 
 This candidate's performance indicates a high level of competence and potential. With a bit more emphasis on exploring hypotheses in greater depth and generating a wider array of creative solutions, they would be an outstanding Data Scientist.
 
+
+
+---
+<div style="page-break-before: always;"></div> 
+
+## Analytical Execution Interview Examples
+
+### Meta Ads Manager - Decreasing Click-Through Rate (CTR) for Small Businesses
+
+**Interviewer:** Hi, thanks for joining me. Let's dive into a new scenario. You're a Data Scientist on the Meta Ads team, specifically focused on small business advertisers. We've noticed a concerning trend: a 8% decrease in the average click-through rate (CTR) for ads targeted by small businesses over the last month. This is a significant problem as it directly impacts the effectiveness of their campaigns. How would you approach investigating this decline?
+
+**Candidate:**
+
+Thanks for having me. An 8% drop in CTR for small business advertisers is definitely a red flag. This directly affects their ROI and could lead to them reducing their ad spend on our platform. My approach would be systematic, aiming to understand the scope of the decline, identify potential drivers, and propose actionable solutions. Here's my breakdown:
+
+**1. Understanding the Scope of the Decline:**
+
+*   **Time Series Analysis:**
+    *   I'd first want to examine the trend over time to see if this 8% decrease is a sharp drop or a more gradual trend that has been developing.
+    *  I would look at the past month, the past quarter and even the past year to identify any seasonality or recurring patterns.
+    *    I would investigate if the decline is consistent across all days of the week, or if it's more pronounced on weekends or weekdays which can give clues as to when users are more likely to click on ads from small businesses.
+
+*   **Segmentation:**
+    *   **Business Size:** Are micro-businesses (e.g., sole proprietorships, very small teams) being more affected compared to small-to-medium-sized businesses (SMBs) or are larger SMBs being more affected? This helps determine if there are size-specific issues.
+    *   **Industry/Category:** Is the decline uniform across all industries or are certain categories (e.g., restaurants, retail, local services) experiencing a more significant impact? This can indicate specific challenges within sectors.
+    *   **Geographic Location:** Is this a global issue or is it concentrated in specific regions, countries, or cities? This can identify geographically correlated factors.
+    *   **Ad Type:**  Is the decline more pronounced for specific ad types (e.g., image ads, video ads, carousel ads, lead gen ads)? This would identify format-specific issues.
+    *   **Placement:** Is the decline specific to certain placements (e.g., Facebook feed, Instagram feed, stories, Audience Network)? This helps understand the impact of where the ads are displayed.
+    *   **Targeting:**  Is the decline more prevalent with certain targeting parameters (e.g., specific demographics, interests, behaviors)? It helps identify if there are issues with particular targeting settings.
+    *    **Campaign Objective:**  Is the decline more pronounced across different campaign objectives (e.g., Brand awareness, reach, link clicks, engagement, lead generation etc)? This will give insight as to if a particular objective is less performing than others
+    *   **Budget Allocation:** Does the issue disproportionately impact small businesses with lower daily budgets or is it across all budget sizes? This can be indicative of an issue with small budgets being less effective
+    *   **Ad Creative Performance:** Are CTRs declining across all types of creative or is there a specific type that is experiencing decline, for example static images or video or if the copy and the call to action are not resonating with user
+
+*   **User Analysis:**
+    *    **User Demographics:** Is the decline in CTR related to a certain user demographic seeing these small business ads?
+    *   **User Behavior**: It would be important to analyze user behavior patterns, such as time spent on the platform, content consumption patterns and overall app usage to identify if the decreased CTR could be tied to changes in user behavior on the platform.
+
+Here is a breakown of my process: (need to create a new diagram)
+![alt text](../resources/problem_flow_diagram.png)
+
+**2. Investigating Potential Causes:**
+
+*   **Recent Platform Changes:** I’d closely examine any recent changes to the Meta Ads platform, including algorithm updates, UI/UX changes to the Ads Manager, policy changes, and new ad features/placements. It's crucial to check the timing of these changes against the start of the CTR decline.
+*   **Algorithm Updates:** Especially, we should investigate if there were changes to the ad delivery algorithm that could be affecting how ads from small businesses are being shown to potential customers. For instance, changes could have inadvertently led to decreased impressions, resulting in lower CTR.
+*   **Ad Auction Dynamics:** Has there been any change in ad auction dynamics that might affect small business ad performance, for instance, an increase in bidding competition or overall auction prices?
+*   **User Experience:** Have there been any changes that affect how ads are displayed or interacted with by users, potentially impacting click-through rates.
+*   **Ad Creative Best Practices:** Review if there has been changes in the platform or user behavior that may impact the best practices for creating effective ads, this may also include ensuring if new features or changes to the platform have not been updated in the help section of the Ads Manager
+*  **Ad Fatigue:** Is the audience being targeted seeing the same ad creative too frequently? We should investigate if ad fatigue and ad frequency is higher now than prior to the decline.
+*   **Competitive Landscape:** Have there been shifts in user preference and spending on competitor platforms, potentially impacting how they interact with ads on the Meta platform?
+*   **External Factors:** Are there external factors, like economic changes, holidays, or news events, that could be influencing user behavior and their likelihood to click on ads?
+*   **Ad Quality/Relevance:** Are the ads that small businesses are creating as relevant and compelling to the target audience as they used to be? Could a decrease in the quality or relevance of the ads also contribute to a decline in CTR?
+*   **Data Quality:** We should ensure there is no data quality issues affecting measurement and tracking in our systems
+*    **User Feedback:** We should also analyze user feedback regarding ads served to them through a variety of means, such as customer support tickets, app store reviews and any other form of user feedback available on ads served
+
+**3. Data Sources:**
+
+To conduct a thorough investigation, I would need access to the following data sources:
+
+*   **Meta Ads Manager Data:** Detailed data on ad impressions, clicks, CTR, spend, targeting parameters, ad placements, and ad types. This is the primary source for understanding campaign performance.
+*   **User Activity Logs:** Data on user interactions with ads, browsing behavior within the platform, and demographic information. This helps understand user behavior and their interaction with ads.
+*   **Product/Engineering Change Logs:** A timeline of platform updates, algorithm changes, and any other relevant modifications to the Meta Ads platform and the Ads Manager. This allows for correlation between platform updates and the CTR decline.
+*   **External Data Sources:** Market research data, competitor data, economic indicators, and any other relevant external data points, which helps contextualize the decline with broader industry trends.
+*   **User Feedback:** User feedback from customer support channels, surveys, and any in-app feedback.
+
+**Interviewer:** That's a good comprehensive start. Let's say we've run some initial analysis, and here's what we found: The 8% decline is not uniform. It's primarily concentrated in image ads (down 12%), and carousel ads (down 10%), while video ads have remained relatively stable. We also see a more significant decline in the 'Home & Garden' and 'Retail' categories compared to others. Furthermore, the decline is primarily in the Facebook feed and Instagram feed placements. Finally, we have noticed an increase in ad frequency with users being shown the same ad more often than before.  We also see that those running Link Clicks as their campaign objective have had a larger negative impact that other objectives
+
+**Candidate:**
+
+This is really helpful data. It helps narrow down the potential causes. Given these insights, here's how I would adjust my investigation and the potential hypotheses I would develop:
+
+**1. Prioritizing Areas of Focus:**
+
+*   **Ad Formats:** We should prioritize the investigation into why Image and Carousel ad formats are underperforming, especially compared to Video which has seen no decline.
+*   **Categories:** The ‘Home & Garden’ and ‘Retail’ categories should be investigated further as the issue seems more pronounced in these categories compared to others. This suggests category specific issues
+*   **Placements:** We need to focus on the Facebook and Instagram feeds as the primary areas of decline. We need to understand if those feeds have changed in a way that has impacted ad CTRs negatively
+*   **Campaign Objective:** We should prioritize Link Clicks objective as that seems to be the most impacted, we need to investigate if users are less likely to click on ads that have the objective of clicking through to a website than they are to ads with other objectives
+*   **Ad Fatigue:**  The increased ad frequency warrants deeper investigation. We need to understand if this is a potential cause to the decline
+
+**2. Developing Hypotheses:**
+
+Based on the findings, here are my specific hypotheses:
+
+*   **Hypothesis 1 (Ad Format Fatigue/Relevance):** The decline in Image and Carousel ad CTR is due to a combination of ad fatigue and a possible decrease in perceived relevance to users, particularly when used more frequently than in the past. Users may be saturated with these formats and are less likely to engage. This is further supported by the fact that we are seeing increase in ad frequency
+*   **Hypothesis 2 (Category-Specific Issues):**  The 'Home & Garden' and 'Retail' categories might be experiencing a shift in user preferences or are facing higher competition, which could contribute to decreased CTR. Also these categories may be running similar ads and thus leading to fatigue
+*   **Hypothesis 3 (Placement Algorithm/UX):** A recent change to Facebook and Instagram feed algorithms or User Experience (UX) elements might have inadvertently reduced the visibility or engagement with image and carousel ads from small businesses, these feeds may be showing content differently to users now.
+*  **Hypothesis 4 (Campaign Objective Relevance):** Users may be less interested in clicking through to a website, which may indicate a higher value to them to engage on the platform directly instead of being directed elsewhere
+
+**3. Proposed Experiment: A/B Test of Ad Frequency & Dynamic Creative**
+
+To test Hypothesis 1 (Ad Format Fatigue/Relevance) and in the interest of quick action, I propose an A/B test with a specific focus on ad frequency and a new feature called Dynamic Creative with the following framework. We will focus on Image and Carousel ads:
+
+*   **Goal:** To determine if reducing ad frequency and using dynamic creative elements can improve CTR for image and carousel ads, particularly for small business advertisers. We want to see the impact on ads in general, but also in the Retail and Home & Garden categories
+
+*   **Target Population:** Small business advertisers using image or carousel ads on the Facebook and Instagram Feeds, with a focus on the 'Home & Garden' and 'Retail' categories and those targeting the 'Link Clicks' campaign objective.
+*   **Control Group (A):** A randomly selected group of small businesses will continue to run their existing image and carousel ad campaigns with the same frequency and creative they are currently using.
+*   **Experimental Group (B):** A randomly selected group of small businesses will have 2 experimental modifications to their Image and Carousel ads:
+    *   **Reduced Ad Frequency:** We will reduce the frequency at which their ads are shown to individual users. We can achieve this by setting a daily cap on impressions for a given user, and experiment with varying that daily cap to find the optimal frequency.  We will set it to 75% of the average of their current average frequency. If we have data of individual users and their frequency on the Meta platform, we will target the reduction to those with higher frequency.
+    *    **Dynamic Creative:** We will offer a beta test of dynamic creative to this group, which will allow users to dynamically test multiple versions of their headlines, descriptions, calls to action and images. The platform will select the highest-performing combination of assets and display that automatically.
+*   **Sampling:** We will use stratified random sampling across all categories, with a specific focus on ‘Home & Garden’ and ‘Retail’, to ensure each category and campaign objective is proportionally represented in both the control and experimental groups.
+*   **Primary Metric:** Click-Through Rate (CTR) on image and carousel ads.
+    *   **Definition:** (Number of Clicks) / (Number of Impressions).
+    *   **Why this metric?:** This metric directly relates to the business problem (the declining CTR), and is a common measure of ad performance.
+*   **Secondary Metrics:**
+    *   **Ad Frequency:** The average number of times an ad is shown to a user.
+    *   **Conversion Rate:** The percentage of users who convert after clicking on the ad (if conversion tracking is enabled by the advertisers).
+    *   **Cost-Per-Click (CPC):** How much small businesses are paying for each click they receive.
+    *   **Reach:** How many unique users are reached by each ad.
+*   **Hypotheses:**
+    *   **Null Hypothesis (H0):** Reducing ad frequency and using dynamic creative has no significant impact on CTR or conversion rate.
+    *   **Alternative Hypothesis (H1):** Reducing ad frequency and using dynamic creative will improve CTR for image and carousel ads, while maintaining conversion rates (or not decreasing it) and a similar or lower cost per click.
+*   **Statistical Analysis:**
+    *   We will use a two-sample t-test or ANOVA to compare the CTR between the control and experimental groups (depending on the nature of the data). We will use a non-parametric equivalent if the data is non-normal
+    *   We will set a significance level (alpha) of 0.05
+*   **Duration:** We will run the experiment for 2 weeks. This duration is sufficient to see a statistically significant difference while limiting the risk of major external factors influencing results.
+*   **Ethical Considerations:** We will ensure that we use ethical data practices, will only use user data that is essential and have their consent. We will also be completely transparent with users and the businesses that will be part of the A/B test.
+
+*   **Data Collection and Example Mathematical Solution:**
+We will track CTR for each ad in the control and experimental groups and for the 'Home & Garden' and 'Retail' categories daily and then aggregate that to a 2 week total.
+
+Let's illustrate a two-sample t-test with synthetic data.
+
+*   **Sample Data (Synthetic):**
+    *   Control Group (A): $n_A = 1000$ ads, average CTR $\bar{x}_A = 0.01$ (1%), sample standard deviation $s_A = 0.005$.
+    *   Experimental Group (B): $n_B = 1000$ ads, average CTR $\bar{x}_B = 0.012$ (1.2%), sample standard deviation $s_B = 0.006$.
+
+*   **1. Calculate the Pooled Standard Deviation:**
+
+    $s_{pooled} = \sqrt{\frac{(n_A - 1)s_A^2 + (n_B - 1)s_B^2}{n_A + n_B - 2}} \approx \sqrt{\frac{999*0.005^2 + 999*0.006^2}{1000 + 1000 - 2}} \approx 0.0055$
+
+*   **2. Calculate the Standard Error of the Difference (SE):**
+
+    $SE = s_{pooled} * \sqrt{\frac{1}{n_A} + \frac{1}{n_B}} \approx 0.0055 * \sqrt{\frac{1}{1000} + \frac{1}{1000}} \approx 0.00025$
+
+*   **3. Calculate the t-statistic:**
+
+    $t = \frac{\bar{x}_B - \bar{x}_A}{SE} = \frac{0.012 - 0.01}{0.00025} \approx 8$
+
+*   **4. Calculate the degrees of freedom (df):**
+
+    $df = n_A + n_B - 2 = 1000 + 1000 - 2 = 1998$
+
+*   **5. Calculate the p-value:**
+
+We can use a t-distribution calculator or statistical software to find the p-value for $t = 8$ and $df = 1998$.
+The p-value will be extremely low (very close to zero) because our t-statistic is so high
+
+*   **6. Make a Decision:**
+
+With $\alpha = 0.05$, since $p\text{-value} \approx 0 < 0.05$, we reject the null hypothesis.
+
+*   **7. Interpretation:**
+
+    There is strong statistical evidence to conclude that the modified approach (reduced frequency and dynamic creative) has a statistically significant *positive* impact on CTR for image and carousel ads. This could indicate that our hypothesis was right, and that ad fatigue is a factor.
+
+    **Effect Size (Cohen's d):**
+
+     $d = \frac{\bar{x}_B - \bar{x}_A}{s_{pooled}} = \frac{0.012 - 0.01}{0.0055} \approx 0.36$
+
+     This means the modified approach resulted in a medium effect size, indicating that the increase is practically significant in addition to being statistically significant.
+
+**4. Addressing Remaining Hypotheses:**
+
+*   **Category Specific Issues (Hypothesis 2):**  Alongside the A/B test, I would conduct further research on the 'Home & Garden' and 'Retail' categories. I'd examine user behavior within these categories, competitive ads, and any recent changes that might have affected their CTR to validate my hypothesis and propose solutions if needed
+*   **Placement and Algorithm Issues (Hypothesis 3):** I'd work with the engineering team to investigate any recent changes to the Facebook and Instagram feed algorithms and User Experience. I would analyze data to determine if changes to the feed are causing ad visibility and CTR issues for the image and carousel ads.
+*  **Campaign Objective (Hypothesis 4):**  I would work with the product team to find alternatives to the 'Link Clicks' objective. I would investigate alternative campaign objectives and ad formats which can help small businesses reach their goals while not suffering the same decline in CTR as the Link Clicks objective
+
+**5. Post-Experiment Analysis:**
+
+*   If the experiment shows a significant positive impact on CTR in the experimental group (i.e reduced ad frequency with dynamic creative elements), we will conduct an analysis to see how this differs between those running the Link Clicks campaign objective, and other campaign objectives. We will also segment that by different business types.
+*   We would then consider a phased rollout of reduced frequency and dynamic creative elements for Image and Carousel ads across the platform.
+*   If the experiment does not show a significant improvement, we will analyze the results to identify reasons for that and propose new solutions and hypotheses.
+
+This comprehensive approach, along with the A/B test, will provide actionable insights to address the declining CTR for small business advertisers. It will allow us to understand the driving factors and make data-driven decisions to help small businesses be successful on our platform.
+
+**6. Visualization Techniques for the Investigation and Presentation:**
+
+Throughout this process, I would use various visualization techniques to assist with the investigation, analysis, and final presentation of conclusions to stakeholders:
+
+*   **Time Series Line Charts:**
+    *   **Process:** I'd plot the average CTR for small businesses over time, using daily or weekly aggregates.
+    *   **Purpose:**
+        *   To visualize the trend of the decline: Is it a sudden drop or a gradual decline?
+        *   To identify specific dates or weeks where the decline was most pronounced.
+        *   To detect any seasonality or recurring patterns (e.g., weekly, monthly).
+    *   **Details:**
+        *   The x-axis would represent time (e.g., days, weeks).
+        *   The y-axis would represent the average CTR.
+        *   I'd use a clear, solid line for the overall CTR and potentially add dotted lines to represent trends for key segments (e.g., 'Home & Garden' vs. 'Retail').
+        *   I'd add annotations for significant events (e.g., platform updates, algorithm changes) to visually correlate them with the decline.
+        *  I would also include a rolling average to smooth out the noise to show a clearer trend.
+    *   **Benefit:** This helps stakeholders quickly grasp the temporal dimension of the problem and identify potential triggers.
+    *   **Tools:** Python with libraries like Matplotlib, Seaborn, Plotly; R with ggplot2; or spreadsheet software for quick views.
+
+*   **Segmented Bar Charts or Stacked Bar Charts:**
+    *   **Process:**
+        *   For categorical segmentations (e.g., business size, industry, ad type), I'd calculate and display the average CTR for each segment.
+    *   **Purpose:**
+        *   To quickly compare CTR across different groups.
+        *   To identify specific segments that are driving the overall decline.
+    *   **Details:**
+        *   Each bar would represent a segment.
+        *   The height of the bar would represent the average CTR for that segment.
+        *   I'd use distinct colors for each category to differentiate.
+        *   If there are sub-categories, stacked bar charts can be used for visual clarity.
+    *   **Benefit:** Provides a direct visual comparison and highlights which segments are most affected.
+    *   **Tools:** Python with Matplotlib or Seaborn, Tableau, or spreadsheet software.
+
+*   **Geographic Heatmaps:**
+    *   **Process:** If geographical segmentation is important, I'd use a heatmap to display the decline in CTR across different regions, countries, or cities.
+    *   **Purpose:**
+        *   To identify if the decline is concentrated in specific geographic locations.
+        *   To show spatial patterns and regional differences.
+    *   **Details:**
+        *   A map would be used as the base, and different areas would be shaded with colors that represent the level of CTR decline.
+        *   I would use a color gradient to show the level of impact (e.g., red for highest decline, green for least).
+    *   **Benefit:** Shows regional patterns and helps prioritize investigations based on geographic impact.
+    *   **Tools:** Python with Geopandas or Folium, Tableau, or other mapping software.
+
+*   **Scatter Plots with Trendlines:**
+    *   **Process:**
+        *   I'd create scatter plots to examine relationships between CTR and various continuous variables, such as ad frequency, or changes in the ad auction price.
+    *   **Purpose:**
+        *   To identify correlations between CTR and other key factors.
+        *   To visualize if there's a trend or a relationship, and estimate the nature of the trend.
+    *   **Details:**
+        *   The x-axis would represent one variable (e.g., ad frequency).
+        *   The y-axis would represent CTR.
+        *   Each point on the scatter plot would represent a specific ad or set of ads.
+        *   A trendline (linear or polynomial) could be added to show the general trend.
+        *  I would calculate the correlation to show the strength of any linear relationship
+    *   **Benefit:** Helps to understand correlations and identify potential drivers of the CTR decline.
+    *   **Tools:** Python with Matplotlib or Seaborn, R with ggplot2, or spreadsheet software.
+
+*   **Funnel Charts:**
+    *   **Process:** I'd create a funnel chart to visualize the user journey, showing the drop-off rates at each stage from impression to click.
+    *   **Purpose:**
+        *   To pinpoint the stage in the ad delivery pipeline where the most significant drop-off is occurring.
+        *   To understand how user are interacting with the ads, at what point they are engaging less with them
+    *   **Details:**
+        *   Each stage would be represented by a segment of the funnel.
+        *   The width of each segment would be proportional to the number of users who are passing through that stage.
+        *   I would add annotations to show the drop off between each stage.
+    *   **Benefit:** Visually highlights bottlenecks and key drop-off points in the user journey.
+    *   **Tools:** Python with Plotly, Tableau, or dedicated funnel charting software.
+
+*  **Correlation Matrix Heatmaps:**
+    *   **Process:** I would calculate correlations between all key variables and then display the results in a correlation matrix heatmap.
+    *  **Purpose:**
+        *   To identify multi-variate relationships between key variables.
+        *   To identify factors that have a high positive correlation to CTR and those with a negative correlation to CTR
+    *   **Details:**
+        *   Each variable is listed as both a row and column, with the cells displaying the correlation coefficient
+        *  The color intensity and type (positive vs negative correlation) would be displayed through a color gradient
+    *   **Benefit:** Allows one to quickly visualize correlations, this is especially helpful in discovering non-obvious relationships.
+    *   **Tools:** Python with Seaborn, R with ggplot2, or statistical software.
+
+*   **Before-and-After Bar Charts:**
+    *   **Process:** For presenting the results of the A/B test, I'd create bar charts comparing the CTR and conversion rates before and after the implementation of the experimental modifications (reduced frequency and dynamic creative elements).
+    *   **Purpose:**
+        *   To clearly show the impact of the experiment.
+        *   To compare the control and experimental groups.
+    *   **Details:**
+        *   Two bars per metric (one for control, one for experimental)
+        *   Use clear labels and annotations to highlight the change.
+    *   **Benefit:** Easy to understand and demonstrates the effectiveness of the experiment.
+    *   **Tools:** Python with Matplotlib or Seaborn, Tableau, or spreadsheet software.
+
+*   **Statistical Significance Visuals:**
+    *   **Process:** I'd use techniques to visualize statistical significance.
+    *   **Purpose:**
+        *   To highlight differences that are statistically significant.
+        *   To show p-values, confidence intervals, or error bars to indicate uncertainty in the result
+    *   **Details:**
+         *   I would include error bars on bar charts to show the confidence interval, or annotation of the p value on a scatter plot to indicate that the results are not by chance
+    *   **Benefit:** Helps stakeholders understand the certainty associated with the conclusions and experiments
+    *   **Tools:** Python with Matplotlib or Seaborn, R with ggplot2, or statistical software.
+
+*    **Storytelling Dashboards:**
+     *   **Process:**  I would create a cohesive dashboard that combines all the key visualizations in a storytelling format
+    *   **Purpose:**
+        * To communicate all aspects of the issue, the results of the experiments, and the impact.
+        *  To provide a central source of truth on the investigation
+    *   **Details:**
+        *   The dashboard should have an introduction that outlines the investigation and the key issues
+        *   It should then step through the investigation process using the relevant visualizations at each stage and highlight key learnings
+        *  The dashboard should clearly highlight the final experimental results and the impact of those results.
+        *   It should also include recommendations for future experiments and next steps.
+    *   **Benefit:** Provides a more engaging and impactful format of results and conclusions to present to stakeholders.
+    *  **Tools:** Tableau, Power BI, or Python with Dash or Streamlit.
+
+**7. General Principles for All Visualizations:**
+
+*   **Clarity:** Keep visualizations simple and easy to understand.
+*   **Accuracy:** Ensure data is accurately represented.
+*   **Context:** Provide context and labels, such as clear axis titles, legends, and annotations.
+*   **Color:** Use color strategically and consistently to highlight key data points. Avoid using excessive color, or colors that are hard to interpret.
+*   **Accessibility:** Use color combinations that are colorblind-friendly.
+
+By using these visualization techniques, I would be able to:
+
+*   **Identify Patterns:** Quickly spot trends, outliers, and relationships in the data.
+*   **Communicate Effectively:** Convey complex findings to stakeholders in an easily digestible format.
+*   **Drive Decisions:** Provide data-driven insights to make informed business decisions.
+
+
+
 ---
 <div style="page-break-before: always;"></div> 
 
