@@ -4,43 +4,168 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Data Science Analytical Interview Handbook</title>
-    <link rel="stylesheet" href="style.css"> 
+      <style>
+      body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+            color: #333;
+            background-color: #f9f9f9;
+        }
+        h1, h2, h3, h4 {
+            color: #0056b3;
+             margin-bottom: 15px;
+        }
+         h1 {
+            border-bottom: 2px solid #0056b3;
+            padding-bottom: 10px;
+         }
+        a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        ul {
+            padding-left: 20px;
+            list-style-type: disc;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        blockquote {
+          background-color: #f0f0f0;
+          padding: 15px;
+          margin: 15px 0;
+          border-left: 5px solid #ccc;
+          font-style: italic;
+        }
+        pre {
+            background-color: #f0f0f0;
+            padding: 10px;
+            overflow-x: auto;
+            border: 1px solid #ddd;
+        }
+        code {
+            font-family: 'Courier New', monospace;
+            background-color: #f0f0f0;
+            padding: 2px 5px;
+            border-radius: 3px;
+        }
+        .handbook-section {
+            margin-bottom: 30px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+         .handbook-section h2 {
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+       .handbook-section h3 {
+           margin-top: 20px;
+           margin-bottom: 10px;
+        }
+        .handbook-section h4 {
+            margin-top: 15px;
+            margin-bottom: 8px;
+         }
+        .code-block {
+            background-color: #f0f0f0;
+             padding: 10px;
+             margin-top: 10px;
+             border-radius: 5px;
+             border: 1px solid #ddd;
+        }
+          .table-container {
+            overflow-x: auto;
+        }
+        .table-container table {
+             width: 100%;
+             min-width: 800px;
+        }
+         img {
+            display: block;
+            margin: 20px auto;
+            max-width: 100px;
+            height: auto;
+        }
+       header {
+        background-color: #f0f0f0;
+        padding: 10px 0;
+         text-align: center;
+      }
+       nav ul {
+        padding: 0;
+        margin: 10px 0;
+        display: flex;
+        justify-content: center;
+        list-style-type: none;
+      }
+       nav ul li {
+        margin: 0 15px;
+      }
+       main {
+        margin-top: 20px;
+        }
+     footer {
+            text-align: center;
+            padding: 10px;
+            margin-top: 20px;
+            background-color: #f0f0f0;
+            border-top: 1px solid #ddd;
+        }
+
+    </style>
 </head>
 <body>
     <header>
         <h1>Data Science Analytical Interview Handbook</h1>
         <nav>
             <ul>
-                <li><a href="Data-Science-Analytical-Interview-Preparation-Handbook.html">Home</a></li> 
-                <li><a href="#getting-started">Getting Started</a></li>
-                <li><a href="#foundational-knowledge">Foundational Knowledge & Skills</a></li>
-                <li><a href="#interview-specific-prep">Interview-Specific Preparation</a></li>
-                <li><a href="#analytical-execution">Analytical Execution/Case Study</a></li>
-                <li><a href="#analytical-reasoning">Analytical Reasoning/Product Sense</a></li>
-                <li><a href="#behavioral-interview">Behavioral Interview</a></li>
-                <li><a href="#resources">Resources & Communities</a></li>
-                <li><a href="placeholder-main-handbook">Main Handbook</a></li> 
+                <li><a href="html_source\Data-Science-Analytical-Interview-Preparation-Handbook.html">Main Handbook</a></li>
+                <li><a href="html_source\Data-Science-Analytical-Interview-Preparation-Handbook.html#getting-started">Getting Started</a></li>
+                <li><a href="html_source\Data-Science-Analytical-Interview-Preparation-Handbook.html#foundational-knowledge--skills">Foundational Knowledge & Skills</a></li>
+               <li><a href="html_source\Data-Science-Analytical-Interview-Preparation-Handbook.html#interview-specific-preparation">Interview-Specific Preparation</a></li>
+                <li><a href="html_source\Data-Science-Analytical-Interview-Preparation-Handbook.html#analytical-executioncase-study-interview">Analytical Execution/Case Study</a></li>
+                <li><a href="html_source\Data-Science-Analytical-Interview-Preparation-Handbook.html#analytical-reasoningproduct-sense-interview">Analytical Reasoning/Product Sense</a></li>
+                <li><a href="html_source\Data-Science-Analytical-Interview-Preparation-Handbook.html#behavioral-interview">Behavioral Interview</a></li>
+                <li><a href="html_source\Data-Science-Analytical-Interview-Preparation-Handbook.html#resources--communities">Resources & Communities</a></li>
             </ul>
         </nav>
     </header>
     <main>
-        <section id="getting-started">
+         <section id="getting-started" class="handbook-section">
             <h2>Getting Started</h2>
             <p>If you are new to Data Science or interviewing at Meta, start by reviewing Meta's official interview preparation resources (if available) and familiarizing yourself with their company values (Move Fast, Be Bold, Be Open, Focus on Impact).</p>
-            <p>For focused preparation:
+            <p>For focused preparation:</p>
                 <ul>
-                    <li>Check out the <a href="#foundational-knowledge">[Foundational Knowledge & Skills](#foundational-knowledge--skills)</a> section.</li>
-                    <li>Check out the <a href="#interview-specific-prep">[Interview-Specific Preparation](#interview-specific-preparation)</a> section.</li>
-                    <li>Check out the <a href="#analytical-execution">[Analytical Execution/Case Study Interview](#analytical-executioncase-study-interview)</a> section.</li>
-                    <li>Check out the <a href="#analytical-reasoning">[Analytical Reasoning/Product Sense Interview](#analytical-reasoningproduct-sense-interview)</a> section.</li>
-                    <li>Check out the <a href="#resources">[Resources & Communities](#resources--communities)</a> section.</li>
-                </ul>
-            </p>
+                  <li>Check out the <a href="html_source\Data-Science-Analytical-Interview-Preparation-Handbook.html#foundational-knowledge--skills">Foundational Knowledge & Skills</a> section.</li>
+                   <li>Check out the <a href="html_source\Data-Science-Analytical-Interview-Preparation-Handbook.html#interview-specific-preparation">Interview-Specific Preparation</a> section.</li>
+                   <li>Check out the <a href="html_source\Data-Science-Analytical-Interview-Preparation-Handbook.html#analytical-executioncase-study-interview">Analytical Execution/Case Study Interview</a> section.</li>
+                   <li>Check out the <a href="html_source\Data-Science-Analytical-Interview-Preparation-Handbook.html#analytical-reasoningproduct-sense-interview">Analytical Reasoning/Product Sense Interview</a> section.</li>
+                    <li>Check out the <a href="html_source\Data-Science-Analytical-Interview-Preparation-Handbook.html#resources--communities">Resources & Communities</a> section.</li>
+               </ul>
+
         </section>
+
 
         </main>
     <footer>
-        <p>&copy; 2025 Moshe Shamoulian</p>
+        <p>© 2025 Moshe Shamoulian</p>
     </footer>
 </body>
 </html>
