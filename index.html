@@ -4,181 +4,247 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Data Science Analytical Interview Handbook</title>
-    <style>
-     body {
+     <style>
+         body {
             font-family: 'Arial', sans-serif;
             line-height: 1.6;
-            margin: 20px;
-            color: #333;
-            background-color: #f9f9f9;
+            margin: 0; /* Reset default margin */
+            color: #f0f0f0; /* Light text */
+            background: linear-gradient(45deg, #1a1a1a, #333); /* Darker gradient background */
+            padding: 20px; /* Add padding */
         }
-        h1, h2, h3, h4 {
-            color: #0056b3;
-             margin-bottom: 15px;
-        }
-         h1 {
-            border-bottom: 2px solid #0056b3;
-            padding-bottom: 10px;
+         h1, h2, h3, h4 {
+            color: #00bfff; /* Futuristic blue */
+            margin-bottom: 15px;
+            text-shadow: 1px 1px 2px #000; /* Slight shadow for depth */
          }
+           h1 {
+               border-bottom: 2px solid #00bfff;
+                padding-bottom: 10px;
+            }
         a {
-            color: #007bff;
-            text-decoration: none;
+             color: #40e0d0; /* Teal color */
+             text-decoration: none;
+             transition: color 0.3s ease; /* Smooth color transition */
         }
-        a:hover {
-            text-decoration: underline;
+       a:hover {
+           text-decoration: underline;
+           color: #00ffff; /* Cyan on hover */
         }
         ul {
-            padding-left: 20px;
+             padding-left: 20px;
             list-style-type: disc;
-        }
+         }
         table {
             width: 100%;
             border-collapse: collapse;
             margin-bottom: 20px;
+            background-color: rgba(255,255,255,0.05); /* Transparent background */
+            border-radius: 8px;
+            overflow: hidden;
         }
-        th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: left;
-        }
-        th {
-            background-color: #f2f2f2;
-        }
-        blockquote {
-          background-color: #f0f0f0;
-          padding: 15px;
-          margin: 15px 0;
-          border-left: 5px solid #ccc;
-          font-style: italic;
-        }
-        pre {
-            background-color: #f0f0f0;
+         th, td {
+            border: 1px solid #444;
             padding: 10px;
-            overflow-x: auto;
-            border: 1px solid #ddd;
-        }
+            text-align: left;
+           color: #ccc;
+         }
+        th {
+           background-color: rgba(255,255,255,0.1);
+            color: #ddd;
+         }
+       blockquote {
+         background-color: rgba(255,255,255,0.05);
+         padding: 15px;
+          margin: 15px 0;
+         border-left: 5px solid #555;
+           font-style: italic;
+         }
+        pre {
+            background-color: rgba(255,255,255,0.05);
+             padding: 10px;
+           overflow-x: auto;
+             border: 1px solid #555;
+             border-radius: 5px;
+         }
         code {
             font-family: 'Courier New', monospace;
-            background-color: #f0f0f0;
+            background-color: rgba(255,255,255,0.05);
             padding: 2px 5px;
             border-radius: 3px;
         }
-        .handbook-section {
-            margin-bottom: 30px;
-            padding: 20px;
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+          .handbook-section {
+           margin-bottom: 30px;
+           padding: 20px;
+            background-color: rgba(255,255,255,0.05);
+            border-radius: 10px; /* Rounded borders */
+            box-shadow: 0 0 10px rgba(0,0,0,0.3); /* Shadow effect */
         }
-         .handbook-section h2 {
-            border-bottom: 1px solid #eee;
-            padding-bottom: 10px;
-            margin-bottom: 20px;
+        .handbook-section h2 {
+           border-bottom: 1px solid #555;
+           padding-bottom: 10px;
+             margin-bottom: 20px;
         }
-       .handbook-section h3 {
-           margin-top: 20px;
-           margin-bottom: 10px;
-        }
-        .handbook-section h4 {
-            margin-top: 15px;
-            margin-bottom: 8px;
+          .handbook-section h3 {
+          margin-top: 20px;
+             margin-bottom: 10px;
          }
-        .code-block {
-            background-color: #f0f0f0;
-             padding: 10px;
-             margin-top: 10px;
-             border-radius: 5px;
-             border: 1px solid #ddd;
+          .handbook-section h4 {
+             margin-top: 15px;
+             margin-bottom: 8px;
         }
+         .code-block {
+            background-color: rgba(255,255,255,0.05);
+            padding: 10px;
+           margin-top: 10px;
+            border-radius: 5px;
+            border: 1px solid #555;
+         }
           .table-container {
             overflow-x: auto;
-        }
-        .table-container table {
-             width: 100%;
-             min-width: 800px;
+         }
+         .table-container table {
+           width: 100%;
+           min-width: 800px;
         }
          img {
-            display: block;
+             display: block;
             margin: 20px auto;
-            max-width: 100px;
+           max-width: 150px; /* Adjust as needed */
             height: auto;
         }
-       header {
-        background-color: #f0f0f0;
-        padding: 10px 0;
-         text-align: center;
-      }
+        header {
+           background-color: rgba(255,255,255,0.1);
+             padding: 10px 0;
+             text-align: center;
+          }
        nav ul {
-        padding: 0;
-        margin: 10px 0;
-        display: flex;
-        justify-content: center;
-        list-style-type: none;
-      }
+          padding: 0;
+           margin: 10px 0;
+             display: flex;
+           justify-content: center;
+           list-style-type: none;
+         }
        nav ul li {
-        margin: 0 15px;
-      }
-       main {
-        margin-top: 20px;
+           margin: 0 15px;
         }
-     footer {
-            text-align: center;
-            padding: 10px;
-            margin-top: 20px;
-            background-color: #f0f0f0;
-            border-top: 1px solid #ddd;
+          main {
+           margin-top: 20px;
         }
-        .image-placeholder {
-            border: 2px dashed #ccc;
-            padding: 20px;
-            text-align: center;
+          footer {
+          text-align: center;
+           padding: 10px;
+          margin-top: 20px;
+           background-color: rgba(255,255,255,0.1);
+          border-top: 1px solid #555;
+         }
+           .image-placeholder {
+             border: 2px dashed rgba(255,255,255,0.3);
+             padding: 20px;
+             text-align: center;
             font-style: italic;
-            color: #777;
-            margin: 10px auto;
-             max-width: 400px; /* Adjust as needed */
+           color: #777;
+           margin: 10px auto;
+           max-width: 400px;
+             height: 200px;
+               display: flex;
+                align-items: center;
+               justify-content: center;
+              border-radius: 10px;
+               transition: background-color 0.3s ease; /* Add transition */
+            }
+            .image-placeholder:hover {
+                background-color: rgba(255, 255, 255, 0.1); /* Lighter background on hover */
+            }
+        /* Media Queries for Responsiveness */
+        @media (max-width: 768px) {
+            nav ul {
+                flex-direction: column;
+                 align-items: center;
+             }
+            nav ul li {
+               margin: 10px 0;
+            }
+           .table-container table {
+              min-width: 0;
+            }
+              .image-placeholder {
+                 max-width: 100%; /* Full width for small screens */
+                 height: auto; /* Adjust height to fit content */
+              }
+         }
+          .linkedin-link {
+            position: absolute;
+             top: 20px;
+            right: 20px;
+             display: flex;
+            align-items: center;
+            color: #fff;
+           text-decoration: none;
+           }
+         .linkedin-link img {
+            width: 30px;
+             height: auto;
+            margin-right: 5px;
+         }
+        .footer-banner {
+             background-color: rgba(255,255,255,0.1);
+            padding: 10px;
+            text-align: center;
+             margin-top: 20px;
+             border-top: 1px solid #555;
         }
-
     </style>
 </head>
 <body>
     <header>
-        <h1>Data Science Analytical Interview Handbook 🚀</h1>
+       <h1>Data Science Analytical Interview Handbook for Meta 🚀</h1>
+        <a href="https://www.linkedin.com/in/moshesham/" class="linkedin-link" target = '_blank'>
+            <img src="https://brand.linkedin.com/content/dam/me/business/en-us/linkedin-brand/images/icons/app-icons/linkedin-app-icon-1080x1080.png" alt="LinkedIn Logo">
+            LinkedIn Profile
+        </a>
         <nav>
             <ul>
-                <li><a href="Data-Science-Analytical-Interview-Preparation-Handbook.html">Main Handbook 📖</a></li>
-                <li><a href="Data-Science-Analytical-Interview-Preparation-Handbook.html#getting-started">Getting Started ✨</a></li>
-                <li><a href="Data-Science-Analytical-Interview-Preparation-Handbook.html#foundational-knowledge--skills">Foundational Knowledge & Skills 🧠</a></li>
-               <li><a href="Data-Science-Analytical-Interview-Preparation-Handbook.html#interview-specific-preparation">Interview-Specific Preparation 🎯</a></li>
-                <li><a href="Data-Science-Analytical-Interview-Preparation-Handbook.html#analytical-executioncase-study-interview">Analytical Execution/Case Study 📊</a></li>
-                <li><a href="Data-Science-Analytical-Interview-Preparation-Handbook.html#analytical-reasoningproduct-sense-interview">Analytical Reasoning/Product Sense 🤔</a></li>
-                <li><a href="Data-Science-Analytical-Interview-Preparation-Handbook.html#behavioral-interview">Behavioral Interview 🎭</a></li>
-                <li><a href="Data-Science-Analytical-Interview-Preparation-Handbook.html#resources--communities">Resources & Communities 🌐</a></li>
+               <li><a href="html_source/Data-Science-Analytical-Interview-Preparation-Handbook.html">Home</a></li>
+                <li><a href="#getting-started">Getting Started ✨</a></li>
+                <li><a href="#foundational-knowledge">Foundational Knowledge & Skills 🧠</a></li>
+                <li><a href="#interview-specific-prep">Interview-Specific Preparation 🎯</a></li>
+                 <li><a href="#analytical-execution">Analytical Execution/Case Study 📊</a></li>
+                 <li><a href="#analytical-reasoning">Analytical Reasoning/Product Sense 🤔</a></li>
+                  <li><a href="#behavioral-interview">Behavioral Interview 🎭</a></li>
+                <li><a href="#resources">Resources & Communities 🌐</a></li>
+                 <li><a href="html_source/Data-Science-Analytical-Interview-Preparation-Handbook.html">Main Handbook</a></li>
             </ul>
         </nav>
     </header>
     <main>
-         <section id="getting-started" class="handbook-section">
-            <h2>Getting Started ✨</h2>
-               <div class="image-placeholder">
-                   [Placeholder: Image of a person starting a journey, perhaps with a map or laptop]
-                </div>
-
-            <p>If you are new to Data Science or interviewing at Meta, start by reviewing Meta's official interview preparation resources (if available) and familiarizing yourself with their company values (<b>Move Fast</b>, <i>Be Bold</i>, Be Open, Focus on Impact).  </p>
-            <p>For focused preparation, explore these sections: 🧐</p>
+        <div class="handbook-section">
+        <div class="image-placeholder">
+        <img src="https://i.ibb.co/L9kG0zC/data-analyst-desk.png" alt="Futuristic desk with data analysis tools">
+        </div>
+            <p>If you are new to Data Science or interviewing at Meta, start by reviewing Meta's official interview preparation resources (if available) and familiarizing yourself with their company values (Move Fast, Be Bold, Be Open, Focus on Impact).</p>
+            <p>For focused preparation:
                 <ul>
-                  <li>Check out the <a href="Data-Science-Analytical-Interview-Preparation-Handbook.html#foundational-knowledge--skills"><b>Foundational Knowledge & Skills</b></a> section. 🧠</li>
-                   <li>Check out the <a href="Data-Science-Analytical-Interview-Preparation-Handbook.html#interview-specific-preparation"><b>Interview-Specific Preparation</b></a> section. 🎯</li>
-                   <li>Check out the <a href="Data-Science-Analytical-Interview-Preparation-Handbook.html#analytical-executioncase-study-interview"><b>Analytical Execution/Case Study Interview</b></a> section. 📊</li>
-                   <li>Check out the <a href="Data-Science-Analytical-Interview-Preparation-Handbook.html#analytical-reasoningproduct-sense-interview"><b>Analytical Reasoning/Product Sense Interview</b></a> section. 🤔</li>
-                    <li>Check out the <a href="Data-Science-Analytical-Interview-Preparation-Handbook.html#resources--communities"><b>Resources & Communities</b></a> section. 🌐</li>
-               </ul>
-
-        </section>
-
+                    <li>Check out the <a href="#foundational-knowledge">Foundational Knowledge & Skills</a> section.</li>
+                    <li>Check out the <a href="#interview-specific-prep">Interview-Specific Preparation</a> section.</li>
+                    <li>Check out the <a href="#analytical-execution">Analytical Execution/Case Study Interview</a> section.</li>
+                    <li>Check out the <a href="#analytical-reasoning">Analytical Reasoning/Product Sense Interview</a> section.</li>
+                    <li>Check out the <a href="#resources">Resources & Communities</a> section.</li>
+                </ul>
+            </p>
+        </div>
+         <div class="handbook-section">
+        <div class="image-placeholder">
+            <img src="https://i.ibb.co/8g48W6D/data-analyst-team.png" alt="Data scientist team discussing data">
+         </div>
+        </div>
 
         </main>
+        <div class="footer-banner">
+         [Placeholder: Add a footer banner with a call to action]
+           </div>
     <footer>
-        <p>© 2025 Moshe Shamoulian 🧑‍💻</p>
+        <p>© 2025 Moshe Shamoulian</p>
     </footer>
 </body>
 </html>
