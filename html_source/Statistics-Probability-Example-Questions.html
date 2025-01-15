@@ -1,0 +1,1567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Statistics & Probability Interview  Exercies</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+      /* Base styles */
+       * {
+           box-sizing: border-box;
+           margin: 0;
+           padding: 0;
+       }
+       body {
+           font-family: system-ui, -apple-system, sans-serif;
+           line-height: 1.6;
+           color: #1a1a1a;
+           background-color: #fafafa;
+           overflow-x: hidden;
+       }
+
+       /* Container for responsive padding */
+       .container {
+          width: 100%;
+         max-width: 4200px;
+           margin: 0 auto;
+          padding: 0 50px;
+             flex: 1;
+              display: flex;
+        }
+       /* Responsive header */
+       .header {
+           text-align: center;
+          padding: clamp(2rem, 5vw, 4rem) 1rem;
+          background-color: white;
+          box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+       }
+       .header h1 {
+          font-size: clamp(2rem, 5vw, 3rem);
+          margin-bottom: clamp(0.5rem, 2vw, 1rem);
+          color: #1a1a1a;
+       }
+        .header p {
+            font-size: clamp(1rem, 2vw, 1.25rem);
+           color: #666;
+           max-width: 600px;
+            margin: 0 auto clamp(1rem, 3vw, 2rem);
+           padding: 0 1rem;
+       }
+        /* Responsive button group */
+       .button-group {
+             display: flex;
+             gap: 1rem;
+          justify-content: center;
+            margin-bottom: 2rem;
+             flex-wrap: wrap;
+          padding: 0 1rem;
+       }
+        .button {
+           padding: clamp(0.5rem, 2vw, 0.75rem) clamp(1rem, 3vw, 1.5rem);
+            border-radius: 0.5rem;
+           font-weight: 500;
+           cursor: pointer;
+             transition: all 0.2s;
+            font-size: clamp(0.875rem, 2vw, 1rem);
+            white-space: nowrap;
+         }
+       .primary-button {
+           background-color: #3b82f6;
+           color: white;
+          border: none;
+       }
+       .primary-button:hover {
+           background-color: #2563eb;
+       }
+       .secondary-button {
+            background-color: white;
+           color: #1a1a1a;
+          border: 1px solid #e5e7eb;
+       }
+       .secondary-button:hover {
+            background-color: #f3f4f6;
+       }
+        /* Resources section */
+         .resources-section {
+           padding: clamp(2rem, 5vw, 4rem) 1rem;
+        }
+       /* Responsive grid */
+        .resources-grid {
+           display: grid;
+            gap: clamp(1rem, 3vw, 2rem);
+           max-width: 1200px;
+           margin: 0 auto;
+           padding: 0 1rem;
+         /* Responsive columns */
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+       }
+        /* Card styling */
+         .resource-card {
+           background-color: white;
+           border-radius: 1rem;
+             padding: clamp(1.5rem, 3vw, 2rem);
+          border: 1px solid #e5e7eb;
+           transition: all 0.2s;
+          display: flex;
+           flex-direction: column;
+           height: 100%;
+          text-decoration: none; /* Remove default link underline */
+              color: inherit;
+          }
+        .resource-card:hover {
+            border-color: #3b82f6;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+       .icon-container {
+            width: clamp(2.5rem, 5vw, 3rem);
+             height: clamp(2.5rem, 5vw, 3rem);
+          background-color: #eff6ff;
+           border-radius: 0.5rem;
+             display: flex;
+           align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            font-size: clamp(1.25rem, 2.5vw, 1.5rem);
+        }
+        .resource-card h3 {
+           margin: 0 0 0.5rem 0;
+           font-size: clamp(1.125rem, 2.5vw, 1.25rem);
+        }
+        .resource-card p {
+            color: #666;
+             margin: 0 0 1rem 0;
+            font-size: clamp(0.875rem, 2vw, 1rem);
+             flex-grow: 1;
+        }
+        .metric {
+            color: #3b82f6;
+            font-size: clamp(0.75rem, 1.5vw, 0.875rem);
+           font-weight: 500;
+           margin-top: auto;
+        }
+        /* Navigation menu */
+       .nav-menu {
+           display: flex;
+          justify-content: center;
+            padding: 1rem;
+          background-color: white;
+          box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .nav-list {
+            display: flex;
+           gap: 2rem;
+          list-style: none;
+             flex-wrap: wrap;
+           justify-content: center;
+        }
+         .nav-list a {
+             color: #666;
+             text-decoration: none;
+            font-size: clamp(0.875rem, 2vw, 1rem);
+            transition: color 0.2s;
+        }
+       .nav-list a:hover {
+         color: #3b82f6;
+        }
+       /* Mobile optimizations */
+       @media (max-width: 768px) {
+            .button-group {
+                flex-direction: column;
+               padding: 0 2rem;
+            }
+            .button {
+               width: 100%;
+               text-align: center;
+            }
+            .nav-list {
+              gap: 1rem;
+               padding: 0 1rem;
+            }
+            .resource-card {
+             margin: 0 1rem;
+            }
+         }
+        /* Ensure text remains readable on very small screens */
+       @media (max-width: 320px) {
+             .header h1 {
+                font-size: 1.75rem;
+           }
+           .header p {
+               font-size: 0.875rem;
+            }
+             .resource-card h3 {
+                font-size: 1rem;
+          }
+          .resource-card p {
+               font-size: 0.875rem;
+           }
+        }
+         .linkedin-link {
+             position: absolute;
+            top: 20px;
+              right: 20px;
+               display: flex;
+             align-items: center;
+             color: #333;
+             text-decoration: none;
+          }
+        .linkedin-link img {
+           width: 30px;
+              height: auto;
+            margin-right: 5px;
+        }
+       .footer-banner {
+             background-color: #ddd;
+            padding: 10px;
+            text-align: center;
+           margin-top: 20px;
+             border-top: 1px solid #ccc;
+       }
+      /* Responsive header */
+       header{
+           max-width: 1200px;
+            margin: 0 auto;
+       }
+      .container {
+          width: 100%;
+           max-width: 1200px;
+           margin: 0 auto;
+          padding: 0 20px;
+            flex: 1;
+          display: flex;
+       }
+      .sidebar {
+         width: fit-content;
+           padding: 90px;
+            background-color: #f0f0f0;
+            border-radius: 8px;
+           box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            margin-right: 20px;
+            overflow-y: auto;
+
+          height:auto;
+       }
+       .main-content {
+           flex: 1;
+           padding: 20px;
+           background-color: #fff;
+            border-radius: 8px;
+           box-shadow: 0 0 10px rgba(0,0,0,0.1);
+           }
+           .card {
+  border: 1px solid #ccc;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1); 
+}
+
+.card:nth-child(odd) {
+  background-color: #f9f9f9;
+}
+
+.question {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.key-concepts {
+  font-style: italic;
+  color: #555;
+}
+   </style>
+</head>
+<body>
+    <div class = "container">
+        <div class="sidebar">
+            <h2>Contents</h2>
+            <ul class = "nav-list">
+                <li><a href="#probability-and-combinations">Probability and Combinations</a></li>
+                 <ul>
+                      <li><a href="#question-1">Question 1</a></li>
+                       <li><a href="#question-2">Question 2</a></li>
+                       <li><a href="#question-3">Question 3</a></li>
+                       <li><a href="#question-4">Question 4</a></li>
+                      <li><a href="#question-5">Question 5</a></li>
+                       <li><a href="#question-6">Question 6</a></li>
+                       <li><a href="#question-7">Question 7</a></li>
+                       <li><a href="#question-8">Question 8</a></li>
+                        <li><a href="#question-9">Question 9</a></li>
+                       <li><a href="#question-10">Question 10</a></li>
+                        <li><a href="#question-11">Question 11</a></li>
+                       <li><a href="#question-12">Question 12</a></li>
+                    </ul>
+                <li><a href="#conditional-probability-and-bayes-theorem">Conditional Probability and Bayes’ Theorem</a></li>
+                  <ul>
+                    <li><a href="#question-13">Question 13</a></li>
+                      <li><a href="#question-14">Question 14</a></li>
+                     <li><a href="#question-15">Question 15</a></li>
+                    <li><a href="#question-16">Question 16</a></li>
+                    </ul>
+                 <li><a href="#hypothesis-testing">Hypothesis Testing</a></li>
+                  <ul>
+                    <li><a href="#question-17">Question 17</a></li>
+                   <li><a href="#question-18">Question 18</a></li>
+                   <li><a href="#question-19">Question 19</a></li>
+                   <li><a href="#question-20">Question 20</a></li>
+                   <li><a href="#question-21">Question 21</a></li>
+                     <li><a href="#question-22">Question 22</a></li>
+                  <li><a href="#question-23">Question 23</a></li>
+                   <li><a href="#question-24">Question 24</a></li>
+                     <li><a href="#question-25">Question 25</a></li>
+                   <li><a href="#question-26">Question 26</a></li>
+                    <li><a href="#question-27">Question 27</a></li>
+                   <li><a href="#question-28">Question 28</a></li>
+                      <li><a href="#question-29">Question 29</a></li>
+                  <li><a href="#question-30">Question 30</a></li>
+                 </ul>
+                  <li><a href="#statistical-inference-and-data-analysis">Statistical Inference and Data Analysis</a></li>
+                   <ul>
+                     <li><a href="#question-31">Question 31</a></li>
+                      <li><a href="#question-32">Question 32</a></li>
+                     <li><a href="#question-33">Question 33</a></li>
+                      <li><a href="#question-34">Question 34</a></li>
+                       <li><a href="#question-35">Question 35</a></li>
+                        <li><a href="#question-36">Question 36</a></li>
+                       <li><a href="#question-37">Question 37</a></li>
+                     <li><a href="#question-38">Question 38</a></li>
+                    </ul>
+                   <li><a href="#statistical-relationships">Statistical Relationships</a></li>
+                      <ul>
+                       <li><a href="#question-39">Question 39</a></li>
+                        <li><a href="#question-40">Question 40</a></li>
+                       <li><a href="#question-41">Question 41</a></li>
+                      <li><a href="#question-42">Question 42</a></li>
+                      <li><a href="#question-43">Question 43</a></li>
+                         <li><a href="#question-44">Question 44</a></li>
+                    </ul>
+                     <li><a href="#time-series-analysis">Time Series Analysis</a></li>
+                      <ul>
+                        <li><a href="#question-45">Question 45</a></li>
+                        <li><a href="#question-46">Question 46</a></li>
+                       <li><a href="#question-47">Question 47</a></li>
+                     </ul>
+                   <li><a href="#handling-outliers-and-imbalanced-data">Handling Outliers and Imbalanced Data</a></li>
+                    <ul>
+                        <li><a href="#question-48">Question 48</a></li>
+                      <li><a href="#question-49">Question 49</a></li>
+                       <li><a href="#question-50">Question 50</a></li>
+                       <li><a href="#question-51">Question 51</a></li>
+                    </ul>
+                     <li><a href="#harder-practice-questions-social-network-focus">Harder Practice Questions (Social Network Focus)</a></li>
+                     <ul>
+                       <li><a href="#question-52">Question 52</a></li>
+                         <li><a href="#question-53">Question 53</a></li>
+                           <li><a href="#question-54">Question 54</a></li>
+                           <li><a href="#question-55">Question 55</a></li>
+                            <li><a href="#question-56">Question 56</a></li>
+                         <li><a href="#question-57">Question 57</a></li>
+                          <li><a href="#question-58">Question 58</a></li>
+                         <li><a href="#question-59">Question 59</a></li>
+                            <li><a href="#question-60">Question 60</a></li>
+                     </ul>
+            </ul>
+        </div>
+        <div class="main-content">
+           <div class = "section">
+            <h1>Statistics & Probability for Meta Data Science Interviews</h1>
+               <p>This page provides a detailed review of statistics and probability concepts relevant to Meta Data Science (Analytical) interviews. It is intended as a supplement to the main Meta Data Science Interview Preparation Handbook.</p>
+            </div>
+             <div class = "section">
+            <h2>Probability and Combinations</h2>
+                <h3>Basic Probability</h3>
+                <div class="card"> 
+                  <div class="question" id = "question-1">
+                      <p><strong>Question 1: (Easy)</strong> On Instagram, the probability of a user watching a story to completion is 0.8. If a user posts a sequence of 4 stories, what is the probability that a viewer will watch all 4 stories?</p>
+                  </div>
+                  <p class="key-concepts"><strong>Key Concept(s):</strong> Independent Events</p>
+                  <div class = "explanation">
+                      <p><strong>Explanation:</strong> This question tests understanding of independent events.</p>
+                      <ul>
+                          <li>Since each story view is independent, we multiply the probabilities: (0.8 * 0.8 * 0.8 * 0.8 = 0.8^4 = 0.4096)</li>
+                      </ul>
+                  </div>
+                  <div class = "answer">
+                      <p><strong>Answer:</strong> The probability of watching all 4 stories is 40.96%.</p>
+                  </div>
+                </div>
+                <div class="card">
+                 <div class="question" id = "question-2">
+                     <p><strong>Question 2: (Easy)</strong>  You have a bag containing 8 red balls and 4 blue balls. If you draw two balls without replacement, what is the probability that both balls are red?</p>
+                 </div>
+                <p class="key-concepts"><strong>Key Concept(s):</strong> Conditional Probability, Dependent Events</p>
+                <div class = "explanation">
+                    <p><strong>Explanation:</strong> This problem tests understanding of probability without replacement.</p>
+                       <ul>
+                             <li><strong>1st ball is red</strong>: There are 12 total balls so probability is (\frac{8}{12})</li>
+                             <li><strong>2nd ball is red</strong>: Given the first ball is red, then there are 7 red balls and 11 balls total left so probability is (\frac{7}{11})</li>
+                             <li>The probability of the two independent steps is (\frac{8}{12} * \frac{7}{11} = \frac{56}{132} = 0.424).</li>
+                         </ul>
+                 </div>
+                <div class = "answer">
+                   <p><strong>Answer:</strong> The probability that both balls drawn are red is approximately (\frac{56}{132} ) which equals approximately 0.424.</p>
+                 </div> 
+                </div>
+                <div class="card">
+                <div class="question" id = "question-3">
+                     <p><strong>Question 3: (Easy)</strong> A coin is flipped three times. What is the probability of getting exactly two heads?</p>
+                  </div>
+                 <p class="key-concepts"><strong>Key Concept(s):</strong> Binomial Probability</p>
+                   <div class = "explanation">
+                         <p><strong>Explanation:</strong> There are 2^3 = 8 possible outcomes. The combinations with two heads are: HHT, HTH, THH. So 3/8. You can also use the binomial formula
+                            <span class="latex-math">\(P(X=2) = \binom{3}{2} * 0.5^2 * 0.5^1= \frac{3!}{2!1!} * 0.25 * 0.5 = 3*0.125 = 0.375 \)</span></p>
+                      </div>
+                     <div class = "answer">
+                       <p><strong>Answer:</strong> The probability of getting exactly two heads is 3/8 or 0.375.</p>
+                  </div>
+                </div>
+                <div class="card">
+                 <div class="question" id = "question-4">
+                    <p><strong>Question 4: (Easy)</strong> A six-sided die is rolled once. What is the probability of rolling a number greater than 4?</p>
+                   </div>
+                  <p class="key-concepts"><strong>Key Concept(s):</strong> Basic Probability</p>
+                    <div class = "explanation">
+                        <p><strong>Explanation:</strong> There are six possible outcomes, and two are greater than 4 (5 and 6).</p>
+                    </div>
+                   <div class = "answer">
+                      <p><strong>Answer:</strong> The probability is 2/6 or 1/3.</p>
+                     </div>
+                    </div>
+                    <div class="card">
+                  <div class="question" id = "question-5">
+                       <p><strong>Question 5: (Easy)</strong>  A deck of cards has 52 cards. What is the probability of drawing a King?</p>
+                    </div>
+                    <p class="key-concepts"><strong>Key Concept(s):</strong> Basic Probability</p>
+                     <div class = "explanation">
+                          <p><strong>Explanation:</strong> There are 4 Kings in a standard deck of 52 cards.</p>
+                     </div>
+                    <div class = "answer">
+                       <p><strong>Answer:</strong> The probability is 4/52 or 1/13.</p>
+                  </div>
+                </div>
+                <div class="card">
+                   <div class="question" id = "question-6">
+                       <p><strong>Question 6: (Easy)</strong> If you have two independent events, A and B, with (P(A) = 0.4) and (P(B) = 0.6), what is (P(A \cap B))?</p>
+                     </div>
+                     <p class="key-concepts"><strong>Key Concept(s):</strong> Independent Events</p>
+                     <div class = "explanation">
+                        <p><strong>Explanation:</strong> For independent events, (P(A \cap B) = P(A) * P(B)).</p>
+                      </div>
+                      <div class = "answer">
+                         <p><strong>Answer:</strong>  (P(A \cap B) = 0.4 * 0.6 = 0.24)</p>
+                       </div>
+                      </div>
+                      <div class="card">
+                    <div class="question" id = "question-7">
+                     <p><strong>Question 7: (Easy)</strong> A lottery has 100 tickets. You buy 5. What’s the probability you hold the winning ticket?</p>
+                     </div>
+                    <p class="key-concepts"><strong>Key Concept(s):</strong> Basic Probability</p>
+                    <div class = "explanation">
+                          <p><strong>Explanation:</strong>  There are 5 winning tickets out of 100</p>
+                    </div>
+                    <div class = "answer">
+                         <p><strong>Answer:</strong> 5/100 or 1/20.</p>
+                     </div>
+                    </div>
+                    <div class="card">
+                     <div class="question" id = "question-8">
+                         <p><strong>Question 8: (Easy)</strong> In a group of 10 people, 3 are left-handed. If you randomly select one person, what is the probability they are right-handed?</p>
+                    </div>
+                   <p class="key-concepts"><strong>Key Concept(s):</strong> Basic Probability, Complementary Probability</p>
+                   <div class = "explanation">
+                         <p><strong>Explanation:</strong>  If 3 are left-handed, then 7 are right-handed.</p>
+                   </div>
+                     <div class = "answer">
+                         <p><strong>Answer:</strong> 7/10 or 0.7</p>
+                     </div>
+                    </div>
+                    <div class="card">
+                       <div class="question" id = "question-9">
+                       <p><strong>Question 9: (Medium)</strong> A social media platform notices that 70% of users like at least one post per day. If you randomly select 5 users, what is the probability that exactly 3 of them like at least one post daily?</p>
+                       </div>
+                     <p class="key-concepts"><strong>Key Concept(s):</strong> Binomial Probability</p>
+                       <div class = "explanation">
+                             <p><strong>Explanation:</strong> This question tests understanding of the binomial probability distribution.</p>
+                                <ul>
+                                   <li><strong>Setup</strong>: <span class = "latex-math">\(n=5\)</span>, <span class = "latex-math">\(p=0.7\)</span>, and we want the probability of exactly 3 successes (<span class = "latex-math">\(k=3\)</span>). We will need to use the formula
+                                       <span class = "latex-math">\(P(X=k) = \binom{n}{k} * p^k * (1-p)^{n-k}\)</span>
+                                       <span class = "latex-math">\(P(X=3) = \binom{5}{3} * 0.7^3 * (1-0.7)^{5-3} =  \frac{5!}{3!2!} * 0.7^3 * 0.3^2 = 10* 0.343 * 0.09= 0.3087 \)</span></li>
+                               </ul>
+                        </div>
+                         <div class = "answer">
+                              <p><strong>Answer:</strong> The probability that exactly 3 out of 5 users like at least one post per day is approximately 0.3087 or 30.87%.</p>
+                           </div>
+                          </div>
+                          <div class="card">
+                          <div class="question" id = "question-10">
+                                 <p><strong>Question 10: (Medium)</strong> On a video-sharing platform, 60% of users watch a video at least 5 minutes long. If 6 users are randomly selected, what is the probability that exactly 4 of them watch a video for at least 5 minutes?</p>
+                           </div>
+                       <p class="key-concepts"><strong>Key Concept(s):</strong> Binomial Probability</p>
+                          <div class = "explanation">
+                               <p><strong>Explanation:</strong>  Use the binomial probability formula. <span class = "latex-math">\(n=6\)</span>, <span class = "latex-math">\(p=0.6\)</span>, <span class = "latex-math">\(k=4\)</span>.
+                                   <span class = "latex-math">\(P(X=4) = \binom{6}{4} * 0.6^4 * (1-0.6)^{6-4}\)</span>
+                                   <span class = "latex-math">\(P(X=4) = 15 * 0.1296 * 0.16 = 0.31104\)</span></p>
+                          </div>
+                           <div class = "answer">
+                               <p><strong>Answer:</strong> The probability is approximately 0.311, or 31.1%</p>
+                           </div>
+                          </div>
+                          <div class="card">
+                          <div class="question" id = "question-11">
+                            <p><strong>Question 11: (Medium)</strong> A music streaming service offers a 'daily mix' playlist. If 30% of users listen to the entire mix, and you pick 4 users randomly, what is the probability that at least 1 of them will listen to the full mix?</p>
+                         </div>
+                          <p class="key-concepts"><strong>Key Concept(s):</strong> Complement Probability, Binomial Probability</p>
+                           <div class = "explanation">
+                               <p><strong>Explanation:</strong> Calculate the complement (none listen to full mix) and subtract from 1.
+                                    Probability of not listening: (1-0.3 = 0.7).
+                                     Probability of none listening: (0.7^4 = 0.2401)
+                                     Probability of at least one: (1 - 0.2401 = 0.7599)</p>
+                            </div>
+                            <div class = "answer">
+                                 <p><strong>Answer:</strong> The probability is approximately 0.76, or 76%.</p>
+                             </div>
+                            </div>
+                            <div class="card">
+                           <div class="question" id = "question-12">
+                             <p><strong>Question 12: (Medium)</strong> Say you roll a die three times. What is the probability of getting two sixes in a row?</p>
+                            </div>
+                            <p class="key-concepts"><strong>Key Concept(s):</strong> Independent Events, Probability</p>
+                             <div class = "explanation">
+                                  <p><strong>Explanation:</strong> This involves calculating probabilities of sequential events.</p>
+                                  <p>There are <span class = "latex-math">\(6^3 = 216\)</span> possible outcomes when rolling a die three times. The sequences with two sixes in a row are:</p>
+                                      <ul>
+                                       <li>6, 6, 1</li>
+                                         <li>6, 6, 2</li>
+                                          <li>6, 6, 3</li>
+                                        <li>6, 6, 4</li>
+                                         <li>6, 6, 5</li>
+                                         <li>6, 6, 6</li>
+                                         <li>1, 6, 6</li>
+                                         <li>2, 6, 6</li>
+                                          <li>3, 6, 6</li>
+                                        <li>4, 6, 6</li>
+                                          <li>5, 6, 6</li>
+                                      </ul>
+                                 <p>There are 11 such outcomes.</p>
+                            </div>
+                            <div class = "answer">
+                                <p><strong>Answer:</strong> The probability is 11/216, or approximately 5.09%.</p>
+                           </div>
+       </div>
+      </div>
+       <div class="section" id="conditional-probability-and-bayes-theorem">
+           <h2>Conditional Probability and Bayes’ Theorem</h2>
+          <div class="card">
+            <div class="question" id = "question-13">
+                 <p><strong>Question 13: (Medium)</strong> A Facebook Ads analyst is investigating the effectiveness of a new ad targeting algorithm. As a general baseline, they know that 1% of all users who see an ad convert (make a purchase). The new algorithm correctly identifies 80% of users who will convert for an ad. The algorithm also incorrectly flags 10% of non-converting users as likely to convert. Given that the algorithm has flagged a user as likely to convert, what is the probability that this user will actually convert?</p>
+            </div>
+            <p class="key-concepts"><strong>Key Concept(s):</strong> Bayes’ Theorem, Conditional Probability</p>
+               <div class = "explanation">
+                    <p><strong>Explanation:</strong> This is a classic application of Bayes' Theorem.</p>
+                   <ul>
+                        <li>  <span class = "latex-math">\(P(\text{Convert}) = 0.01\)</span> (Prior probability of conversion)</li>
+                        <li> <span class = "latex-math">\( P(\text{Not Convert}) = 0.99 \)</span></li>
+                           <li>  <span class = "latex-math">\(P(\text{Flagged} | \text{Convert}) = 0.80\)</span> (True Positive Rate)</li>
+                        <li>  <span class = "latex-math">\(P(\text{Flagged} | \text{Not Convert}) = 0.10\)</span> (False Positive Rate)</li>
+                   </ul>
+                    <p>We want to find   <span class = "latex-math">\(P(\text{Convert} | \text{Flagged})\)</span>. Using Bayes' Theorem:</p>
+                     <span class = "latex-math">\(P(\text{Convert} | \text{Flagged}) = \frac{P(\text{Flagged} | \text{Convert}) * P(\text{Convert})}{P(\text{Flagged})}\)</span>
+                     <p>First, we need to calculate  <span class = "latex-math">\(P(\text{Flagged})\)</span>:</p>
+                    <span class = "latex-math">\(P(\text{Flagged}) = P(\text{Flagged} | \text{Convert}) * P(\text{Convert}) + P(\text{Flagged} | \text{Not Convert}) * P(\text{Not Convert})\)</span>
+                     <span class = "latex-math">\(P(\text{Flagged}) = (0.80 * 0.01) + (0.10 * 0.99) = 0.008 + 0.099 = 0.107\)</span>
+                     <p>Now we can calculate  <span class = "latex-math">\(P(\text{Convert} | \text{Flagged})\)</span>:</p>
+                   <span class = "latex-math">\(P(\text{Convert} | \text{Flagged}) = (0.80 * 0.01) / 0.107 = 0.008 / 0.107 \approx 0.0748\)</span> or 7.48%
+                </div>
+                 <div class = "answer">
+                      <p><strong>Answer:</strong> Given that the algorithm has flagged a user as likely to convert, there is approximately a 7.48% chance that the user will actually convert. This highlights that even with a good algorithm, if the base conversion rate is very low, the positive predictions will still have a relatively high false positive rate.</p>
+                  </div>
+                </div>
+                <div class="card">
+            <div class="question" id = "question-14">
+                 <p><strong>Question 14: (Medium)</strong> An email provider uses a spam filter. The filter correctly identifies 95% of spam emails, and incorrectly flags 1% of non-spam emails as spam. If 40% of all incoming emails are actually spam, what is the probability that an email flagged as spam is actually spam?</p>
+           </div>
+               <p class="key-concepts"><strong>Key Concept(s):</strong> Bayes’ Theorem, Conditional Probability</p>
+                <div class = "explanation">
+                       <p><strong>Explanation:</strong> Applying Bayes’ Theorem with correct probabilities.</p>
+                           <ul>
+                              <li> <span class = "latex-math">\(P(Spam) = 0.40\)</span></li>
+                               <li> <span class = "latex-math">\(P(Not Spam) = 0.60\)</span></li>
+                                 <li> <span class = "latex-math">\(P(Flagged | Spam) = 0.95\)</span></li>
+                                 <li> <span class = "latex-math">\(P(Flagged | Not Spam) = 0.01\)</span></li>
+                                 <li> <span class = "latex-math">\(P(Spam|Flagged) = \frac{P(Flagged|Spam) * P(Spam)}{P(Flagged)}\)</span></li>
+                                  <li> <span class = "latex-math">\(P(Flagged) = P(Flagged|Spam)*P(Spam)+P(Flagged|NotSpam)*P(NotSpam) = (0.95*0.40)+(0.01*0.60)=0.38+0.006 = 0.386\)</span></li>
+                                 <li>  <span class = "latex-math">\(P(Spam | Flagged) = \frac{0.95 * 0.40}{0.386} = \frac{0.38}{0.386} = 0.984\)</span></li>
+                            </ul>
+                   </div>
+                 <div class = "answer">
+                        <p><strong>Answer:</strong> The probability that an email flagged as spam is actually spam is approximately 0.984, or 98.4%.</p>
+                 </div>
+                </div>
+              </div>
+                <div class="card">
+                <div class="question" id = "question-15">
+                       <p><strong>Question 15: (Medium)</strong> A mobile gaming app uses a push notification system, where 70% of users have enabled push notifications. The notification system correctly alerts 80% of players who have a new level available and 10% of players who do not have a level available are incorrectly alerted. If you receive a push notification, what is the probability that you actually have a new level available?</p>
+                  </div>
+                  <p class="key-concepts"><strong>Key Concept(s):</strong> Bayes’ Theorem, Conditional Probability</p>
+                <div class = "explanation">
+                       <p><strong>Explanation:</strong> Bayes’ Theorem problem with push notifications.</p>
+                            <ul>
+                             <li> <span class = "latex-math">\(P(\text{Level}) = 0.70\)</span></li>
+                            <li> <span class = "latex-math">\(P(\text{No Level}) = 0.30\)</span></li>
+                            <li> <span class = "latex-math">\(P(\text{Notified} | \text{Level}) = 0.80\)</span></li>
+                              <li> <span class = "latex-math">\(P(\text{Notified} | \text{No Level}) = 0.10\)</span></li>
+                              <li><span class = "latex-math">\(P(\text{Level} | \text{Notified}) = \frac{P(\text{Notified} | \text{Level}) * P(\text{Level})}{P(\text{Notified})}\)</span></li>
+                            <li> <span class = "latex-math">\(P(\text{Notified}) = P(\text{Notified} | \text{Level})*P(\text{Level}) + P(\text{Notified} | \text{No Level})*P(\text{No Level}) = (0.80*0.70) + (0.10*0.30) = 0.56+0.03 = 0.59\)</span></li>
+                            <li> <span class = "latex-math">\(P(\text{Level} | \text{Notified}) = \frac{0.80*0.70}{0.59} =  0.56/0.59 = 0.949\)</span></li>
+                           </ul>
+                    </div>
+                     <div class = "answer">
+                          <p><strong>Answer:</strong>  The probability that a user has a new level available given they received a push notification is approximately 0.949, or 94.9%.</p>
+                     </div>
+                </div>
+                <div class="card">
+                     <div class="question" id = "question-16">
+                          <p><strong>Question 16: (Medium)</strong> You have the following data about user demographics and usage of a new feature:</p>
+                         <div class = "table-container">
+                           <table>
+                                 <thead>
+                                   <tr>
+                                       <th>Demographic</th>
+                                      <th>Used Feature</th>
+                                      <th>Did Not Use Feature</th>
+                                    <th>Total</th>
+                                 </tr>
+                                  </thead>
+                                 <tbody>
+                                     <tr>
+                                        <td>Age 18-24</td>
+                                          <td>300</td>
+                                       <td>200</td>
+                                          <td>500</td>
+                                     </tr>
+                                    <tr>
+                                         <td>Age 25-34</td>
+                                         <td>400</td>
+                                        <td>100</td>
+                                        <td>500</td>
+                                      </tr>
+                                    <tr>
+                                        <td>Total</td>
+                                          <td>700</td>
+                                         <td>300</td>
+                                          <td>1000</td>
+                                     </tr>
+                             </tbody>
+                        </table>
+                     </div>
+                     <ol>
+                           <li>What is the probability that a randomly selected user is aged 18-24 <em>and</em> used the feature?</li>
+                         <li>What is the probability that a user used the feature <em>given</em> they are aged 25-34?</li>
+                            <li>Are age demographic and feature usage independent events?</li>
+                       </ol>
+                     </div>
+                <p class="key-concepts "><strong>Key Concept(s):</strong> Joint Probability, Conditional Probability, Independence</p>
+                <div class = "explanation">
+                <p><strong>Explanation:</strong> This tests understanding of joint and conditional probabilities and how to assess independence.</p>
+                </div>
+                <div class = "answer">
+                <p><strong>Answer:</strong></p>
+                <ol>
+                <li><strong>P(Age 18-24 and Used Feature):</strong> 300/1000 = 0.3</li>
+                <li><strong>P(Used Feature | Age 25-34):</strong> 400/500 = 0.8</li>
+                <li><strong>Independence:</strong>
+                <ul>
+                <li>P(Age 18-24) = 500/1000 = 0.5</li>
+                <li>P(Used Feature) = 700/1000 = 0.7</li>
+                <li>If independent, P(Age 18-24 and Used Feature) should equal P(Age 18-24) * P(Used Feature) = 0.5 * 0.7 = 0.35</li>
+                <li>Since 0.3 ≠ 0.35, the events are <em>not</em> independent.</li>
+                </ul>
+                </li>
+                </ol>
+                </div>
+          
+                </div>
+                <div class="section" id="hypothesis-testing">
+                <h2>Hypothesis Testing</h2>
+                <h3>Fundamentals of Hypothesis Testing</h3>
+                <div class="card">
+                <div class="question" id = "question-17">
+                <p><strong>Question 17: (Easy)</strong> What is the difference between Type I and Type II errors in hypothesis testing?</p>
+                </div>
+                <p class="key-concepts"><strong>Key Concept(s):</strong> Type I Error, Type II Error, Null Hypothesis, Alternative Hypothesis</p>
+                <div class = "explanation">
+                <p><strong>Explanation:</strong> This is a fundamental concept in hypothesis testing.</p>
+                <ul>
+                <li><strong>Type I Error (False Positive):</strong> Rejecting the null hypothesis when it is actually true. This is often represented by <span class = "latex-math">(\alpha)</span> (alpha), the significance level. Example: Concluding that a new feature improves conversion rates when it actually has no effect.</li>
+                <li><strong>Type II Error (False Negative):</strong> Failing to reject the null hypothesis when it is actually false. This is often represented by <span class = "latex-math">(\beta)</span> (beta). Example: Concluding that a new feature has no effect on conversion rates when it actually does improve them.</li>
+                </ul>
+                </div>
+                <div class = "answer">
+                <p><strong>Answer:</strong> A Type I error is a false positive (incorrectly rejecting a true null hypothesis), while a Type II error is a false negative (incorrectly failing to reject a false null hypothesis).</p>
+                </div>
+              </div>
+              <div class="card">
+                <div class="question" id = "question-18">
+                <p><strong>Question 18: (Easy)</strong> Define what a Null Hypothesis is and explain in the context of a A/B test example.</p>
+                </div>
+                <p class="key-concepts"><strong>Key Concept(s):</strong> Null Hypothesis, A/B Testing</p>
+                <div class = "explanation">
+                <p><strong>Explanation:</strong> Tests understanding of the fundamental concept of the Null Hypothesis</p>
+                <ul>
+                <li>The null hypothesis in statistical testing, such as during A/B testing, is the statement that there is no significant difference or effect between different scenarios, variables, or groups that are being studied. It essentially asserts that any changes observed in our testing or observation are not because of any real phenomena being studied but are due to random chance. An A/B testing context is if we want to understand the effectiveness of a redesign to the UI interface and so an appropriate Null hypothesis is “There is no statistically significant change between interface A and Interface B when looking at conversion rates".</li>
+                </ul>
+                </div>
+                <div class = "answer">
+                <p><strong>Answer:</strong> The Null Hypothesis states there is no effect and it is what you set out to disprove.</p>
+                </div>
+              </div>
+              <div class="card">
+                <div class="question" id = "question-19">
+                <p><strong>Question 19: (Easy)</strong> Explain the difference between a one-tailed and a two-tailed hypothesis test. When would you use each?</p>
+                </div>
+                <p class="key-concepts"><strong>Key Concept(s):</strong> One-tailed Test, Two-tailed Test, Hypothesis Testing</p>
+                <div class = "explanation">
+                <p><strong>Explanation:</strong> This is about the directionality of the hypothesis.</p>
+                <ul>
+                <li><strong>One-tailed Test:</strong> Tests for a difference in <em>one</em> direction. For example, testing if a new feature <em>increases</em> conversion rates. The alternative hypothesis specifies a direction (e.g., <span class = "latex-math">(\mu > \mu_0)</span> or <span class = "latex-math">(\mu < \mu_0)</span>).</li>
+                <li><strong>Two-tailed Test:</strong> Tests for a difference in <em>either</em> direction. For example, testing if a new feature has <em>any</em> effect (positive or negative) on conversion rates. The alternative hypothesis simply states that there is a difference (e.g., <span class = "latex-math">(\mu \ne \mu_0)</span>).</li>
+                </ul>
+                </div>
+                <div class = "answer">
+                <p><strong>Answer:</strong> Use a one-tailed test when you have a specific directional hypothesis (you only care about an increase or a decrease). Use a two-tailed test when you're interested in any difference, regardless of direction.</p>
+                </div>
+              </div>
+              <div class="card">
+                <div class="question" id = "question-20">
+                <p><strong>Question 20: (Easy)</strong> A company is testing a new website design. The null hypothesis is that the new design does not change the average time users spend on the website. What does a Type I error mean in this context?</p>
+                </div>
+                <p class="key-concepts"><strong>Key Concept(s):</strong> Type I Error, Null Hypothesis</p>
+                <div class = "explanation">
+                <p><strong>Explanation:</strong> Relating Type 1 error to a real world scenario.</p>
+                <ul>
+                <li>Type 1 error is rejecting the Null hypothesis when it is true.</li>
+                <li>In this case it would mean concluding that the new design changed the average time, when it did not.</li>
+                </ul>
+                </div>
+                <div class = "answer">
+                <p><strong>Answer:</strong> A Type I error would be concluding that the new design changed user engagement time when, in reality, it has no impact.</p>
+                </div>
+              </div>
+              <div class="card">
+                <div class="question" id = "question-21">
+                <p><strong>Question 21: (Easy)</strong> A study is done on whether a new app feature increases engagement. If a type 2 error occurs, what does this mean?</p>
+                </div>
+                <p class="key-concepts"><strong>Key Concept(s):</strong> Type II Error</p>
+                <div class = "explanation">
+                <p><strong>Explanation:</strong> Testing understanding of a type 2 error in a test context.</p>
+                <ul>
+                <li>A type 2 error is to not reject the Null hypothesis when it is false.</li>
+                <li>In this context it means concluding there was no increase in engagement when there in fact was.</li>
+                </ul>
+                </div>
+                <div class = "answer">
+                <p><strong>Answer:</strong> A type 2 error in this case means that concluding there was no increase in user engagement with the new feature, when there actually was an increase in user engagement that went undetected.</p>
+                </div>
+              </div>
+              <div class="card">
+                <div class="question" id = "question-22">
+                <p><strong>Question 22: (Easy)</strong> If a p-value is 0.01, and significance level (<span class = "latex-math">(\alpha)</span>) is 0.05, would you reject the null hypothesis, and what is the reason?</p>
+                </div>
+                <p class="key-concepts"><strong>Key Concept(s):</strong> p-value, Significance Level</p>
+                <div class = "explanation">
+                <p><strong>Explanation:</strong> Tests knowledge of statistical concepts and implications</p>
+                <ul>
+                <li>The p-value is compared to (<span class = "latex-math">(\alpha)</span>).</li>
+                <li>A p-value below (<span class = "latex-math">(\alpha)</span>) results in rejection.</li>
+                </ul>
+                </div>
+                <div class = "answer">
+                <p><strong>Answer:</strong> Yes, you would reject the null hypothesis because the p-value (0.01) is less than the significance level (0.05).</p>
+                </div>
+              </div>
+              <div class="card">
+                <div class="question" id = "question-23">
+                <p><strong>Question 23: (Easy)</strong> In hypothesis testing, what is the relationship between the p-value and the significance level? Explain with example scenarios when you would chose to use differing levels of significance.</p>
+                </div>
+                <p class="key-concepts"><strong>Key Concept(s):</strong> p-value, Significance Level</p>
+                <div class = "explanation">
+                <p><strong>Explanation:</strong> Tests knowledge of statistical concepts and implications</p>
+                <ul>
+                <li>The p-value is compared against the chosen significance level (<span class = "latex-math">(\alpha)</span>) (alpha) to determine if the results are statistically significant and if the null hypothesis is to be rejected.</li>
+                <li>The significance level ((<span class = "latex-math">(\alpha)</span>)), is typically set at a chosen threshold (often at 0.05), to establish how rare your observation of differences under a Null hypothesis scenario has to be in order to deem our findings statistically signficant.</li>
+                <li>A p-value smaller than (<span class = "latex-math">(\alpha)</span>) results in rejecting the Null Hypothesis. If the (p>\alpha), then fail to reject.</li>
+                <li>The threshold that is chosen, will relate to your real world needs and so (<span class = "latex-math">(\alpha=0.05)</span>) is not always the right approach. If you were working on high-risk scenarios (e.g., drug trials), a lower (<span class = "latex-math">(\alpha)</span>) (such as (<span class = "latex-math">(\alpha)</span>)= 0.01 or 0.001) is required. When the risk of falsely concluding that a change makes no impact ( when it in fact might exist) has a higher cost, then you would increase (<span class = "latex-math">(\alpha)</span>) above (<span class = "latex-math">(0.05)</span>), like 0.10 for less crucial experiments</li>
+                </ul>
+                </div>
+                <div class = "answer">
+                <p><strong>Answer:</strong> The p-value is directly compared with the pre-selected significance level ((<span class = "latex-math">(\alpha)</span>)) to see if findings are statistically significant to reject the null hypothesis, the choice of (<span class = "latex-math">(\alpha)</span>) needs to reflect the cost of Type 1 errors for a given research context</p>
+                </div>
+              </div>
+              <div class="card">
+                <div class="question" id = "question-24">
+                <p><strong>Question 24: (Medium)</strong> In the context of A/B testing, if your p-value is 0.10 and the alpha level is 0.05, what conclusion would you draw about your null hypothesis?</p>
+                </div>
+                <p class="key-concepts"><strong>Key Concept(s):</strong> p-value, Significance Level, Hypothesis Testing</p>
+                <div class = "explanation">
+                <p><strong>Explanation:</strong> Tests p-value interpretation.</p>
+                <ul>
+                <li>The p-value is greater than the alpha level.</li>
+                <li>Therefore, the null hypothesis (that there is no significant difference between the groups) is not rejected.</li>
+                </ul>
+                </div>
+                <div class = "answer">
+                <p><strong>Answer:</strong> We would fail to reject the null hypothesis, meaning there is not enough evidence to conclude there is a statistically significant difference between the two groups being tested.</p>
+                </div>
+              </div>
+              <div class="card">
+                <div class="question" id = "question-25">
+                <p><strong>Question 25: (Medium)</strong> What is the relationship between sample size and the power of a test? Explain how these relate to Type II error?</p>
+                </div>
+                <p class="key-concepts"><strong>Key Concept(s):</strong> Statistical Power, Type II Error, Sample Size</p>
+                <div class = "explanation">
+                <p><strong>Explanation:</strong> Relate sample size and power and error.</p>
+                <ul>
+                <li>A larger sample size increases the statistical power of a test and thus the ability to detect a real effect if it exists.</li>
+                <li>Statistical power is inversely related to a Type II error (False Negative).</li>
+                <li>A bigger sample size will mean you will be more likely to find an effect (more power) and it also means you are less likely to commit a type 2 error.</li>
+                </ul>
+                </div>
+                <div class = "answer">
+                <p><strong>Answer:</strong> Increasing the sample size improves the power of the test, reducing the risk of a Type II error (failing to reject a false null hypothesis).</p>
+                </div>
+              </div>
+                <h3>A/B Testing</h3>
+              <div class="card">
+                <div class="question" id = "question-26">
+                <p><strong>Question 26: (Medium)</strong> You’re analyzing user engagement with a new feature. You observe that users who interact with the feature spend significantly more time on the platform. How would you determine if this increase in time spent is statistically significant?</p>
+                </div>
+                <p class="key-concepts"><strong>Key Concept(s):</strong> Hypothesis Testing, A/B Testing, Statistical Significance, Z-test, Mann-Whitney U test</p>
+                <div class = "explanation">
+                <p><strong>Answer:</strong></p>
+                <ol>
+                <li>
+                <p><strong>Define Hypotheses:</strong></p>
+                <ul>
+                <li>Null Hypothesis (H0): There is no significant difference in the average time spent on the platform between users who interact with the feature and those who don’t.</li>
+                <li>Alternative Hypothesis (H1): There is a significant difference in the average time spent between the two groups.</li>
+                </ul>
+                </li>
+                <li>
+                <p><strong>Choose a Test:</strong></p>
+                <ul>
+                <li>If the data is approximately normally distributed, a two-sample t-test is appropriate.</li>
+                <li>If the data is skewed, the Mann-Whitney U test (a non-parametric test) is a better choice.</li>
+                </ul>
+                </li>
+                <li>
+                <p><strong>Collect Data:</strong></p>
+                <ul>
+                <li>Record the time spent on the platform for both users who interacted and users who didn’t with the new feature. Ensure you have an equal and sufficient number of users for each group, to determine if you can reasonably use a t-test.</li>
+                </ul>
+                </li>
+                <li>
+                <p><strong>Calculate the Test Statistic:</strong></p>
+                <ul>
+                <li><strong>For the t-test:</strong> Calculate the sample means, sample variances, and standard error, then compute the t-statistic.</li>
+                <li><strong>For the Mann-Whitney U test:</strong> rank the data of both groups together, and calculate the U statistic.</li>
+                </ul>
+                </li>
+                <li>
+                <p><strong>Calculate the p-value:</strong></p>
+                <ul>
+                <li>Calculate the p-value based on the t-statistic or U statistic.</li>
+                </ul>
+                </li>
+                <li>
+                <p><strong>Interpret the Results:</strong></p>
+                <ul>
+                <li>Compare the p-value to the chosen significance level (<span class = "latex-math">(\alpha)</span>), typically 0.05.</li>
+                <li><strong>If <span class = "latex-math">(p\text{-value} \le \alpha)</span>:</strong> Reject the null hypothesis (H0). This indicates that there is statistically significant evidence of a difference in time spent between the two groups.</li>
+                <li><strong>If <span class = "latex-math">(p\text{-value} > \alpha)</span>:</strong> Fail to reject the null hypothesis (H0). This means there is not enough evidence to conclude a statistically significant difference.</li>
+                <li>Consider Effect Size to determine practical significance of a statistically significant result.</li>
+                </ul>
+                </li>
+                </ol>
+                </div>
+                <div class = "answer">
+                </div>
+              </div>
+              <div class="card">
+                <div class="question" id = "question-27">
+                <p><strong>Question 27: (Medium)</strong> You’re testing a new search algorithm on an e-commerce platform. How would you set up your A/B test to determine if it increases the click-through rate of search results?</p>
+                </div>
+                <p class="key-concepts"><strong>Key Concept(s):</strong> A/B Testing, Control Group, Treatment Group, Randomization</p>
+                <div class = "explanation">
+                <p><strong>Explanation:</strong> Design of a good A/B test.</p>
+                <ul>
+                <li>Randomly assign users into a control group (old algorithm) and a treatment group (new algorithm).</li>
+                <li>Ensure the randomization process is robust, and users are evenly distributed to avoid confounding results.</li>
+                <li>Measure the click-through rate (CTR) in each group.</li>
+                <li>Choose an appropriate statistical test (e.g. z-test for proportions) to compare the means of each group.</li>
+                <li>Decide on a significance level (<span class = "latex-math">(\alpha)</span>) to assess the outcome.</li>
+                </ul>
+                </div>
+                <div class = "answer">
+                <p><strong>Answer:</strong> Randomly assign users to control and treatment groups, measure the CTR, and use a hypothesis test to determine statistical significance.</p>
+                </div>
+              </div>
+              <div class="card">
+                <div class="question" id = "question-28">
+                <p><strong>Question 28: (Medium)</strong> You run an A/B test on a new notification system designed to increase user engagement. You measure the average number of sessions per week. The control group (A) has a mean of 5.2 sessions with a standard deviation of 1.5, and the treatment group (B) has a mean of 5.5 sessions with a standard deviation of 1.6. Both groups have a sample size of 5000 users.</p>
+                <ol>
+                <li>Calculate a 95% confidence interval for the difference in means between the two groups.</li>
+                <li>Based on the confidence interval, can you conclude that the new notification system significantly increased user engagement?</li>
+                </ol>
+                </div>
+                <p class="key-concepts"><strong>Key Concept(s):</strong> Confidence Intervals, A/B Testing, Difference of Means, Standard Error</p>
+                <div class = "explanation">
+                <p><strong>Explanation:</strong> This tests understanding of confidence intervals in the context of A/B testing.</p>
+                </div>
+                <div class = "answer">
+                <p><strong>Answer:</strong></p>
+                <ol>
+                <li>
+                <p><strong>Calculate the Standard Error of the Difference (SE):</strong></p>
+                <p>The standard error of the difference between two means is calculated as:</p>
+                <span class = "latex-math">(SE = \sqrt{\frac{SD_A^2}{n_A} + \frac{SD_B^2}{n_B}})</span>
+                <ul>
+                <li>Where:</li>
+                <li> <span class = "latex-math">(SD_A)</span> is the standard deviation of group A.</li>
+                <li> <span class = "latex-math">(SD_B)</span> is the standard deviation of group B.</li>
+                <li><span class = "latex-math">(n_A)</span> is the sample size of group A.</li>
+                <li> <span class = "latex-math">(n_B)</span> is the sample size of group B.</li>
+                </ul>
+                <p>Plugging in the given values:</p>
+                <span class = "latex-math">(SE = \sqrt{\frac{1.5^2}{5000} + \frac{1.6^2}{5000}} = \sqrt{\frac{2.25}{5000} + \frac{2.56}{5000}} = \sqrt{0.00045 + 0.000512} = \sqrt{0.000962} \approx 0.031)</span>
+                </li>
+                <li>
+                <p><strong>Find the Z-score:</strong></p>
+                <p>For a 95% confidence interval, the Z-score is approximately 1.96. This value corresponds to the point on the standard normal distribution where 95% of the data falls within <span class = "latex-math">(\pm)</span> 1.96 standard deviations of the mean.</p>
+                </li>
+                <li>
+                <p><strong>Calculate the Confidence Interval for the Difference in Means:</strong></p>
+                <p>The confidence interval for the difference in means is calculated as:</p>
+                <span class = "latex-math">(CI = (\bar{x}_B - \bar{x}_A) \pm z \times SE)</span>
+                <ul>
+                <li>Where:</li>
+                <li><span class = "latex-math">(\bar{x}_A)</span> is the mean of group A.</li>
+                <li> <span class = "latex-math">(\bar{x}_B)</span> is the mean of group B.</li>
+                <li><span class = "latex-math">(z)</span> is the Z-score corresponding to the desired confidence level.</li>
+                </ul>
+                <p>Plugging in the values:</p>
+                <span class = "latex-math">(CI = (5.5 - 5.2) \pm 1.96 \times 0.031 = 0.3 \pm 0.061 \approx (0.239, 0.361))</span>
+                </li>
+                <li>
+                <p><strong>Conclusion:</strong></p>
+                <p>Since the 95% confidence interval (0.239, 0.361) does <em>not</em> contain zero, we can conclude with 95% confidence that there is a statistically significant difference in the average number of sessions per week between the two groups. Because the entire interval is positive, we can confidently state that the new notification system <em>significantly increased</em> user engagement, as measured by sessions per week. The average number of sessions per week in group B is likely to be between 0.239 and 0.361 sessions greater than in group A.</p>
+                </li>
+                </ol>
+                </div>
+              </div>
+              <div class="card">
+                <div class="question" id = "question-29">
+                <p><strong>Question 29: (Medium)</strong> What are some common threats to the validity of A/B tests, and how can these threats be mitigated?</p>
+                </div>
+                <p class="key-concepts"><strong>Key Concept(s):</strong> A/B Testing, Confounding Variables, Validity</p>
+                <div class = "explanation">
+                <p><strong>Explanation:</strong> A/B testing pitfalls.</p>
+                <ul>
+                <li><strong>Novelty Effects</strong>: New features may initially cause user behaviour changes but will fade over time. Solution: Run tests long enough to see stable behaviours.</li>
+                <li><strong>Sample Bias</strong>: If users are not evenly distributed, or self select then the sample can be biased and not representative of the population. Solution: Use randomisation and if not feasible, account for source of bias.</li>
+                <li><strong>Confounding Variables</strong>: External factors, like marketing pushes, can influence the test outcome. Solution: Reduce impact of external factor or account for influence in analysis.</li>
+                <li><strong>Data Quality Issues</strong>: Incorrect tracking or data collection errors can invalidate results. Solution: Ensure solid data capture mechanisms are in place.</li>
+                <li><strong>Multiple Testing</strong>: If you are running multiple tests on the same data, then you increase the chance of type 1 error. Solution: Use a correction method for multiple testing such as Bonferroni correction</li>
+                </ul>
+                </div>
+                <div class = "answer">
+                <p><strong>Answer:</strong> Common threats include novelty effects, sample bias, confounding variables, data issues and multiple testing. They are usually mitigated by using random assignment, ensuring data accuracy, accounting for external effects and using correction methods where necessary.</p>
+                </div>
+              </div>
+              <div class="card">
+                <div class="question" id = "question-30">
+                <p><strong>Question 30: (Medium)</strong> Explain in simple terms what is the concept of effect size in the context of an A/B test and why is it important?</p>
+                </div>
+                <p class="key-concepts"><strong>Key Concept(s):</strong> Effect Size, A/B testing</p>
+                <div class = "explanation">
+                <p><strong>Explanation:</strong> Testing awareness of Effect Size.</p>
+                <ul>
+                <li>Effect Size measures the magnitude of the difference or impact of an intervention in your A/B test in a meaningful, unitful way.</li>
+                <li>Effect Size gives you a good sense of the practical importance of the finding beyond just looking at statistical significance from the p-value.</li>
+                <li>A small effect size, even with significant p value could mean the practical gain from a change is not worth the time and resource.</li>
+                <li>Effect Size is more insightful than just p-values as p values are impacted by sample size and therefore can be misleading without further context</li>
+                </ul>
+                </div>
+                <div class = "answer">
+                <p><strong>Answer:</strong> Effect size measures the real-world magnitude of the difference between groups, highlighting practical significance beyond statistical significance.</p>
+                </div>
+              </div>
+              <div class="section" id="statistical-inference-and-data-analysis">
+                <h2>Statistical Inference and Data Analysis</h2>
+                <h3>Descriptive Statistics and Distributions</h3>
+                <div class="card">
+                <div class="question" id = "question-31">
+                <p><strong>Question 31: (Easy)</strong> Can you explain what a p-value and confidence interval are, but in layman’s terms?</p>
+                </div>
+                <p class="key-concepts"><strong>Key Concept(s):</strong> p-value, Confidence Interval, Statistical Significance</p>
+                <div class = "explanation">
+                <p><strong>Explanation:</strong> These are key concepts for interpreting statistical results.</p>
+                <ul>
+                <li><strong>p-value:</strong> The probability of observing the results (or more extreme results) of your experiment if there were actually no real effect (if the null hypothesis were true). A small p-value (typically below 0.05) suggests strong evidence against the null hypothesis. Imagine you’re testing a new drug. If the p-value is 0.03, it means there’s only a 3% chance you’d see the observed improvement in patients if the drug was actually useless.</li>
+                <li><strong>Confidence Interval:</strong> A range of values that is likely to contain the true population parameter (like the average user session time or conversion rate). A 95% confidence interval means that if you were to repeat the experiment many times, 95% of the calculated intervals would contain the true population value. For example, a 95% confidence interval for average session time of (10-12 seconds) means that we are 95% sure that the true average session time lies between 10 and 12 seconds.</li>
+                </ul>
+                </div>
+                <div class = "answer">
+                <p><strong>Answer:</strong> A p-value tells you how surprising your results are if there’s no real effect. A confidence interval gives you a plausible range for the true value you’re trying to estimate.</p>
+                </div>
+                </div>
+                <div class="card">
+                <div class="question" id = "question-32">
+                <p><strong>Question 32: (Easy)</strong> You are given two datasets. One contains the average time users spend on your mobile app per session, and the other shows the number of clicks users make per session. Which type of chart would be best to compare the distributions of these two variables side-by-side, and why?</p>
+                </div>
+                <p class="key-concepts"><strong>Key Concept(s):</strong> Data Visualization, Box Plot, Distribution Comparison</p>
+                <div class = "explanation">
+                <p><strong>Explanation:</strong> Tests understanding of how to compare distributions.</p>
+                <ul>
+                <li>While histograms can show distributions, comparing multiple histograms side by side can become difficult.</li>
+                <li>Box plots are ideal to compare distributions of different datasets, visually demonstrating medians, quartiles, and outlier values for different datasets and how they differ.</li>
+                </ul>
+                </div>
+                <div class = "answer">
+                <p><strong>Answer:</strong> A box plot is ideal to visually compare the distributions of the two datasets side-by-side, highlighting their central tendencies and spread.</p>
+                </div>
+              </div>
+              <div class="card">
+                <div class="question" id = "question-33">
+                <p><strong>Question 33: (Easy)</strong> You want to know the average daily time a user spends on your application. Explain when you would use the sample mean vs when to use the median.</p>
+                </div>
+                <p class="key-concepts"><strong>Key Concept(s):</strong> Measures of Central Tendency, Sample Mean, Median</p>
+                <div class = "explanation">
+                <p><strong>Explanation:</strong> Tests awareness of when it is more appropriate to use sample mean or median.</p>
+                <ul>
+                <li>The <strong>sample mean</strong>, or average, is appropriate when the data are reasonably symmetrical or roughly normal and there is little to no outlier data. This can also work if large enough sample is observed to make any distortions small enough due to outlier issues.</li>
+                <li>The <strong>median</strong> on the other hand is more appropriate if your data shows skewed distributions, due to outliers as they wont influence this measure so readily, and often results in better reflection of central tendency in many use case contexts.</li>
+                <li>The <strong>Median</strong> could be very insightful, if you wanted to measure something where you felt most common users don’t exhibit an effect of your population parameter (time in application), with outlier values being an unwanted distortion for such analysis. For example If a small subsegment uses the platform for a vast length of time vs everyone else.</li>
+                <li>Often use mean as one method to check if the distribution has outlier behaviour where the median would likely also be evaluated if means appears far away, when that can indicate skew that might influence average calculations for certain measures.</li>
+                </ul>
+                </div>
+                <div class = "answer">
+                <p><strong>Answer:</strong> Sample means are appropriate for relatively normal distributions, but you need to observe distribution and make decisions accordingly, but be cautious of potential distortions. In practice mean and median together should also be viewed to highlight these insights with a measure such as median also being evaluated for skew where applicable in such circumstances.</p>
+                </div>
+              </div>
+              <div class="card">
+                <div class="question" id = "question-34">
+                <p><strong>Question 34: (Easy)</strong> What does a standard deviation represent in a dataset?</p>
+                </div>
+                <p class="key-concepts"><strong>Key Concept(s):</strong> Standard Deviation, Data Dispersion</p>
+                <div class = "explanation">
+                <p><strong>Explanation:</strong> Tests understanding of standard deviation.</p>
+                <ul>
+                <li>Standard deviation measures the dispersion or spread of data points around the mean of the dataset.</li>
+                <li>A higher standard deviation means the data is more spread out.</li>
+                <li>A lower standard deviation means the data is more concentrated around the mean.</li>
+                </ul>
+                </div>
+                <div class = "answer">
+                <p><strong>Answer:</strong> Standard deviation quantifies how much the data points in a set deviate from the mean.</p>
+                </div>
+              </div>
+              <div class="card">
+                <div class="question" id = "question-35">
+                <p><strong>Question 35: (Easy)</strong> You are given a dataset showing the number of daily active users (DAU) for a mobile app. How would you visually represent this data to identify trends and patterns over time?</p>
+                </div>
+                <p class="key-concepts"><strong>Key Concept(s):</strong> Data Visualization, Time Series Analysis, Line Chart</p>
+                <div class = "explanation">
+                <p><strong>Explanation:</strong> This assesses understanding of time-series visualization.</p>
+                <ul>
+                <li>A line chart is the best method to visualize this data as it shows change over time and therefore can highlight trends, seasonality, and changes in activity over the given timeline.</li>
+                </ul>
+                </div>
+                <div class = "answer">
+                <p><strong>Answer:</strong> Use a line chart to visualize the daily active users over time.</p>
+                </div>
+              </div>
+              <div class="card">
+                <div class="question" id = "question-36">
+                <p><strong>Question 36: (Medium)</strong> You have a dataset of user ages that is right-skewed. How would you calculate a measure of central tendency that is robust to outliers?</p>
+                </div>
+                <p class="key-concepts"><strong>Key Concept(s):</strong> Measures of Central Tendency, Skewed Data, Median</p>
+                <div class = "explanation">
+                <p><strong>Explanation:</strong> Testing awareness of median as a robust measure.</p>
+                <ul>
+                <li>The mean is highly sensitive to outliers in a skewed distribution.</li>
+                <li>The median is robust to outliers and can be ideal to describe the central value for skewed distributions.</li>
+                </ul>
+                </div>
+                <div class = "answer">
+                <p><strong>Answer:</strong> Calculate the median as it is less sensitive to outliers than the mean for skewed data.</p>
+                </div>
+              </div>
+              <div class="card">
+                <div class="question" id = "question-37">
+                <p><strong>Question 37: (Medium)</strong> A social media platform is analyzing the distribution of likes per post. They notice the data is highly right-skewed. What does this imply about the distribution, and which summary statistics should they use to describe the center and spread of the data?</p>
+                </div>
+                <p class="key-concepts"><strong>Key Concept(s):</strong> Skewed Data, Measures of Central Tendency, Median, IQR</p>
+                <div class = "explanation">
+                <p><strong>Explanation:</strong> Tests understanding of skewed distributions and appropriate stats.</p>
+                <ul>
+                <li>Right-skewed data has a long tail on the right side, meaning a few posts have a large number of likes while most have few.</li>
+                <li>For the center of the data, the median is a more robust measure than the mean, as it is not influenced by outliers.</li>
+                <li>For the spread of the data, the interquartile range (IQR) is more robust than the standard deviation.</li>
+                </ul>
+                </div>
+                <div class = "answer">
+                <p><strong>Answer:</strong> The data has a long tail, use the median for the center, and IQR for the spread.</p>
+                </div>
+              </div>
+              <div class="card">
+                <div class="question" id = "question-38">
+                <p><strong>Question 38: (Medium)</strong> You’re analyzing the distribution of session lengths on your website. You notice that it’s bimodal. What could this indicate and what would you need to investigate further?</p>
+            </div>
+            <p class="key-concepts"><strong>Key Concept(s):</strong> Bimodal Distribution, Data Segmentation</p>
+            <div class = "explanation">
+            <p><strong>Explanation:</strong> Testing interpretation of bimodal data.</p>
+            <ul>
+            <li>A bimodal distribution indicates there may be two distinct groups within the population.</li>
+            <li>It would be important to investigate the user behaviour to identify if there are any two types of user groups with very different engagement behaviours.</li>
+            </ul>
+            </div>
+            <div class = "answer">
+            <p><strong>Answer:</strong> A bimodal distribution suggests the presence of distinct user groups; investigate segments and perform separate analyses of each group.</p>
+            </div>
+            </div>
+            </div>
+            <div class="section" id="statistical-relationships">
+            <h2>Statistical Relationships</h2>
+            <div class="card">
+            <div class="question" id = "question-39">
+            <p><strong>Question 39: (Easy)</strong> Explain the concept of covariance and correlation. How are they different, and what do they measure?</p>
+            </div>
+            <p class="key-concepts"><strong>Key Concept(s):</strong> Covariance, Correlation</p>
+            <div class = "explanation">
+            <p><strong>Explanation:</strong> These measures describe the relationship between two variables.</p>
+            <ul>
+            <li><strong>Covariance:</strong> Measures how two variables change together. A positive covariance means they tend to increase or decrease together, while a negative covariance means they tend to move in opposite directions. However, the magnitude of covariance is difficult to interpret because it’s dependent on the scales of the variables.</li>
+            <li><strong>Correlation:</strong> A standardized measure of the linear relationship between two variables. It ranges from -1 to +1. -1 indicates a perfect negative correlation, +1 indicates a perfect positive correlation, and 0 indicates no linear correlation. Correlation is easier to interpret than covariance because it’s on a fixed scale.</li>
+            </ul>
+            </div>
+            <div class = "answer">
+            <p><strong>Answer:</strong> Covariance measures the direction of a linear relationship, while correlation measures both the direction and strength of the linear relationship, making it easier to compare relationships between different pairs of variables.</p>
+            </div>
+          </div>
+          <div class="card">
+            <div class="question" id = "question-40">
+            <p><strong>Question 40: (Easy)</strong> If the covariance between two variables is zero, what can you conclude about their relationship?</p>
+            </div>
+            <p class="key-concepts"><strong>Key Concept(s):</strong> Covariance, Linear Relationship</p>
+            <div class = "explanation">
+            <p><strong>Explanation:</strong> Understanding zero covariance.</p>
+            <ul>
+            <li>Zero covariance implies that two variables have no <em>linear</em> relationship.</li>
+            <li>It doesn’t mean that they have absolutely no relationship, as it could be non-linear.</li>
+            </ul>
+            </div>
+            <div class = "answer">
+            <p><strong>Answer:</strong> A zero covariance indicates no linear relationship between the variables.</p>
+            </div>
+          </div>
+          <div class="card">
+            <div class="question" id = "question-41">
+            <p><strong>Question 41: (Easy)</strong> What does a correlation coefficient of -1 indicate?</p>
+            </div>
+            <p class="key-concepts"><strong>Key Concept(s):</strong> Correlation, Linear Relationship</p>
+            <div class = "explanation">
+            <p><strong>Explanation:</strong> Interpreting correlation coefficients.</p>
+            <ul>
+            <li>A correlation of -1 implies a perfect negative linear relationship.</li>
+            <li>As one value increases the other will decrease at same rate.</li>
+            </ul>
+            </div>
+            <div class = "answer">
+            <p><strong>Answer:</strong> A correlation of -1 means a perfect negative linear relationship.</p>
+            </div>
+          </div>
+          <div class="card">
+            <div class="question" id = "question-42">
+            <p><strong>Question 42: (Medium)</strong> If the covariance between two variables is positive, what does that indicate about the relationship between the variables? Is there any drawback to just using covariance?</p>
+            </div>
+            <p class="key-concepts"><strong>Key Concept(s):</strong> Covariance</p>
+            <div class = "explanation">
+            <p><strong>Explanation:</strong> Tests for correlation knowledge.</p>
+            <ul>
+            <li>A positive covariance indicates that two variables tend to increase or decrease together.</li>
+            <li>Covariance is difficult to interpret since it is not standardized so the magnitude is difficult to interpret in an absolute sense.</li>
+            </ul>
+            </div>
+            <div class = "answer">
+            <p><strong>Answer:</strong> A positive covariance means the variables tend to move in the same direction. The lack of standardization however makes it difficult to compare across datasets.</p>
+            </div>
+          </div>
+          <div class="card">
+            <div class="question" id = "question-43">
+            <p><strong>Question 43: (Medium)</strong> Explain what correlation does well and its practical limitations in measuring relationship between variables.</p>
+            </div>
+            <p class="key-concepts"><strong>Key Concept(s):</strong> Correlation, Linearity</p>
+            <div class = "explanation">
+            <p><strong>Explanation:</strong> Understanding use and limits of correlation.</p>
+            <ul>
+            <li>Correlation measures the strength and direction of a <em>linear</em> relationship between two variables. It will vary between -1 and 1.</li>
+            <li>A correlation of 0 indicates no <em>linear</em> relationship.</li>
+            <li>Correlation doesn’t capture non-linear relationships between variables (like quadratic). This is a crucial and practical limitation of its usage.</li>
+            <li>Correlation does not imply causation, only an association between two variables.</li>
+            <li>Outliers may also skew correlation results so its important to investigate such instances before drawing conclusions based on correlative insight</li>
+            </ul>
+            </div>
+            <div class = "answer">
+            <p><strong>Answer:</strong> Correlation captures linear relationships well but can miss non-linear dependencies, should be interpreted with outliers accounted for, and it cannot imply causation.</p>
+            </div>
+          </div>
+          <div class="card">
+            <div class="question" id = "question-44">
+            <p><strong>Question 44: (Medium)</strong> You observe a strong positive correlation between the number of ads a user sees and the number of purchases they make. What are some possible explanations, and how would you investigate if the ads are causing the purchases?</p>
+            </div>
+            <p class="key-concepts"><strong>Key Concept(s):</strong> Correlation vs Causation, Confounding Variables</p>
+            <div class = "explanation">
+            <p><strong>Explanation:</strong> Testing understanding that correlation isn’t causation</p>
+            <ul>
+            <li>Correlation does not imply causation. There are a few possibilities such as users that purchase more may also be more active and see more ads. Or that an external factor influences both.</li>
+            <li>Investigating causality would need A/B testing where you randomise users and expose a subset to a variable like ads, to understand direct causal effects</li>
+            </ul>
+            </div>
+            
+            <div class = "answer">
+            <p><strong>Answer:</strong> A positive correlation doesn’t imply ads cause purchases. Investigate with A/B testing, controlling for confounders.</p>
+            </div>
+            </div>
+            <div class="section" id="time-series-analysis">
+            </div>
+            <h2>Time Series Analysis</h2>
+          <div class="card">
+            <div class="question" id = "question-45">
+            <p><strong>Question 45: (Medium)</strong> You have collected the daily active users (DAU) for your platform for the past year. You are asked to estimate DAU for next month, what methods would be appropriate for forecasting this time series data?</p>
+            </div>
+            <p class="key-concepts"><strong>Key Concept(s):</strong> Time Series Analysis, Forecasting, ARIMA, Exponential Smoothing</p>
+            <div class = "explanation">
+            <p><strong>Explanation:</strong> Tests awareness of time series methods</p>
+            <ul>
+            <li>Time series analysis techniques are required for time based data.</li>
+            <li>Suitable methods could include: ARIMA models (Autoregressive Integrated Moving Average) which are suited to find patterns in time series data.</li>
+            <li>Exponential Smoothing methods also work which uses weighted averages of the previous data points.</li>
+            <li>The choice of method would need to account for trend, seasonality and auto correlation in historical data.</li>
+            </ul>
+            </div>
+            <div class = "answer">
+            <p><strong>Answer:</strong> Employ time series analysis techniques like ARIMA or exponential smoothing, taking into account patterns in historical data such as trend and seasonality.</p>
+            </div>
+          </div>
+          <div class="card">
+            <div class="question" id = "question-46">
+            <p><strong>Question 46: (Medium)</strong> You’re analyzing website traffic data and notice a recurring pattern of higher traffic on weekends. Which time series analysis concept does this demonstrate?</p>
+            </div>
+            <p class="key-concepts"><strong>Key Concept(s):</strong> Time Series Analysis, Seasonality</p>
+            <div class = "explanation">
+            <p><strong>Explanation:</strong> Identifying seasonality.</p>
+            <ul>
+            <li>A recurring pattern at regular intervals in a time series, such as higher website traffic on weekends, indicates the presence of seasonality</li>
+            </ul>
+            </div>
+            <div class = "answer">
+            <p><strong>Answer:</strong> This demonstrates seasonality in the time series data.</p>
+            </div>
+          </div>
+          <div class="card">
+            <div class="question" id = "question-47">
+            <p><strong>Question 47: (Medium)</strong> What is the difference between trend and seasonality in a time series? Give an example of each in the context of e-commerce sales.</p>
+            </div>
+            <p class="key-concepts"><strong>Key Concept(s):</strong> Time Series Analysis, Trend, Seasonality</p>
+            <div class = "explanation">
+            <p><strong>Explanation:</strong> Defining trend and seasonality in time series data.</p>
+            <ul>
+            <li><strong>Trend</strong> - is a long term upward or downward pattern in data over time, such as sales going up due to adoption.</li>
+            <li><strong>Seasonality</strong> - patterns that repeat over fixed periods, such as higher sales around holidays.</li>
+            </ul>
+            </div>
+            <div class = "answer">
+            <p><strong>Answer:</strong> Trend is long-term direction, seasonality is patterns that repeat at fixed intervals. Example: Overall e-commerce growth = trend. Increased sales around Black Friday = seasonality.</p>
+            </div>
+            </div>
+            </div>
+            <div class="section" id="handling-outliers-and-imbalanced-data">
+            <h2>Handling Outliers and Imbalanced Data</h2>
+          <div class="card">
+            <div class="question" id = "question-48">
+            <p><strong>Question 48: (Medium)</strong> You have data on the number of comments a post receives on a social network, and you notice the data is heavily right-skewed. Explain what method you would use for a confidence interval calculation and why?</p>
+            </div>
+            <p class="key-concepts"><strong>Key Concept(s):</strong> Confidence Intervals, Skewed Data, Bootstrapping</p>
+            <div class = "explanation">
+            <p><strong>Explanation:</strong> Addressing confidence intervals with non-normal data.</p>
+            <ul>
+            <li>Standard methods for confidence intervals (such as using the t distribution) assume approximately normal distributions.</li>
+            <li>When data is heavily skewed, the assumption of normality is not met.</li>
+            <li>Bootstrapping (resampling) methods are a robust approach to construct confidence intervals without the normality assumption.</li>
+            </ul>
+            </div>
+            <div class = "answer">
+            <p><strong>Answer:</strong> Use a bootstrapping method for confidence interval calculation when dealing with heavily skewed data like comment counts, as it doesn’t rely on a normality assumption.</p>
+            </div>
+          </div>
+          <div class="card">
+            <div class="question" id = "question-49">
+            <p><strong>Question 49: (Medium)</strong> In a social network, you’re analyzing the number of friend requests sent by users. You observe that a few users have sent an extremely high number of requests. How would you address these outliers before calculating summary statistics like the mean and standard deviation?</p>
+            </div>
+            <p class="key-concepts"><strong>Key Concept(s):</strong> Outliers, Data Cleaning, Robust Statistics</p>
+            <div class = "explanation">
+            <p><strong>Explanation:</strong> Outlier impact and mitigation.</p>
+            <ul>
+            <li>Outliers can significantly skew the mean and standard deviation, which are not robust to extreme values.</li>
+            <li>Options include: Winsorizing (capping the extreme values to a percentile range), transformation (log or square root), or removing the outlier values. However it may also be useful to evaluate the origin of outliers as they may provide unique insights into the population parameter.</li>
+            <li>Robust statistics, such as the median and interquartile range, which are less sensitive to outliers are also useful to use.</li>
+            </ul>
+            </div>
+            <div class = "answer">
+            <p><strong>Answer:</strong> Address outliers through winsorizing, transforming data or removing, while also investigating outliers. Robust statistics like the median and IQR are preferred for summarizing such datasets.</p>
+            </div>
+          </div>
+          <div class="card">
+            <div class="question" id = "question-50">
+            <p><strong>Question 50: (Medium)</strong> Explain in practical terms why a log transformation might be useful when dealing with user engagement metrics that may be right-skewed?</p>
+            </div>
+            <p class="key-concepts"><strong>Key Concept(s):</strong> Log Transformation, Skewed Data</p>
+            <div class = "explanation">
+            <p><strong>Explanation:</strong> Log transformation for skewed data.</p>
+            <ul>
+            <li>Log transformations compress higher values, and stretch lower values which reduces the impact of outliers on summary statistics.</li>
+            <li>This can make the data more normally distributed, which helps for statistical methods that assume such distributions like t-tests.</li>
+            </ul>
+            </div>
+            <div class = "answer">
+            <p><strong>Answer:</strong> Log transformations compress the scale of high values and expand the scale of low values, which can help make heavily skewed, long-tailed data more suitable for statistical analysis by reducing the influence of outliers and approaching a normal distribution.</p>
+            </div>
+          </div>
+          <div class="card">
+            <div class="question" id = "question-51">
+            <p><strong>Question 51: (Medium)</strong> What are some methods for dealing with imbalanced datasets, and why are they important?</p>
+            </div>
+            <p class="key-concepts"><strong>Key Concept(s):</strong> Imbalanced Datasets, Oversampling, Undersampling, SMOTE, Cost-Sensitive Learning</p>
+            <div class = "explanation">
+            <p><strong>Explanation:</strong> This is important in machine learning and data analysis when one class is significantly more prevalent than another.</p>
+            </div>
+            <div class = "answer">
+            <p><strong>Answer:</strong> Imbalanced datasets can bias models towards the majority class. Methods to address this include:</p>
+            <ul>
+            <li><strong>Oversampling:</strong> Duplicating instances from the minority class.</li>
+            <li><strong>Undersampling:</strong> Removing instances from the majority class.</li>
+            <li><strong>SMOTE (Synthetic Minority Over-sampling Technique):</strong> Creating synthetic instances of the minority class by interpolating between existing minority class instances.</li>
+            <li><strong>Cost-sensitive learning:</strong> Assigning higher misclassification costs to the minority class during model training.</li>
+            <li><strong>Collecting more data:</strong> If possible, collecting more data for the minority class can help balance the dataset.</li>
+            </ul>
+            <p>These methods are important because they help models learn to accurately predict the minority class, which is often the class of interest (e.g., fraud detection, churn prediction).</p>
+            </div>
+            </div>
+            </div>
+            <div class="section" id="harder-practice-questions-social-network-focus">
+            <h2>Harder Practice Questions (Social Network Focus)</h2>
+          <div class="card">
+            <div class="question" id = "question-52">
+            <p><strong>Question 52: (Hard)</strong> You are A/B testing a new algorithm for ranking posts in a user’s feed. You are measuring the average time spent per session. You notice some users have extremely long session durations (potential outliers).</p>
+            <ol>
+            <li>How would you handle these outliers before conducting your statistical test?</li>
+            <li>How does the Central Limit Theorem help you in this scenario, given that session durations are likely right-skewed?</li>
+            <li>What statistical test would you use to compare the average time spent between the control and treatment groups?</li>
+            </ol>
+            </div>
+            <p class="key-concepts"><strong>Key Concept(s):</strong> Outliers, Central Limit Theorem, A/B Testing, t-test, Mann-Whitney U test</p>
+            <div class = "explanation">
+            <p><strong>Explanation:</strong> This question combines several important concepts.</p>
+            </div>
+            <div class = "answer">
+            <p><strong>Answer:</strong></p>
+            <ol>
+            <li><strong>Handling Outliers:</strong>
+            <ul>
+            <li><strong>Investigate:</strong> Determine if the long session durations are due to errors (e.g., app crashes, background activity) or genuine user behavior (e.g., users leaving the app open).</li>
+            <li><strong>Transformation:</strong> Consider a log transformation of the session duration data to reduce the influence of outliers and potentially normalize the distribution. This is often a good approach for right-skewed data like session durations.</li>
+            <li><strong>Winsorizing/Trimming:</strong> Replace extreme values with less extreme values (Winsorizing) or remove them entirely (Trimming). This should be done cautiously and with a clear justification.</li>
+            </ul>
+            </li>
+            <li><strong>Central Limit Theorem:</strong> The Central Limit Theorem states that the distribution of the <em>sample means</em> of session duration will be approximately normal, even if individual session durations are right-skewed, <em>provided the sample size is large enough</em>. This is crucial because it allows you to use statistical tests that assume normality (like t-tests or z-tests) to make inferences about the <em>population mean</em> session duration, even though the original data is not normally distributed.</li>
+            <li><strong>Statistical Test:</strong>
+            <ul>
+            <li>If the data is approximately normally distributed <em>after handling outliers/transformations</em> and the sample sizes are reasonably large, a two-sample t-test is appropriate.</li>
+            <li>If the data remains skewed even after transformation or if the sample size is small, the Mann-Whitney U test (a non-parametric test) is a better choice as it does not assume normality.</li>
+            </ul>
+            </li>
+            </ol>
+            </div>
+          </div>
+          <div class="card">
+            <div class="question" id = "question-53">
+            <p><strong>Question 53: (Hard)</strong> You are analyzing user engagement with a new feature. You are measuring engagement by the number of clicks per user per day, and you find that the data follows a power-law distribution. How should you analyze and interpret such data?</p>
+            </div>
+            <p class="key-concepts"><strong>Key Concept(s):</strong> Power-Law Distribution, Heavy-Tailed Distributions, Log Transformation, Robust Statistics</p>
+            <div class = "explanation">
+            <p><strong>Explanation:</strong> Addressing power law distributions</p>
+            <ul>
+            <li>Power laws are common in user engagement metrics. The data will be highly skewed, with a few users having a large number of clicks and the majority having very few.</li>
+            <li>Traditional statistical methods assuming normality (like the mean and standard deviation) are not suitable.</li>
+            <li>You should employ metrics like the median and interquartile range (IQR).</li>
+            <li>Transforming the data via logs and further analysis can also be useful to see distribution insights.</li>
+            <li>Consider also modelling via non parametric tests.</li>
+            </ul>
+            </div>
+            <div class = "answer">
+            <p><strong>Answer:</strong> Due to skew, use robust statistics (median, IQR), consider transformations, and model via non parametric tests.</p>
+            </div>
+          </div>
+          <div class="card">
+            <div class="question" id = "question-54">
+            <p><strong>Question 54: (Hard)</strong> You are tasked with evaluating a new ranking algorithm for a social media feed. You want to assess how diverse the content is that users are seeing. How would you define and quantify content diversity? Provide examples of metrics you might calculate.</p>
+            </div>
+            <p class="key-concepts"><strong>Key Concept(s):</strong> Diversity Metric, Information Retrieval, Entropy, Pairwise dissimilarity.</p>
+            <div class = "explanation">
+            <p><strong>Explanation:</strong> Measuring diversity in recommendations.</p>
+            <ul>
+            <li>Quantifying diversity is not straight forward and depends on definition of diversity.</li>
+            <li>One approach is to calculate the entropy of categories for the recommended items. A high entropy indicates a more diverse set of recommendations as items are not from the same categories. Calculate entropy over different categories.</li>
+            <li>Another method is to measure the pairwise dissimilarity between items, where more diverse recommendations will have a higher dissimilarity score. Use measures of distance (like Euclidean) to calculate dissimilarity.</li>
+            <li>A simpler way is to measure the number of unique categories of items across a recommendation list.</li>
+            </ul>
+            </div>
+            <div class = "answer">
+            <p><strong>Answer:</strong> Diversity can be quantified using metrics such as entropy of item categories, pairwise dissimilarity between items, or by the number of unique categories, adapting to the specific context.
+            For example:</p>
+            <ul>
+            <li><strong>Category Entropy:</strong> Calculate the probability of each category appearing in the recommendations. Then calculate the entropy: <span class = "latex-math">( -\sum_{i=1}^{n} p_i * log(p_i))</span> where <span class = "latex-math">(p_i)</span> is the probability of the i-th category.</li>
+            <li><strong>Pairwise Dissimilarity</strong>: calculate a dissimilarity score (e.g using euclidean disstance) between each item in recommendation, and average.</li>
+            <li><strong>Unique Categories:</strong> Simply count the number of unique categories in the recommendations.</li>
+            </ul>
+            </div>
+          </div>
+          <div class="card">
+            <div class="question" id = "question-55">
+            <p><strong>Question 55: (Hard)</strong> You are analyzing a dataset containing user activity on a social platform, including the number of posts, likes, and comments each user makes. You are asked to understand the relationship between these different engagement metrics, but are unsure of whether you should be using correlation, or covariance. Provide your thoughts on which metric and explain why.</p>
+            </div>
+            <p class="key-concepts"><strong>Key Concept(s):</strong> Correlation vs Covariance, Feature Relationship</p>
+            <div class = "explanation">
+            <p><strong>Explanation:</strong> Testing understanding between covariance and correlation, feature relationship</p>
+            <ul>
+            <li>Covariance will show direction, but the unstandardised metrics make absolute comparison and interpretation difficult</li>
+            <li>Correlation, on the other hand standardises, but is only useful if looking for linear relationships.</li>
+            <li>Therefore If interested in only direction use covariance, if you are looking for linear relationships and strength you will have to use correlation.</li>
+            </ul>
+            </div>
+            <div class = "answer">
+            <p><strong>Answer:</strong> If interested in the direction of relationship only, use covariance, if strength and direction are important, use correlation. If non linear relationships, then neither covariance nor correlation will work, and would need other forms of techniques.</p>
+            </div>
+          </div>
+          <div class="card">
+            <div class="question" id = "question-56">
+            <p><strong>Question 56: (Hard)</strong> You are analyzing the click-through rate (CTR) of a new ad campaign. You observe a CTR of 2% from a sample of 10,000 impressions. Calculate a 95% confidence interval for the true CTR. How would a larger sample size (e.g. 100,000 impressions) impact the width of the confidence interval?</p>
+            </div>
+            <p class="key-concepts"><strong>Key Concept(s):</strong> Confidence Intervals, Proportions, Sample Size, Standard Error</p>
+            <div class = "explanation">
+            <p><strong>Explanation:</strong> This tests the application and interpretation of confidence intervals.</p>
+            </div>
+            <div class = "answer">
+            <p><strong>Answer:</strong></p>
+            <ol>
+            <li><strong>Calculate the Standard Error (n=10,000):</strong> <span class = "latex-math">(SE = \sqrt{\frac{p(1-p)}{n}} = \sqrt{\frac{(0.02 * 0.98)}{10000}} \approx 0.0014)</span></li>
+            <li><strong>Find the Z-score:</strong> For a 95% confidence interval, the z-score is approximately 1.96.</li>
+            <li><strong>Calculate the Confidence Interval (n=10,000):</strong> <span class = "latex-math">(CI = p \pm z * SE = 0.02 \pm 1.96 * 0.0014 \approx (0.0173, 0.0227))</span> or (1.73%, 2.27%)</li>
+            </ol>
+            <p>With a larger sample size (100,000 impressions):</p>
+            <ol>
+            <li><strong>Calculate the Standard Error (n=100,000):</strong> <span class = "latex-math">(SE = \sqrt{\frac{(0.02 * 0.98)}{100000}} \approx 0.00044)</span></li>
+            <li><strong>Calculate the Confidence Interval (n=100,000):</strong> <span class = "latex-math">(CI = 0.02 \pm 1.96 * 0.00044 \approx (0.0191, 0.0209))</span> or (1.91%, 2.09%)</li>
+            </ol>
+            <p><strong>Impact of Sample Size:</strong> As you can see, the confidence interval is much narrower with the larger sample size. This is because the standard error decreases as the sample size increases, leading to a more precise estimate of the true CTR.</p>
+            </div>
+          </div>
+          <div class="card">
+            <div class="question" id = "question-57">
+            <p><strong>Question 57: (Hard)</strong> You’re running an A/B test to evaluate a new recommendation system. The primary metric is the average time users spend on the platform per session. However, you notice a significant number of users who have extremely short sessions (less than 10 seconds). How would you analyze this data, accounting for these short sessions?</p>
+            </div>
+            <p class="key-concepts"><strong>Key Concept(s):</strong> Outliers, Data Transformation, Trimming, Winsorizing, Segmentation, A/B Testing</p>
+            <div class = "explanation">
+            <p><strong>Explanation:</strong> Addressing outlier data</p>
+            <ul>
+            <li>Very short session lengths are likely to be due to accidental opens or technical issues, and are not indicative of genuine user behaviour, so could distort your results by skewing means.</li>
+            <li>Consider investigating and removing the very short sessions (trimming) or capping them to a threshold (Winsorizing).</li>
+            <li>Consider if the session data is better represented via a non parametric test if transforming the data to be gaussian proves difficult.</li>
+            <li>Segment data to understand different patterns, like very active vs less active users.</li>
+            <li>Run robust statistical tests that don’t assume normal data.</li>
+            </ul>
+            </div>
+            <div class = "answer">
+            <p><strong>Answer:</strong> Trim/winsorize short sessions. Segment users, non parametric tests, check distribution.</p>
+            </div>
+          </div>
+          <div class="card">
+            <div class="question" id = "question-58">
+            <p><strong>Question 58: (Hard)</strong> You have a dataset showing the number of items purchased per user on an e-commerce platform. You notice that the data is heavily skewed to the right. What approach would you take to calculate a 95% confidence interval for the median number of items purchased per user?</p>
+            </div>
+            <p class="key-concepts"><strong>Key Concept(s):</strong> Confidence Intervals, Skewed Data, Bootstrapping, Median</p>
+            <div class = "explanation">
+            <p><strong>Explanation:</strong> This tests knowledge of confidence intervals for non-normal data, and median</p>
+            <ul>
+            <li>Standard confidence interval formulas assume a normal distribution, which is not suitable for highly skewed data.</li>
+            <li>Bootstrapping allows us to resample the data and generate many values for the median and get its sampling distribution which can be used to create the confidence intervals.</li>
+            <li>You would resample from original data many times and calculate a new median every time and then use the distribution to calculate confidence interval.</li>
+            </ul>
+            </div>
+            <div class = "answer">
+            <p><strong>Answer:</strong> Since the data is skewed use the bootstrapping method to get confidence intervals of the median.</p>
+            </div>
+          </div>
+          <div class="card">
+            <div class="question" id = "question-59">
+            <p><strong>Question 59: (Hard)</strong> You’re analyzing the effectiveness of a new personalized recommendation algorithm on a music streaming platform. You are measuring the average number of songs listened to per session. You notice that user behavior is highly variable, with some users listening to hundreds of songs per session, while others listen to only a few. You want to assess if the new algorithm is improving the average number of songs listened to. How would you conduct the statistical analysis? Which test would be more appropriate and why?</p>
+            </div>
+            <p class="key-concepts"><strong>Key Concept(s):</strong> Skewed Data, Non-Parametric Tests, Mann-Whitney U test, A/B testing</p>
+            <div class = "explanation">
+            <p><strong>Explanation:</strong> Testing awareness of non parametric tests when assumptions of normality are broken.</p>
+            <ul>
+            <li>The data is highly variable with potentially skew distribution so a t-test (which assumes normality) is likely not the best choice for this data.</li>
+            <li>A non-parametric test such as the Mann-Whitney U test is preferred as it doesn’t assume normal data.</li>
+            <li>Apply robust tests such as this one and compare mean / median. Evaluate effect size of changes, not just statistical significance.</li>
+            </ul>
+            </div>
+            <div class = "answer">
+            <p><strong>Answer:</strong> Use Mann-Whitney U test for analysis of the skewed distribution data, and not t-test. Further, evaluate effect size not just statistical significance.</p>
+            </div>
+          </div>
+          <div class="card">
+            <div class="question" id = "question-60">
+            <p><strong>Question 60: (Hard)</strong> You’re investigating a drop in user sign-ups on your social media platform. You suspect that the drop may be related to a change in the signup flow that was deployed a few weeks ago. How would you approach this problem systematically, including appropriate statistical analysis?</p>
+            </div>
+            <p class="key-concepts"><strong>Key Concept(s):</strong> Data Analysis, Time Series Analysis, A/B Testing, Hypothesis Testing, Segmentation</p>
+            <div class = "explanation">
+            <p><strong>Explanation:</strong> This tests analytical thinking and applying statistical concepts to a real-world problem.</p>
+            </div>
+            <div class = "answer">
+            <p><strong>Answer:</strong></p>
+            <ol>
+            <li><strong>Data Validation:</strong> Start by validating the data for accuracy, ensure there are no tracking issues or data collection errors.</li>
+            <li><strong>Time Series Analysis:</strong> Check sign-up trends before the change was implemented and after the deployment to identify the extent of drop, and to see whether this is part of larger seasonal or temporal change.</li>
+            <li><strong>Segmentation Analysis:</strong> Check sign-ups across different user segments (geo, demographic, channel). If one group shows much larger drop, investigate that sub segment more deeply.</li>
+            <li><strong>A/B Testing Analysis:</strong> Analyze data collected from A/B test during that week to see if the new changes resulted in significantly different sign-ups. Consider any statistical test to determine the extent of impact (using mean / proportion and their respective tests as applicable to your particular business context).</li>
+            <li><strong>Correlation Analysis:</strong> Check correlation between sign-up rate with other metrics to investigate other potentially causative factors for the drop.</li>
+            <li><strong>External Factors:</strong> Investigate external factors like competitor activity, marketing, or trends that may influence sign-ups.</li>
+            </ol>
+            <p>This approach provides a systematic way to validate data, identify the extent of the drop, investigate potential reasons using segmentation, and see if the change itself is the primary driver of the dip.</p>
+            </div>
+            </div>
+            </div>
+            </div>
+          </div>
+            <div class="footer-banner">
+            [Placeholder: Add a footer banner with a call to action]
+            </div>
+            <footer>
+            <p>© 2025 Moshe Shamoulian</p>
+            </footer>
+            
+            </body>
+            </html>
