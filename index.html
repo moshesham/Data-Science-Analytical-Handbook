@@ -221,11 +221,18 @@
             margin-right: 5px;
         }
         .footer-banner {
-            background-color: #ddd;
+            background-color: #52a079a2;
             padding: 10px;
             text-align: center;
             margin-top: 20px;
-            border-top: 1px solid #ccc;
+            border-top: 2px solid #448487cd;
+        }
+        .logo-link img {
+            width: auto;
+            height: 275px;
+            margin-right: 5px;
+            text-align: center;
+
         }
         /* Responsive header */
         header{
@@ -344,8 +351,51 @@
                 padding-left: 0px;
             }
         }
+        .social-share-buttons {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        .social-share-buttons a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #fff;
+            border: 1px solid #e5e7eb;
+            transition: all 0.2s;
+            text-decoration: none;
+        }
+
+        .social-share-buttons a:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .social-share-buttons img {
+            width: 20px;
+            height: 20px;
+        }
+
+        .social-share-buttons .copy-link {
+            cursor: pointer;
+        }
+
+        /* Remove old social media section styles */
+        .social-media-section,
+        .social-media-container,
+        .social-media-title,
+        .social-media-icons {
+            display: none;
+        }
     </style>
 </head>
+
 <body>
     <header class="header">
         <a href="https://www.linkedin.com/in/moshesham/" class="linkedin-link" target='_blank'>
@@ -486,7 +536,6 @@
                         <p>Learn SQL for data processing and analysis, including advanced techniques.</p>
                         <span class="metric"></span>
 
-                        C:\Users\Moshe\PycharmProjects\Data-Science-Analytical-Handbook\html_source\Analytical_Hanbook.html
                     </a>
                     <a href="html_source/Analytical_Handbook.html#programming-python-r" class="resource-card">
                         <div class="icon-container">🐍</div>
@@ -530,8 +579,43 @@
     </div>
 
     <div class="footer-banner">
-        [Placeholder: Add a footer banner with a call to action]
+
+        <a href="https://discord.gg/pZAtftH9bb" class="logo-link" target='_blank'>
+            <img src="resources/banner.webp" alt="Community Logo">
+        </a>
+
+        
+        <!-- <div class="social-share-buttons">
+            
+            <a href="#" class="copy-link" title="Copy Link">
+                <img src="path/to/link-icon.svg" alt="Copy Link">
+            </a>
+            <a href="#" class="pinterest" title="Share on Pinterest">
+                <img src="path/to/pinterest-icon.svg" alt="Pinterest">
+            </a>
+            <a href="#" class="twitter" title="Share on Twitter">
+                <img src="path/to/twitter-icon.svg" alt="Twitter">
+            </a>
+            <a href="#" class="facebook" title="Share on Facebook">
+                <img src="path/to/facebook-icon.svg" alt="Facebook">
+            </a>
+            <a href="#" class="linkedin" title="Share on LinkedIn">
+                <img src="path/to/linkedin-icon.svg" alt="LinkedIn">
+            </a>
+        </div>
+        <div class="social-media-icons">
+            <a href="https://discord.gg/pZAtftH9bb" class="social-icon" target="_blank">
+                <img src="https://cdnjs.cloudflare.com/ajax/libs/simple-icons/4.25.0/discord.svg" alt="Discord">
+                <span>Join Discord</span>
+            </a>
+            <a href="https://youtube.com/example" class="social-icon" target="_blank">
+                <img src="https://cdnjs.cloudflare.com/ajax/libs/simple-icons/4.25.0/youtube.svg" alt="YouTube">
+                <span>Watch Videos</span>
+            </a>
+        </div> -->
     </div>
+
+    
     <footer>
         <p>© 2025 Moshe Shamoulian</p>
     </footer>
