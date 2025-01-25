@@ -1,0 +1,12 @@
+#requests==2.27.1
+#streamlit==1.28.0
+#streamlit_book==0.7.5
+streamlit
+st-pages
+pandas
+numpy
+scipy>=1.10
+seaborn
+matplotlib
+statsmodels
+scikit-learn
