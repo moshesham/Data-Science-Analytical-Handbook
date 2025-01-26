@@ -1,9 +1,21 @@
 # main.py
 import streamlit as st
-from streamlit_app.Product_Analytics.pages.home import main as Home_main
-# from streamlit_app.Product_Analytics.pages.data_fundamentals import main as data_fundamentals_main
+from st_pages import Page, show_pages, add_page_title
 
-from st_pages import hide_pages, add_page_title, show_pages, Page, Section
+# Add your main page
+add_page_title()
+
+# Specify what pages should be shown in the sidebar, and what their titles and icons
+# should be
+show_pages(
+    [
+        Page("streamlit_app/Product_Analytics/pages/home.py", "Home", "🏠"),
+        Page("streamlit_app/Product_Analytics/pages/3_descriptive_statistics.py", "Descriptive Statistics", "📊"),
+        Page("streamlit_app/Product_Analytics/pages/4_data_visualization.py", "Data Visualization", "📊"),
+        Page("streamlit_app/Product_Analytics/pages/5_hypothesis_testing.py", "Hypothesis Testing", "🤔"),
+        Page("streamlit_app/Product_Analytics/pages/6_ab_testing.py", "A/B Testing", "🆎"),
+    ]
+)
 
 # Define the mapping between HTML section IDs and Streamlit page file names
 # pages_config = [
