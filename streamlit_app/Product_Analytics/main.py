@@ -17,6 +17,7 @@ show_pages(
     ]
 )
 
+
 # Define the mapping between HTML section IDs and Streamlit page file names
 # pages_config = [
 #     {"type": "page", "file": "Home.py", "name": "Home", "icon": "🏠"},
