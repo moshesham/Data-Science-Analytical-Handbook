@@ -7,7 +7,7 @@
       "openFiles": [
       
         "streamlit_app/Product_Analytics/requirements.txt",
-        "streamlit_app/Product_Analytics/3_descriptive_statistics.py"
+        "streamlit_app/Product_Analytics/main.py"
       ]
     },
     "vscode": {
@@ -20,7 +20,7 @@
   },
   "updateContentCommand": "[ -f packages.txt ] && sudo apt update && sudo apt upgrade -y && sudo xargs apt install -y <packages.txt; [ -f requirements.txt ] && pip3 install --user -r requirements.txt; pip3 install --user streamlit; echo '✅ Packages installed and Requirements met'",
   "postAttachCommand": {
-    "server": "streamlit run streamlit_app/Product_Analytics/3_descriptive_statistics.py --server.enableCORS false --server.enableXsrfProtection false"
+    "server": "streamlit run streamlit_app/Product_Analytics/main.py --server.enableCORS false --server.enableXsrfProtection false"
   },
   "portsAttributes": {
     "8501": {
