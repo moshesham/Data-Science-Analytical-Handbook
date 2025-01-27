@@ -1,6 +1,9 @@
+# utils/stats_utils.py
 import numpy as np
 from scipy import stats
 from typing import List, Dict
+from statsmodels.stats.power import TTestIndPower
+import math
 
 def calculate_descriptive_stats(data: List[float]) -> Dict:
     """Calculates descriptive statistics for a given dataset."""
@@ -22,3 +25,9 @@ def calculate_descriptive_stats(data: List[float]) -> Dict:
         "75th Percentile (Q3)": np.percentile(data, 75),
         "90th Percentile": np.percentile(data, 90),
     }
+
+def calculate_sample_size_power(effect_size: float, power: float, alpha: float = 0.05) -> float:
+      """Calculates sample size given effect size, power and alpha"""
+      analysis = TTestIndPower() # indendent samples t test
+      sample_size = analysis.solve_power(effect_size = effect_size, power=power, alpha=alpha)
+      return math.ceil(sample_size) # round up
