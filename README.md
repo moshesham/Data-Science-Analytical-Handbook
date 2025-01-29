@@ -1,4 +1,4 @@
-# Data Science Analytical Interview Preparation Handbook for Meta 🧑‍💻
+# Data Science Analytical Interview Preparation Handbook 🧑‍💻
 
 This repository contains a comprehensive handbook designed to help you prepare for data science analytical interviews, with a specific focus on Meta 🚀.
 
