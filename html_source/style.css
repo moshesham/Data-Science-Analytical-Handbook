@@ -1,0 +1,245 @@
+/* Base styles */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+body {
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #fafafa;
+    overflow-x: hidden;
+}
+/* Container for responsive padding */
+.container {
+    width: 100%;
+    max-width: 4200px;
+    margin: 0 auto;
+    padding: 0;
+    display: flex;
+}
+
+/* Header styles */
+.header {
+    text-align: center;
+    padding: clamp(2rem, 5vw, 4rem) 1rem;
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+.header h1 {
+    font-size: clamp(2rem, 5vw, 3rem);
+    margin-bottom: clamp(0.5rem, 2vw, 1rem);
+    color: #1a1a1a;
+}
+.header p {
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    color: #666;
+    max-width: 600px;
+    margin: 0 auto clamp(1rem, 3vw, 2rem);
+    padding: 0 1rem;
+}
+
+/* Sidebar styles */
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 250px;
+    background-color: #f8f8f8;
+    border-right: 1px solid #e0e0e0;
+    padding: 20px;
+    overflow-y: auto;
+    z-index: 10;
+}
+
+.sidebar h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+/* Navigation list styles */
+.nav-list {
+    list-style: none;
+    padding: 0;
+}
+
+.nav-list ul {
+    padding-left: 20px;
+}
+
+.nav-list li {
+    margin-bottom: 10px;
+}
+
+.nav-list a {
+    font-size: 1rem;
+    color: #666;
+    text-decoration: none;
+    transition: color 0.2s, text-decoration 0.2s; /* Add text-decoration to transition */
+}
+
+.nav-list a:hover {
+    color: #3b82f6;
+    text-decoration: underline; /* Add underline on hover */
+}
+
+/* Main content styles */
+.main-content {
+    flex: 1;
+    padding: 20px;
+    margin-left: 280px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Breadcrumb styles */
+.breadcrumb {
+    margin-bottom: 20px;
+    font-size: 0.9em;
+}
+
+.breadcrumb a {
+    color: #3b82f6;
+    text-decoration: none;
+    transition: color 0.2s, text-decoration 0.2s;
+}
+
+.breadcrumb a:hover {
+    text-decoration: underline;
+}
+
+.breadcrumb span {
+    margin: 0 5px;
+}
+
+.section-title {
+    margin-top: 30px;
+    margin-bottom: 15px;
+    font-size: x-large;
+    text-decoration: none; /* Remove underline from section titles */
+}
+
+/* Card styling */
+.card {
+    border: 1px solid #ccc;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+    background-color: #f9f9f9; /* Set a light background for all cards */
+}
+/* Add this to your style.css */
+.code-block {
+    background-color: rgba(255,255,255,0.05);
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 5px;
+    border: 1px solid #555;
+    overflow-x: auto; /* to handle long code */
+    color: #ccc; /* Set code text color to be more readable*/
+}
+.code-block pre, .code-block code {
+    color:#ccc; /* ensures code inside codeblock is readable */
+}
+
+.card h4 {
+    margin-top: 0; /* Reduce top margin for card titles */
+    margin-bottom: 15px;
+    font-size: larger;
+    text-decoration: none; /* Remove underline from card titles */
+}
+.card p{
+    line-height: 1.8;
+    font-size: medium;
+}
+.card ul li{
+    line-height: 1.8;
+    font-size: medium;
+}
+.card ol li{
+    line-height: 1.8;
+    font-size: medium;
+}
+
+.card ul, .card ol {
+    margin-bottom: 15px; /* Add spacing after lists */
+}
+
+.card hr {
+    margin: 20px 0; /* Add spacing around horizontal rules */
+    border: none;
+    border-top: 1px solid #ccc;
+}
+
+.navigation-buttons {
+    margin-top: 20px;
+    text-align: center;
+}
+.navigation-buttons a {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 0 10px;
+    background-color: #3b82f6;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.2s;
+}
+.navigation-buttons a:hover{
+    background-color: #1e40af;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        position: static;
+        width: 100%;
+        height: auto;
+        margin-bottom: 0px;
+        border-right: none;
+        border-bottom: 1px solid #e0e0e0;
+        padding: 10px;
+    }
+
+    .main-content {
+        margin-left: 0;
+        margin-top: 20px;
+    }
+
+    .nav-list {
+        gap: 1rem;
+        padding: 0 1rem;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .nav-list li {
+        margin-bottom: 0;
+        margin-right: 10px;
+    }
+
+    .nav-list ul {
+        padding-left: 0px;
+    }
+}
+
+/* Footer styles */
+.footer-banner {
+    background-color: #ddd;
+    padding: 10px;
+    text-align: center;
+    margin-top: 20px;
+    border-top: 1px solid #ccc;
+}
+footer{
+    max-width: 1200px;
+    margin: 0 auto;
+}
