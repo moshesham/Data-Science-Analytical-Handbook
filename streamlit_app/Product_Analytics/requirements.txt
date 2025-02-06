@@ -11,3 +11,4 @@ seaborn
 matplotlib
 statsmodels
 scikit-learn
+lifelines
