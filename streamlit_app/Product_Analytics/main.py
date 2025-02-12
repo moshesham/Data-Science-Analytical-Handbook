@@ -9,10 +9,27 @@ def main():
         ### Overview
 
         This handbook will guide you through key areas in product analytics, with focus on:
-            - **Statistics Fundamentals:** Understand descriptive statistics, distributions, and hypothesis testing.
-            - **Visualization Techniques:** Learn how to effectively visualize data for exploratory analysis and communication.
-            - **A/B Testing:** Explore the process of designing, running, and interpreting A/B tests.
-            - **Data Analysis:** Learn how to apply core concepts for effective product analysis.
+
+        **Fundamentals:**
+            - **Probability:** Understand the basics of probability, including distributions and statistical inference.
+            - **Descriptive Statistics:** Learn how to summarize and describe data using central tendency, dispersion, and other measures.
+            - **Data Visualization:** Explore effective techniques for visualizing data to gain insights and communicate findings.
+            - **Data Quality and Validation:** Understand the importance of data quality and how to ensure data accuracy.
+            - **KRIs and KPIs Metrics:** Learn how to define, design, and implement effective Key Risk Indicators (KRIs) and Key Performance Indicators (KPIs).
+            - **Effective Communication:** Learn how to effectively communicate data insights to stakeholders.
+
+        **Advanced Topics:**
+            - **Hypothesis Testing:** Learn how to design and conduct A/B tests and other hypothesis tests.
+            - **Time Series Analysis:** Learn how to analyze data over time to identify trends and patterns.
+            - **A/B Testing:** Explore the process of designing, running, and interpreting A/B tests for product optimization.
+
+        **Applications:**
+            - **Survival Analysis:** Understand how to analyze time-to-event data, such as customer churn.
+            - **Churn Analysis:** Learn how to identify factors contributing to customer churn and develop strategies to reduce it.
+            - **Marketing Analytics:** Understand how to analyze marketing campaigns and measure their effectiveness.
+            - **Fraud Risk Analysis:** Learn how to use data to detect and prevent fraud.
+            - **Supply Chain Analysis:** Explore how to optimize supply chain operations using data analysis.
+            - **Economic Demand Forecasting:** Learn how to forecast demand for products and services.
 
         ### How to Use This Handbook
 
