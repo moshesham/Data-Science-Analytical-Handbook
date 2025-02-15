@@ -18,3 +18,5 @@ yfinance
 statsmodels
 imbalanced-learn
 pmdarima
+folium
+streamlit-folium

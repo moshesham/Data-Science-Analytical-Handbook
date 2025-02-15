@@ -2,487 +2,621 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import plotly.express as px
-import plotly.graph_objects as go
-from scipy.stats import chi2_contingency
+from itertools import product
+import random
 
-# --- Data Generation Functions ---
-
-def generate_campaign_data(n_customers=1000, conversion_rate=0.05, avg_order_value=50, cost_per_click=1, random_state=42):
-    """Generates synthetic marketing campaign data."""
-    np.random.seed(random_state)
-    customer_ids = np.arange(1, n_customers + 1)
-    impressions = np.random.randint(1, 5, n_customers)  # 1-4 impressions
-    clicks = (np.random.rand(n_customers) < 0.2).astype(int)  # Assume 20% click-through rate
-    converted = (np.random.rand(n_customers) < conversion_rate).astype(int)
-    revenue = np.where(converted == 1, np.random.normal(avg_order_value, 10, n_customers), 0)
-    cost = clicks * cost_per_click
-
-    df = pd.DataFrame({
-        'CustomerID': customer_ids,
-        'Impressions': impressions,
-        'Clicks': clicks,
-        'Converted': converted,
-        'Revenue': revenue,
-        'Cost': cost
-    })
-    return df
-
-def generate_segmentation_data(n_customers=1000, random_state=42):
-    np.random.seed(random_state)
-    customer_ids = np.arange(1, n_customers + 1)
-    age = np.random.randint(18, 65, n_customers)
-    income = np.random.normal(50000, 20000, n_customers).astype(int)
-    income = np.maximum(income, 10000)  # Ensure income >= 10000
-    location = np.random.choice(['Urban', 'Suburban', 'Rural'], n_customers)
-    past_purchases = np.random.randint(0, 10, n_customers)
-
-    df = pd.DataFrame({
-        'CustomerID': customer_ids,
-        'Age': age,
-        'Income': income,
-        'Location': location,
-        'PastPurchases': past_purchases
-    })
-    return df
-
-def generate_ab_test_data(n_variants=2, n_users_per_variant=500, conversion_rates=[0.10, 0.12], random_state=42):
-    np.random.seed(random_state)
+def generate_website_dashboard_data(days=90, channels=['Organic', 'Paid Ads', 'Social', 'Email'], devices=['Desktop', 'Mobile', 'Tablet'], countries=['USA', 'Canada', 'UK']):
+    """Generates synthetic website dashboard data with channels, devices, and countries."""
+    dates = pd.date_range(end="today", periods=days)
     data = []
-    for i in range(n_variants):
-        variant = chr(65 + i)  # A, B, C...
-        users = np.arange(1, n_users_per_variant + 1)
-        converted = (np.random.rand(n_users_per_variant) < conversion_rates[i]).astype(int)
-        data.extend(list(zip([variant] * n_users_per_variant, users, converted)))
-
-    df = pd.DataFrame(data, columns=['Variant', 'UserID', 'Converted'])
+    for date in dates:
+        for channel in channels:
+            for device in devices:
+                for country in countries:
+                    users = max(0, int(100 + random.gauss(20, 30) + (days - (dates.max() - date).days) * 2 )) # Users increase over time
+                    sessions = max(0, int(users * random.uniform(0.8, 0.95)))
+                    page_views = max(0, int(sessions * random.uniform(2, 4)))
+                    bounce_rate = min(100, max(20, int(random.gauss(60, 10)))) / 100 # Bounce rate around 60%
+                    session_duration = max(30, int(random.expovariate(1/180))) # Avg session duration ~ 3 mins
+                    conversions = max(0, int(users * random.uniform(0.01, 0.03))) # Conversion rate 1-3%
+                    data.append([date, channel, device, country, users, sessions, page_views, bounce_rate, session_duration, conversions])
+    df = pd.DataFrame(data, columns=['Date', 'Channel', 'Device', 'Country', 'Users', 'Sessions', 'Page Views', 'Bounce Rate', 'Session Duration (Seconds)', 'Conversions'])
     return df
 
-def generate_clv_data(n_customers=1000, avg_revenue=100, retention_rate=0.7, discount_rate=0.1, periods=5, random_state=42):
-    np.random.seed(random_state)
-    customer_ids = np.arange(1, n_customers + 1)
-    # Simulate more realistic revenue with some variation
-    initial_revenue = np.random.normal(avg_revenue, avg_revenue * 0.3, n_customers)
-    initial_revenue = np.maximum(initial_revenue, 10)  # Ensure revenue is not too low
+def generate_multi_channel_ads_data(num_campaigns=20, channels=['Google Ads', 'Facebook Ads', 'LinkedIn Ads', 'Display Ads']):
+    """Generates synthetic multi-channel advertising campaign data."""
+    data = []
+    for channel in channels:
+        for i in range(1, num_campaigns + 1):
+            campaign_name = f'{channel} Campaign {i}'
+            impressions = int(random.expovariate(1/50000)) # Avg impressions differ by channel
+            clicks = int(impressions * random.uniform(0.01, 0.05)) # CTR varies
+            spend = clicks * random.uniform(0.5, 2.5) # CPC varies
+            conversions = int(clicks * random.uniform(0.02, 0.08)) # Conversion rate varies
+            revenue = conversions * random.uniform(20, 150) # Revenue per conversion varies
+            data.append([campaign_name, channel, impressions, clicks, spend, conversions, revenue])
+    df_ads = pd.DataFrame(data, columns=['Campaign', 'Channel', 'Impressions', 'Clicks', 'Spend', 'Conversions', 'Revenue'])
+    df_ads['CTR'] = df_ads.apply(lambda row: (row['Clicks'] / row['Impressions']) * 100 if row['Impressions'] > 0 else 0, axis=1)
+    df_ads['CPC'] = df_ads.apply(lambda row: row['Spend'] / row['Clicks'] if row['Clicks'] > 0 else 0, axis=1)
+    df_ads['CPA'] = df_ads.apply(lambda row: row['Spend'] / row['Conversions'] if row['Conversions'] > 0 else 0, axis=1)
+    df_ads['ROAS'] = df_ads.apply(lambda row: row['Revenue'] / row['Spend'] if row['Spend'] > 0 else 0, axis=1)
+    return df_ads
 
-    data = {'CustomerID': customer_ids, 'InitialRevenue': initial_revenue}
-    for period in range(1, periods + 1):
-        retained = (np.random.rand(n_customers) < retention_rate).astype(int)
-        # Revenue changes year-to-year, but is correlated with previous year
-        if period == 1:
-            revenue = initial_revenue * (1 + np.random.normal(0, 0.1, n_customers))  # 10% variation
-        else:
-            revenue = data[f'Revenue_Year{period-1}'] * (1 + np.random.normal(0, 0.1, n_customers))
-        revenue = np.where(retained == 1, revenue, 0) # zero if not retained.
-        data[f'Revenue_Year{period}'] = revenue
+def generate_customer_segmentation_data(num_customers=1000):
+    """Generates synthetic customer segmentation data."""
+    np.random.seed(42) # for reproducibility
+    age = np.random.randint(18, 70, num_customers)
+    gender = np.random.choice(['Male', 'Female', 'Other'], num_customers, p=[0.45, 0.45, 0.1])
+    location = np.random.choice(['USA', 'Canada', 'UK', 'Germany', 'France'], num_customers)
+    website_visits_last_month = np.random.randint(0, 50, num_customers)
+    time_on_site_minutes = np.random.randint(1, 120, num_customers)
+    pages_visited = np.random.randint(1, 20, num_customers)
+    purchase_frequency = np.random.choice(['Low', 'Medium', 'High'], num_customers, p=[0.5, 0.3, 0.2])
+    avg_order_value = np.random.randint(25, 300, num_customers)
+    email_engagement_score = np.random.randint(0, 100, num_customers) # Higher score = more engagement
+    social_media_engagement = np.random.choice(['Low', 'Medium', 'High'], num_customers, p=[0.4, 0.4, 0.2])
 
-    df = pd.DataFrame(data)
+    df_customers = pd.DataFrame({
+        'Age': age, 'Gender': gender, 'Location': location,
+        'Website Visits Last Month': website_visits_last_month, 'Time on Site (Minutes)': time_on_site_minutes, 'Pages Visited': pages_visited,
+        'Purchase Frequency': purchase_frequency, 'Average Order Value': avg_order_value,
+        'Email Engagement Score': email_engagement_score, 'Social Media Engagement': social_media_engagement
+    })
+    return df_customers
 
-    #Calculate CLV
-    df['CLV'] = 0
-    for period in range(1, periods + 1):
-        df['CLV'] += df[f'Revenue_Year{period}'] / ((1 + discount_rate) ** period)
+def generate_ab_test_detailed_data(sample_size=1000):
+    """Generates more detailed A/B test data with more metrics."""
+    group_a_conversions = np.random.binomial(1, 0.045, sample_size) # Slightly lower conversion for A
+    group_b_conversions = np.random.binomial(1, 0.055, sample_size) # Slightly higher conversion for B
+    group_a_aov = np.random.normal(45, 15, size=sample_size) # Avg order value for A
+    group_b_aov = np.random.normal(50, 18, size=sample_size) # Avg order value for B is a bit higher
+    group_a_bounce_rate = np.random.normal(0.65, 0.1, size=sample_size) # Higher bounce for A
+    group_b_bounce_rate = np.random.normal(0.55, 0.08, size=sample_size) # Lower bounce for B
+    group_a_time_on_page = np.random.normal(120, 40, size=sample_size) # Less time on page for A
+    group_b_time_on_page = np.random.normal(150, 50, size=sample_size) # More time on page for B
+
+    df_ab_detailed = pd.DataFrame({
+        'Group': ['A'] * sample_size + ['B'] * sample_size,
+        'Converted': np.concatenate([group_a_conversions, group_b_conversions]).astype(bool),
+        'Average Order Value': np.concatenate([group_a_aov, group_b_aov]),
+        'Bounce Rate': np.concatenate([group_a_bounce_rate, group_b_bounce_rate]),
+        'Time on Page (Seconds)': np.concatenate([group_a_time_on_page, group_b_time_on_page])
+    })
+    df_ab_detailed['Average Order Value'] = df_ab_detailed['Average Order Value'].clip(lower=10) # Ensure AOV is not too low
+    df_ab_detailed['Bounce Rate'] = df_ab_detailed['Bounce Rate'].clip(0, 1) # Ensure bounce rate is between 0 and 1
+    df_ab_detailed['Time on Page (Seconds)'] = df_ab_detailed['Time on Page (Seconds)'].clip(lower=30) # Ensure time on page is not too low
+
+    return df_ab_detailed
+
+def generate_customer_journey_attribution_data(num_journeys=1000):
+    """Generates customer journey data with conversion value for attribution."""
+    channels = ['Organic Search', 'Paid Ads', 'Social Media', 'Email Marketing', 'Direct']
+    journey_data = []
+    for _ in range(num_journeys):
+        journey_length = random.randint(1, 5)
+        journey_path = random.choices(channels, k=journey_length)
+        conversion = random.random() < 0.15 # 15% conversion rate
+        conversion_value = 0
+        if conversion:
+            conversion_value = random.uniform(50, 500) # Conversion value varies
+        journey_data.append({'Journey Path': journey_path, 'Conversion': conversion, 'Conversion Value': conversion_value})
+    return pd.DataFrame(journey_data)
+
+def last_click_attribution(journey_df):
+    """Performs last-click attribution."""
+    attributed_conversions = {}
+    for index, row in journey_df.iterrows():
+        if row['Conversion']:
+            last_touch_channel = row['Journey Path'][-1]
+            attributed_conversions[last_touch_channel] = attributed_conversions.get(last_touch_channel, 0) + row['Conversion Value']
+    return attributed_conversions
+
+def first_click_attribution(journey_df):
+    """Performs first-click attribution."""
+    attributed_conversions = {}
+    for index, row in journey_df.iterrows():
+        if row['Conversion']:
+            first_touch_channel = row['Journey Path'][0]
+            attributed_conversions[first_touch_channel] = attributed_conversions.get(first_touch_channel, 0) + row['Conversion Value']
+    return attributed_conversions
+
+def linear_attribution(journey_df):
+    """Performs linear attribution."""
+    attributed_conversions = {}
+    for index, row in journey_df.iterrows():
+        if row['Conversion']:
+            path_length = len(row['Journey Path'])
+            value_per_touch = row['Conversion Value'] / path_length
+            for channel in row['Journey Path']:
+                attributed_conversions[channel] = attributed_conversions.get(channel, 0) + value_per_touch
+    return attributed_conversions
+
+
+def calculate_ctr(impressions, clicks):
+    """Calculates Click-Through Rate (CTR)."""
+    if impressions == 0:
+        return 0
+    return (clicks / impressions) * 100
+
+def calculate_conversion_rate(clicks, conversions):
+    """Calculates Conversion Rate."""
+    if clicks == 0:
+        return 0
+    return (conversions / clicks) * 100
+
+def calculate_roas(ad_spend, revenue):
+    """Calculates Return on Ad Spend (ROAS)."""
+    if ad_spend == 0:
+        return 0
+    return revenue / ad_spend
+
+def generate_ab_test_data(sample_size=1000):
+    """Generates synthetic A/B test data."""
+    group_a_conversions = np.random.binomial(1, 0.05, sample_size) # 5% conversion rate for group A
+    group_b_conversions = np.random.binomial(1, 0.065, sample_size) # 6.5% conversion rate for group B
+    df = pd.DataFrame({
+        'Group': ['A'] * sample_size + ['B'] * sample_size,
+        'Converted': np.concatenate([group_a_conversions, group_b_conversions])
+    })
+    df['Converted'] = df['Converted'].astype(bool) # Convert to boolean for readability
     return df
 
-
-
-def perform_chi2_test(df, group_col, outcome_col):
-    """Performs a Chi-Square test of independence and returns results."""
-    contingency_table = pd.crosstab(df[group_col], df[outcome_col])
-    chi2, p, dof, expected = chi2_contingency(contingency_table)
-
-    results = {
-        "Chi-Square Statistic": chi2,
-        "P-value": p,
-        "Degrees of Freedom": dof,
-        "Contingency Table": contingency_table,
-        "Expected Frequencies": expected
-    }
-    return results
-
-def calculate_metrics(df):
-    """Calculates key marketing metrics."""
-    total_impressions = df['Impressions'].sum()
-    total_clicks = df['Clicks'].sum()
-    total_conversions = df['Converted'].sum()
-    total_revenue = df['Revenue'].sum()
-    total_cost = df['Cost'].sum()
-
-    ctr = (total_clicks / total_impressions) * 100 if total_impressions > 0 else 0
-    conversion_rate = (total_conversions / total_clicks) * 100 if total_clicks > 0 else 0
-    cpa = total_cost / total_conversions if total_conversions > 0 else 0
-    roas = total_revenue / total_cost if total_cost > 0 else 0
-    avg_order_value = total_revenue / total_conversions if total_conversions > 0 else 0
-
-    metrics = {
-        'Total Impressions': total_impressions,
-        'Total Clicks': total_clicks,
-        'Total Conversions': total_conversions,
-        'Total Revenue': total_revenue,
-        'Total Cost': total_cost,
-        'Click-Through Rate (CTR) (%)': ctr,
-        'Conversion Rate (%)': conversion_rate,
-        'Cost per Acquisition (CPA)': cpa,
-        'Return on Ad Spend (ROAS)': roas,
-        'Average Order Value (AOV)': avg_order_value
-    }
-    return metrics
+def generate_customer_journey_data(num_journeys=100):
+    """Generates synthetic customer journey data."""
+    channels = ['Organic Search', 'Paid Ads', 'Social Media', 'Email Marketing', 'Direct']
+    touchpoints_per_journey = random.choices(range(1, 6), k=num_journeys) # Random number of touchpoints
+    journey_data = []
+    for i in range(num_journeys):
+        journey = random.choices(channels, k=touchpoints_per_journey[i])
+        converted = random.random() < 0.2 # 20% overall conversion rate
+        journey_data.append({'Journey': journey, 'Converted': converted})
+    return pd.DataFrame(journey_data)
 
 
 def main():
-    st.set_page_config(page_title="Marketing Analytics Dashboard", page_icon="📊", layout="wide")
+    st.set_page_config(page_title="Marketing Analytics Guide", page_icon="📈", layout="wide")
+    st.title("Marketing Analytics: An In-Depth Guide 📈")
+    st.write("""
+        Unlock the power of data in marketing! This interactive guide will walk you through the essentials of marketing analytics, 
+        from fundamental concepts to real-world applications and future trends. Master data-driven marketing and elevate your strategies.
+    """)
 
-    st.title("Marketing Analytics Dashboard")
-    st.write("Explore key marketing metrics, customer segmentation, A/B testing, and CLV analysis.")
-
-    with st.expander("📖 Theoretical Concepts"):
+    st.header("1. Understanding the Fundamentals of Marketing Analytics")
+    with st.expander("1.1 Defining Marketing Analytics", expanded=True):
+        st.subheader("1.1 Defining Marketing Analytics")
         st.markdown("""
-        Marketing analytics involves analyzing marketing data to measure performance, identify trends, and optimize campaigns.
+            **Definition:** Marketing analytics is the process of **measuring, managing, and analyzing marketing performance** to maximize its effectiveness and optimize return on investment (ROI). It's about using data and statistical techniques to understand marketing activities, gain customer insights, and make informed, data-driven decisions.
 
-        ### 1. Key Marketing Metrics
-
-        *   **Click-Through Rate (CTR):** `(Clicks / Impressions) * 100%` - Measures the percentage of people who click on an ad after seeing it.
-        *   **Conversion Rate:** `(Conversions / Clicks) * 100%` - Measures the percentage of people who complete a desired action (e.g., purchase) after clicking on an ad.
-        *   **Cost per Acquisition (CPA):** `Total Cost / Conversions` - Measures the cost of acquiring a new customer.
-        *   **Return on Ad Spend (ROAS):** `Revenue / Cost` - Measures the revenue generated for every dollar spent on advertising.
-        *   **Average Order Value (AOV):**  `Total Revenue / Number of Orders`
-        * **Customer Lifetime Value (CLV)** `Sum of (Revenue - cost) / (1 + Discount Rate)^t for period t`
-
-        ### 2. Customer Segmentation
-
-        *   **Purpose:** Dividing customers into groups based on shared characteristics (demographics, behavior, etc.).
-        *   **Benefits:** Targeted marketing, personalized messaging, improved customer engagement.
-        *   **Techniques:**  Clustering (k-means, hierarchical), RFM analysis (Recency, Frequency, Monetary Value).
-
-        ### 3. A/B Testing
-
-        *   **Purpose:** Comparing two or more versions of a marketing element (e.g., ad copy, landing page) to see which performs better.
-        *   **Methodology:**  Randomly assign users to different variants and measure a key metric (e.g., conversion rate).
-        *   **Statistical Significance:**  Use statistical tests (e.g., Chi-Square test) to determine if the observed differences are likely due to the changes made or just random chance.
-
-        ### 4. Customer Lifetime Value (CLV)
-        *   **Definition:**  A prediction of the net profit attributed to the entire future relationship with a customer.
-        * **Importance:** Helps businesses understand the long-term value of their customers and make informed decisions about customer acquisition and retention.
-        * **Calculation:** Various methods, often involving factors like average revenue, retention rate, and discount rate.
-
-        **Further Reading:**
-            *   [Google Digital Marketing & E-commerce Professional Certificate](https://grow.google/certificates/digital-marketing-ecommerce/#?modal_active=none)
-            *   [HubSpot Marketing Blog](https://blog.hubspot.com/marketing)
-
+            **Core Objectives of Marketing Analytics:**
+            *   **Measuring Marketing Performance:**  Track and evaluate the effectiveness of campaigns, channels, and initiatives.
+            *   **Understanding Customer Behavior:** Gain insights into customer preferences, needs, journeys, and interactions.
+            *   **Optimizing Marketing Strategies:** Identify improvements, refine tactics, and allocate resources efficiently.
+            *   **Improving Marketing ROI:** Demonstrate marketing value and maximize returns on investments.
+            *   **Predicting Future Trends:** Forecast market changes, customer behavior shifts, and campaign outcomes.
+            *   **Personalizing Customer Experiences:** Tailor messages and offers to individual customer needs.
         """)
 
+    with st.expander("1.2 The Importance of Marketing Analytics", expanded=True):
+        st.subheader("1.2 The Importance of Marketing Analytics")
+        st.markdown("""
+            Marketing analytics is crucial in today's business environment for several reasons:
 
-    # --- Sidebar for Data Selection ---
-    st.sidebar.header("Data Selection")
-    analysis_type = st.sidebar.selectbox("Select Analysis Type:", ["Campaign Performance", "Customer Segmentation", "A/B Testing", "Customer Lifetime Value (CLV)"])
+            *   **Data-Driven Decision Making:** Shift from guesswork to evidence-based strategies, leading to more effective decisions.
+            *   **Improved Campaign Performance:** Optimize campaigns in real-time for better engagement, conversions, and results.
+            *   **Enhanced Customer Understanding:** Gain deep insights into customer needs and behaviors for more effective targeting and messaging.
+            *   **Increased Marketing ROI:** Justify marketing investments with measurable results and optimize resource allocation.
+            *   **Competitive Advantage:** Leverage data to identify market opportunities and adapt to trends faster than competitors.
+            *   **Personalized Customer Experiences:** Deliver relevant and personalized experiences to boost satisfaction and loyalty.
+            *   **Accountability and Transparency:** Provide clear metrics and reports for accountability to stakeholders.
+        """)
+    
+    st.header("2. Core Components of Marketing Analytics")
+    with st.expander("2.1 Types of Marketing Data", expanded=True):
+        st.subheader("2.1 Types of Marketing Data")
+        st.markdown("""
+            Effective marketing analytics relies on diverse data sources. Key types include:
+
+            *   **Web Analytics Data:** Website interactions (traffic, page views, bounce rates) from tools like Google Analytics, Adobe Analytics.
+            *   **Social Media Data:** Engagement metrics, follower growth, sentiment from platforms' analytics and tools.
+            *   **CRM Data:** Customer demographics, purchase history, interactions from CRM systems (Salesforce, HubSpot).
+            *   **Advertising Data:** Impressions, clicks, CTR, conversions, ad spend from platforms (Google Ads, Facebook Ads).
+            *   **Email Marketing Data:** Open rates, CTR, bounce rates, conversions from platforms (Mailchimp, Marketo).
+            *   **Sales Data:** Sales revenue, units sold, order value, product performance, sales cycle.
+            *   **Customer Feedback Data:** Surveys, reviews, feedback forms, customer service interactions (qualitative and quantitative).
+            *   **Market Research Data:** Surveys, focus groups, competitor analysis for broader market context.
+            *   **Location Data:** Geolocation data for understanding customer movement and geographic targeting.
+        """)
+
+    with st.expander("2.2 Key Marketing Metrics and KPIs", expanded=True):
+        st.subheader("2.2 Key Marketing Metrics and KPIs")
+        st.markdown("""
+            **Key Performance Indicators (KPIs)** and metrics are vital for measuring marketing success. Common categories include:
+
+            *   **Website Traffic Metrics:** Unique Visitors, Page Views, Bounce Rate, Session Duration, Traffic Sources.
+            *   **Social Media Metrics:** Engagement Rate, Reach, Impressions, Follower Growth, Social Sentiment.
+            *   **Advertising Metrics:** Click-Through Rate (CTR), Conversion Rate, Cost Per Click (CPC), Cost Per Acquisition (CPA), Return on Ad Spend (ROAS).
+            *   **Email Marketing Metrics:** Open Rate, Click-Through Rate (CTR), Conversion Rate, Bounce Rate, Unsubscribe Rate.
+            *   **Sales and Revenue Metrics:** Sales Revenue, Overall Conversion Rate, Customer Acquisition Cost (CAC), Customer Lifetime Value (CLTV), Return on Marketing Investment (ROMI).
+            *   **Customer-Centric Metrics:** Customer Satisfaction (CSAT), Net Promoter Score (NPS), Customer Retention Rate, Churn Rate.
+        """)
+
+    with st.expander("2.3 The Marketing Analytics Process", expanded=True):
+        st.subheader("2.3 The Marketing Analytics Process")
+        st.markdown("""
+            A structured process is key to effective marketing analytics:
+
+            1.  **Define Objectives and KPIs:** Clearly define marketing goals and metrics for success.
+            2.  **Data Collection and Integration:** Gather data from various sources and unify it.
+            3.  **Data Cleaning and Preparation:** Ensure data accuracy and consistency.
+            4.  **Data Analysis and Exploration:** Apply techniques to find patterns and trends.
+            5.  **Insight Generation and Interpretation:** Translate analysis into actionable insights.
+            6.  **Reporting and Visualization:** Create dashboards and reports to communicate findings.
+            7.  **Action and Implementation:** Apply insights to optimize marketing activities.
+            8.  **Measurement and Iteration:** Monitor results and refine strategies continuously.
+
+            This is a continuous cycle of improvement.
+        """)
+
+    st.header("3. Types of Marketing Analytics")
+    with st.expander("3.1 By Analytical Approach", expanded=True):
+        st.subheader("3.1 By Analytical Approach")
+        st.markdown("""
+            Marketing analytics can be categorized by the type of questions they answer:
+
+            *   **Descriptive Analytics (What happened?):** Summarizes past performance. Examples: traffic reports, engagement summaries, sales dashboards.
+            *   **Diagnostic Analytics (Why did it happen?):** Investigates reasons behind outcomes. Examples: analyzing traffic drops, poor campaign performance.
+            *   **Predictive Analytics (What will happen?):** Forecasts future trends. Examples: predicting churn, sales forecasts, campaign conversion predictions.
+            *   **Prescriptive Analytics (What should we do?):** Recommends optimal actions. Examples: personalized offers, ad spend optimization, content strategies.
+        """)
+
+    with st.expander("3.2 By Marketing Domain", expanded=True):
+        st.subheader("3.2 By Marketing Domain")
+        st.markdown("""
+            Marketing analytics is also categorized by specific marketing areas:
+
+            *   **Web Analytics:** Website user behavior and performance. Tools: Google Analytics, Adobe Analytics.
+            *   **Social Media Analytics:** Social performance, engagement, sentiment. Tools: Sprout Social, Hootsuite, Brandwatch.
+            *   **SEO Analytics:** Search rankings, organic traffic, keyword performance. Tools: SEMrush, Ahrefs, Google Search Console.
+            *   **Content Analytics:** Content performance, engagement. Metrics: page views, time on page, shares.
+            *   **Email Marketing Analytics:** Email campaign performance. Tools: Mailchimp, Marketo analytics.
+            *   **CRM Analytics:** Customer behavior, segmentation. Tools: CRM platform analytics.
+            *   **Customer Analytics:** Customer lifecycle, value, journey. Techniques: segmentation, cohort analysis, CLTV.
+            *   **Mobile Analytics:** Mobile app usage and marketing performance. Tools: Firebase Analytics, Mixpanel.
+            *   **Advertising Analytics:** Ad campaign performance. Tools: Ad platform dashboards.
+        """)
+
+    with st.expander("4. Business Use Cases of Marketing Analytics", expanded=False):
+        st.header("4. Business Use Cases of Marketing Analytics")
+
+        st.markdown("""
+            Marketing analytics is applied across numerous business functions:
+
+            *   **Campaign Optimization:** A/B testing, real-time adjustments, budget allocation.
+            *   **Customer Segmentation and Targeting:** Identifying segments, targeted campaigns, personalized journeys.
+            *   **Personalization:** Website, email, and dynamic content personalization.
+            *   **Lead Scoring and Conversion Optimization:** Lead scoring models, funnel optimization.
+            *   **Customer Lifetime Value (CLTV) Analysis:** Predicting CLTV, retention strategies.
+            *   **Attribution Modeling:** Channel effectiveness, multi-touch attribution, channel mix optimization.
+            *   **Market Basket Analysis:** Product associations, cross-selling, up-selling.
+            *   **Sentiment Analysis:** Brand sentiment monitoring, issue detection.
+            *   **Churn Prediction:** Identifying at-risk customers, proactive retention.
+        """)
+
+    with st.expander("5. Tools and Technologies for Marketing Analytics", expanded=False):
+        st.header("5. Tools and Technologies for Marketing Analytics")
+        st.markdown("""
+            The marketing analytics tech stack includes various tools:
+
+            *   **Analytics Platforms:** Google Analytics, Adobe Analytics, Matomo.
+            *   **Data Visualization & Dashboarding:** Tableau, Power BI, Qlik Sense, Google Data Studio.
+            *   **CRM Systems:** Salesforce, HubSpot CRM, Zoho CRM.
+            *   **Marketing Automation Platforms:** Marketo, Pardot, HubSpot Marketing Hub.
+            *   **Social Media Analytics Tools:** Sprout Social, Hootsuite, Brandwatch.
+            *   **SEO Tools:** SEMrush, Ahrefs, Google Search Console, Moz Pro.
+            *   **Programming & Statistical Software:** Python (Pandas, Scikit-learn), R, SPSS, SAS.
+            *   **Databases & Data Warehouses:** SQL Databases, NoSQL Databases, Cloud Data Warehouses (Redshift, BigQuery, Snowflake).
+        """)
+
+    st.header("6. Challenges and Best Practices in Marketing Analytics")
+    with st.expander("6.1 Challenges", expanded=True):
+        st.subheader("6.1 Challenges")
+        st.markdown("""
+            Implementing marketing analytics effectively faces hurdles:
+
+            *   **Data Quality Issues:** Inaccurate, incomplete, or inconsistent data.
+            *   **Data Silos:** Disconnected data sources hindering a holistic view.
+            *   **Lack of Data Literacy and Skills Gap:** Shortage of skilled analysts.
+            *   **Privacy Concerns and Data Regulations (GDPR, CCPA):** Compliance and ethical data use.
+            *   **Attribution Complexity:** Accurately crediting marketing efforts in complex journeys.
+            *   **Actionable Insights vs. Data Overload:** Extracting meaningful insights from massive data.
+            *   **Measuring ROI and Proving Marketing Value:** Demonstrating tangible marketing impact.
+            *   **Keeping Up with Technology and Trends:** Rapidly evolving analytics landscape.
+        """)
+
+    with st.expander("6.2 Best Practices", expanded=True):
+        st.subheader("6.2 Best Practices")
+        st.markdown("""
+            Overcome challenges by following best practices:
+
+            *   **Establish Clear Objectives and KPIs (SMART):** Define specific, measurable goals.
+            *   **Prioritize Data Quality and Governance:** Implement data management processes.
+            *   **Integrate Data Sources:** Unify data from different channels.
+            *   **Invest in Data Analytics Skills and Training:** Develop in-house capabilities.
+            *   **Focus on Actionable Insights:** Go beyond reporting to strategic guidance.
+            *   **Visualize Data Effectively:** Use dashboards for clear communication.
+            *   **Embrace Experimentation and A/B Testing:** Foster a culture of continuous improvement.
+            *   **Adopt a Customer-Centric Approach:** Focus on understanding customer needs.
+            *   **Measure and Demonstrate Marketing ROI:** Track performance and communicate value.
+            *   **Stay Updated on Industry Trends and Technologies:** Continuous learning.
+        """)
+
+    with st.expander("7. Future Trends in Marketing Analytics", expanded=False):
+        st.header("7. Future Trends in Marketing Analytics")
+        st.markdown("""
+            Marketing analytics is constantly evolving, with key future trends:
+
+            *   **AI and Machine Learning Integration:** Enhanced predictive analytics, personalization, and automation.
+            *   **Predictive Customer Journeys:** AI-driven prediction and shaping of individual journeys in real-time.
+            *   **Hyper-Personalization at Scale:** Highly tailored experiences across all touchpoints via advanced analytics and AI.
+            *   **Voice and Conversational Analytics:** Analyzing voice data from assistants and chatbots.
+            *   **Privacy-Focused Analytics:** Techniques for privacy-preserving insights.
+            *   **Real-Time Analytics and Decision-Making:** Immediate data processing for instant adjustments.
+            *   **Marketing Mix Modeling Evolution:** More sophisticated models incorporating granular data and AI.
+            *   **Augmented Analytics:** AI-powered tools for automated insights and recommendations.
+        """)
+
+    with st.expander("📚 Further Reading and Resources", expanded=False):
+        st.header("📚 Further Reading and Resources")
+        st.markdown("""
+            To deepen your knowledge, explore these resources:
+
+            **Books:**
+            *   "Marketing Analytics: Data-Driven Techniques with Microsoft Excel" by Wayne L. Winston
+            *   "Marketing Metrics: The Definitive Guide to Measuring Marketing Performance" by Farris, Bendle, Pfeifer, and Reibstein
+            *   "Data-Driven Marketing: The 15 Metrics Everyone in Marketing Should Know" by Mark Jeffery
+            *   "Digital Marketing Analytics: Making Sense of Consumer Data in a Digital World" by Hemann and Burbary
+
+            **Online Courses and Platforms:**
+            *   Coursera, edX, Udacity (search for "Marketing Analytics", "Digital Marketing", "Data Science")
+            *   Google Analytics Academy (Free courses on Google Analytics)
+            *   LinkedIn Learning (Courses on Marketing Analytics, Data Visualization)
+
+            **Industry Blogs and Publications:**
+            *   MarketingProfs, Marketing Land, HubSpot Marketing Blog, Neil Patel Blog
+            *   Harvard Business Review, Journal of Marketing Analytics
+
+            **Industry Associations and Communities:**
+            *   Digital Analytics Association (DAA), Marketing Analytics Summit
+            *   Online Marketing Communities and Forums
+        """)
+
+    st.header("🕹️ Interactive Marketing Analytics Explorations")
+
+    with st.expander("📊 Website Traffic Dashboard (Descriptive Analytics)", expanded=True):
+        st.subheader("Interactive Website Traffic Dashboard")
+        st.write("Explore website performance across different dimensions and metrics. Use the filters below to investigate trends and patterns.")
+
+        website_df = generate_website_dashboard_data()
+
+        # Filters
+        col1, col2 = st.columns(2)
+        selected_channel_dashboard = col1.multiselect("Filter by Channel:", website_df['Channel'].unique(), default=website_df['Channel'].unique())
+        selected_device_dashboard = col2.multiselect("Filter by Device:", website_df['Device'].unique(), default=website_df['Device'].unique())
+
+        filtered_website_df = website_df[website_df['Channel'].isin(selected_channel_dashboard) & website_df['Device'].isin(selected_device_dashboard)]
+
+        # Metrics Selection
+        metric_options_dashboard = ['Users', 'Sessions', 'Page Views', 'Bounce Rate', 'Session Duration (Seconds)', 'Conversions']
+        selected_metric_dashboard = st.selectbox("Choose Metric to Visualize:", metric_options_dashboard, index=0)
+
+        # Time Aggregation
+        time_aggregation_dashboard = st.selectbox("Time Aggregation:", ['Daily', 'Weekly', 'Monthly'], index=1)
+        if time_aggregation_dashboard == 'Weekly':
+            filtered_website_df['Date'] = filtered_website_df['Date'].dt.to_period('W').dt.to_timestamp()
+        elif time_aggregation_dashboard == 'Monthly':
+            filtered_website_df['Date'] = filtered_website_df['Date'].dt.to_period('M').dt.to_timestamp()
+
+        aggregated_df_dashboard = filtered_website_df.groupby('Date')[selected_metric_dashboard].sum().reset_index() if selected_metric_dashboard not in ['Bounce Rate', 'Session Duration (Seconds)'] else filtered_website_df.groupby('Date')[selected_metric_dashboard].mean().reset_index() #Mean for rate/duration
+
+        fig_website_dashboard = px.line(aggregated_df_dashboard, x='Date', y=selected_metric_dashboard, title=f'Website {selected_metric_dashboard} Trends ({time_aggregation_dashboard} Aggregation)')
+        st.plotly_chart(fig_website_dashboard, use_container_width=True)
+
+        st.markdown("**Exploration Questions:**")
+        st.markdown("* What are the overall trends for **Users, Sessions, and Conversions** over time? Are they increasing, decreasing, or stable?")
+        st.markdown("* How does the **Bounce Rate** fluctuate? Are there any spikes or dips that might correlate with specific dates or events?")
+        st.markdown("* Investigate **Channel** performance: Filter by individual channels (e.g., 'Organic', 'Paid Ads') to compare their contribution to traffic and conversions.")
+        st.markdown("* Compare **Device** performance: How does website behavior differ between 'Desktop' and 'Mobile' users in terms of session duration or bounce rate?")
+        st.markdown("* Try changing the **Time Aggregation** to 'Weekly' or 'Monthly' to smooth out daily fluctuations and see longer-term trends more clearly.")
 
 
-    # --- Main Content ---
-    if analysis_type == "Campaign Performance":
-        st.header("Campaign Performance Analysis")
-        data_source = st.sidebar.radio("Data Source:", ["Generate Synthetic Data", "Upload CSV"]) #Moved to sidebar
+    with st.expander("💰 Multi-Channel Ad Campaign Analyzer (Performance & Diagnostic)", expanded=True):
+        st.subheader("Multi-Channel Advertising Campaign Performance Analyzer")
+        st.write("Analyze and compare the performance of different ad campaigns across multiple channels. Sort and filter to identify top and bottom performers.")
 
-        if data_source == "Generate Synthetic Data":
-            n_customers = st.sidebar.number_input("Number of Customers:", min_value=100, max_value=10000, value=1000, step=100)
-            conversion_rate = st.sidebar.slider("Conversion Rate (%):", min_value=0.01, max_value=0.2, value=0.05, step=0.01)
-            avg_order_value = st.sidebar.number_input("Average Order Value:", min_value=10, max_value=500, value=50, step=10)
-            cost_per_click = st.sidebar.number_input("Cost per Click:", min_value=0.1, max_value=10.0, value=1.0, step=0.1)
-            df_campaign = generate_campaign_data(n_customers, conversion_rate, avg_order_value, cost_per_click)
-            st.write("Generated Campaign Data:")
-            st.dataframe(df_campaign)
+        ads_df = generate_multi_channel_ads_data()
+
+        # Channel Filter
+        selected_channels_ads = st.multiselect("Filter by Channel:", ads_df['Channel'].unique(), default=ads_df['Channel'].unique())
+        filtered_ads_df = ads_df[ads_df['Channel'].isin(selected_channels_ads)]
+
+        # Metric Selection & Sorting
+        col_sort_metric, col_sort_order = st.columns(2)
+        sort_metric_ads = col_sort_metric.selectbox("Sort Campaigns By:", ['Impressions', 'Clicks', 'Spend', 'Conversions', 'Revenue', 'ROAS', 'CTR', 'CPC', 'CPA'], index=5) #Default ROAS
+        sort_ascending_ads = col_sort_order.selectbox("Sort Order:", [False, True], format_func=lambda x: "Descending" if not x else "Ascending") # Descending as default
+
+        sorted_ads_df = filtered_ads_df.sort_values(by=sort_metric_ads, ascending=sort_ascending_ads)
+
+        st.dataframe(sorted_ads_df, use_container_width=True)
+
+        # Channel Performance Bar Chart
+        channel_performance_ads = filtered_ads_df.groupby('Channel')[['Spend', 'Revenue', 'Conversions']].sum().reset_index()
+        performance_metric_chart_ads = st.selectbox("Visualize Channel Performance By:", ['Spend', 'Revenue', 'Conversions', 'ROAS'], index=1) # Default Revenue
+
+        if performance_metric_chart_ads == 'ROAS':
+            channel_performance_ads['ROAS'] = channel_performance_ads.apply(lambda row: row['Revenue'] / row['Spend'] if row['Spend'] > 0 else 0, axis=1)
+            fig_channel_ads = px.bar(channel_performance_ads, x='Channel', y='ROAS', title='Channel ROAS Comparison', labels={'ROAS': 'Return on Ad Spend'})
         else:
-            uploaded_file = st.sidebar.file_uploader("Upload CSV for Campaign Data", type=["csv"])
-            if uploaded_file is not None:
-                try:
-                    df_campaign = pd.read_csv(uploaded_file)
-                    st.write("Uploaded Campaign Data:")
-                    st.dataframe(df_campaign)
-                except Exception as e:
-                    st.error(f"Error reading CSV: {e}")
-                    df_campaign = None # Ensure df isn't used
-            else:
-                df_campaign = None
+            fig_channel_ads = px.bar(channel_performance_ads, x='Channel', y=performance_metric_chart_ads, title=f'Channel {performance_metric_chart_ads} Comparison', labels={performance_metric_chart_ads: performance_metric_chart_ads})
+
+        st.plotly_chart(fig_channel_ads, use_container_width=True)
+
+        st.markdown("**Exploration Questions:**")
+        st.markdown("* **Identify top-performing campaigns:** Sort by 'Revenue' or 'ROAS' in descending order. Which campaigns are generating the most revenue and return?")
+        st.markdown("* **Find underperforming campaigns:** Sort by 'ROAS' in ascending order. Are there campaigns with low or even negative ROAS that need attention?")
+        st.markdown("* **Compare channel efficiency:** Look at the 'Channel Performance' bar chart, visualizing 'ROAS' or 'CPA'. Which channels are most cost-effective in driving conversions and revenue?")
+        st.markdown("* **Investigate high-spend vs. high-return:** Is there a correlation between 'Spend' and 'Revenue'? Are campaigns with higher spend always delivering proportionally higher returns? Sort by 'Spend' and then examine 'ROAS'.")
+        st.markdown("* **Examine CTR and CPC:** Sort by 'CTR' and 'CPC'. Are there channels or campaigns with unusually high or low click-through rates or cost per click? What might explain these differences?")
 
 
-        if df_campaign is not None: # Only proceed if df is valid
-            metrics = calculate_metrics(df_campaign)
-            st.subheader("Key Marketing Metrics")
-            col1, col2, col3, col4, col5 = st.columns(5)  # Create columns for layout
-            with col1:
-                st.metric("Total Impressions", f"{metrics['Total Impressions']:,}")
-                st.metric("CTR (%)", f"{metrics['Click-Through Rate (CTR) (%)']:.2f}")
-            with col2:
-                st.metric("Total Clicks", f"{metrics['Total Clicks']:,}")
-                st.metric("Conversion Rate (%)", f"{metrics['Conversion Rate (%)']:.2f}")
-            with col3:
-                st.metric("Total Conversions", f"{metrics['Total Conversions']:,}")
-                st.metric("CPA", f"${metrics['Cost per Acquisition (CPA)']:.2f}")
-            with col4:
-                st.metric("Total Revenue", f"${metrics['Total Revenue']:.2f}")
-                st.metric("ROAS", f"{metrics['Return on Ad Spend (ROAS)']:.2f}")
-            with col5:
-                st.metric("Total Cost", f"${metrics['Total Cost']:.2f}")
-                st.metric("AOV", f"${metrics['Average Order Value (AOV)']:.2f}")
+    with st.expander("👤 Customer Segmentation Explorer (Customer Analytics)", expanded=True):
+        st.subheader("Customer Segmentation Explorer")
+        st.write("Explore customer data to identify segments based on demographics, behavior, and engagement. Visualize segments and understand their characteristics.")
 
-            # Visualizations
-            st.subheader("Campaign Performance Visualizations")
+        customer_df = generate_customer_segmentation_data()
 
-            # Impressions, Clicks, Conversions over Time (Simulated)
-            df_time = df_campaign.copy()
-            df_time['Date'] = pd.to_datetime('2024-01-01') + pd.to_timedelta(np.random.randint(0, 30, len(df_time)), unit='D')  # Simulate daily data
-            df_time = df_time.groupby('Date').agg({'Impressions': 'sum', 'Clicks': 'sum', 'Converted': 'sum'}).reset_index()
-            fig_time = px.line(df_time, x='Date', y=['Impressions', 'Clicks', 'Converted'], title='Impressions, Clicks, and Conversions Over Time')
-            st.plotly_chart(fig_time)
+        segment_by_options = ['Gender', 'Location', 'Purchase Frequency', 'Social Media Engagement']
+        segment_by = st.selectbox("Segment Customers By:", segment_by_options, index=0)
 
-            # Revenue Distribution
-            fig_revenue = px.histogram(df_campaign, x='Revenue', nbins=20, title='Revenue Distribution')
-            st.plotly_chart(fig_revenue)
+        col_scatter_x, col_scatter_y = st.columns(2)
+        scatter_x_metric = col_scatter_x.selectbox("Scatter Plot - X-axis:", ['Age', 'Website Visits Last Month', 'Time on Site (Minutes)', 'Pages Visited', 'Average Order Value', 'Email Engagement Score'], index=0)
+        scatter_y_metric = col_scatter_y.selectbox("Scatter Plot - Y-axis:", ['Age', 'Website Visits Last Month', 'Time on Site (Minutes)', 'Pages Visited', 'Average Order Value', 'Email Engagement Score'], index=4) # Default AOV
 
-            # Cost vs. Revenue
-            fig_cost_revenue = px.scatter(df_campaign, x='Cost', y='Revenue', color='Converted', title='Cost vs. Revenue')
-            st.plotly_chart(fig_cost_revenue)
+        fig_segmentation = px.scatter(customer_df, x=scatter_x_metric, y=scatter_y_metric, color=segment_by,
+                                    title=f'Customer Segmentation by {segment_by}', labels={scatter_x_metric: scatter_x_metric, scatter_y_metric: scatter_y_metric, 'color': segment_by})
+        st.plotly_chart(fig_segmentation, use_container_width=True)
+
+        segment_summary = customer_df.groupby(segment_by)[['Age', 'Website Visits Last Month', 'Time on Site (Minutes)', 'Pages Visited', 'Average Order Value', 'Email Engagement Score']].mean().reset_index()
+        st.dataframe(segment_summary, use_container_width=True)
+
+        st.markdown("**Exploration Questions:**")
+        st.markdown("* **Identify segments with high Average Order Value:** Segment by 'Purchase Frequency' or 'Social Media Engagement' and examine the 'Average Order Value' in the summary table. Which segments have the highest AOV?")
+        st.markdown("* **Explore engagement differences:** Segment by 'Gender' or 'Location' and compare the 'Website Visits Last Month' or 'Email Engagement Score'. Are there noticeable differences in engagement levels across segments?")
+        st.markdown("* **Visualize segment clusters:** Use the scatter plot, plotting 'Average Order Value' vs. 'Website Visits Last Month' and color by different segmentation variables (e.g., 'Purchase Frequency', 'Gender'). Do you see distinct clusters forming for different segments?")
+        st.markdown("* **Analyze segment profiles:** For each segment (e.g., 'High' Purchase Frequency customers), look at the average values in the summary table for 'Age', 'Time on Site', 'Email Engagement Score'. Can you describe the typical profile of customers within each segment?")
+        st.markdown("* **Consider actionable segments:** Based on your exploration, which segments might be most valuable to target with personalized marketing campaigns? Why?")
 
 
-    elif analysis_type == "Customer Segmentation":
-        st.header("Customer Segmentation Analysis")
+    with st.expander("🔬 A/B Test Deep Dive Analyzer (Diagnostic & Statistical)", expanded=True):
+        st.subheader("Detailed A/B Test Result Analyzer")
+        st.write("Analyze A/B test results across multiple metrics to determine the winning variant and understand the impact beyond just conversion rates.")
 
-        data_source = st.sidebar.radio("Data Source:", ["Generate Synthetic Data", "Upload CSV"]) #moved to sidebar
+        ab_detailed_df = generate_ab_test_detailed_data()
 
-        if data_source == "Generate Synthetic Data":
-            n_customers = st.sidebar.number_input("Number of Customers:", min_value=100, max_value=10000, value=1000, step=100)
-            df_segmentation = generate_segmentation_data(n_customers)
-            st.write("Generated Segmentation Data:")
-            st.dataframe(df_segmentation)
+        st.dataframe(ab_detailed_df.describe().T, use_container_width=True) # Summary statistics
 
+        metric_options_ab_detailed = ['Converted', 'Average Order Value', 'Bounce Rate', 'Time on Page (Seconds)']
+        for metric in metric_options_ab_detailed:
+            fig_box = px.box(ab_detailed_df, x='Group', y=metric, color='Group', title=f'Distribution of {metric} by Group', labels={metric: metric})
+            st.plotly_chart(fig_box, use_container_width=True)
+
+        st.markdown("**Analysis & Exploration Questions:**")
+        st.markdown("* **Compare Conversion Rates:** Examine the 'Converted' box plot and the summary statistics. Is there a noticeable and practically significant difference in conversion rates between Group A and Group B?")
+        st.markdown("* **Analyze Average Order Value (AOV):** Look at the 'Average Order Value' box plot. Does one group have a significantly higher AOV? If so, this could contribute to overall revenue increase even if conversion rate difference is small.")
+        st.markdown("* **Investigate Bounce Rate:** Compare 'Bounce Rate' distributions. A lower bounce rate in one group (like Group B potentially) suggests a better user experience on that variant.")
+        st.markdown("* **Examine Time on Page:** Analyze 'Time on Page' distributions. Higher time on page for a variant could indicate more engaging content, even if it doesn't directly translate to much higher conversions immediately.")
+        st.markdown("* **Overall Winner?**: Considering all metrics (Conversion Rate, AOV, Bounce Rate, Time on Page), which group (A or B) appears to be the more successful variant overall? Is the 'winner' clear-cut, or are there trade-offs?")
+        st.markdown("* **Statistical Significance (Conceptual):** While this demo doesn't perform formal statistical tests, visually inspect the box plots. Are the medians and distributions clearly separated, suggesting a potentially meaningful difference? For a real A/B test, you would perform statistical significance tests to confirm if the observed differences are not just due to random chance.")
+
+
+    with st.expander("🔄 Customer Journey Attribution Modeler (Attribution Modeling)", expanded=True):
+        st.subheader("Customer Journey Attribution Modeling")
+        st.write("Explore how different attribution models can change the perceived value of marketing channels. Select an attribution model and compare channel performance.")
+
+        attribution_df = generate_customer_journey_attribution_data(num_journeys=500)
+
+        attribution_model_options = ['Last Click', 'First Click', 'Linear']
+        selected_attribution_model = st.selectbox("Choose Attribution Model:", attribution_model_options, index=0)
+
+        if selected_attribution_model == 'Last Click':
+            attributed_conversions_data = last_click_attribution(attribution_df)
+        elif selected_attribution_model == 'First Click':
+            attributed_conversions_data = first_click_attribution(attribution_df)
+        elif selected_attribution_model == 'Linear':
+            attributed_conversions_data = linear_attribution(attribution_df)
         else:
-            uploaded_file = st.sidebar.file_uploader("Upload CSV for Segmentation Data", type=["csv"])
-            if uploaded_file is not None:
-                try:
-                    df_segmentation = pd.read_csv(uploaded_file)
-                    st.write("Uploaded Segmentation Data")
-                    st.dataframe(df_segmentation)
-                except Exception as e:
-                    st.error(f"Error reading CSV: {e}")
-                    df_segmentation = None
-            else:
-                df_segmentation = None
+            attributed_conversions_data = {}
 
-        if df_segmentation is not None: # Proceed only if df is valid
-            st.subheader("Customer Segmentation Visualizations")
+        attributed_channels = list(attributed_conversions_data.keys())
+        attributed_values = list(attributed_conversions_data.values())
+        attribution_results_df = pd.DataFrame({'Channel': attributed_channels, 'Attributed Value': attributed_values})
 
-            # Age Distribution
-            fig_age = px.histogram(df_segmentation, x='Age', nbins=20, title='Age Distribution')
-            st.plotly_chart(fig_age)
+        fig_attribution = px.bar(attribution_results_df, x='Channel', y='Attributed Value',
+                                 title=f'{selected_attribution_model} Attribution Model - Channel Performance', labels={'Attributed Value': 'Attributed Conversion Value'})
+        st.plotly_chart(fig_attribution, use_container_width=True)
+        st.dataframe(attribution_results_df, use_container_width=True)
 
-            # Income Distribution
-            fig_income = px.histogram(df_segmentation, x='Income', nbins=20, title='Income Distribution')
-            st.plotly_chart(fig_income)
-
-            # Location Breakdown
-            fig_location = px.pie(df_segmentation, names='Location', title='Customer Location Breakdown')
-            st.plotly_chart(fig_location)
-
-            # Scatter Plot: Income vs. Past Purchases
-            fig_scatter = px.scatter(df_segmentation, x='Income', y='PastPurchases', color='Location', title='Income vs. Past Purchases')
-            st.plotly_chart(fig_scatter)
-
-            # Correlation Heatmap
-            st.subheader("Correlation Heatmap")
-            corr_matrix = df_segmentation[['Age', 'Income', 'PastPurchases']].corr()
-            fig_heatmap = px.imshow(corr_matrix, text_auto=True, aspect="auto", color_continuous_scale='RdBu', title='Correlation Heatmap')
-            st.plotly_chart(fig_heatmap)
-
-    elif analysis_type == "A/B Testing":
-        st.header("A/B Testing Analysis")
-
-        data_source = st.sidebar.radio("Data Source:", ["Generate Synthetic Data", "Upload CSV"])
-
-        if data_source == "Generate Synthetic Data":
-           n_variants = st.sidebar.number_input("Number of Variants:", min_value=2, max_value=5, value=2, step=1)
-           n_users_per_variant = st.sidebar.number_input("Users per Variant:", min_value=100, max_value=5000, value=500, step=100)
-           conversion_rates = [st.sidebar.slider(f"Conversion Rate for Variant {chr(65 + i)} (%):", min_value=0.01, max_value=0.30, value=0.10 + i*0.02, step=0.01) for i in range(n_variants)]
-           df_ab_test = generate_ab_test_data(n_variants, n_users_per_variant, conversion_rates)
-           st.write("Generated AB Test Data:")
-           st.dataframe(df_ab_test)
-
-        else:
-            uploaded_file = st.sidebar.file_uploader("Upload CSV for A/B Test Data", type=["csv"])
-            if uploaded_file is not None:
-                try:
-                    df_ab_test = pd.read_csv(uploaded_file)
-                    st.write("Uploaded AB Test Data")
-                    st.dataframe(df_ab_test)
-                except Exception as e:
-                    st.error(f"Error reading CSV file: {e}")
-                    df_ab_test = None
-            else:
-                df_ab_test = None
-
-        if df_ab_test is not None: #Proceed only with valid dataframe
-            st.subheader("A/B Test Results")
-
-            # Summary Table
-            summary_table = df_ab_test.groupby('Variant')['Converted'].agg(['count', 'sum', 'mean']).reset_index()
-            summary_table.columns = ['Variant', 'Users', 'Conversions', 'Conversion Rate']
-            summary_table['Conversion Rate'] = summary_table['Conversion Rate'] * 100
-            st.dataframe(summary_table)
-
-            # Visualization
-            fig_conversion = px.bar(summary_table, x='Variant', y='Conversion Rate', title='Conversion Rate by Variant', text_auto='.2f')
-            st.plotly_chart(fig_conversion)
-
-            # Statistical Significance (Chi-Square Test)
-            st.subheader("Statistical Significance (Chi-Square Test)")
-            chi2_results = perform_chi2_test(df_ab_test, 'Variant', 'Converted')
-            st.write(f"Chi-Square Statistic: {chi2_results['Chi-Square Statistic']:.2f}")
-            st.write(f"P-value: {chi2_results['P-value']:.4f}")
-            st.write(f"Degrees of Freedom: {chi2_results['Degrees of Freedom']}")
-
-            if chi2_results['P-value'] < 0.05:
-                st.success("The difference in conversion rates is statistically significant.")
-            else:
-                st.warning("The difference in conversion rates is not statistically significant.")
-
-            with st.expander("Show Contingency Table and Expected Frequencies"):
-                st.write("Contingency Table:")
-                st.dataframe(chi2_results['Contingency Table'])
-                st.write("Expected Frequencies:")
-                st.dataframe(pd.DataFrame(chi2_results['Expected Frequencies'], index=chi2_results['Contingency Table'].index, columns=chi2_results['Contingency Table'].columns))
-
-    elif analysis_type == "Customer Lifetime Value (CLV)":
-        st.header("Customer Lifetime Value (CLV) Analysis")
-        data_source = st.sidebar.radio("Data Source:", ["Generate Synthetic Data", "Upload CSV"])
-
-        if data_source == "Generate Synthetic Data":
-            n_customers = st.sidebar.number_input("Number of Customers:", min_value=100, max_value=5000, value=1000, step=100, key="clv_n_cust") #key added
-            avg_revenue = st.sidebar.number_input("Average Initial Revenue:", min_value=20, max_value=500, value=100, step=10, key='clv_rev')
-            retention_rate = st.sidebar.slider("Retention Rate (%):", min_value=0.1, max_value=0.99, value=0.7, step=0.01, key='clv_retention')
-            discount_rate = st.sidebar.slider("Discount Rate (%):", min_value=0.01, max_value=0.2, value=0.1, step=0.01, key='clv_discount')
-            periods = st.sidebar.number_input("Number of Periods (Years):", min_value=1, max_value=10, value=5, step=1, key='clv_periods')
-            df_clv = generate_clv_data(n_customers, avg_revenue, retention_rate, discount_rate, periods)
-            st.write("Generated CLV Data:")
-            st.dataframe(df_clv)
-        else:
-            uploaded_file = st.sidebar.file_uploader("Upload CSV for CLV Data", type=["csv"])
-            if uploaded_file is not None:
-                try:
-                    df_clv = pd.read_csv(uploaded_file)
-                    st.write("Uploaded CLV data")
-                    st.dataframe(df_clv)
-                except Exception as e:
-                    st.error(f"Error reading CSV: {e}")
-                    df_clv = None
-            else:
-                df_clv = None
-
-        if df_clv is not None: # Proceed if valid
-            st.subheader("CLV Analysis Results")
-
-            # Summary Statistics
-            st.write(f"Average CLV: ${df_clv['CLV'].mean():.2f}")
-            st.write(f"Median CLV: ${df_clv['CLV'].median():.2f}")
-            st.write(f"Total CLV: ${df_clv['CLV'].sum():.2f}")
-
-            # CLV Distribution
-            fig_clv_hist = px.histogram(df_clv, x='CLV', nbins=30, title='Customer Lifetime Value (CLV) Distribution')
-            st.plotly_chart(fig_clv_hist)
-
-            # Top Customers by CLV
-            st.subheader("Top 10 Customers by CLV")
-            top_customers = df_clv.sort_values('CLV', ascending=False).head(10)
-            st.dataframe(top_customers[['CustomerID', 'CLV']])
+        st.markdown("**Exploration Questions:**")
+        st.markdown("* **Compare Channel Rankings:** Switch between 'Last Click', 'First Click', and 'Linear' attribution models. How does the ranking of channels by 'Attributed Value' change across models? Which channels gain or lose value depending on the model?")
+        st.markdown("* **Last-Click Bias:** Observe the results under 'Last Click' attribution. Is 'Direct' traffic always the top channel? Why might last-click attribution overemphasize 'Direct' and under value earlier touchpoints?")
+        st.markdown("* **First-Click Emphasis:** Examine 'First Click' attribution. Which channels are now valued more highly? How does first-click attribution shift the focus to top-of-funnel channels that initiate customer journeys?")
+        st.markdown("* **Linear Distribution:** Analyze 'Linear' attribution. How does it distribute value across all touchpoints in the journey? Is the channel value distribution more even compared to last-click or first-click?")
+        st.markdown("* **Strategic Implications:** If you were making budget allocation decisions based on these attribution models, how might your channel investment strategy differ depending on whether you used last-click, first-click, or linear attribution?")
+        st.markdown("* **Model Choice Considerations:**  Which attribution model do you think might be most appropriate for different marketing objectives (e.g., brand awareness vs. direct response)? What are the limitations of each model?")
 
 
-    st.header("💪 Practice Exercises")
-    st.markdown("""
-        1. **Analyze a real-world marketing campaign dataset.** Calculate key metrics (CTR, conversion rate, CPA, ROAS) and interpret the results.
-        2. **Perform customer segmentation on a dataset.** Use different criteria (demographics, behavior) to group customers and identify valuable segments.
-        3.  **Design and analyze an A/B test.** Compare two versions of an ad or landing page and determine if there's a statistically significant difference in performance.
-        4.  **Calculate CLV for a customer cohort.** Use historical data or make assumptions about future revenue and retention to estimate CLV.
-        5.  **Explore different visualization techniques.**  Create charts and graphs to effectively communicate marketing insights.
-    """)
-
-    st.header("🌍 Real-world Applications")
-    st.markdown("""
-    Marketing analytics is used across various industries and functions:
-
-    *   **Digital Marketing:** Optimizing online advertising campaigns, improving website performance, and measuring social media engagement.
-    *   **E-commerce:** Understanding customer behavior, personalizing recommendations, and improving conversion rates.
-    *   **Retail:** Analyzing sales data, optimizing pricing and promotions, and managing inventory.
-    *   **Customer Relationship Management (CRM):** Identifying high-value customers, predicting churn, and improving customer retention.
-    *   **Market Research:** Understanding consumer preferences, identifying market trends, and assessing the effectiveness of marketing strategies.
-    """)
-    st.header("✅ Knowledge Check")
+    st.header("✅ Knowledge Check Quiz: Test Your Understanding of Marketing Analytics")
     quiz_questions = [
-    {
-        "question": "What does CTR stand for in marketing?",
-        "options": ["Click-Total Ratio", "Click-Through Rate", "Conversion-Total Ratio", "Cost-Through Rate"],
-        "answer": "Click-Through Rate",
-        "solution": "CTR measures the percentage of people who click on an ad after seeing it."
-    },
-    {
-        "question": "What is the formula for calculating Return on Ad Spend (ROAS)?",
-        "options": ["Revenue / Cost", "Cost / Revenue", "(Revenue - Cost) / Cost", "Clicks / Impressions"],
-        "answer": "Revenue / Cost",
-        "solution": "ROAS indicates how much revenue is generated for every dollar spent on advertising."
-    },
-    {
-        "question": "What is the purpose of customer segmentation?",
-        "options": ["To increase advertising costs", "To divide customers into groups based on shared characteristics", "To reduce the number of marketing channels", "To make all marketing messages the same for everyone"],
-        "answer": "To divide customers into groups based on shared characteristics",
-        "solution": "Segmentation allows for more targeted and personalized marketing efforts."
-    },
-    {
-        "question": "In A/B testing, what does a statistically significant result (e.g., p-value < 0.05) indicate?",
-        "options": ["The observed difference between variants is likely due to random chance.",
-                    "The observed difference is likely due to the changes made between variants.",
-                    "The experiment was poorly designed.",
-                    "The sample size was too small."],
-        "answer": "The observed difference is likely due to the changes made between variants.",
-        "solution": "Statistical significance suggests that the results are not just due to random variation."
-    },
-    {
-        "question": "What is Customer Lifetime Value (CLV)?",
-        "options": ["The total revenue a customer has generated to date",
-                    "A prediction of the net profit attributed to the entire future relationship with a customer",
-                    "The cost of acquiring a new customer",
-                    "The average order value of a customer"],
-        "answer": "A prediction of the net profit attributed to the entire future relationship with a customer",
-        "solution": "CLV is a forward-looking metric that helps businesses understand the long-term value of their customers."
-    },
-    {
-        "question": "Which of the following is NOT a typical input for calculating CLV?",
-        "options": ["Average revenue per customer", "Customer retention rate", "Discount rate", "Number of marketing emails sent"],
-        "answer": "Number of marketing emails sent",
-        "solution": "While marketing emails might influence retention, the number sent is not a direct input for calculating CLV. The other options are common inputs."
-    },
-    {
-        "question": "What statistical test is commonly used to analyze the results of A/B tests with categorical outcomes (e.g., conversion/no conversion)?",
-        "options": ["t-test", "ANOVA", "Chi-Square test", "Regression analysis"],
-        "answer": "Chi-Square test",
-        "solution": "The Chi-Square test of independence is used to determine if there's a statistically significant association between two categorical variables (e.g., variant and conversion)."
-    },
-    {
-        "question": "What does CPA stand for in marketing?",
-        "options": ["Cost Per Acquisition", "Click Per Action", "Cost Per Action", "Clicks Per Acquisition"],
-        "answer": "Cost Per Acquisition",
-        "solution": "CPA measures the cost of acquiring a *new customer*."
-    },
-    {
-       "question": "What is the primary goal of RFM analysis in customer segmentation?",
-        "options": ["To predict future revenue.",
-                    "To identify high-value customers based on recency, frequency, and monetary value of purchases.",
-                    "To determine the optimal pricing strategy.",
-                    "To measure website traffic."],
-        "answer": "To identify high-value customers based on recency, frequency, and monetary value of purchases.",
-        "solution": "RFM analysis focuses on past customer behavior to segment customers."
-    },
-    {
-        "question": "Which metric would you primarily use to assess the effectiveness of an email marketing campaign aimed at driving immediate sales?",
-        "options": ["Open rate", "Click-through rate", "Conversion rate", "Bounce rate"],
-        "answer": "Conversion rate",
-        "solution": "While open and click-through rates are important, the conversion rate directly measures the percentage of recipients who completed the desired action (a purchase)."
-    }
-]
+        {
+            "question": "What is the primary goal of marketing analytics?",
+            "options": ["To increase marketing spend", "To make marketing decisions based on intuition", "To measure and optimize marketing performance using data", "To automate all marketing activities"],
+            "answer": "To measure and optimize marketing performance using data",
+            "solution": "Marketing analytics is fundamentally about using data to improve marketing effectiveness and ROI."
+        },
+        {
+            "question": "Which of the following is an example of descriptive analytics in marketing?",
+            "options": ["Predicting customer churn", "Analyzing website traffic trends over the past year", "Recommending products to customers", "Optimizing ad spend allocation"],
+            "answer": "Analyzing website traffic trends over the past year",
+            "solution": "Descriptive analytics focuses on summarizing and describing past data, like website traffic trends."
+        },
+        {
+            "question": "What does KPI stand for in marketing analytics?",
+            "options": ["Key Process Improvement", "Knowledge Performance Indicator", "Key Performance Indicator", "Keep Promoting Initiatives"],
+            "answer": "Key Performance Indicator",
+            "solution": "KPIs are crucial metrics to measure the success of marketing activities against objectives."
+        },
+        {
+            "question": "Which type of marketing data is typically collected from CRM systems?",
+            "options": ["Website traffic data", "Social media engagement data", "Customer demographics and purchase history", "Advertising campaign performance data"],
+            "answer": "Customer demographics and purchase history",
+            "solution": "CRM systems are designed to store and manage customer-related data, including demographics and transaction history."
+        },
+        {
+            "question": "What is the purpose of diagnostic analytics in marketing?",
+            "options": ["To describe past marketing performance", "To predict future marketing outcomes", "To understand why certain marketing outcomes occurred", "To recommend optimal marketing actions"],
+            "answer": "To understand why certain marketing outcomes occurred",
+            "solution": "Diagnostic analytics aims to investigate the reasons and causes behind observed marketing results."
+        },
+        {
+            "question": "Which metric directly measures the profitability of advertising spend?",
+            "options": ["Click-Through Rate (CTR)", "Conversion Rate", "Cost Per Click (CPC)", "Return on Ad Spend (ROAS)"],
+            "answer": "Return on Ad Spend (ROAS)",
+            "solution": "ROAS calculates the revenue generated for every dollar spent on advertising, directly indicating profitability."
+        },
+        {
+            "question": "What is 'data integration' in the marketing analytics process?",
+            "options": ["Cleaning and preparing data", "Analyzing data for insights", "Combining data from different sources into a unified view", "Visualizing data in dashboards"],
+            "answer": "Combining data from different sources into a unified view",
+            "solution": "Data integration is essential to overcome data silos and get a holistic view of marketing performance."
+        },
+        {
+            "question": "Which future trend in marketing analytics involves using AI to automatically surface insights and recommendations?",
+            "options": ["Predictive Customer Journeys", "Hyper-Personalization at Scale", "Augmented Analytics", "Voice and Conversational Analytics"],
+            "answer": "Augmented Analytics",
+            "solution": "Augmented analytics leverages AI to make analytics more accessible and insightful even for non-experts."
+        },
+        {
+            "question": "What is a key challenge related to 'attribution complexity' in marketing analytics?",
+            "options": ["Ensuring data quality", "Measuring the ROI of marketing activities", "Accurately crediting marketing touchpoints in multi-channel journeys", "Keeping up with technology trends"],
+            "answer": "Accurately crediting marketing touchpoints in multi-channel journeys",
+            "solution": "Attribution complexity arises from the need to understand the contribution of each marketing channel and touchpoint in the customer journey."
+        },
+        {
+            "question": "Which best practice is crucial for ensuring marketing analytics leads to strategic actions?",
+            "options": ["Focusing solely on data collection", "Prioritizing data visualization above all else", "Focusing on generating actionable insights", "Ignoring data privacy regulations"],
+            "answer": "Focusing on generating actionable insights",
+            "solution": "The ultimate goal of marketing analytics is to drive better decisions and actions, so focusing on actionable insights is key."
+        }
+    ]
 
     user_answers = []
     for i, question in enumerate(quiz_questions):
@@ -490,24 +624,28 @@ def main():
         user_answer = st.radio(f"Select an answer:", question["options"], key=f"quiz_{i}")
         user_answers.append(user_answer)
 
-    if st.button("Submit Quiz"):
+    if st.button("Submit Quiz", key="quiz_submit_button"):
         correct_count = 0
         for i, (user_answer, question) in enumerate(zip(user_answers, quiz_questions)):
             if user_answer == question["answer"]:
                 correct_count += 1
+                st.success(f"Question {i+1}: Correct! 🎉")
+            else:
+                st.error(f"Question {i+1}: Incorrect. Let's review the solution below. 🧐")
 
-        st.write(f"You got {correct_count} out of {len(quiz_questions)} questions correct.")
+        st.write(f"You scored **{correct_count} out of {len(quiz_questions)}** questions correctly.")
 
-        with st.expander("Show Detailed Solutions"):
-            for i, question in enumerate(quiz_questions):
-                st.markdown(f"**Question {i+1}:** {question['question']}")
-                st.markdown(f"**Your Answer:** {user_answers[i]}")
-                st.markdown(f"**Correct Answer:** {question['answer']}")
-                st.markdown(f"**Solution:** {question['solution']}")
-                if user_answers[i] == question['answer']:
-                    st.success("Correct!")
-                else:
-                    st.error("Incorrect.")
+        if correct_count < len(quiz_questions): #Optionally show solutions only if not perfect score
+            with st.expander("Show Detailed Solutions"):
+                for i, question in enumerate(quiz_questions):
+                    st.markdown(f"**Question {i+1}:** {question['question']}")
+                    st.markdown(f"**Your Answer:** {user_answers[i]}")
+                    st.markdown(f"**Correct Answer:** {question['answer']}")
+                    st.markdown(f"**Solution:** {question['solution']}")
+                    if user_answers[i] == question['answer']:
+                        st.success("Correct!")
+                    else:
+                        st.error("Incorrect.")
 
 if __name__ == "__main__":
     main()
