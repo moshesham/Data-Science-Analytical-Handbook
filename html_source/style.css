@@ -4,60 +4,92 @@
     margin: 0;
     padding: 0;
 }
-body {
-    font-family: "Helvetica Neue", Arial, sans-serif;
-    line-height: 1.6;
-    color: #333;
-    background-color: #fafafa;
-    overflow-x: hidden;
-}
-/* Container for responsive padding */
-.container {
-    width: 100%;
-    max-width: 4200px;
-    margin: 0 auto;
-    padding: 0;
-    display: flex;
-}
+:root {
+            --primary-color: #2563eb;
+            --secondary-color: #1e40af;
+            --background-color: #0f172a;
+            --text-color: #e2e8f0;
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --card-border: rgba(255, 255, 255, 0.1);
+        }
 
-/* Header styles */
-.header {
-    text-align: center;
-    padding: clamp(2rem, 5vw, 4rem) 1rem;
-    background-color: white;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-}
-.header h1 {
-    font-size: clamp(2rem, 5vw, 3rem);
-    margin-bottom: clamp(0.5rem, 2vw, 1rem);
-    color: #1a1a1a;
-}
-.header p {
-    font-size: clamp(1rem, 2vw, 1.25rem);
-    color: #666;
-    max-width: 600px;
-    margin: 0 auto clamp(1rem, 3vw, 2rem);
-    padding: 0 1rem;
-}
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--background-color);
+            background-image:
+                radial-gradient(circle at 15% 50%, rgba(37, 99, 235, 0.1) 0%, transparent 25%),
+                radial-gradient(circle at 85% 30%, rgba(37, 99, 235, 0.1) 0%, transparent 25%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Container */
+        .container {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+            display: flex;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            padding: 4rem 1rem;
+            background: linear-gradient(180deg, rgba(37, 99, 235, 0.1) 0%, transparent 100%);
+            border-bottom: 1px solid var(--card-border);
+            margin-bottom: 4rem;
+        }
+
+        .header h1 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header p {
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            max-width: 600px;
+            margin: 0 auto 5rem;
+            color: #94a3b8;
+        }
+
 
 /* Sidebar styles */
 .sidebar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 100vh;
-    width: 250px;
-    background-color: #f8f8f8;
-    border-right: 1px solid #e0e0e0;
-    padding: 20px;
-    overflow-y: auto;
-    z-index: 10;
-}
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100vh;
+            width: 250px;
+            background: var(--card-bg);
+            border-right: 1px solid var(--card-border);
+            padding: 90px 20px 20px 20px;
+            overflow-y: auto;
+            z-index: 10;
+            backdrop-filter: blur(10px);
+        }
 
-.sidebar h2 {
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
-}
+        .sidebar h2 {
+            color: var(--text-color);
+            margin-bottom: 1rem;
+        }
+
+        /* Main content */
+        .main-content {
+            flex: 1;
+            width: calc(100% - 350px);
+            margin-left: 280px;
+            background: var(--card-bg);
+            border-radius: 8px;
+            border: 1px solid var(--card-border);
+            backdrop-filter: blur(10px);
+        }
 
 /* Navigation list styles */
 .nav-list {
@@ -83,16 +115,6 @@ body {
 .nav-list a:hover {
     color: #3b82f6;
     text-decoration: underline; /* Add underline on hover */
-}
-
-/* Main content styles */
-.main-content {
-    flex: 1;
-    padding: 20px;
-    margin-left: 280px;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 /* Breadcrumb styles */
@@ -128,12 +150,15 @@ body {
     padding: 20px;
     margin-bottom: 20px;
     border-radius: 5px;
+
+    margin-bottom: 30px; /* between paragraphs */
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
-    background-color: #f9f9f9; /* Set a light background for all cards */
+    background-color: linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%);/* Set a light background for all cards */
 }
 /* Add this to your style.css */
 .code-block {
     background-color: rgba(255,255,255,0.05);
+    background-color: #3b82f6;
     padding: 10px;
     margin-top: 10px;
     border-radius: 5px;
@@ -147,12 +172,15 @@ body {
 
 .card h4 {
     margin-top: 0; /* Reduce top margin for card titles */
-    margin-bottom: 15px;
+    line-height: 15px;   /* within paragraph */
+
+    margin-bottom: 25px;
     font-size: larger;
     text-decoration: none; /* Remove underline from card titles */
 }
 .card p{
-    line-height: 1.8;
+    line-height: 2.3;
+
     font-size: medium;
 }
 .card ul li{
@@ -165,7 +193,7 @@ body {
 }
 
 .card ul, .card ol {
-    margin-bottom: 15px; /* Add spacing after lists */
+    margin-bottom: 25px; /* Add spacing after lists */
 }
 
 .card hr {
