@@ -55,7 +55,7 @@
         .header p {
             font-size: clamp(1rem, 2vw, 1.25rem);
             max-width: 600px;
-            margin: 0 auto 2rem;
+            margin: 0 auto 5rem;
             color: #94a3b8;
         }
 
@@ -150,6 +150,8 @@
     padding: 20px;
     margin-bottom: 20px;
     border-radius: 5px;
+
+    margin-bottom: 30px; /* between paragraphs */
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
     background-color: linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%);/* Set a light background for all cards */
 }
@@ -170,12 +172,15 @@
 
 .card h4 {
     margin-top: 0; /* Reduce top margin for card titles */
-    margin-bottom: 15px;
+    line-height: 15px;   /* within paragraph */
+
+    margin-bottom: 25px;
     font-size: larger;
     text-decoration: none; /* Remove underline from card titles */
 }
 .card p{
-    line-height: 1.8;
+    line-height: 2.3;
+
     font-size: medium;
 }
 .card ul li{
@@ -188,7 +193,7 @@
 }
 
 .card ul, .card ol {
-    margin-bottom: 15px; /* Add spacing after lists */
+    margin-bottom: 25px; /* Add spacing after lists */
 }
 
 .card hr {
