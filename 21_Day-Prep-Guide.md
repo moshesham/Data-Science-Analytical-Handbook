@@ -1,47 +1,57 @@
-# 21-Day Meta Data Science Analytical Interview Preparation Plan
+# The Ultimate 21-Day Analytical Interview Prep Plan
 
-This is an intensive 21-day study plan to help you ace your Meta Data Science Analytical interview. Adjust the pace as needed based on your current skill level and available time.
+This intensive 21-day plan is structured to build your skills from the ground up, moving from core technical abilities to strategic product thinking and, finally, to interview execution. Each day includes a primary focus, a specific "Do This" action, and targeted resources.
 
-## Week 1: Foundational Knowledge and SQL
+## Week 1: Core Skills - SQL and Statistics Mastery
 
-| Day  | Topic                                         | Activity                                                                                                                                                                                 | Resources                                                                                                                               |
-| :--- | :-------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------- |
-| **1** | Intro & Probability                          | Review probability basics: independent/dependent events, conditional probability, Bayes' Theorem.                                                                                          | Khan Academy Statistics & Probability                                                                                                     |
-| **2** | Probability Distributions                   | Study normal, binomial, Poisson distributions. Understand their characteristics and applications. Do practice problems.                                                                    | Khan Academy, StatQuest YouTube                                                                                                           |
-| **3** | Descriptive Statistics & Hypothesis Testing  | Review descriptive stats (mean, median, mode, variance, standard deviation). Learn hypothesis testing: null/alternative, p-values, confidence intervals, Type I/II errors.                     | OpenIntro Statistics, StatQuest YouTube                                                                                                  |
-| **4** | SQL Fundamentals                             | Practice basic SQL: `SELECT`, `FROM`, `WHERE`, `GROUP BY`, `HAVING`, `ORDER BY`. Work through interactive tutorials.                                                                      | SQLZoo, SQLBolt, DataLemur                                                                                                              |
-| **5** | SQL Joins & Aggregations                   | Master different types of joins (`INNER`, `LEFT`, `RIGHT`, `FULL`) and aggregate functions (`COUNT`, `SUM`, `AVG`, `MIN`, `MAX`).                                                          | SQLZoo, HackerRank SQL                                                                                                                 |
-| **6** | SQL Practice (Intermediate)                 | Solve more challenging SQL problems involving joins, aggregations, and subqueries. Focus on business-related scenarios.                                                                       | HackerRank SQL, LeetCode Database, StrataScratch                                                                                          |
-| **7** | SQL Window Functions                        | Learn about window functions (`ROW_NUMBER`, `RANK`, `DENSE_RANK`, `LAG`, `LEAD`, `NTILE`) and practice using them to solve problems.                                                            | StrataScratch, Mode Analytics, Leetcode discuss posts, `Window Functions` section in PostgreSQL Tutorial (if using PostgreSQL)           |
+**Goal:** Build a rock-solid, practical foundation in the two most critical technical areas.
 
-## Week 2: Statistics, Case Studies, and Product Sense
+| Day | Topic Focus | Do This | Handbook Reference | Targeted Resources |
+|-----|-------------|---------|-------------------|-------------------|
+| 1 | SQL Fundamentals | Complete SQLBolt's interactive tutorials from start to finish. Focus on understanding JOIN logic. | SQL & Data Manipulation | SQLBolt |
+| 2 | Intermediate SQL | Solve 5 medium-difficulty problems on DataLemur involving GROUP BY, HAVING, and subqueries. | SQL & Data Manipulation | DataLemur Questions |
+| 3 | Advanced SQL: Window Functions | Read Mode's guide on Window Functions. Then, solve 3 problems on StrataScratch that specifically require RANK(), LAG(), or ROW_NUMBER(). | SQL & Data Manipulation | Mode's Window Functions Guide, StrataScratch |
+| 4 | Applied Statistics: Probability & Distributions | Watch the StatQuest videos on Probability, Binomial, and Poisson distributions. For each, write down one product-related example. | Statistics & Probability | StatQuest: Probability, Binomial, Poisson |
+| 5 | Applied Statistics: Hypothesis Testing | Read the "Trustworthy Online Controlled Experiments" book summary. Explain p-values, confidence intervals, and statistical power out loud. | Statistics & Probability | Summary of "Trustworthy Online Controlled Experiments" |
+| 6 | Python for Data Analysis | Complete a full data cleaning and exploration project using Pandas to load, clean, and analyze a dataset. | Programming (Python/R) | Kaggle: "Data Cleaning Challenge" |
+| 7 | Week 1 Review & Synthesis | Write a SQL query using a window function. Then, use Python to calculate the statistical significance of a hypothetical A/B test result. | SQL & Stats Sections | Use your own project or a Kaggle dataset |
 
-| Day  | Topic                                   | Activity                                                                                                                                                                                                   | Resources                                                                                                                                                                           |
-| :--- | :-------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **8** | Regression Analysis & Experimental Design | Study linear and logistic regression. Understand experimental design principles: randomization, control groups, sample size, confounding variables.                                                     | "An Introduction to Statistical Learning," OpenIntro Statistics                                                                                                                        |
-| **9** | Case Study Practice                     | Work through a data analysis case study. Focus on framing the problem, defining metrics, generating hypotheses, and analyzing data.                                                                  | Do a search in your browser for "data science case study" or "data analyst case study". |
-| **10** | Case Study Practice & Review            | Analyze another case study, focusing on communicating your findings and recommendations clearly and concisely. Review solutions and identify areas for improvement.                                  | Do a search in your browser for "data science case study" or "data analyst case study".                                                                                                     |
-| **11** | Product Sense - Day 1                  | Read about product development frameworks (e.g., AARRR, HEART). Analyze successful products and identify their key metrics. Start practicing answering product sense questions aloud.               | Harvard Business Review articles, MIT Sloan Management Review articles                                                                                                                |
-| **12** | Product Sense - Day 2                  | Continue practicing product sense questions. Focus on defining metrics, identifying user needs, and understanding the competitive landscape.                                                            | See links in Day 11.                                                                                                                                                               |
-| **13** | A/B Testing                             | Deep dive into A/B testing: sample size calculation, statistical significance, power, interpreting results, common pitfalls.                                                                      | Udacity A/B Testing Course, "Trustworthy Online Controlled Experiments" book                                                                                                           |
-| **14** | Network Effects & Experimentation      | Understand how network effects impact experimentation in social networks. Learn about mitigation strategies (cluster randomization, egocentric network design).                                      | Research Articles, Company Blogs, Start with "Experimentation in a Networked World" by Sinan Aral, available at SSRN: [https://ssrn.com/abstract=3031976](https://ssrn.com/abstract=3031976) |
+## Week 2: Product Thinking & Experimentation
 
-## Week 3: Behavioral, Review, and Mock Interviews
+**Goal:** Shift from how to analyze data to what to analyze and why. This week is about product sense, metrics, and A/B testing.
 
-| Day  | Topic                             | Activity                                                                                                                                                                                                                         | Resources                                                                                                       |
-| :--- | :-------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------- |
-| **15** | Behavioral Interview Prep         | Prepare stories using the STAR method for common behavioral interview questions. Focus on Meta's values (Move Fast, Be Bold, Be Open, Focus on Impact).                                                                             | Create a document with common behavioral interview questions and add in your answers using the STAR method          |
-| **16** | Behavioral Interview Practice   | Practice answering behavioral questions aloud. Record yourself and identify areas for improvement in your delivery and content.                                                                                                     | Continue to utilize the document you created on Day 15.                                                          |
-| **17** | Python/R for Data Analysis       | Review Pandas/dplyr for data manipulation. Practice cleaning, transforming, and aggregating data. Work through problems on HackerRank or LeetCode (Database section).                                                                 | HackerRank, LeetCode, Python Data Science Handbook                                                               |
-| **18** | Review & Consolidate             | Review all the topics covered in the past two weeks. Identify areas where you feel less confident and revisit those topics.                                                                                                      | Review this handbook and all the notes you have been taking.                                                    |
-| **19** | Mock Interview 1 (Technical)    | Conduct a mock technical interview with a friend, on a platform like Pramp, or record yourself. Focus on SQL and data manipulation skills. Get feedback and identify areas for improvement.                                         | Pramp, Interviewing.io, or record yourself                                                                       |
-| **20** | Mock Interview 2 (Case Study) | Conduct a mock case study interview. Focus on framing the problem, generating hypotheses, analyzing data, and communicating your findings.                                                                                         | Pramp, Interviewing.io, or record yourself                                                                       |
-| **21** | Mock Interview 3 (Product Sense) | Conduct a mock product sense interview. Focus on defining metrics, understanding user needs, and proposing data-driven product improvements.                                                                                          | Pramp, Interviewing.io, or record yourself                                                                       |
+| Day | Topic Focus | Do This | Handbook Reference | Targeted Resources |
+|-----|-------------|---------|-------------------|-------------------|
+| 8 | Developing Product Sense | Pick a feature on Facebook or Instagram. Deconstruct it: What user problem does it solve? Who is the target user? How does it help the business? | Analytical Reasoning/Product Sense | Lenny's Newsletter: "How to Develop Product Sense" |
+| 9 | Metrics Frameworks (HEART/AARRR) | Read about the HEART and AARRR frameworks. Apply one of them to the feature you analyzed on Day 8. | Analytical Reasoning/Product Sense | Google's HEART Framework, AARRR Framework |
+| 10 | Case Study Framework | Learn a structured approach for case studies. Outline a response to: "User engagement on Instagram Reels has dropped by 5%. How would you investigate?" | Analytical Execution/Case Study | Exponent's Guide to Data Science Case Studies |
+| 11 | A/B Testing Deep Dive: Design | Read Airbnb's blog post on experimentation. Design an A/B test: form a hypothesis, choose success/guardrail metrics, and estimate sample size. | Designing Experiments | Airbnb: "Experimentation & Measurement" |
+| 12 | A/B Testing Deep Dive: Analysis | Read Netflix's blog on interpreting A/B test results. Analyze a hypothetical result: What if your primary metric improves but a guardrail metric declines? | Quantitative Analysis | Netflix: "Interpreting A/B test results" |
+| 13 | Product Case Study Practice | Complete one full case study walk-through. Record yourself speaking or write out a detailed document. | Analytical Execution/Case Study | StrataScratch's Product Sense Questions |
+| 14 | Week 2 Review & Synthesis | Propose a new feature for a product you use daily. Define its North Star metric, design an A/B test, and explain how you would analyze the results. | Product Sense & Experimentation Sections | Apply concepts from this week |
 
-**Important Notes:**
+## Week 3: Execution, Storytelling & Mock Interviews
 
-*   **Consistency is Key:** Dedicate time each day, even if it's just for an hour or two. Consistent effort is more effective than cramming.
-*   **Active Learning:** Don't just passively read. Actively engage with the material by doing practice problems, writing code, and explaining concepts aloud.
-*   **Seek Feedback:** Get feedback on your mock interviews and practice problems whenever possible.
-*   **Stay Updated:** Keep an eye on Meta's official careers page and any interview preparation resources they provide.
-*   **Rest and Recharge:** Make sure to get enough rest and take breaks to avoid burnout.
+**Goal:** Synthesize all your skills and practice delivering your analysis under pressure.
+
+| Day | Topic Focus | Do This | Handbook Reference | Targeted Resources |
+|-----|-------------|---------|-------------------|-------------------|
+| 15 | Behavioral Interview: STAR Method | Prepare 3 stories using the STAR method: 1) A complex project, 2) Dealing with ambiguity, 3) Influencing a decision with data. | Behavioral Interview Prep | The STAR Method Guide |
+| 16 | Data Storytelling | Watch a talk on data storytelling. Create a 3-slide presentation for your project from Day 6: 1) Problem, 2) Analysis & Insight, 3) Recommendation. | Communication (in Analytical Execution) | Brent Dykes: "Winning The Insights War" |
+| 17 | Timed SQL + Python Challenge | Give yourself 45 minutes. Complete one hard SQL question and one medium Python/Pandas question back-to-back. | Technical Skills Interview | Use LeetCode or HackerRank |
+| 18 | Full Mock Interview 1 (Technical) | Conduct a mock technical interview with a peer or on a platform. Focus on thinking out loud and explaining your code. | Technical Skills Interview | Pramp (free peer-to-peer mocks) |
+| 19 | Full Mock Interview 2 (Product/Case) | Conduct a mock product sense or case study interview. Focus on asking clarifying questions and presenting a structured conclusion. | Analytical Execution/Case Study | Pramp, or record yourself |
+| 20 | Review, Refine & Rest | Review your notes from the mock interviews. Identify your single biggest area for improvement and do one focused exercise on it. Then, rest. | Your own notes | |
+| 21 | Final Polish & Mindset | Review Meta's core values. Re-read your 3 STAR stories and align them with those values. Do a light 30-minute review of key concepts. | Behavioral Interview Prep | Meta's Core Values |
+
+## Key Success Metrics
+
+- **Week 1:** Master SQL fundamentals and statistical concepts
+- **Week 2:** Develop product intuition and experimentation skills
+- **Week 3:** Perfect interview execution and storytelling
+
+## Daily Commitment
+
+- **Time Investment:** 2-3 hours per day
+- **Focus Areas:** Technical skills → Product thinking → Interview execution
+- **Practice Method:** Active learning with real projects and mock interviews
