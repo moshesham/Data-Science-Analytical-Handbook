@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-LHTGZTRTCX"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Master Product Data Analytics</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <h2>Contents</h2>
+            <ul class="nav-list">
+                <li><a href="../introduction.html">I. Introduction</a></li>
+                <ul>
+                    <li><a href="../introduction.html#welcome">1. Welcome and Purpose of this Handbook</a></li>
+                    <li><a href="../introduction.html#meta-data-science-role">2. What to Expect: The Meta Data Science Role</a></li>
+                    <li><a href="../introduction.html#interview-process">3. Navigating the Meta Interview Process</a></li>
+                    <li><a href="../introduction.html#handbook-usage">4. How to Use This Handbook</a></li>
+                </ul>
+                <li><a href="foundational_knowledge/1.html">II. Foundational Knowledge & Skills</a></li>
+                <ul>
+                    <li><a href="1.html">1. Statistics & Probability</a></li>
+                    <ul>
+                        <li><a href="1.html#descriptive_statistics">1.1 Descriptive Statistics</a></li>
+                        <li><a href="1.html#probability">1.2 Probability</a></li>
+                         <li><a href="1.html#probability-distributions">1.3 Probability Distributions</a></li>
+                        <li><a href="1.html#hypothesis-testing">1.4 Hypothesis Testing</a></li>
+                        <li><a href="1.html#regression-analysis">1.5 Regression Analysis</a></li>
+                        <li><a href="1.html#experimental-design">1.6 Experimental Design</a></li>
+                        <li><a href="1.html#bayesian-methods">1.7 Bayesian Methods</a></li>
+                    </ul>
+                   <li><a href="2-SQL.html">2. SQL & Data Manipulation</a></li>
+                    <ul>
+                        <li><a href="2-SQL.html#core-sql-syntax">2.1 Core SQL Syntax</a></li>
+                        <li><a href="2-SQL.html#advanced-sql-techniques">2.2 Advanced SQL Techniques</a></li>
+                        <li><a href="2-SQL.html#query-optimization">2.3 Query Optimization</a></li>
+                        <li><a href="2-SQL.html#data-cleaning-sql">2.4 Data Cleaning with SQL</a></li>
+                    </ul>
+                     <li><a href="3.html">3. Programming (Python/R) for Data Analysis</a></li>
+                    <ul>
+                         <li><a href="3.html#python-fundamentals">3.1 Python Fundamentals for Data Science</a></li>
+                         <li><a href="3.html#data-manipulation-pandas">3.2 Data Manipulation with Pandas</a></li>
+                        <li><a href="3.html#numerical-computing-numpy">3.3 Numerical Computing with NumPy</a></li>
+                        <li><a href="3.html#data-visualization">3.4 Data Visualization</a></li>
+                        <li><a href="3.html#statistical-modeling-libraries">3.5 (Optional) Statistical Modeling Libraries</a></li>
+                    </ul>
+                </ul>
+                <li><a href="../interview_preparation/technical_skills.html">III. Interview Preparation</a></li>
+                <ul>
+                     <li><a href="../interview_preparation/technical_skills.html#technical-skills-interview">1. Technical Skills Interview</a></li>
+                    <ul>
+                        <li><a href="../interview_preparation/technical_skills.html#sql-deep-dive">1.1 SQL Deep Dive</a></li>
+                        <li><a href="../interview_preparation/technical_skills.html#python-r-data-manipulation">1.2 Python/R for Data Manipulation</a></li>
+                         <li><a href="../interview_preparation/technical_skills.html#mock-interview-practice-sql-python">1.3 Mock Interview Practice</a></li>
+                    </ul>
+                    <li><a href="../interview_preparation/analytical_execution.html">2. Analytical Execution Interview</a></li>
+                    <ul>
+                        <li><a href="../interview_preparation/analytical_execution.html#framework-case-studies">2.1 Framework for Approaching Case Studies</a></li>
+                        <li><a href="../interview_preparation/analytical_execution.html#hypothesis-generation-testing">2.2 Hypothesis Generation and Testing</a></li>
+                         <li><a href="../interview_preparation/analytical_execution.html#quantitative-analysis-techniques">2.3 Quantitative Analysis Techniques</a></li>
+                         <li><a href="../interview_preparation/analytical_execution.html#goal-setting-kpis">2.4 Goal Setting and KPIs</a></li>
+                        <li><a href="../interview_preparation/analytical_execution.html#trade-off-analysis">2.5 Trade-off Analysis</a></li>
+                         <li><a href="../interview_preparation/analytical_execution.html#dealing-ambiguity-changing-requirements">2.6 Dealing with Ambiguity and Changing Requirements</a></li>
+                        <li><a href="../interview_preparation/analytical_execution.html#case-study-examples">2.7 Case Study Examples</a></li>
+                         <li><a href="../interview_preparation/analytical_execution.html#mock-interview-practice-case-studies">2.8 Mock Interview Practice</a></li>
+                    </ul>
+                      <li><a href="../interview_preparation/analytical_reasoning.html">3. Analytical Reasoning/Product Sense Interview</a></li>
+                    <ul>
+                        <li><a href="../interview_preparation/analytical_reasoning.html#developing-product-sense">3.1 Developing Strong Product Sense</a></li>
+                        <li><a href="../interview_preparation/analytical_reasoning.html#framework-answering-product-sense-questions">3.2 A Framework for Answering Product Sense Questions</a></li>
+                        <li><a href="../interview_preparation/analytical_reasoning.html#defining-evaluating-metrics">3.3 Defining and Evaluating Metrics</a></li>
+                         <li><a href="../interview_preparation/analytical_reasoning.html#experimentation-social-networks">3.4 Experimentation in Social Networks</a></li>
+                        <li><a href="../interview_preparation/analytical_reasoning.html#identifying-mitigating-biases">3.5 Identifying and Mitigating Biases</a></li>
+                        <li><a href="../interview_preparation/analytical_reasoning.html#communicating-data-driven-decisions">3.6 Communicating Data-Driven Product Decisions</a></li>
+                        <li><a href="../interview_preparation/analytical_reasoning.html#example-product-sense-questions-answers">3.7 Example Product Sense Questions and Answers</a></li>
+                         <li><a href="../interview_preparation/analytical_reasoning.html#mock-interview-practice-product-sense">3.8 Mock Interview Practice</a></li>
+                    </ul>
+                     <li><a href="../interview_preparation/behavioral_interview.html">4. Behavioral Interview</a></li>
+                     <ul>
+                        <li><a href="../interview_preparation/behavioral_interview.html#star-method">4.1 The STAR Method</a></li>
+                        <li><a href="../interview_preparation/behavioral_interview.html#common-behavioral-questions">4.2 Common Behavioral Interview Questions</a></li>
+                         <li><a href="../interview_preparation/behavioral_interview.html#meta-specific-behavioral-questions">4.3 Meta-Specific Behavioral Questions</a></li>
+                        <li><a href="../interview_preparation/behavioral_interview.html#sample-star-responses">4.4 Sample STAR Responses</a></li>
+                        <li><a href="../interview_preparation/behavioral_interview.html#mock-interview-practice-behavioral">4.5 Mock Interview Practice</a></li>
+                    </ul>
+                </ul>
+                 <li><a href="../meta_specificity.html">IV. Meta Specificity</a></li>
+                <ul>
+                    <li><a href="../meta_specificity.html#deep-dive-meta-interview">1. Deep Dive into Meta's Interview Process</a></li>
+                    <li><a href="../meta_specificity.html#meta-data-science-culture">2. Meta's Data Science Culture</a></li>
+                    <li><a href="../meta_specificity.html#internal-tools-technologies">3. Internal Tools and Technologies</a></li>
+                     <li><a href="../meta_specificity.html#product-deep-dives">4. Product Deep Dives</a></li>
+                </ul>
+                 <li><a href="../resources_practice.html">V. Resources and Practice</a></li>
+                <ul>
+                    <li><a href="../resources_practice.html#sql-practice-platforms">1. SQL Practice Platforms</a></li>
+                    <li><a href="../resources_practice.html#python-r-resources">2. Python/R Resources</a></li>
+                    <li><a href="../resources_practice.html#statistical-learning-resources">3. Statistical Learning Resources</a></li>
+                    <li><a href="../resources_practice.html#product-sense-development">4. Product Sense Development</a></li>
+                    <li><a href="../resources_practice.html#mock-interview-platforms">5. Mock Interview Platforms</a></li>
+                     <li><a href="../resources_practice.html#community-forums-groups">6. Community Forums and Groups</a></li>
+                     <li><a href="../resources_practice.html#a-b-testing-experimentation">7. A/B Testing and Experimentation</a></li>
+                    <li><a href="../resources_practice.html#business-analytics-case-studies">8. Business Analytics and Case Studies</a></li>
+                     <li><a href="../resources_practice.html#youtube-social-media-channels">9. YouTube and Social Media Channels</a></li>
+                    <li><a href="../resources_practice.html#company-blogs-case-studies">10. Company Blogs and Case Studies</a></li>
+                </ul>
+                <li><a href="../conclusion.html">VI. Conclusion</a></li>
+                <ul>
+                    <li><a href="../conclusion.html#recap-key-takeaways">1. Recap of Key Takeaways</a></li>
+                    <li><a href="../conclusion.html#encouragement-motivation">2. Encouragement and Motivation</a></li>
+                    <li><a href="../conclusion.html#final-tips-success">3. Final Tips for Success</a></li>
+                </ul>
+                 <li><a href="appendix.html">Appendix</a></li>
+                <ul>
+                    <li><a href="appendix.html#glossary-terms">Glossary of Terms</a></li>
+                    <li><a href="appendix.html#cheatsheets">Cheatsheets (SQL, Pandas, etc.)</a></li>
+                </ul>
+            </ul>
+        </div>
+
+         <div class="main-content">
+            <div class="breadcrumb">
+                <a href="../index.html">Home</a> <span>></span>
+                <a href="1.html">Foundational Knowledge & Skills</a> <span>></span>
+                <span>Statistics & Probability</span>
+            </div>
+            <div class="header">
+                <h1>Master Product Data Analytics</h1>
+                <p>Your Guide To Data Analytics Mastery</p>
+            </div>
+            <div class="section" id="foundational-knowledge">
+                 <h2 class="section-title">II. Foundational Knowledge & Skills (The Building Blocks)</h2>
+                <div class="section" id="statistics-probability">
+                    <h3 class="section-title">1. Statistics & Probability</h3>
+                    <p>Alright, let's dive into the world of statistics and probability! 📊 Don't worry, we're not going to get bogged down in complex formulas without understanding their meaning. The goal here is to truly master these concepts so that you can analyze data, interpret results, and make sound judgments. Remember, at Meta, data is king 👑, and your ability to wield these statistical tools will be critical to your success. This section is broken down into different areas that will be the focus of analytical interviews and on the job work for Meta Data Scientists, and we have included practical examples to test your knowledge, with full solutions. We are also going to cover the mathematical foundations to make sure you have a deep, solid understanding. Let's get started! </p>
+                    <div class="card" id="descriptive-statistics">
+                        <h4>1.1 Descriptive Statistics (Understanding the Data)</h4>
+                        <p>First up, descriptive statistics. This is where we roll up our sleeves and get to know our data. We're talking about summarizing and describing the main features of a dataset. 📊 Think of it as getting a "lay of the land" before you start building anything fancy. Here's what we'll cover:</p>
+                        <hr>
+                        <ul>
+                            <li>
+                                <b>1.1.1 Measures of Central Tendency (Mean, Median, Mode)</b>
+                                <p>These are your go-to stats for understanding the "typical" value in your data. We'll talk about when to use each one, and why the mean isn't always the best choice (especially with skewed data! 😉).</p>
+                                <ul>
+                                    <li>
+                                        <b>Mean (Arithmetic Mean):</b>
+                                        <p>The mean, often denoted as \(\mu\) for a population and \(\bar{x}\) for a sample, is the sum of all values divided by the number of values.</p>
+                                        <p><b>Formula:</b></p>
+                                        <p>\[ \mu = \frac{\sum_{i=1}^{n} x_i}{n} \]</p>
+                                        <p>where \(x_i\) represents each value in the dataset and \(n\) is the total number of values.</p>
+                                        <p><b>When to use:</b> The mean is best used when data is normally distributed or when the distribution is not heavily skewed. It is sensitive to outliers.</p>
+                                        <p><a href="https://en.wikipedia.org/wiki/Mean">Wikipedia: Mean</a>, <a href="https://mathworld.wolfram.com/Mean.html">Wolfram MathWorld: Mean</a></p>
+                                    </li>
+                                    <li>
+                                        <b>Median:</b>
+                                        <p>The median is the middle value in an ordered dataset. It divides the data into two equal halves.</p>
+                                        <p><b>How to calculate:</b></p>
+                                        <ol>
+                                            <li>Arrange the data in ascending order.</li>
+                                            <li>If \(n\) is odd, the median is the value at the \(\frac{n+1}{2}\) position.</li>
+                                            <li>If \(n\) is even, the median is the average of the values at the \(\frac{n}{2}\) and \(\frac{n}{2} + 1\) positions.</li>
+                                        </ol>
+                                        <p><b>When to use:</b> The median is robust to outliers and skewed distributions, making it a better measure of central tendency in such cases.</p>
+                                        <p><a href="https://en.wikipedia.org/wiki/Median">Wikipedia: Median</a>, <a href="https://mathworld.wolfram.com/StatisticalMedian.html">Wolfram MathWorld: Median</a></p>
+                                    </li>
+                                    <li>
+                                        <b>Mode:</b>
+                                        <p>The mode is the value that appears most frequently in a dataset.</p>
+                                        <p><b>When to use:</b> The mode is particularly useful for categorical data or when identifying the most common value in a dataset.</p>
+                                        <p><a href="https://en.wikipedia.org/wiki/Mode_(statistics)">Wikipedia: Mode</a>, <a href="https://mathworld.wolfram.com/Mode.html">Wolfram MathWorld: Mode</a></p>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <b>1.1.2 Measures of Dispersion (Variance, Standard Deviation, Range, IQR)</b>
+                                <p>How spread out is your data? Are all the data points clustered together, or are they all over the place? These measures help us quantify that spread.</p>
+                                <ul>
+                                    <li>
+                                        <b>Variance:</b>
+                                        <p>Variance measures the average squared deviation of each data point from the mean. It is denoted as \(\sigma^2\) for a population and \(s^2\) for a sample.</p>
+                                        <p><b>Formula:</b></p>
+                                        <p>\[ \sigma^2 = \frac{\sum_{i=1}^{n} (x_i - \mu)^2}{n} \]</p>
+                                        <p>where \(x_i\) is each value, \(\mu\) is the mean, and \(n\) is the number of values.</p>
+                                        <p><a href="https://en.wikipedia.org/wiki/Variance">Wikipedia: Variance</a>, <a href="https://mathworld.wolfram.com/Variance.html">Wolfram MathWorld: Variance</a></p>
+                                    </li>
+                                    <li>
+                                        <b>Standard Deviation:</b>
+                                        <p>The standard deviation (\(\sigma\) for a population, \(s\) for a sample) is the square root of the variance. It measures the average amount of variation or dispersion from the mean in the original units of the data.</p>
+                                        <p><b>Formula:</b></p>
+                                        <p>\[ \sigma = \sqrt{\sigma^2} \]</p>
+                                        <p><b>Use:</b> Along with the mean, the standard deviation helps to understand the spread of data in a normal distribution.</p>
+                                        <p><a href="https://en.wikipedia.org/wiki/Standard_deviation">Wikipedia: Standard Deviation</a>, <a href="https://mathworld.wolfram.com/StandardDeviation.html">Wolfram MathWorld: Standard Deviation</a></p>
+                                    </li>
+                                    <li>
+                                        <b>Range:</b>
+                                        <p>The range is the difference between the maximum and minimum values in a dataset.</p>
+                                        <p><b>Formula:</b></p>
+                                        <p>\[ \text{Range} = \text{max}(x_i) - \text{min}(x_i) \]</p>
+                                        <p><b>Use:</b> The range provides a quick, rough estimate of the spread but is sensitive to outliers.</p>
+                                        <p><a href="https://en.wikipedia.org/wiki/Range_(statistics)">Wikipedia: Range</a>, <a href="https://mathworld.wolfram.com/Range.html">Wolfram MathWorld: Range</a></p>
+                                    </li>
+                                    <li>
+                                        <b>Interquartile Range (IQR):</b>
+                                        <p>The IQR is the range between the first quartile (25th percentile) and the third quartile (75th percentile). It represents the spread of the middle 50% of the data.</p>
+                                        <p><b>Formula:</b></p>
+                                        <p>\[ \text{IQR} = Q_3 - Q_1 \]</p>
+                                        <p>where \(Q_3\) is the third quartile and \(Q_1\) is the first quartile.</p>
+                                        <p><b>Use:</b> The IQR is robust to outliers and is particularly useful for skewed distributions.</p>
+                                        <p><a href="https://en.wikipedia.org/wiki/Interquartile_range">Wikipedia: Interquartile Range</a>, <a href="https://mathworld.wolfram.com/InterquartileRange.html">Wolfram MathWorld: Interquartile Range</a></p>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <b>1.1.3 Data Distributions and Visualization (Histograms, Box Plots)</b>
+                                <p>Sometimes, a picture is worth a thousand numbers. We'll look at how to visualize data distributions using histograms and box plots, so you can quickly grasp the shape and characteristics of your data.</p>
+                                 <ul>
+                                    <li>
+                                        <b>Histograms:</b>
+                                        <p>Histograms display the distribution of a dataset by dividing the data into bins and showing the frequency or count of data points in each bin.</p>
+                                        <p><b>Use:</b> They help visualize the shape of the distribution (e.g., normal, skewed, bimodal) and identify the range of values where most data points fall.</p>
+                                        <p><a href="https://en.wikipedia.org/wiki/Histogram">Wikipedia: Histogram</a>, <a href="https://mathworld.wolfram.com/Histogram.html">Wolfram MathWorld: Histogram</a></p>
+                                    </li>
+                                    <li>
+                                        <b>Box Plots:</b>
+                                        <p>Box plots provide a visual summary of the distribution, showing the median, quartiles, and potential outliers.</p>
+                                        <p><b>Components:</b></p>
+                                        <ul>
+                                            <li>The box represents the interquartile range (IQR), with the median marked inside.</li>
+                                            <li>Whiskers extend to the farthest data points within 1.5 times the IQR from the box edges.</li>
+                                            <li>Points beyond the whiskers are considered potential outliers.</li>
+                                        </ul>
+                                        <p><b>Use:</b> Box plots are useful for comparing distributions across different groups and identifying the presence of outliers.</p>
+                                        <p><a href="https://en.wikipedia.org/wiki/Box_plot">Wikipedia: Box Plot</a>, <a href="https://mathworld.wolfram.com/Box-and-WhiskerPlot.html">Wolfram MathWorld: Box Plot</a></p>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <b>1.1.4 Skewness and Kurtosis:</b>
+                                <p>These are fancy words for describing the asymmetry and "tailedness" of a distribution. We'll break them down and see why they matter.</p>
+                                <ul>
+                                    <li>
+                                        <b>Skewness:</b>
+                                        <p>Skewness measures the asymmetry of a distribution. A distribution is skewed if one tail is longer than the other.</p>
+                                        <ul>
+                                            <li><b>Positive Skew (Right Skew):</b> The right tail is longer; the mass of the distribution is concentrated on the left. The mean is typically greater than the median.</li>
+                                            <li><b>Negative Skew (Left Skew):</b> The left tail is longer; the mass of the distribution is concentrated on the right. The mean is typically less than the median.</li>
+                                        </ul>
+                                        <p><b>Formula:</b></p>
+                                        <p>\[ \text{Skewness} = \frac{\sum_{i=1}^{n} (x_i - \bar{x})^3 / n}{s^3} \]</p>
+                                        <p>where \(\bar{x}\) is the sample mean, \(s\) is the sample standard deviation, and \(n\) is the number of values.</p>
+                                        <p><a href="https://en.wikipedia.org/wiki/Skewness">Wikipedia: Skewness</a>, <a href="https://mathworld.wolfram.com/Skewness.html">Wolfram MathWorld: Skewness</a></p>
+                                    </li>
+                                    <li>
+                                        <b>Kurtosis:</b>
+                                        <p>Kurtosis measures the "tailedness" of a distribution, or how much data is in the tails compared to a normal distribution.</p>
+                                        <ul>
+                                            <li><b>High Kurtosis:</b> Heavy tails, indicating more outliers or extreme values.</li>
+                                            <li><b>Low Kurtosis:</b> Light tails, indicating fewer outliers.</li>
+                                        </ul>
+                                        <p><b>Formula:</b></p>
+                                        <p>\[ \text{Kurtosis} = \frac{\sum_{i=1}^{n} (x_i - \bar{x})^4 / n}{s^4} - 3 \]</p>
+                                        <p>(Note: The -3 is often included to make the kurtosis of a normal distribution equal to 0.)</p>
+                                        <p><a href="https://en.wikipedia.org/wiki/Kurtosis">Wikipedia: Kurtosis</a>, <a href="https://mathworld.wolfram.com/Kurtosis.html">Wolfram MathWorld: Kurtosis</a></p>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <hr>
+                    </div>
+                    <div class="card" id="probability">
+                        <h3 class="section-title">2.Probability</h3>
+                        <h4>2 Probability (Quantifying Uncertainty)</h4>
+                        <p>Probability is the bedrock of statistical inference. It's the language we use to talk about uncertainty, and it's essential for making informed decisions in the face of incomplete information. Don't worry, we'll keep it practical and relevant to the kinds of problems you'll encounter at Meta. 👍</p>
+                        <hr>
+                        <ul>
+                            <li>
+                                <b>2.1 Basic Probability Concepts</b>
+                                <ul>
+                                    <li>
+                                        <b>Sample Spaces, Events, Outcomes:</b>
+                                        <p>We'll start with the fundamentals. An <b>outcome</b> is a single possible result of an experiment. The <b>sample space</b> is the set of all possible outcomes. An <b>event</b> is a subset of the sample space, or a collection of one or more outcomes.</p>
+                                        <p><b>Example:</b></p>
+                                        <ul>
+                                            <li>Experiment: Rolling a six-sided die.</li>
+                                            <li>Sample space: {1, 2, 3, 4, 5, 6}</li>
+                                            <li>Event: Rolling an even number (outcomes: 2, 4, 6)</li>
+                                        </ul>
+                                        <p><a href="https://en.wikipedia.org/wiki/Sample_space">Wikipedia: Sample Space</a>, <a href="https://en.wikipedia.org/wiki/Event_(probability_theory)">Wikipedia: Event</a>, <a href="https://mathworld.wolfram.com/Outcome.html">Wolfram MathWorld: Outcome</a></p>
+                                    </li>
+                                    <li>
+                                        <b>Probability Axioms:</b>
+                                        <p>These are the basic rules that govern probability. They might seem obvious, but they're important to keep in mind.</p>
+                                        <ol>
+                                            <li>The probability of any event is a non-negative number between 0 and 1, inclusive.</li>
+                                            <li>The probability of the entire sample space is 1.</li>
+                                            <li>If two events are mutually exclusive (they cannot both occur at the same time), the probability of either event occurring is the sum of their individual probabilities.</li>
+                                        </ol>
+                                        <p><a href="https://en.wikipedia.org/wiki/Probability_axioms">Wikipedia: Probability Axioms</a>, <a href="https://mathworld.wolfram.com/ProbabilityAxioms.html">Wolfram MathWorld: Probability Axioms</a></p>
+                                    </li>
+                                    <li>
+                                        <b>Calculating Probabilities (Classical, Frequentist, Subjective):</b>
+                                        <p>We'll look at different ways to calculate probabilities, depending on the situation.</p>
+                                        <ul>
+                                            <li><b>Classical:</b> Based on counting equally likely outcomes (e.g., rolling a die).</li>
+                                            <li><b>Frequentist:</b> Based on the long-run frequency of an event occurring (e.g., observing many coin flips).</li>
+                                            <li><b>Subjective:</b> Based on personal beliefs or judgments (e.g., assigning a probability to a new product launch being successful).</li>
+                                        </ul>
+                                        <p><a href="https://en.wikipedia.org/wiki/Probability_interpretations">Wikipedia: Probability Interpretations</a></p>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <b>2.2 Conditional Probability and Independence</b>
+                                <ul>
+                                    <li>
+                                        <b>Defining Conditional Probability:</b>
+                                        <p>This is the probability of an event happening *given* that another event has already occurred. It's a crucial concept for understanding how events relate to each other. We denote the probability of event A happening given that event B has happened as \(P(A|B)\).</p>
+                                        <p><b>Formula:</b></p>
+                                        <p>\[ P(A|B) = \frac{P(A \cap B)}{P(B)} \]</p>
+                                        <p>where \(P(A \cap B)\) is the probability of both A and B happening, and \(P(B)\) is the probability of B happening.</p>
+                                        <p><a href="https://en.wikipedia.org/wiki/Conditional_probability">Wikipedia: Conditional Probability</a>, <a href="https://mathworld.wolfram.com/ConditionalProbability.html">Wolfram MathWorld: Conditional Probability</a></p>
+                                    </li>
+                                    <li>
+                                        <b>The Multiplication Rule:</b>
+                                        <p>This rule helps us calculate the probability of two events happening together. It is derived from the definition of conditional probability.</p>
+                                        <p><b>Formula:</b></p>
+                                        <p>\[ P(A \cap B) = P(A|B) * P(B) \]</p>
+                                        <p>or</p>
+                                        <p>\[ P(A \cap B) = P(B|A) * P(A) \]</p>
+                                        <p><a href="https://en.wikipedia.org/wiki/Conditional_probability#Multiplication_rule">Wikipedia: Multiplication Rule</a></p>
+                                    </li>
+                                    <li>
+                                        <b>Independent vs. Dependent Events:</b>
+                                        <p>Two events are <b>independent</b> if the occurrence of one does not affect the probability of the other. They are <b>dependent</b> if the occurrence of one does affect the probability of the other.</p>
+                                        <p><b>For independent events:</b></p>
+                                        <p>\[ P(A|B) = P(A) \]</p>
+                                        <p>\[ P(B|A) = P(B) \]</p>
+                                        <p>\[ P(A \cap B) = P(A) * P(B) \]</p>
+                                        <p><a href="https://en.wikipedia.org/wiki/Independence_(probability_theory)">Wikipedia: Independence</a>, <a href="https://mathworld.wolfram.com/IndependentEvents.html">Wolfram MathWorld: Independent Events</a></p>
+                                    </li>
+                                    <li>
+                                        <b>Real-world examples:</b> If a user clicks on an ad (Event A), what's the probability they'll make a purchase (Event B)? This is a classic example of conditional probability in action.
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <b>2.3 Bayes' Theorem (Updating Beliefs with Data)</b>
+                                <ul>
+                                    <li>
+                                        <b>Prior and Posterior Probabilities:</b>
+                                        <p>Bayes' Theorem provides a way to update our beliefs in light of new evidence. The <b>prior probability</b> is our initial belief about an event before observing any data. The <b>posterior probability</b> is our updated belief after observing the data.</p>
+                                    </li>
+                                    <li>
+                                        <b>Likelihood:</b>
+                                        <p>This is the probability of observing the data given a particular hypothesis.</p>
+                                    </li>
+                                    <li>
+                                        <b>Bayes' Theorem Formula:</b>
+                                        <p>\[ P(A|B) = \frac{P(B|A) * P(A)}{P(B)} \]</p>
+                                        <p>Where:</p>
+                                        <ul>
+                                            <li>\(P(A|B)\) is the posterior probability of A given B.</li>
+                                            <li>\(P(B|A)\) is the likelihood of B given A.</li>
+                                            <li>\(P(A)\) is the prior probability of A.</li>
+                                            <li>\(P(B)\) is the probability of B.</li>
+                                        </ul>
+                                        <p><b>In words:</b> The posterior probability of A given B is proportional to the likelihood of B given A multiplied by the prior probability of A.</p>
+                                        <p><a href="https://en.wikipedia.org/wiki/Bayes%27_theorem">Wikipedia: Bayes' Theorem</a>, <a href="https://mathworld.wolfram.com/BayesTheorem.html">Wolfram MathWorld: Bayes' Theorem</a></p>
+                                    </li>
+                                    <li>
+                                        <b>Applications in Spam Filtering, Medical Diagnosis, and A/B Testing:</b>
+                                        <p>Bayes' Theorem has a wide range of applications. For example, in spam filtering, we can use it to update our belief that an email is spam given the words it contains. In A/B testing we can use it to update our belief a new feature is better based on observed data.</p>
+                                    </li>
+                                    <li>
+                                        <b>Worked-out examples using Bayes' Theorem:</b> We'll walk through some examples in later sections to solidify your understanding.
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <b>2.4 Random Variables</b>
+                                <ul>
+                                    <li>
+                                        <b>Discrete vs. Continuous Random Variables:</b>
+                                        <p>A <b>random variable</b> is a variable whose value is a numerical outcome of a random phenomenon. A <b>discrete</b> random variable has a countable number of possible values (e.g., number of clicks, number of likes). A <b>continuous</b> random variable can take on any value within a given range (e.g., time spent on a page, height, weight).</p>
+                                        <p><a href="https://en.wikipedia.org/wiki/Random_variable">Wikipedia: Random Variable</a>, <a href="https://mathworld.wolfram.com/RandomVariable.html">Wolfram MathWorld: Random Variable</a></p>
+                                    </li>
+                                    <li>
+                                        <b>Probability Mass Functions (PMFs):</b>
+                                        <p>These describe the probability distribution of a <b>discrete</b> random variable. The PMF gives the probability that the random variable takes on a specific value.</p>
+                                        <p><b>Example:</b> For a fair six-sided die, the PMF is \(P(X=k) = 1/6\) for \(k = 1, 2, 3, 4, 5, 6\).</p>
+                                        <p><a href="https://en.wikipedia.org/wiki/Probability_mass_function">Wikipedia: Probability Mass Function</a>, <a href="https://mathworld.wolfram.com/ProbabilityMassFunction.html">Wolfram MathWorld: Probability Mass Function</a></p>
+                                    </li>
+                                    <li>
+                                        <b>Probability Density Functions (PDFs):</b>
+                                        <p>These describe the probability distribution of a <b>continuous</b> random variable. The probability that the random variable falls within a particular range is given by the area under the PDF curve over that range.</p>
+                                        <p><b>Example:</b> The standard normal distribution has a bell-shaped PDF.</p>
+                                        <p><a href="https://en.wikipedia.org/wiki/Probability_density_function">Wikipedia: Probability Density Function</a>, <a href="https://mathworld.wolfram.com/ProbabilityDensityFunction.html">Wolfram MathWorld: Probability Density Function</a></p>
+                                    </li>
+                                    <li>
+                                        <b>Cumulative Distribution Functions (CDFs):</b>
+                                        <p>The CDF gives the probability that a random variable (discrete or continuous) is less than or equal to a certain value.</p>
+                                        <p><b>Formula (for continuous random variables):</b></p>
+                                        <p>\[ F(x) = P(X \le x) = \int_{-\infty}^{x} f(t) dt \]</p>
+                                        <p>where \(f(t)\) is the PDF.</p>
+                                        <p><a href="https://en.wikipedia.org/wiki/Cumulative_distribution_function">Wikipedia: Cumulative Distribution Function</a>, <a href="https://mathworld.wolfram.com/DistributionFunction.html">Wolfram MathWorld: Distribution Function</a></p>
+                                    </li>
+                                    <li>
+                                        <b>Expectation and Variance of Random Variables:</b>
+                                        <p>The <b>expectation</b> (or expected value) of a random variable is its average value, weighted by the probabilities of each outcome. The <b>variance</b> measures the spread or dispersion of the random variable around its expected value.</p>
+                                        <p><b>Formula (for discrete random variables):</b></p>
+                                        <p>\[ E(X) = \sum_{i} x_i * P(X = x_i) \]</p>
+                                        <p>\[ Var(X) = E[(X - E(X))^2] = E(X^2) - [E(X)]^2 \]</p>
+                                        <p><a href="https://en.wikipedia.org/wiki/Expected_value">Wikipedia: Expected Value</a>, <a href="https://en.wikipedia.org/wiki/Variance">Wikipedia: Variance</a>, <a href="https://mathworld.wolfram.com/ExpectationValue.html">Wolfram MathWorld: Expected Value</a>, <a href="https://mathworld.wolfram.com/Variance.html">Wolfram MathWorld: Variance</a></p>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <hr>
+                    </div>
+                    <div class="card" id="probability-distributions">
+                        <h3 class="section-title">3. Probability Distributions</h3>
+                        <p>Probability distributions are mathematical functions that describe the likelihood of different outcomes in a random experiment. They're essential for modeling real-world phenomena and making predictions. Here are some of the most important ones:</p>
+                        <hr>
+                        <ul>
+                            <li>
+                                <b>3.1 Discrete Distributions</b>
+                                <ul>
+                                    <li>
+                                        <b>Bernoulli Distribution</b>
+                                        <p>Models a single trial with two possible outcomes (success or failure), each with a fixed probability.</p>
+                                        <p><b>Parameters:</b></p>
+                                        <ul>
+                                            <li>\(p\): Probability of success (0 ≤ \(p\) ≤ 1)</li>
+                                        </ul>
+                                        <p><b>Probability Mass Function (PMF):</b></p>
+                                        <p>\[ P(X=k) = \begin{cases} p & \text{if } k=1 \text{ (success)} \\ 1-p & \text{if } k=0 \text{ (failure)} \end{cases} \]</p>
+                                        <p><b>Example:</b> A single coin flip (Heads = success, Tails = failure).</p>
+                                        <p><b>Expectation:</b> \(E(X) = p\)</p>
+                                        <p><b>Variance:</b> \(Var(X) = p(1-p)\)</p>
+                                        <p><a href="https://en.wikipedia.org/wiki/Bernoulli_distribution">Wikipedia: Bernoulli Distribution</a>, <a href="https://mathworld.wolfram.com/BernoulliDistribution.html">Wolfram MathWorld: Bernoulli Distribution</a></p>
+                                    </li>
+                                    <li>
+                                        <b>Binomial Distribution</b>
+                                        <p>Models the number of successes in a fixed number of independent Bernoulli trials.</p>
+                                        <p><b>Parameters:</b></p>
+                                        <ul>
+                                            <li>\(n\): Number of trials</li>
+                                            <li>\(p\): Probability of success on each trial</li>
+                                        </ul>
+                                        <p><b>Probability Mass Function (PMF):</b></p>
+                                        <p>\[ P(X=k) = \binom{n}{k} p^k (1-p)^{n-k} \]</p>
+                                        <p>where \(\binom{n}{k} = \frac{n!}{k!(n-k)!}\) is the binomial coefficient.</p>
+                                        <p><b>Example:</b> The number of heads in 10 coin flips.</p>
+                                        <p><b>Expectation:</b> \(E(X) = np\)</p>
+                                        <p><b>Variance:</b> \(Var(X) = np(1-p)\)</p>
+                                        <p><a href="https://en.wikipedia.org/wiki/Binomial_distribution">Wikipedia: Binomial Distribution</a>, <a href="https://mathworld.wolfram.com/BinomialDistribution.html">Wolfram MathWorld: Binomial Distribution</a></p>
+                                    </li>
+                                    <li>
+                                        <b>Poisson Distribution</b>
+                                        <p>Models the number of events occurring in a fixed interval of time or space, given a constant average rate of occurrence.</p>
+                                        <p><b>Parameter:</b></p>
+                                        <ul>
+                                            <li>\(\lambda\): The average rate of events per interval (\(\lambda\) > 0)</li>
+                                        </ul>
+                                        <p><b>Probability Mass Function (PMF):</b></p>
+                                        <p>\[ P(X=k) = \frac{e^{-\lambda} \lambda^k}{k!} \]</p>
+                                        <p><b>Example:</b> The number of users visiting a website per hour.</p>
+                                        <p><b>Expectation:</b> \(E(X) = \lambda\)</p>
+                                        <p><b>Variance:</b> \(Var(X) = \lambda\)</p>
+                                        <p><a href="https://en.wikipedia.org/wiki/Poisson_distribution">Wikipedia: Poisson Distribution</a>, <a href="https://mathworld.wolfram.com/PoissonDistribution.html">Wolfram MathWorld: Poisson Distribution</a></p>
+                                    </li>
+                                    <li>
+                                        <b>Geometric Distribution</b>
+                                        <p>Models the number of independent Bernoulli trials needed to get the first success.</p>
+                                        <p><b>Parameter:</b></p>
+                                        <ul>
+                                            <li>\(p\): Probability of success on each trial (0 < \(p\) ≤ 1)</li>
+                                        </ul>
+                                        <p><b>Probability Mass Function (PMF):</b></p>
+                                        <p>\[ P(X=k) = (1-p)^{k-1} p \]</p>
+                                        <p><b>Example:</b> The number of ad impressions until a user clicks on an ad.</p>
+                                        <p><b>Expectation:</b> \(E(X) = \frac{1}{p}\)</p>
+                                        <p><b>Variance:</b> \(Var(X) = \frac{1-p}{p^2}\)</p>
+                                        <p><a href="https://en.wikipedia.org/wiki/Geometric_distribution">Wikipedia: Geometric Distribution</a>, <a href="https://mathworld.wolfram.com/GeometricDistribution.html">Wolfram MathWorld: Geometric Distribution</a></p>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <b>3.2 Continuous Distributions</b>
+                                <ul>
+                                    <li>
+                                        <b>Normal (Gaussian) Distribution</b>
+                                        <p>A bell-shaped distribution that is symmetric around the mean. Many natural phenomena and measurement errors follow a normal distribution. It is also the limiting distribution of the sum of many independent random variables (Central Limit Theorem).</p>
+                                        <p><b>Parameters:</b></p>
+                                        <ul>
+                                            <li>\(\mu\): Mean (center of the distribution)</li>
+                                            <li>\(\sigma\): Standard deviation (spread of the distribution)</li>
+                                        </ul>
+                                        <p><b>Probability Density Function (PDF):</b></p>
+                                        <p>\[ f(x) = \frac{1}{\sigma\sqrt{2\pi}} e^{-\frac{(x-\mu)^2}{2\sigma^2}} \]</p>
+                                        <p><b>Standard Normal Distribution:</b> A special case where \(\mu = 0\) and \(\sigma = 1\). Any normal distribution can be transformed into a standard normal distribution by standardizing: \(Z = \frac{X - \mu}{\sigma}\)</p>
+                                        <p><b>Example:</b> Heights of people, measurement errors.</p>
+                                        <p><b>Expectation:</b> \(E(X) = \mu\)</p>
+                                        <p><b>Variance:</b> \(Var(X) = \sigma^2\)</p>
+                                        <p><a href="https://en.wikipedia.org/wiki/Normal_distribution">Wikipedia: Normal Distribution</a>, <a href="https://mathworld.wolfram.com/NormalDistribution.html">Wolfram MathWorld: Normal Distribution</a></p>
+                                    </li>
+                                    <li>
+                                        <b>Exponential Distribution</b>
+                                        <p>Models the time until an event occurs, assuming a constant rate of occurrence. Often used in reliability analysis and queuing theory.</p>
+                                        <p><b>Parameter:</b></p>
+                                        <ul>
+                                            <li>\(\lambda\): Rate parameter (\(\lambda\) > 0), which is the average number of events per unit of time.</li>
+                                        </ul>
+                                        <p><b>Probability Density Function (PDF):</b></p>
+                                        <p>\[ f(x) = \lambda e^{-\lambda x} \text{ for } x \ge 0 \]</p>
+                                        <p><b>Example:</b> Time until a user churns, time until the next customer arrives.</p>
+                                        <p><b>Expectation:</b> \(E(X) = \frac{1}{\lambda}\)</p>
+                                        <p><b>Variance:</b> \(Var(X) = \frac{1}{\lambda^2}\)</p>
+                                        <p><a href="https://en.wikipedia.org/wiki/Exponential_distribution">Wikipedia: Exponential Distribution</a>, <a href="https://mathworld.wolfram.com/ExponentialDistribution.html">Wolfram MathWorld: Exponential Distribution</a></p>
+                                    </li>
+                                    <li>
+                                        <b>Uniform Distribution</b>
+                                        <p>All values within a given range are equally likely.</p>
+                                        <p><b>Parameters:</b></p>
+                                        <ul>
+                                            <li>\(a\): Lower bound of the range</li>
+                                            <li>\(b\): Upper bound of the range</li>
+                                        </ul>
+                                        <p><b>Probability Density Function (PDF):</b></p>
+                                        <p>\[ f(x) = \begin{cases} \frac{1}{b-a} & \text{for } a \le x \le b \\ 0 & \text{otherwise} \end{cases} \]</p>
+                                        <p><b>Example:</b> Random number generation between 0 and 1.</p>
+                                        <p><b>Expectation:</b> \(E(X) = \frac{a+b}{2}\)</p>
+                                        <p><b>Variance:</b> \(Var(X) = \frac{(b-a)^2}{12}\)</p>
+                                        <p><a href="https://en.wikipedia.org/wiki/Continuous_uniform_distribution">Wikipedia: Continuous Uniform Distribution</a>, <a href="https://mathworld.wolfram.com/UniformDistribution.html">Wolfram MathWorld: Uniform Distribution</a></p>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <b>3.3 Key Theorems</b>
+                                <ul>
+                                    <li>
+                                        <b>Law of Large Numbers:</b>
+                                        <p>This theorem states that as you repeat an experiment many times, the average of the results will converge to the expected value. In simpler terms, the more data you collect, the closer your sample average will be to the true population average.</p>
+                                        <p><b>Practical Implication:</b> When making decisions based on data, it's important to have a sufficiently large sample size to ensure that your results are reliable.</p>
+                                        <p><a href="https://en.wikipedia.org/wiki/Law_of_large_numbers">Wikipedia: Law of Large Numbers</a>, <a href="https://mathworld.wolfram.com/LawofLargeNumbers.html">Wolfram MathWorld: Law of Large Numbers</a></p>
+                                    </li>
+                                    <li>
+                                        <b>Central Limit Theorem:</b>
+                                        <p>One of the most important theorems in statistics! It states that the sum (or average) of a large number of independent and identically distributed random variables will be approximately normally distributed, regardless of the underlying distribution of the individual variables.</p>
+                                        <p><b>Practical Implication:</b> This theorem allows us to use statistical methods that assume normality (like t-tests and confidence intervals) even when the original data is not normally distributed, as long as the sample size is large enough. This is why the normal distribution is so important in statistical inference.</p>
+                                        <p><a href="https://en.wikipedia.org/wiki/Central_limit_theorem">Wikipedia: Central Limit Theorem</a>, <a href="https://mathworld.wolfram.com/CentralLimitTheorem.html">Wolfram MathWorld: Central Limit Theorem</a></p>
+                                    </li>
+                                    <li>
+                                        <b>Understanding the relationship between distributions:</b>
+                                        <p>Many distributions are related to each other. For example:</p>
+                                        <ul>
+                                            <li>The binomial distribution can be approximated by the normal distribution when the number of trials is large and the probability of success is not too close to 0 or 1.</li>
+                                            <li>The sum of independent Poisson random variables also follows a Poisson distribution.</li>
+                                            <li>The exponential distribution is the continuous counterpart of the geometric distribution.</li>
+                                        </ul>
+                                        <p>Understanding these relationships can help you choose the appropriate distribution for a given problem and make connections between different statistical concepts.</p>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <hr>
+                    </div>
+                    <div class="card" id="hypothesis-testing">
+                    <h3 class="section-title">4. Hypothesis Testing</h3>
+                        <p>Hypothesis testing is a formal procedure for using data to evaluate the validity of a claim about a population. It's a cornerstone of statistical inference and a critical tool for data scientists at Meta. Let's break down the key concepts:</p>
+                        <hr>
+                        <ul>
+                            <li>
+                                <b>4.1 Null and Alternative Hypotheses</b>
+                                <p>Every hypothesis test has two competing hypotheses:</p>
+                                <ul>
+                                    <li><b>Null Hypothesis (\(H_0\)):</b> This is the statement of "no effect" or "no difference." It's the status quo assumption that we're trying to disprove.</li>
+                                    <li><b>Alternative Hypothesis (\(H_1\) or \(H_a\)):</b> This is the statement that we're trying to find evidence for. It's the opposite of the null hypothesis.</li>
+                                </ul>
+                                <p><b>Example:</b></p>
+                                <ul>
+                                    <li>\(H_0\): The new ad campaign has no effect on click-through rates.</li>
+                                    <li>\(H_1\): The new ad campaign increases click-through rates.</li>
+                                </ul>
+                                <p><a href="https://en.wikipedia.org/wiki/Statistical_hypothesis_testing">Wikipedia: Statistical Hypothesis Testing</a>, <a href="https://mathworld.wolfram.com/HypothesisTesting.html">Wolfram MathWorld: Hypothesis Testing</a></p>
+                            </li>
+                            <li>
+                                <b>4.2 Type I and Type II Errors</b>
+                                <p>In hypothesis testing, there are two types of errors we can make:</p>
+                                <ul>
+                                    <li><b>Type I Error (False Positive):</b> Rejecting the null hypothesis when it is actually true. The probability of making a Type I error is denoted by \(\alpha\) (alpha) and is called the significance level.</li>
+                                    <li><b>Type II Error (False Negative):</b> Failing to reject the null hypothesis when it is actually false. The probability of making a Type II error is denoted by \(\beta\) (beta).</li>
+                                </ul>
+                                <p><b>Analogy:</b> Think of a smoke detector. A Type I error is a false alarm (the alarm goes off when there's no fire), and a Type II error is a missed alarm (the alarm doesn't go off when there is a fire).</p>
+                                <p><b>Trade-off:</b> There's a trade-off between Type I and Type II errors. Decreasing the probability of one type of error generally increases the probability of the other.</p>
+                                <p><a href="https://en.wikipedia.org/wiki/Type_I_and_type_II_errors">Wikipedia: Type I and Type II Errors</a>, <a href="https://mathworld.wolfram.com/TypeIError.html">Wolfram MathWorld: Type I Error</a>, <a href="https://mathworld.wolfram.com/TypeIIError.html">Wolfram MathWorld: Type II Error</a></p>
+                            </li>
+                            <li>
+                                <b>4.3 p-values and Statistical Significance</b>
+                                <p>The <b>p-value</b> is the probability of observing data as extreme as, or more extreme than, the actual data collected, assuming that the null hypothesis is true. It's a measure of how much evidence we have against the null hypothesis.</p>
+                                <p><b>Interpretation:</b></p>
+                                <ul>
+                                    <li>A small p-value (typically less than \(\alpha\), which is often set to 0.05) suggests that the observed data is unlikely to have occurred by chance alone if the null hypothesis were true. This provides evidence against the null hypothesis.</li>
+                                    <li>A large p-value suggests that the observed data is consistent with the null hypothesis.</li>
+                                </ul>
+                                <p><b>Decision Rule:</b></p>
+                                <ul>
+                                    <li>If p-value ≤ \(\alpha\): Reject the null hypothesis.</li>
+                                    <li>If p-value > \(\alpha\): Fail to reject the null hypothesis.</li>
+                                </ul>
+                                <p><b>Important Note:</b> The p-value is NOT the probability that the null hypothesis is true. It's the probability of observing the data (or more extreme data) given that the null hypothesis is true.</p>
+                                <p><a href="https://en.wikipedia.org/wiki/P-value">Wikipedia: P-value</a>, <a href="https://mathworld.wolfram.com/P-Value.html">Wolfram MathWorld: P-value</a></p>
+                            </li>
+                            <li>
+                                <b>4.4 Confidence Intervals</b>
+                                <p>A <b>confidence interval</b> provides a range of plausible values for a population parameter (e.g., the population mean, the difference in means between two groups). It's constructed in such a way that we have a certain level of confidence (e.g., 95%) that the true parameter lies within the interval.</p>
+                                <p><b>Interpretation:</b> A 95% confidence interval means that if we were to repeat the experiment many times and construct a confidence interval each time, about 95% of those intervals would contain the true population parameter.</p>
+                                <p><b>Relationship to Hypothesis Testing:</b> If the null hypothesis value of the parameter falls outside the confidence interval, we can reject the null hypothesis at the corresponding significance level.</p>
+                                <p><a href="https://en.wikipedia.org/wiki/Confidence_interval">Wikipedia: Confidence Interval</a>, <a href="https://mathworld.wolfram.com/ConfidenceInterval.html">Wolfram MathWorld: Confidence Interval</a></p>
+                            </li>
+                            <li>
+                                <b>4.5 Statistical Power and Sample Size Determination</b>
+                                <p><b>Statistical power</b> is the probability of correctly rejecting the null hypothesis when it is false (i.e., the probability of avoiding a Type II error). It depends on the sample size, the effect size, the significance level, and the variability of the data.</p>
+                                <p><b>Sample Size Determination:</b> Before conducting an experiment, it's important to determine the required sample size to achieve a desired level of power. This ensures that the study has a good chance of detecting a meaningful effect if it exists.</p>
+                                <p><b>Factors Affecting Power:</b></p>
+                                <ul>
+                                    <li><b>Sample Size:</b> Larger sample size = more power.</li>
+                                    <li><b>Effect Size:</b> Larger effect size (i.e., a bigger difference between groups or a stronger relationship between variables) = more power.</li>
+                                    <li><b>Significance Level (\(\alpha\)):</b> Higher \(\alpha\) = more power (but also a higher risk of Type I error).</li>
+                                    <li><b>Variability of Data:</b> Lower variability = more power.</li>
+                                </ul>
+                                <p><a href="https://en.wikipedia.org/wiki/Statistical_power">Wikipedia: Statistical Power</a>, <a href="https://mathworld.wolfram.com/StatisticalPower.html">Wolfram MathWorld: Statistical Power</a></p>
+                            </li>
+                            <li>
+                                <b>4.6 Common Hypothesis Tests</b>
+                                <p>Here are some commonly used hypothesis tests:</p>
+                                <ul>
+                                    <li>
+                                        <b>t-tests (Comparing Means)</b>
+                                        <p>Used to compare the means of two groups. There are different types of t-tests depending on whether the samples are independent or paired and whether the variances are assumed to be equal.</p>
+                                        <ul>
+                                            <li><b>Independent Samples t-test:</b> Used when the two groups are independent of each other (e.g., comparing the average time spent on a website between users who see ad A and users who see ad B).</li>
+                                            <li><b>Paired Samples t-test:</b> Used when the two groups are dependent or paired (e.g., comparing the average blood pressure of patients before and after taking a medication).</li>
+                                            <li><b>One-Sample t-test:</b> Used to compare the mean of a single group to a known or hypothesized value.</li>
+                                        </ul>
+                                        <p><b>Assumptions:</b></p>
+                                        <ul>
+                                            <li>The data should be approximately normally distributed within each group.</li>
+                                            <li>The variances of the two groups should be approximately equal (for independent samples t-test).</li>
+                                        </ul>
+                                        <p><b>Test Statistic:</b></p>
+                                        <p>\[ t = \frac{\bar{x}_1 - \bar{x}_2}{s_p \sqrt{\frac{1}{n_1} + \frac{1}{n_2}}} \]</p>
+                                        <p>where \(\bar{x}_1\) and \(\bar{x}_2\) are the sample means, \(s_p\) is the pooled standard deviation, and \(n_1\) and \(n_2\) are the sample sizes.</p>
+                                        <p><a href="https://en.wikipedia.org/wiki/Student%27s_t-test">Wikipedia: Student's t-test</a>, <a href="https://mathworld.wolfram.com/Studentst-Test.html">Wolfram MathWorld: Student's t-Test</a></p>
+                                    </li>
+                                    <li>
+                                        <b>Chi-squared Tests (Analyzing Categorical Data)</b>
+                                        <p>Used to determine if there's a relationship between two categorical variables.</p>
+                                        <ul>
+                                            <li><b>Chi-squared Test of Independence:</b> Tests whether two categorical variables are independent or associated.</li>
+                                            <li><b>Chi-squared Goodness-of-Fit Test:</b> Tests whether a sample distribution matches a hypothesized distribution.</li>
+                                        </ul>
+                                        <p><b>Test Statistic:</b></p>
+                                        <p>\[ \chi^2 = \sum \frac{(O_i - E_i)^2}{E_i} \]</p>
+                                        <p>where \(O_i\) is the observed frequency and \(E_i\) is the expected frequency for each category.</p>
+                                        <p><a href="https://en.wikipedia.org/wiki/Chi-squared_test">Wikipedia: Chi-squared Test</a>, <a href="https://mathworld.wolfram.com/Chi-SquaredTest.html">Wolfram MathWorld: Chi-Squared Test</a></p>
+                                    </li>
+                                    <li>
+                                        <b>ANOVA (Comparing Means Across Multiple Groups)</b>
+                                        <p>Used to compare the means of more than two groups. It determines whether there are any statistically significant differences between the group means.</p>
+                                        <p><b>Assumptions:</b></p>
+                                        <ul>
+                                            <li>The data should be approximately normally distributed within each group.</li>
+                                            <li>The variances of the groups should be approximately equal.</li>
+                                            <li>The observations should be independent.</li>
+                                        </ul>
+                                        <p><b>Test Statistic:</b></p>
+                                        <p>\[ F = \frac{\text{Variance between groups}}{\text{Variance within groups}} \]</p>
+                                        <p><a href="https://en.wikipedia.org/wiki/Analysis_of_variance">Wikipedia: Analysis of Variance (ANOVA)</a>, <a href="https://mathworld.wolfram.com/AnalysisofVariance.html">Wolfram MathWorld: Analysis of Variance</a></p>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <hr>
+                    </div>
+                    <div class="card" id="regression-analysis">
+                    <h3 class="section-title">5. Regression Analysis</h3>                        
+                        <p>Regression analysis is a set of statistical methods used to model the relationship between a dependent variable and one or more independent variables. It's a powerful tool for prediction and understanding causal relationships.</p>
+                        <hr>
+                        <ul>
+                            <li>
+                                <b>5.1 Simple Linear Regression</b>
+                                <p>This is the simplest form of regression, where we model the relationship between two variables with a straight line.</p>
+                                <p><b>Model:</b></p>
+                                <p>\[ y = \beta_0 + \beta_1 x + \epsilon \]</p>
+                                <p>where:</p>
+                                <ul>
+                                    <li>\(y\) is the dependent variable (the outcome we're trying to predict).</li>
+                                    <li>\(x\) is the independent variable (the predictor variable).</li>
+                                    <li>\(\beta_0\) is the y-intercept (the value of \(y\) when \(x\) is 0).</li>
+                                    <li>\(\beta_1\) is the slope (the change in \(y\) for a one-unit increase in \(x\)).</li>
+                                    <li>\(\epsilon\) is the error term (the difference between the actual value of \(y\) and the predicted value).</li>
+                                </ul>
+                                <p><b>Example:</b> Predicting ice cream sales based on temperature.</p>
+                                <p><b>Estimation:</b> The most common method for estimating the coefficients (\(\beta_0\) and \(\beta_1\)) is Ordinary Least Squares (OLS), which minimizes the sum of the squared differences between the actual and predicted values of \(y\).</p>
+                                <p><a href="https://en.wikipedia.org/wiki/Simple_linear_regression">Wikipedia: Simple Linear Regression</a>, <a href="https://mathworld.wolfram.com/LeastSquaresFitting.html">Wolfram MathWorld: Least Squares Fitting</a></p>
+                            </li>
+                            <li>
+                                <b>5.2 Multiple Linear Regression</b>
+                                <p>This is an extension of simple linear regression where we have more than one independent variable.</p>
+                                <p><b>Model:</b></p>
+                                <p>\[ y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + ... + \beta_p x_p + \epsilon \]</p>
+                                <p>where we have \(p\) independent variables.</p>
+                                <p><b>Example:</b> Predicting house prices based on square footage, number of bedrooms, and location.</p>
+                                <p><b>Estimation:</b> Similar to simple linear regression, we use OLS to estimate the coefficients.</p>
+                                <p><a href="https://en.wikipedia.org/wiki/Linear_regression">Wikipedia: Linear Regression</a>, <a href="https://mathworld.wolfram.com/LeastSquaresFittingPolynomial.html">Wolfram MathWorld: Least Squares Fitting</a></p>
+                            </li>
+                            <li>
+                                <b>5.3 Model Evaluation (R-squared, RMSE, MAE)</b>
+                                <p>How do we know if our regression model is any good? Here are some common metrics:</p>
+                                <ul>
+                                    <li><b>R-squared (\(R^2\)):</b> Measures the proportion of the variance in the dependent variable that is explained by the independent variables. It ranges from 0 to 1, with higher values indicating a better fit.</li>
+                                    <li><b>Root Mean Squared Error (RMSE):</b> Measures the average difference between the actual and predicted values of the dependent variable. It has the same units as the dependent variable.</li>
+                                    <li><b>Mean Absolute Error (MAE):</b> Measures the average absolute difference between the actual and predicted values. It is less sensitive to outliers than RMSE.</li>
+                                </ul>
+                                <p><a href="https://en.wikipedia.org/wiki/Coefficient_of_determination">Wikipedia: Coefficient of Determination</a>, <a href="https://en.wikipedia.org/wiki/Root-mean-square_deviation">Wikipedia: Root Mean Square Deviation</a>, <a href="https://en.wikipedia.org/wiki/Mean_absolute_error">Wikipedia: Mean Absolute Error</a></p>
+                            </li>
+                            <li>
+                                <b>5.4 Logistic Regression (for Binary Outcomes)</b>
+                                <p>What if our dependent variable is binary (e.g., click/no click, convert/no convert)? That's where logistic regression comes in.</p>
+                                <p><b>Model:</b></p>
+                                <p>\[ p = \frac{1}{1 + e^{-(\beta_0 + \beta_1 x_1 + ... + \beta_p x_p)}} \]</p>
+                                <p>where \(p\) is the probability of the outcome (e.g., the probability of a click), and the right-hand side is the logistic function.</p>
+                                <p><b>Example:</b> Predicting whether a user will click on an ad based on their age, gender, and interests.</p>
+                                <p><b>Estimation:</b> We use Maximum Likelihood Estimation (MLE) to estimate the coefficients.</p>
+                                <p><a href="https://en.wikipedia.org/wiki/Logistic_regression">Wikipedia: Logistic Regression</a>, <a href="https://mathworld.wolfram.com/LogisticEquation.html">Wolfram MathWorld: Logistic Equation</a></p>
+                            </li>
+                            <li>
+                                <b>5.5 Interpreting Regression Coefficients</b>
+                                <p>The coefficients in a regression model tell us the change in the dependent variable associated with a one-unit change in the corresponding independent variable, holding all other independent variables constant.</p>
+                                <p><b>Example:</b> In a simple linear regression model predicting house prices based on square footage, a coefficient of 100 for square footage would mean that, on average, each additional square foot is associated with a $100 increase in price.</p>
+                                <p><b>Important Note:</b> The interpretation of coefficients can be more complex in multiple linear regression, as we need to consider the relationships between the independent variables.</p>
+                            </li>
+                        </ul>
+                        <hr>
+                    </div>
+                    <div class="card" id="experimental-design">
+                        <h3 class="section-title">6. Experimental Design / Causal Inference</h3>                        
+                        <p>Experimental design is the process of planning an experiment to test a hypothesis in a way that allows us to draw causal conclusions. It's crucial for establishing whether a change in one variable really causes a change in another, and not just that they are associated or correlated. In this section we will look into the key ideas behind causal inference, focusing on how to design experiments that allow us to attribute effects to their causes with confidence.</p>
+                        <hr>
+                        <ul>
+                            <li>
+                                <b>6.1 A/B Testing Fundamentals</b>
+                                <p>A/B testing is the most powerful and widely used method for causal inference in tech. The idea is to randomly assign users to different versions of a product or feature (A and B), and then compare their behavior. By randomizing, we aim to ensure that the groups are similar in all respects except for the treatment, allowing us to attribute any observed differences to the treatment itself.</p>
+                                <p><b>Key Components:</b></p>
+                                <ul>
+                                    <li><b>Control Group (A):</b> The group that receives the existing version or no treatment.</li>
+                                    <li><b>Treatment Group (B):</b> The group that receives the new version or treatment.</li>
+                                    <li><b>Randomization:</b> Assigning users to groups randomly to ensure that the groups are comparable.</li>
+                                    <li><b>Outcome Variable:</b> The metric you're measuring (e.g., click-through rate, conversion rate, time spent).</li>
+                                    <li><b>Hypothesis:</b> A statement about the expected effect of the treatment.</li>
+                                </ul>
+                                <p><b>Example:</b> Testing a new button color on a website to see if it increases click-through rates.</p>
+                                <p><a href="https://en.wikipedia.org/wiki/A/B_testing">Wikipedia: A/B Testing</a></p>
+                            </li>
+                            <li>
+                                <b>6.2 Randomization and Control Groups</b>
+                                <p><b>Randomization</b> is the cornerstone of experimental design. By randomly assigning units (e.g., users, sessions) to treatment and control groups, we aim to create groups that are statistically equivalent in all respects except for the treatment. This helps us isolate the effect of the treatment.</p>
+                                <p><b>Control Group:</b> The control group serves as a baseline for comparison. It allows us to estimate what would have happened in the absence of the treatment. It is important that the control group is identical to the treatment group in all ways apart from not being exposed to the treatment. This is the reason why randomization is so important.</p>
+                                <p><b>Why Randomization is Important:</b></p>
+                                <ul>
+                                    <li>Minimizes bias by ensuring that known and unknown confounding factors are evenly distributed across groups.</li>
+                                    <li>Allows us to make causal inferences about the effect of the treatment.</li>
+                                </ul>
+                            </li>
+                            <li>
+                                <b>6.3 Confounding Variables and Bias</b>
+                                <p><b>Confounding variables</b> are variables that are associated with both the treatment and the outcome. If not accounted for, they can bias the results and lead to incorrect conclusions. Randomization helps to mitigate the influence of confounding variables, but it's important to be aware of potential confounders and control for them if possible.</p>
+                                <p><b>Example:</b> Suppose you're testing a new educational program, and students who volunteer for the program (treatment group) tend to be more motivated than those who don't (control group). Motivation is a confounding variable because it's associated with both the treatment (volunteering) and the outcome (academic performance).</p>
+                                <p><b>Types of Bias:</b></p>
+                                <ul>
+                                    <li><b>Selection Bias:</b> Occurs when the treatment and control groups are not comparable at baseline.</li>
+                                    <li><b>Omitted Variable Bias:</b> Occurs when a confounding variable is not included in the analysis.</li>
+                                    <li><b>Measurement Bias:</b> Occurs when the outcome variable is measured differently between the treatment and control groups.</li>
+                                </ul>
+                            </li>
+                            <li>
+                                <b>6.4 Beyond A/B Testing: Quasi-Experiments and Observational Studies</b>
+                                <p>Sometimes, a true randomized experiment (like an A/B test) is not feasible or ethical. In these cases, we can use quasi-experimental or observational methods to try to estimate causal effects.</p>
+                                <ul>
+                                    <li>
+                                        <b>Quasi-Experiments:</b> These are studies where the treatment assignment is not completely random, but there is some "as-if" random variation that can be exploited. Examples include:
+                                        <ul>
+                                            <li><b>Regression Discontinuity:</b> Comparing units just above and below a cutoff threshold for treatment assignment.</li>
+                                            <li><b>Difference-in-Differences:</b> Comparing changes in outcomes over time between a treatment group and a control group that are assumed to have parallel trends in the absence of treatment.</li>
+                                            <li><b>Instrumental Variables:</b> Using a variable that affects the treatment but not the outcome directly to isolate the causal effect of the treatment.</li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <b>Observational Studies:</b> These are studies where the researcher does not control the treatment assignment. Instead, they observe the relationship between the treatment and the outcome, while trying to control for confounding variables. Examples include:
+                                        <ul>
+                                            <li><b>Matching:</b> Creating a control group that is similar to the treatment group based on observed characteristics.</li>
+                                            <li><b>Regression Analysis:</b> Using statistical models to control for confounding variables.</li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                                <p><b>Limitations:</b> Causal inference is more challenging in quasi-experiments and observational studies because it's harder to rule out confounding variables. These approaches often require making additional assumptions.</p>
+                                <p><a href="https://en.wikipedia.org/wiki/Quasi-experiment">Wikipedia: Quasi-Experiment</a>, <a href="https://en.wikipedia.org/wiki/Observational_study">Wikipedia: Observational Study</a></p>
+                            </li>
+                            <li>
+                                <b>6.5 Ethical Considerations in Experimentation</b>
+                                <p>When conducting experiments with human subjects, it's important to consider ethical principles such as:</p>
+                                <ul>
+                                    <li><b>Informed Consent:</b> Participants should be informed about the experiment and agree to participate.</li>
+                                    <li><b>Beneficence:</b> The potential benefits of the experiment should outweigh the risks to participants.</li>
+                                    <li><b>Justice:</b> The benefits and risks of the experiment should be fairly distributed among the population.</li>
+                                    <li><b>Data Privacy and Security:</b> Protecting the privacy and security of participants' data is of utmost importance.</li>
+                                </ul>
+                                <p><b>Example:</b> When testing a new feature on a social media platform, it's important to consider the potential impact on users' mental health, privacy, and well-being.</p>
+                                <p><a href="https://en.wikipedia.org/wiki/Research_ethics">Wikipedia: Research Ethics</a></p>
+                            </li>
+                        </ul>
+                        <hr>
+                    </div>
+                    <div class="card" id="bayesian-methods">
+                        <h3 class="section-title">7. Bayesian Methods</h3>                        
+                        <h4>7 Bayesian Methods</h4>
+                        <p>Bayesian methods offer an alternative approach to statistical inference that is based on updating prior beliefs with new data. Unlike frequentist methods, which focus on long-run frequencies, Bayesian methods treat probabilities as degrees of belief.</p>
+                        <hr>
+                        <ul>
+                            <li>
+                                <b>7.1 Bayes' Theorem</b>
+                                <p>We've already touched on Bayes' Theorem, but let's revisit it in more detail. It's the fundamental equation that underlies Bayesian inference.</p>
+                                <p><b>Formula:</b></p>
+                                <p>\[ P(A|B) = \frac{P(B|A) * P(A)}{P(B)} \]</p>
+                                <p><b>Components:</b></p>
+                                <ul>
+                                    <li>\(P(A|B)\): Posterior probability - the probability of event A given that event B has occurred.</li>
+                                    <li>\(P(B|A)\): Likelihood - the probability of observing event B given that event A is true.</li>
+                                    <li>\(P(A)\): Prior probability - the initial probability of event A.</li>
+                                    <li>\(P(B)\): Evidence - the probability of event B occurring.</li>
+                                </ul>
+                                <p><b>In words:</b> The posterior probability of A given B is proportional to the likelihood of B given A multiplied by the prior probability of A.</p>
+                                <p><a href="https://en.wikipedia.org/wiki/Bayes%27_theorem">Wikipedia: Bayes' Theorem</a>, <a href="https://mathworld.wolfram.com/BayesTheorem.html">Wolfram MathWorld: Bayes' Theorem</a></p>
+                            </li>
+                            <li>
+                                <b>7.2 Prior and Posterior Distributions</b>
+                                <p>In Bayesian inference, we represent our uncertainty about parameters using probability distributions.</p>
+                                <ul>
+                                    <li><b>Prior Distribution:</b> This represents our beliefs about a parameter *before* observing any data. It can be based on previous studies, expert opinion, or other sources of information. The prior distribution is denoted as \(P(\theta)\), where \(\theta\) is the parameter of interest.</li>
+                                    <li><b>Posterior Distribution:</b> This represents our updated beliefs about the parameter *after* observing the data. It combines the information from the prior distribution and the likelihood function. The posterior distribution is denoted as \(P(\theta|data)\).</li>
+                                </ul>
+                                <p><b>Bayes' Theorem for Distributions:</b></p>
+                                <p>\[ P(\theta|data) = \frac{P(data|\theta) * P(\theta)}{P(data)} \]</p>
+                                <p>where:</p>
+                                <ul>
+                                    <li>\(P(\theta|data)\) is the posterior distribution.</li>
+                                    <li>\(P(data|\theta)\) is the likelihood function.</li>
+                                    <li>\(P(\theta)\) is the prior distribution.</li>
+                                    <li>\(P(data)\) is the marginal likelihood (a normalizing constant).</li>
+                                </ul>
+                                <p><b>Example:</b> Suppose we want to estimate the click-through rate (\(\theta\)) of an ad. We might start with a prior distribution that reflects our belief that the CTR is around 0.1 (10%). After observing some data (clicks and impressions), we can update our belief using Bayes' Theorem to obtain a posterior distribution for the CTR.</p>
+                            </li>
+                            <li>
+                                <b>7.3 Applications in A/B Testing and Personalization</b>
+                                <p>Bayesian methods are increasingly being used in A/B testing and personalization because they offer several advantages over frequentist methods:</p>
+                                <ul>
+                                    <li><b>Incorporating Prior Information:</b> Bayesian methods allow us to incorporate prior knowledge or beliefs into the analysis, which can be especially useful when data is limited.</li>
+                                    <li><b>Quantifying Uncertainty:</b> Bayesian methods provide a full posterior distribution for the parameter of interest, which allows us to quantify our uncertainty about the estimate.</li>
+                                    <li><b>Making Decisions:</b> Bayesian methods provide a natural framework for making decisions under uncertainty. For example, we can calculate the probability that one treatment is better than another, or we can choose the treatment that maximizes the expected utility.</li>
+                                    <li><b>Sequential Analysis:</b> Bayesian methods can be easily adapted for sequential analysis, where we update our beliefs as new data comes in. This allows us to stop an experiment early if there is strong evidence in favor of one treatment.</li>
+                                </ul>
+                                <p><b>Example:</b> In a Bayesian A/B test, we might start with a prior distribution for the difference in conversion rates between two versions of a website. As we collect data, we update the posterior distribution. We can then calculate the probability that the new version is better than the old version, and we can stop the test early if this probability exceeds a certain threshold.</p>
+                                <p><a href="https://en.wikipedia.org/wiki/Bayesian_inference">Wikipedia: Bayesian Inference</a>, <a href="https://en.wikipedia.org/wiki/Bayesian_statistics">Wikipedia: Bayesian Statistics</a></p>
+                            </li>
+                        </ul>
+                        <hr>
+                    </div>
+                   
+                    <div class="navigation-buttons">
+                        <a href="../introduction.html">Previous: Introduction</a>
+                        <a href="foundational_knowledge/2-SQL.html">Next: SQL Basic -> Pro</a>
+                  </div>
+                </div>
+             </div>
+        </div>
+    </div>
+     <div class="footer-banner">
+        </div>
+    <footer>
+        <p>© 2025 Moshe Shamoulian</p>
+    </footer>
+</body>
+</html>
