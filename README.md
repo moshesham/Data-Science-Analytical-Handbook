@@ -50,6 +50,30 @@ This file outlines potential additions and improvements to the handbook in the f
 
 The GitHub Pages for this repository is available at: [GitHub Pages URL](https://moshesham.github.io/Data-Science-Analytical-Handbook/)
 
+### 9. 🧠 Omniscient Architect - Code Review Tool (NEW!)
+
+An elite-level AI code review system that performs forensic, multi-perspective analysis of codebases. This tool simulates four specialist sub-agents (Architecture, Efficiency, Reliability, and Alignment) to provide comprehensive code reviews.
+
+**Quick Start:**
+```bash
+# Analyze this repository
+python omniscient_architect.py . --objective "Your project goal"
+
+# Save detailed report
+python omniscient_architect.py . --output review.md
+```
+
+**Documentation:**
+* **Quick Start Guide:** `QUICK_START.md` - Get started in 5 minutes
+* **Full Documentation:** `OMNISCIENT_ARCHITECT_README.md` - Complete feature reference
+* **Sample Report:** `SAMPLE_ANALYSIS_REPORT.md` - See example output
+
+**Use Cases:**
+- Portfolio project reviews before sharing with recruiters
+- Self-assessment for interview preparation projects
+- Learning best practices from code analysis
+- Understanding codebase structure and quality
+
 ## How to Use This Material
 
 1. **Start with the Handbook:** Begin by reading the `Data-Science-Analytical-Interview-Preparation-Handbook.MD` file to gain a comprehensive understanding of Meta's interview process and the key skills assessed.
