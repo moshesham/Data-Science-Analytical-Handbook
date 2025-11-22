@@ -185,7 +185,8 @@ def main():
         decomposition_model = st.selectbox(
             "Decomposition Model:", ["additive", "multiplicative"]
         )
-        decomposition = plot_decomposition(df, model=decomposition_model)
+        # plot_decomposition already renders plots; call without assigning to avoid unused-variable
+        plot_decomposition(df, model=decomposition_model)
 
         # Stationarity Test
         st.subheader("Stationarity Test (ADF)")
@@ -413,7 +414,7 @@ def main():
     for i, question in enumerate(quiz_questions):
         st.markdown(f"**{i + 1}. {question['question']}**")
         user_answer = st.radio(
-            f"Select an answer:", question["options"], key=f"quiz_{i}"
+            "Select an answer:", question["options"], key=f"quiz_{i}"
         )
         user_answers.append(user_answer)
 

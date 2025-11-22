@@ -238,17 +238,18 @@ def main():
 
     with st.expander("📊Discrete Probability Distributions"):
         st.markdown(
-            """ 
+            """
         ### Discrete Probability Distributions
         #### Probability Mass Function (PMF)
-        For a discrete random variable, the **Probability Mass Function (PMF)**, denoted as P(X=x) or f(x), gives the probability that the random variable X takes on a specific value x.  It is the discrete counterpart to the Probability Density Function (PDF) for continuous variables.
+        For a discrete random variable, the **Probability Mass Function (PMF)**, denoted as P(X=x) or f(x), gives the probability that the random variable X takes on a specific value x. It is the discrete counterpart to the Probability Density Function (PDF) for continuous variables.
 
-        *   **Formal Definition:**  For a discrete random variable X, the PMF is a function f(x) that satisfies:
+        *   **Formal Definition:** For a discrete random variable X, the PMF is a function f(x) that satisfies:
             *   f(x) = P(X = x)
             *   f(x) ≥ 0 for all x (Probabilities are non-negative)
             *   Σ f(x) = 1, where the sum is over all possible values of X (Total probability sums to 1)
 
-        *   **Interpretation:** The PMF directly gives the probability of each possible outcome for a discrete random variable.  For example, if X is the outcome of a die roll, the PMF tells you P(X=1), P(X=2), P(X=3), ..., P(X=6).
+        *   **Interpretation:** The PMF directly gives the probability of each possible outcome for a discrete random variable.
+            For example, if X is the outcome of a die roll, the PMF tells you P(X=1), P(X=2), P(X=3), ..., P(X=6).
 
         #### 6.2 Cumulative Distribution Function (CDF) for Discrete Variables
         The **Cumulative Distribution Function (CDF)**, denoted as F(x) or P(X ≤ x), for a discrete random variable X gives the probability that X takes a value less than or equal to x.  It provides the cumulative probability up to a certain point.
@@ -1526,7 +1527,6 @@ def main():
         )
 
         if st.button("Run LLN Demo (Dice Rolls)"):
-            sample_means = []
             cumulative_means = []
             dice_rolls_lln = generate_dice_roll(num_trials_lln)
 
@@ -1748,7 +1748,7 @@ def main():
     for i, question in enumerate(quiz_questions):
         st.markdown(f"**{i + 1}. {question['question']}**")
         user_answer = st.radio(
-            f"Select an answer:", question["options"], key=f"quiz_{i}"
+            "Select an answer:", question["options"], key=f"quiz_{i}"
         )
         user_answers.append(user_answer)
 

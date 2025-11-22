@@ -556,9 +556,7 @@ def main():
         """
         )
 
-    interactive_section = st.expander(
-        "🕹️ 2. Interactive Probability Explorations", expanded=True
-    )
+    # interactive_section removed (was assigned but unused)
 
     with st.expander(" 📈 Interactive Transaction Anomaly Simulation", expanded=True):
         st.subheader("Interactive Transaction Anomaly Simulation")
@@ -685,7 +683,7 @@ def main():
             rule_location_options,
             default=["Dubai"],
         )
-        velocity_threshold = st.slider(
+        st.slider(
             "Velocity Threshold (Transactions per Hour) for Rule 3:",
             min_value=1,
             max_value=10,

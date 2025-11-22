@@ -1,0 +1,34 @@
+name: HTML validate
+
+on:
+  workflow_dispatch: {}
+  pull_request:
+    paths:
+      - '**/*.html'
+      - '_site/**'
+
+jobs:
+  html-validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build Jekyll site (Docker)
+        run: |
+          if [ -f docker-compose.yml ]; then
+            docker compose -f docker-compose.yml run --rm jekyll jekyll build --destination /work/_site || true
+          else
+            echo 'No docker-compose.yml found, skipping build.'
+          fi
+      - name: Run HTML-validate (npm)
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+      - name: Install html-validate
+        run: npm i -g html-validate@8
+      - name: Validate _site
+        run: |
+          if [ -d _site ]; then
+            html-validate --config .htmlvalidate.json _site || true
+          else
+            echo '_site not present, skipping html validation'
+          fi

@@ -567,7 +567,6 @@ def main():
         p_disease = prevalence
         p_no_disease = 1 - p_disease
         p_positive_given_disease = test_accuracy
-        p_negative_given_disease = 1 - test_accuracy
         p_positive_given_no_disease = 1 - test_accuracy  # False positive rate
         p_negative_given_no_disease = test_accuracy
 
@@ -848,7 +847,7 @@ def main():
     for i, question in enumerate(quiz_questions):
         st.markdown(f"**{i + 1}. {question['question']}**")
         user_answer = st.radio(
-            f"Select an answer:", question["options"], key=f"quiz_{i}"
+            "Select an answer:", question["options"], key=f"quiz_{i}"
         )
         user_answers.append(user_answer)
 

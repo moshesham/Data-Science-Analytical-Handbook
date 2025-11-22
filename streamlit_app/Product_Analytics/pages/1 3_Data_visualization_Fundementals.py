@@ -347,7 +347,7 @@ def data_visualization_page():
         orientation = st.radio(
             "Orientation:", ["Vertical", "Horizontal"], horizontal=True
         )
-        orient = "v" if orientation == "Vertical" else "h"
+    # 'orient' variable unused; orientation is checked inline when needed
 
         if st.button("Plot Bar Chart", key="bar_button"):  # UNIQUE KEY
             if not cat_cols:

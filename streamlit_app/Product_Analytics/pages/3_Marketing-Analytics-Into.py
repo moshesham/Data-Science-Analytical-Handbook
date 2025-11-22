@@ -359,7 +359,7 @@ def main():
     st.title("Marketing Analytics: An In-Depth Guide 📈")
     st.write(
         """
-        Unlock the power of data in marketing! This interactive guide will walk you through the essentials of marketing analytics, 
+        Unlock the power of data in marketing! This interactive guide will walk you through the essentials of marketing analytics,
         from fundamental concepts to real-world applications and future trends. Master data-driven marketing and elevate your strategies.
     """
     )
@@ -1112,7 +1112,7 @@ def main():
     for i, question in enumerate(quiz_questions):
         st.markdown(f"**{i + 1}. {question['question']}**")
         user_answer = st.radio(
-            f"Select an answer:", question["options"], key=f"quiz_{i}"
+            "Select an answer:", question["options"], key=f"quiz_{i}"
         )
         user_answers.append(user_answer)
 

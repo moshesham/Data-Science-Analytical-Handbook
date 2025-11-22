@@ -1,0 +1,10 @@
+[flake8]
+exclude = _site, .venv, env, venv, .git, __pycache__
+max-line-length = 100
+# Don't fail CI on long content/docstring lines for pages (they're content-heavy)
+per-file-ignores =
+	streamlit_app/Product_Analytics/pages/*.py:E501
+	Simulations/*.py:E501
+	streamlit_app/Product_Analytics/main.py:E501
+	streamlit_app/Product_Analytics/test.py:E501
+	streamlit_app/Product_Analytics/features/*.py:E501

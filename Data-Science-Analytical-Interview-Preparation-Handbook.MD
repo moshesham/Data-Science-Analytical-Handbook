@@ -484,7 +484,7 @@ print(average_age_by_city)
 *   **Asking Clarifying Questions:** Practice asking clarifying questions to fully understand the problem, identify key assumptions, and uncover hidden requirements. This is crucial for focusing your analysis and ensuring you're solving the right problem.
 
     | Option | Metric A | Impact on Metric A | Metric B | Impact on Metric B | Overall Assessment |
-    | :----- | :------- | :------------------ | :------- | :------------------ | :----------------- |
+    | ----- | ------- | ------------------ | ------- | ------------------ | ----------------- |
     | A      | CTR      | +5%                 | Load Time | +20ms               | Acceptable Trade-off |
     | B      | CTR      | +10%                | Load Time | +100ms              | Unacceptable Trade-off |
 

@@ -156,7 +156,7 @@ Data quality monitoring is the ongoing process of measuring, tracking, and repor
 ### Trade-off Analysis
 
 | Technique             | Effort Required | Complexity    | Impact on Data | Potential Risks                                  | Use Cases                                                                                 |
-| :-------------------- | :-------------- | :------------ | :------------- | :--------------------------------------------- | :---------------------------------------------------------------------------------------- |
+| -------------------- | -------------- | ------------ | ------------- | --------------------------------------------- | ---------------------------------------------------------------------------------------- |
 | Data Profiling       | Low-Medium      | Low-Medium      | None (read-only) | Misinterpretation of results                    | Initial data assessment, identifying data quality issues, understanding data characteristics |
 | Data Cleansing       | Medium-High     | Medium-High     | Modifies data   | Incorrect corrections, data loss                 | Addressing errors, inconsistencies, and missing values                                    |
 | Data Enrichment      | Medium-High     | Medium-High     | Adds data       | Data privacy concerns, integration challenges   | Adding context, improving completeness, creating new insights                               |

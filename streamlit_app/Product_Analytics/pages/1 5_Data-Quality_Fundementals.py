@@ -147,7 +147,7 @@ def main():
                         ",", ""
                     ):  # handle formatting
                         st.warning(
-                            f"Consistency Issue: Name format is different, but values represent the same entity."
+                            "Consistency Issue: Name format is different, but values represent the same entity."
                         )
                     else:
                         st.error(
@@ -486,7 +486,7 @@ def main():
     for i, question in enumerate(quiz_questions):
         st.markdown(f"**{i + 1}. {question['question']}**")
         user_answer = st.radio(
-            f"Select an answer:", question["options"], key=f"quiz_{i}"
+            "Select an answer:", question["options"], key=f"quiz_{i}"
         )
         user_answers.append(user_answer)
 

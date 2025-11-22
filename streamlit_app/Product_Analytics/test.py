@@ -143,11 +143,11 @@ def create_correlation_heatmap_mpl(
     ax.set_xticklabels(corr_matrix.columns, rotation=45, ha="right")
     ax.set_yticklabels(corr_matrix.columns)
 
-    cbar = ax.figure.colorbar(im, ax=ax)
+    ax.figure.colorbar(im, ax=ax)
 
     for i in range(len(corr_matrix.columns)):
         for j in range(len(corr_matrix.columns)):
-            text = ax.text(
+            ax.text(
                 j,
                 i,
                 f"{corr_matrix.iloc[i, j]:.2f}",

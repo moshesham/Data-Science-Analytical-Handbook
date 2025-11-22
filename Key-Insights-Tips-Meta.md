@@ -14,8 +14,8 @@ This section summarizes the key insights and tips specific to Meta, categorized 
 *   Feature Engineering is Crucial: Demonstrate your ability to create impactful features from existing data.
 *   Algorithm Justification: Be prepared to justify your choice of algorithm based on data type, problem type, interpretability, and computational cost.
 *   Model Explainability: Explain how your model works and why it makes certain predictions. This is crucial for building trust and understanding.
- 
- 
+
+
 ### Product Sense & Business Acumen
 
 *   User-Centric Approach: Demonstrate a strong user focus in your analysis and recommendations.

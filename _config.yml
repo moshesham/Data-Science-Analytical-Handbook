@@ -6,6 +6,10 @@ url: "" # set to your site URL, e.g. https://username.github.io
 markdown: kramdown
 kramdown:
   input: GFM
+  auto_id_prefix: "id-"
+
+  # Prevent inline styles for table alignment
+  table_align_class: true
 
 permalink: /:categories/:title/
 
