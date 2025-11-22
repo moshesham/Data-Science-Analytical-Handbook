@@ -1,15 +1,21 @@
 # utils/stats_utils.py
+import math
+from typing import Dict, List
+
 import numpy as np
 from scipy import stats
-from typing import List, Dict
 from statsmodels.stats.power import TTestIndPower
-import math
+
 
 def calculate_descriptive_stats(data: List[float]) -> Dict:
     """Calculates descriptive statistics for a given dataset."""
     data = np.array(data)
     unique_values = np.unique(data)
-    mode_val =  stats.mode(data, keepdims=True)[0][0] if len(unique_values) < 500 else "Not well-defined"
+    mode_val = (
+        stats.mode(data, keepdims=True)[0][0]
+        if len(unique_values) < 500
+        else "Not well-defined"
+    )
     return {
         "Mean": np.mean(data),
         "Median": np.median(data),
@@ -26,8 +32,13 @@ def calculate_descriptive_stats(data: List[float]) -> Dict:
         "90th Percentile": np.percentile(data, 90),
     }
 
-def calculate_sample_size_power(effect_size: float, power: float, alpha: float = 0.05) -> float:
-      """Calculates sample size given effect size, power and alpha"""
-      analysis = TTestIndPower() # indendent samples t test
-      sample_size = analysis.solve_power(effect_size = effect_size, power=power, alpha=alpha)
-      return math.ceil(sample_size) # round up
+
+def calculate_sample_size_power(
+    effect_size: float, power: float, alpha: float = 0.05
+) -> float:
+    """Calculates sample size given effect size, power and alpha"""
+    analysis = TTestIndPower()  # indendent samples t test
+    sample_size = analysis.solve_power(
+        effect_size=effect_size, power=power, alpha=alpha
+    )
+    return math.ceil(sample_size)  # round up

@@ -1,11 +1,10 @@
-import streamlit as st
+import random
+from itertools import product  # for sample space generation
+
 import pandas as pd
-import random
 import plotly.express as px  # For Venn Diagram and other charts
-from itertools import product # for sample space generation
-import random
-import plotly.express as px  # For Venn Diagram and other charts
-from itertools import product # for sample space generation
+import streamlit as st
+
 
 def generate_dice_roll(num_rolls=1):
     """Simulates dice rolls and returns outcomes.
@@ -17,6 +16,7 @@ def generate_dice_roll(num_rolls=1):
         list: A list of integer outcomes from each dice roll (1 to 6).
     """
     return [random.randint(1, 6) for _ in range(num_rolls)]
+
 
 def calculate_empirical_probability(outcomes, event):
     """Calculates empirical probability of an event given outcomes.
@@ -34,14 +34,18 @@ def calculate_empirical_probability(outcomes, event):
         return 0
     return favorable_outcomes / total_outcomes
 
+
 def main():
     st.set_page_config(page_title="Probability Theory", page_icon="🎲", layout="wide")
 
     st.title("Introduction to Probability Theory")
-    st.write("Explore the fundamentals of probability, from basic concepts to real-world applications. Master the language of chance and uncertainty.")
+    st.write(
+        "Explore the fundamentals of probability, from basic concepts to real-world applications. Master the language of chance and uncertainty."
+    )
 
     with st.expander("📖 Foundational Concepts"):
-        st.markdown("""
+        st.markdown(
+            """
         ### 1. Experiments, Sample Spaces, and Events
         Probability is the math of chance!  Let's start with the basics:
 
@@ -91,10 +95,12 @@ def main():
 
         These three axioms are the foundation of all probability theory. Every probability calculation and rule you'll learn is built upon these basic principles.  They guarantee that our system of assigning probabilities is consistent and makes logical sense.
 
-        """)
+        """
+        )
 
     with st.expander("🎲 Types of Probability: Different Ways to Find the Chance"):
-        st.markdown("""
+        st.markdown(
+            """
         ### 1. Classical Probability (Theoretical Probability):  Perfect Worlds 🔮
 
         *   **Definition:**  This is probability in its purest, most ideal form. It's used when you can assume all possible outcomes are **equally likely**.  This often applies to fair games of chance.
@@ -131,30 +137,57 @@ def main():
 
         *   **Key Idea:** Subjective probability is not arbitrary guesswork.  It's about making the best possible probability judgment based on all available knowledge, and being ready to adjust those judgments as you learn more. Bayesian methods provide a rigorous way to do this.
 
-        """)
+        """
+        )
 
         st.subheader("Interactive Demo: Empirical Probability with Dice Rolls 🎲")
-        num_dice_rolls = st.slider("Number of Dice Rolls:", min_value=10, max_value=10000, value=1000, step=100, help="Increase rolls for empirical probability to approach theoretical (1/6)")
-        target_number = st.selectbox("Event: Rolling a Number:", [1, 2, 3, 4, 5, 6], index=3, help="Select which number you want to calculate the empirical probability for") # Default to 4
+        num_dice_rolls = st.slider(
+            "Number of Dice Rolls:",
+            min_value=10,
+            max_value=10000,
+            value=1000,
+            step=100,
+            help="Increase rolls for empirical probability to approach theoretical (1/6)",
+        )
+        target_number = st.selectbox(
+            "Event: Rolling a Number:",
+            [1, 2, 3, 4, 5, 6],
+            index=3,
+            help="Select which number you want to calculate the empirical probability for",
+        )  # Default to 4
 
         if st.button("Simulate Dice Rolls"):
             with st.spinner(f"Rolling dice {num_dice_rolls} times..."):
                 dice_outcomes = generate_dice_roll(num_dice_rolls)
-                event_probability = calculate_empirical_probability(dice_outcomes, lambda x: x == target_number)
-                theoretical_probability = 1/6 # For a fair die
+                event_probability = calculate_empirical_probability(
+                    dice_outcomes, lambda x: x == target_number
+                )
+                theoretical_probability = 1 / 6  # For a fair die
 
-                st.write(f"Empirical Probability (after {num_dice_rolls:,} rolls): **{event_probability:.4f}**")
-                st.write(f"Classical (Theoretical) Probability: **{theoretical_probability:.4f}**")
-                st.write("*Notice how as you increase the number of rolls, the empirical probability gets closer to the theoretical probability (Law of Large Numbers)*")
-
+                st.write(
+                    f"Empirical Probability (after {num_dice_rolls:,} rolls): **{event_probability:.4f}**"
+                )
+                st.write(
+                    f"Classical (Theoretical) Probability: **{theoretical_probability:.4f}**"
+                )
+                st.write(
+                    "*Notice how as you increase the number of rolls, the empirical probability gets closer to the theoretical probability (Law of Large Numbers)*"
+                )
 
                 counts = pd.Series(dice_outcomes).value_counts().sort_index()
-                fig = px.bar(x=counts.index, y=counts.values, labels={'x': 'Dice Outcome', 'y': 'Frequency'}, title="Distribution of Dice Roll Outcomes") #plotly for interactive chart
+                fig = px.bar(
+                    x=counts.index,
+                    y=counts.values,
+                    labels={"x": "Dice Outcome", "y": "Frequency"},
+                    title="Distribution of Dice Roll Outcomes",
+                )  # plotly for interactive chart
                 st.plotly_chart(fig, use_container_width=True)
 
-
-    with st.expander(" 🧮 Conditional Probability and Independence: When Knowledge Changes Everything"):
-        st.markdown("""
+    with st.expander(
+        " 🧮 Conditional Probability and Independence: When Knowledge Changes Everything"
+    ):
+        st.markdown(
+            """
         ### 1. Conditional Probability: The Impact of Prior Knowledge 💡
 
         *   **Definition:**  Conditional probability is about **changing probabilities when you learn new information**. It's the probability of an event A happening, *given that* we already know another event B has happened (or is assumed to have happened).  Written as `P(A|B)` (read as "probability of A *given* B").
@@ -205,16 +238,24 @@ def main():
 
         *   **Important Note:**  Don't confuse "mutually exclusive" with "independent".  Mutually exclusive events *cannot* happen together. Independent events *can* happen together, but one doesn't influence the other's probability.  In fact, if two events with non-zero probabilities *are* mutually exclusive, they *cannot* be independent (because if one happens, the probability of the other becomes 0!).
 
-        """)
+        """
+        )
 
-        st.markdown("---") # Separator for emphasis
+        st.markdown("---")  # Separator for emphasis
         st.markdown("**Key Takeaways on Conditional Probability and Independence:**")
-        st.markdown("*   **Conditional Probability:** Probabilities change when you have new information. `P(A|B)` is the probability of A given B is known.")
-        st.markdown("*   **Bayes' Theorem:**  A powerful tool to *reverse* conditioning and update beliefs based on evidence.  Crucial for interpreting data and making informed decisions in uncertain situations.")
-        st.markdown("*   **Independence:** Events are independent when one doesn't affect the other's probability. Mathematically checked by: `P(A ∩ B) = P(A) * P(B)`.")
+        st.markdown(
+            "*   **Conditional Probability:** Probabilities change when you have new information. `P(A|B)` is the probability of A given B is known."
+        )
+        st.markdown(
+            "*   **Bayes' Theorem:**  A powerful tool to *reverse* conditioning and update beliefs based on evidence.  Crucial for interpreting data and making informed decisions in uncertain situations."
+        )
+        st.markdown(
+            "*   **Independence:** Events are independent when one doesn't affect the other's probability. Mathematically checked by: `P(A ∩ B) = P(A) * P(B)`."
+        )
 
     with st.expander("📊 Random Variables: Bridging Outcomes to Numbers"):
-        st.markdown("""
+        st.markdown(
+            """
         ### 1. Definition of a Random Variable: Quantifying Randomness 🔢
 
         *   **Definition:** A **random variable** is the bridge between the abstract world of sample spaces and the concrete world of numbers.  It's a **variable** (something that can take on different values), but its value is a **numerical outcome** from a **random phenomenon** (experiment).  Formally, it's a function that maps outcomes in the sample space to real numbers.
@@ -252,10 +293,14 @@ def main():
 
         *   **Analogy:**  Think of stairs (discrete - you can only stand on specific steps) vs. a ramp (continuous - you can be at any point along the ramp).
 
-        """)
+        """
+        )
 
-    with st.expander(" 🚀 Advanced Topics in Probability (Brief Overview): Beyond the Basics"):
-        st.markdown("""
+    with st.expander(
+        " 🚀 Advanced Topics in Probability (Brief Overview): Beyond the Basics"
+    ):
+        st.markdown(
+            """
         Probability theory is a vast and deep field.  This introduction just scratches the surface.  Here's a very brief glimpse into a few advanced areas that build upon these foundations and are essential in cutting-edge data science, AI, and beyond:
 
         ### 1. Bayesian Inference:  Probability as a Dynamic Learning Process 🔄
@@ -297,10 +342,12 @@ def main():
             *   **Biology (Population Dynamics, Neuroscience):** Modeling population growth, spread of diseases, neural firing patterns in the brain – biological systems are often inherently noisy and stochastic.
             *   **Telecommunications (Network Traffic Modeling):**  Modeling the random fluctuations in network traffic to design efficient communication networks.
             *   **Operations Research (Inventory Control, Queuing Systems):**  Optimizing inventory levels in the face of uncertain demand, managing queues and waiting times in service systems – stochastic processes are key tools.
-        """)
+        """
+        )
 
     with st.expander("📚 Resources for Further Learning: Dive Deeper! "):
-        st.markdown("""
+        st.markdown(
+            """
         To truly master probability theory, continuous learning and practice are key. Here are excellent resources to take you further:
 
         *   **Textbooks - For Deeper Study:**
@@ -315,18 +362,26 @@ def main():
         *   **Websites and Articles - Concise Explanations and Broader Perspectives:**
             *   **Probability Theory (Stanford Encyclopedia of Philosophy):** If you are interested in a more conceptual and philosophical understanding of probability (different interpretations of probability, its foundations, etc.), this is an excellent resource.  Very detailed and rigorous. [https://plato.stanford.edu/entries/probability/](https://plato.stanford.edu/entries/probability/)
             *   **Seeing Theory: A Visual Introduction to Probability and Statistics:** A truly unique and highly recommended website. It uses **interactive visualizations** to explain complex probability and statistics concepts in a very intuitive and engaging way.  If you are a visual learner, this is a must-visit.  [https://seeingtheory.brown.edu/](https://seeingtheory.brown.edu/)
-        """)
+        """
+        )
 
     """Generates the interactive portion of the Probability Theory Streamlit page."""
     st.header("🕹️ Interactive Probability Explorations")
 
     with st.expander("🎲 Sample Spaces and Events"):
         st.subheader("Exploring Sample Spaces and Events with Dice")
-        experiment_type = st.selectbox("Choose Experiment:", ["Single Die Roll", "Two Dice Roll"])
+        experiment_type = st.selectbox(
+            "Choose Experiment:", ["Single Die Roll", "Two Dice Roll"]
+        )
 
         if experiment_type == "Single Die Roll":
             st.write("Sample Space (S) = {1, 2, 3, 4, 5, 6}")
-            event_options = ["Even Number", "Odd Number", "Number Greater than 4", "Specific Number (Select Below)"]
+            event_options = [
+                "Even Number",
+                "Odd Number",
+                "Number Greater than 4",
+                "Specific Number (Select Below)",
+            ]
             selected_event_type = st.selectbox("Select an Event:", event_options)
 
             if selected_event_type == "Specific Number (Select Below)":
@@ -355,27 +410,51 @@ def main():
                 classical_probability = len(favorable_outcomes) / len(sample_space)
                 st.write(f"Classical Probability: P(E) = {classical_probability:.3f}")
 
-
         elif experiment_type == "Two Dice Roll":
-            st.write("Sample Space (S) = {(1,1), (1,2), ..., (6,6)} - 36 possible outcomes")
-            event_options_two_dice = ["Sum is 7", "Sum is Even", "Both Dice Show Same Number", "Custom Event (Describe Below)"]
-            selected_event_two_dice = st.selectbox("Select an Event:", event_options_two_dice)
+            st.write(
+                "Sample Space (S) = {(1,1), (1,2), ..., (6,6)} - 36 possible outcomes"
+            )
+            event_options_two_dice = [
+                "Sum is 7",
+                "Sum is Even",
+                "Both Dice Show Same Number",
+                "Custom Event (Describe Below)",
+            ]
+            selected_event_two_dice = st.selectbox(
+                "Select an Event:", event_options_two_dice
+            )
 
-            sample_space_two_dice = list(product(range(1, 7), range(1, 7)))  # Generate all pairs
+            sample_space_two_dice = list(
+                product(range(1, 7), range(1, 7))
+            )  # Generate all pairs
 
             if selected_event_two_dice == "Sum is 7":
                 event_description = "Event: Sum of Two Dice is 7"
-                event = {outcome for outcome in sample_space_two_dice if sum(outcome) == 7}
+                event = {
+                    outcome for outcome in sample_space_two_dice if sum(outcome) == 7
+                }
             elif selected_event_two_dice == "Sum is Even":
                 event_description = "Event: Sum of Two Dice is Even"
-                event = {outcome for outcome in sample_space_two_dice if sum(outcome) % 2 == 0}
+                event = {
+                    outcome
+                    for outcome in sample_space_two_dice
+                    if sum(outcome) % 2 == 0
+                }
             elif selected_event_two_dice == "Both Dice Show Same Number":
                 event_description = "Event: Both Dice Show the Same Number"
-                event = {outcome for outcome in sample_space_two_dice if outcome[0] == outcome[1]}
+                event = {
+                    outcome
+                    for outcome in sample_space_two_dice
+                    if outcome[0] == outcome[1]
+                }
             elif selected_event_two_dice == "Custom Event (Describe Below)":
-                custom_event_text = st.text_input("Describe your custom event based on two dice sum/values:")
+                custom_event_text = st.text_input(
+                    "Describe your custom event based on two dice sum/values:"
+                )
                 event_description = f"Custom Event: {custom_event_text}"
-                event = set() # Placeholder for truly custom event - advanced to implement fully here
+                event = (
+                    set()
+                )  # Placeholder for truly custom event - advanced to implement fully here
 
             else:
                 event_description = "Select an Event"
@@ -384,75 +463,139 @@ def main():
             if event:
                 st.write(event_description)
                 st.write(f"Number of outcomes in Event (E): {len(event)}")
-                st.write(f"Number of outcomes in Sample Space (S): {len(sample_space_two_dice)}")
+                st.write(
+                    f"Number of outcomes in Sample Space (S): {len(sample_space_two_dice)}"
+                )
                 classical_probability = len(event) / len(sample_space_two_dice)
                 st.write(f"Classical Probability: P(E) = {classical_probability:.3f}")
 
     with st.expander("📊 Types of Probability"):
         st.subheader("Empirical vs. Classical Probability")
         st.write("Revisit the Dice Roll Simulation to compare:")
-        num_dice_rolls_demo = st.slider("Number of Dice Rolls for Demo:", min_value=10, max_value=10000, value=1000, step=100, key="empirical_demo_slider")
-        target_number_demo = st.selectbox("Event: Rolling a Number (for Demo):", [1, 2, 3, 4, 5, 6], index=3, key="empirical_demo_selectbox")
+        num_dice_rolls_demo = st.slider(
+            "Number of Dice Rolls for Demo:",
+            min_value=10,
+            max_value=10000,
+            value=1000,
+            step=100,
+            key="empirical_demo_slider",
+        )
+        target_number_demo = st.selectbox(
+            "Event: Rolling a Number (for Demo):",
+            [1, 2, 3, 4, 5, 6],
+            index=3,
+            key="empirical_demo_selectbox",
+        )
 
         if st.button("Run Probability Demo"):
             with st.spinner("Simulating..."):
                 dice_outcomes_demo = generate_dice_roll(num_dice_rolls_demo)
-                empirical_prob_demo = calculate_empirical_probability(dice_outcomes_demo, lambda x: x == target_number_demo)
-                theoretical_prob_demo = 1/6
+                empirical_prob_demo = calculate_empirical_probability(
+                    dice_outcomes_demo, lambda x: x == target_number_demo
+                )
+                theoretical_prob_demo = 1 / 6
 
-                st.write(f"Empirical Probability (after {num_dice_rolls_demo:,} rolls): **{empirical_prob_demo:.4f}**")
-                st.write(f"Classical (Theoretical) Probability: **{theoretical_prob_demo:.4f}**")
-                st.info("Observe how empirical probability approaches classical probability as number of rolls increases.")
+                st.write(
+                    f"Empirical Probability (after {num_dice_rolls_demo:,} rolls): **{empirical_prob_demo:.4f}**"
+                )
+                st.write(
+                    f"Classical (Theoretical) Probability: **{theoretical_prob_demo:.4f}**"
+                )
+                st.info(
+                    "Observe how empirical probability approaches classical probability as number of rolls increases."
+                )
 
     with st.expander("🧮 Conditional Probability"):
         st.subheader("Card Drawing and Conditional Probability")
-        card_condition_options = ["No Condition", "Given it's a Red Card", "Given it's a Face Card"]
-        selected_card_condition = st.selectbox("Select Condition:", card_condition_options)
-        event_to_calculate = st.selectbox("Calculate Probability of:", ["Drawing a King", "Drawing a Heart"])
+        card_condition_options = [
+            "No Condition",
+            "Given it's a Red Card",
+            "Given it's a Face Card",
+        ]
+        selected_card_condition = st.selectbox(
+            "Select Condition:", card_condition_options
+        )
+        event_to_calculate = st.selectbox(
+            "Calculate Probability of:", ["Drawing a King", "Drawing a Heart"]
+        )
 
-        prob_conditional = 0 # Initialize
+        prob_conditional = 0  # Initialize
         if selected_card_condition == "No Condition":
             if event_to_calculate == "Drawing a King":
-                prob_conditional = 4/52
+                prob_conditional = 4 / 52
             elif event_to_calculate == "Drawing a Heart":
-                prob_conditional = 13/52
+                prob_conditional = 13 / 52
         elif selected_card_condition == "Given it's a Red Card":
             if event_to_calculate == "Drawing a King":
-                prob_conditional = 2/26 # 2 red kings out of 26 red cards
+                prob_conditional = 2 / 26  # 2 red kings out of 26 red cards
             elif event_to_calculate == "Drawing a Heart":
-                prob_conditional = 13/26 # All 13 hearts are red
+                prob_conditional = 13 / 26  # All 13 hearts are red
         elif selected_card_condition == "Given it's a Face Card":
-             if event_to_calculate == "Drawing a King":
-                prob_conditional = 4/12 # 4 kings out of 12 face cards
-             elif event_to_calculate == "Drawing a Heart":
-                prob_conditional = 3/12 # 3 heart face cards (J, Q, K) out of 12 face cards
+            if event_to_calculate == "Drawing a King":
+                prob_conditional = 4 / 12  # 4 kings out of 12 face cards
+            elif event_to_calculate == "Drawing a Heart":
+                prob_conditional = (
+                    3 / 12
+                )  # 3 heart face cards (J, Q, K) out of 12 face cards
 
-        st.write(f"Probability of {event_to_calculate} { 'with no condition' if selected_card_condition == 'No Condition' else f'given that {selected_card_condition[7:].lower()}' }: **{prob_conditional:.3f}**") # Dynamic output
+        st.write(
+            f"Probability of {event_to_calculate} { 'with no condition' if selected_card_condition == 'No Condition' else f'given that {selected_card_condition[7:].lower()}' }: **{prob_conditional:.3f}**"
+        )  # Dynamic output
 
     with st.expander("🔄 Bayes' Theorem"):
         st.subheader("Bayes' Theorem Calculator (Medical Test Example)")
-        st.write("Explore how prior probability and test accuracy affect posterior probability.")
-        prevalence = st.slider("Disease Prevalence (Prior Probability P(Disease)):", min_value=0.001, max_value=0.10, value=0.01, step=0.001, format="%.3f")
-        test_accuracy = st.slider("Test Accuracy (P(Positive|Disease) and P(Negative|No Disease)):", min_value=0.90, max_value=0.999, value=0.95, step=0.001, format="%.3f")
+        st.write(
+            "Explore how prior probability and test accuracy affect posterior probability."
+        )
+        prevalence = st.slider(
+            "Disease Prevalence (Prior Probability P(Disease)):",
+            min_value=0.001,
+            max_value=0.10,
+            value=0.01,
+            step=0.001,
+            format="%.3f",
+        )
+        test_accuracy = st.slider(
+            "Test Accuracy (P(Positive|Disease) and P(Negative|No Disease)):",
+            min_value=0.90,
+            max_value=0.999,
+            value=0.95,
+            step=0.001,
+            format="%.3f",
+        )
 
         p_disease = prevalence
         p_no_disease = 1 - p_disease
         p_positive_given_disease = test_accuracy
         p_negative_given_disease = 1 - test_accuracy
-        p_positive_given_no_disease = 1 - test_accuracy # False positive rate
+        p_positive_given_no_disease = 1 - test_accuracy  # False positive rate
         p_negative_given_no_disease = test_accuracy
 
-        #Law of total probability - P(Positive)
-        p_positive = (p_positive_given_disease * p_disease) + (p_positive_given_no_disease * p_no_disease)
+        # Law of total probability - P(Positive)
+        p_positive = (p_positive_given_disease * p_disease) + (
+            p_positive_given_no_disease * p_no_disease
+        )
 
-        #Bayes' Theorem
-        p_disease_given_positive = (p_positive_given_disease * p_disease) / p_positive if p_positive > 0 else 0
+        # Bayes' Theorem
+        p_disease_given_positive = (
+            (p_positive_given_disease * p_disease) / p_positive if p_positive > 0 else 0
+        )
 
-        st.write(f"Prior Probability of Disease (Prevalence): P(Disease) = {p_disease:.3f}")
-        st.write(f"Test Accuracy: P(Positive|Disease) = {p_positive_given_disease:.3f},  P(Negative|No Disease) = {p_negative_given_no_disease:.3f}")
-        st.write(f"Probability of Positive Test (Overall): P(Positive) = {p_positive:.3f}")
-        st.write(f"**Posterior Probability (Disease given Positive Test): P(Disease|Positive) = {p_disease_given_positive:.3f}**")
-        st.info("Adjust sliders to see how prevalence and accuracy change the posterior probability. Notice how even with high accuracy, low prevalence leads to surprisingly low posterior probability.")
+        st.write(
+            f"Prior Probability of Disease (Prevalence): P(Disease) = {p_disease:.3f}"
+        )
+        st.write(
+            f"Test Accuracy: P(Positive|Disease) = {p_positive_given_disease:.3f},  P(Negative|No Disease) = {p_negative_given_no_disease:.3f}"
+        )
+        st.write(
+            f"Probability of Positive Test (Overall): P(Positive) = {p_positive:.3f}"
+        )
+        st.write(
+            f"**Posterior Probability (Disease given Positive Test): P(Disease|Positive) = {p_disease_given_positive:.3f}**"
+        )
+        st.info(
+            "Adjust sliders to see how prevalence and accuracy change the posterior probability. Notice how even with high accuracy, low prevalence leads to surprisingly low posterior probability."
+        )
 
     with st.expander("📈 Random Variables: Discrete or Continuous?"):
         st.subheader("Identify Random Variable Types")
@@ -463,60 +606,112 @@ def main():
             "Temperature of a room",
             "Time it takes for a light bulb to burn out",
             "Shoe size of a randomly selected adult",
-            "Weight of a bag of apples"
+            "Weight of a bag of apples",
         ]
-        selected_rv_example = st.selectbox("Select a Random Variable Example:", rv_examples)
-        variable_type = "Unknown" # Initialize
+        selected_rv_example = st.selectbox(
+            "Select a Random Variable Example:", rv_examples
+        )
+        variable_type = "Unknown"  # Initialize
 
-        if selected_rv_example == "Number of heads in 5 coin flips" or selected_rv_example == "Number of cars passing a point on a highway per hour" or selected_rv_example == "Shoe size of a randomly selected adult":
+        if (
+            selected_rv_example == "Number of heads in 5 coin flips"
+            or selected_rv_example
+            == "Number of cars passing a point on a highway per hour"
+            or selected_rv_example == "Shoe size of a randomly selected adult"
+        ):
             variable_type = "Discrete"
-        elif selected_rv_example == "Height of a randomly selected person" or selected_rv_example == "Temperature of a room" or selected_rv_example == "Time it takes for a light bulb to burn out" or selected_rv_example == "Weight of a bag of apples":
+        elif (
+            selected_rv_example == "Height of a randomly selected person"
+            or selected_rv_example == "Temperature of a room"
+            or selected_rv_example == "Time it takes for a light bulb to burn out"
+            or selected_rv_example == "Weight of a bag of apples"
+        ):
             variable_type = "Continuous"
 
         st.write(f"You selected: **{selected_rv_example}**")
         st.write(f"This Random Variable is likely **{variable_type}**.")
         if variable_type == "Discrete":
-            st.success("Correct! Discrete random variables take countable values, often integers (counts).")
+            st.success(
+                "Correct! Discrete random variables take countable values, often integers (counts)."
+            )
         elif variable_type == "Continuous":
-            st.success("Correct! Continuous random variables can take any value within a range (measurements).")
+            st.success(
+                "Correct! Continuous random variables can take any value within a range (measurements)."
+            )
         else:
             st.warning("Try selecting an example to see its classification.")
 
     with st.expander("🎲🎲 Probability Distribution of Sum of Two Dice (Discrete RV)"):
         st.subheader("Explore the Probability Distribution of the Sum of Two Dice")
         st.write("Roll virtual dice and see the distribution of their sums emerge!")
-        num_virtual_dice_rolls = st.slider("Number of Virtual Dice Rolls:", min_value=100, max_value=10000, value=1000, step=100, key="dice_sum_slider")
+        num_virtual_dice_rolls = st.slider(
+            "Number of Virtual Dice Rolls:",
+            min_value=100,
+            max_value=10000,
+            value=1000,
+            step=100,
+            key="dice_sum_slider",
+        )
 
         if st.button("Simulate Two Dice Rolls and Show Distribution"):
             with st.spinner("Rolling virtual dice..."):
-                two_dice_sums = [sum(generate_dice_roll(num_rolls=2)) for _ in range(num_virtual_dice_rolls)] #Simulate sum of two dice
+                two_dice_sums = [
+                    sum(generate_dice_roll(num_rolls=2))
+                    for _ in range(num_virtual_dice_rolls)
+                ]  # Simulate sum of two dice
                 sum_counts = pd.Series(two_dice_sums).value_counts().sort_index()
 
-                theoretical_probs = {i: 0 for i in range(2, 13)} # Initialize theoretical probs dict
-                for outcome in product(range(1, 7), range(1, 7)): # All two dice combinations
-                    theoretical_probs[sum(outcome)] += 1/36 # 1/36 probability for each combination
+                theoretical_probs = {
+                    i: 0 for i in range(2, 13)
+                }  # Initialize theoretical probs dict
+                for outcome in product(
+                    range(1, 7), range(1, 7)
+                ):  # All two dice combinations
+                    theoretical_probs[sum(outcome)] += (
+                        1 / 36
+                    )  # 1/36 probability for each combination
 
-                theoretical_df = pd.DataFrame(list(theoretical_probs.items()), columns=['Sum', 'Theoretical Probability'])
-                empirical_df = pd.DataFrame({'Sum': sum_counts.index, 'Empirical Frequency': sum_counts.values})
+                theoretical_df = pd.DataFrame(
+                    list(theoretical_probs.items()),
+                    columns=["Sum", "Theoretical Probability"],
+                )
+                empirical_df = pd.DataFrame(
+                    {"Sum": sum_counts.index, "Empirical Frequency": sum_counts.values}
+                )
 
                 # Debugging: Explicitly cast 'Sum' to integer before merge and print columns
-                empirical_df['Sum'] = empirical_df['Sum'].astype(int)
-                theoretical_df['Sum'] = theoretical_df['Sum'].astype(int)
-                st.write("Empirical DataFrame columns:", empirical_df.columns) # Debugging
-                st.write("Theoretical DataFrame columns:", theoretical_df.columns) # Debugging
+                empirical_df["Sum"] = empirical_df["Sum"].astype(int)
+                theoretical_df["Sum"] = theoretical_df["Sum"].astype(int)
+                st.write(
+                    "Empirical DataFrame columns:", empirical_df.columns
+                )  # Debugging
+                st.write(
+                    "Theoretical DataFrame columns:", theoretical_df.columns
+                )  # Debugging
 
+                merged_df = pd.merge(
+                    empirical_df, theoretical_df, on="Sum", how="outer"
+                ).fillna(
+                    0
+                )  # Merge and handle missing
 
-                merged_df = pd.merge(empirical_df, theoretical_df, on='Sum', how='outer').fillna(0) #Merge and handle missing
+                st.dataframe(merged_df)  # Debugging: Display merged dataframe
 
-                st.dataframe(merged_df) # Debugging: Display merged dataframe
-
-                fig_dice_sum = px.bar(merged_df, x='Sum', y=['Empirical Frequency', 'Theoretical Probability'],
-                                    barmode='group', title=f"Distribution of Sums of Two Dice ({num_virtual_dice_rolls:,} Rolls)",
-                                    labels={'value': 'Frequency/Probability', 'Sum': 'Sum of Dice'}) #plotly for grouped bar
+                fig_dice_sum = px.bar(
+                    merged_df,
+                    x="Sum",
+                    y=["Empirical Frequency", "Theoretical Probability"],
+                    barmode="group",
+                    title=f"Distribution of Sums of Two Dice ({num_virtual_dice_rolls:,} Rolls)",
+                    labels={"value": "Frequency/Probability", "Sum": "Sum of Dice"},
+                )  # plotly for grouped bar
                 st.plotly_chart(fig_dice_sum, use_container_width=True)
-                st.info("Observe how the empirical distribution of sums approaches the theoretical probability distribution as you increase the number of rolls.")
+                st.info(
+                    "Observe how the empirical distribution of sums approaches the theoretical probability distribution as you increase the number of rolls."
+                )
     st.header("💪 Practice Exercises: Put Your Probability Skills to Work!")
-    st.markdown("""
+    st.markdown(
+        """
     Practice is essential to solidify your understanding of probability. Work through these exercises to apply what you've learned.  Don't just read the solutions – try to solve them yourself first!
 
     1. **Coin Flips and Sample Space: Three Flips in Detail 🪙🪙🪙**
@@ -547,76 +742,114 @@ def main():
        *   What are all the **possible values** that the random variable X can take?  (What's the minimum possible sum? What's the maximum possible sum? What values in between can you get?)
        *   Is X a **discrete or continuous random variable**? Explain your reasoning based on the nature of the possible values you listed in the previous step.
        *   **(Optional, more challenging):**  Think about how you might determine the **probability distribution of X**. That is, how would you find the probability of each possible value of X? (e.g., P(X=2), P(X=3), P(X=4), and so on, up to the maximum value).  *Hint:  Consider listing out all the possible combinations of two dice rolls (e.g., (1,1), (1,2), (1,3)...) and calculate their sums.*
-    """)
+    """
+    )
 
     st.header("✅ Knowledge Check: Test Your Understanding")
-    quiz_questions = [ # Quiz questions - same as before for now
+    quiz_questions = [  # Quiz questions - same as before for now
         {
             "question": "Which of the following is NOT a fundamental axiom of probability?",
-            "options": ["Non-negativity: P(E) ≥ 0", "Probability of Sample Space: P(S) = 1", "Additivity for Mutually Exclusive Events", "Multiplicativity for Independent Events"],
+            "options": [
+                "Non-negativity: P(E) ≥ 0",
+                "Probability of Sample Space: P(S) = 1",
+                "Additivity for Mutually Exclusive Events",
+                "Multiplicativity for Independent Events",
+            ],
             "answer": "Multiplicativity for Independent Events",
-            "solution": "Multiplicativity for independent events is a consequence of the axioms, not an axiom itself. The three axioms are Non-negativity, Probability of Sample Space, and Additivity for Mutually Exclusive Events."
+            "solution": "Multiplicativity for independent events is a consequence of the axioms, not an axiom itself. The three axioms are Non-negativity, Probability of Sample Space, and Additivity for Mutually Exclusive Events.",
         },
         {
             "question": "What is the formula for calculating classical probability?",
-            "options": ["P(Event) = (Number of favorable outcomes) / (Total number of possible outcomes)", "P(Event) ≈ (Number of times event occurred) / (Total trials)", "P(A|B) = P(A ∩ B) / P(B)", "P(A|B) = [P(B|A) * P(A)] / P(B)"],
+            "options": [
+                "P(Event) = (Number of favorable outcomes) / (Total number of possible outcomes)",
+                "P(Event) ≈ (Number of times event occurred) / (Total trials)",
+                "P(A|B) = P(A ∩ B) / P(B)",
+                "P(A|B) = [P(B|A) * P(A)] / P(B)",
+            ],
             "answer": "P(Event) = (Number of favorable outcomes) / (Total number of possible outcomes)",
-            "solution": "Classical probability applies when all outcomes are equally likely."
+            "solution": "Classical probability applies when all outcomes are equally likely.",
         },
         {
             "question": "If events A and B are mutually exclusive, what is P(A ∩ B)?",
             "options": ["P(A) + P(B)", "P(A) * P(B)", "0", "1"],
             "answer": "0",
-            "solution": "Mutually exclusive events cannot occur together, so their intersection is empty, and its probability is 0."
+            "solution": "Mutually exclusive events cannot occur together, so their intersection is empty, and its probability is 0.",
         },
         {
             "question": "Bayes' Theorem is used to:",
-            "options": ["Calculate empirical probability", "Reverse conditional probability", "Determine if events are independent", "Calculate classical probability"],
+            "options": [
+                "Calculate empirical probability",
+                "Reverse conditional probability",
+                "Determine if events are independent",
+                "Calculate classical probability",
+            ],
             "answer": "Reverse conditional probability",
-            "solution": "Bayes' Theorem allows us to find P(A|B) if we know P(B|A), P(A), and P(B)."
+            "solution": "Bayes' Theorem allows us to find P(A|B) if we know P(B|A), P(A), and P(B).",
         },
         {
             "question": "Which type of random variable can take on any value within a given range?",
-            "options": ["Discrete Random Variable", "Continuous Random Variable", "Categorical Random Variable", "Binary Random Variable"],
+            "options": [
+                "Discrete Random Variable",
+                "Continuous Random Variable",
+                "Categorical Random Variable",
+                "Binary Random Variable",
+            ],
             "answer": "Continuous Random Variable",
-            "solution": "Continuous random variables have uncountable possible values within a range."
+            "solution": "Continuous random variables have uncountable possible values within a range.",
         },
         {
             "question": "What is 'Empirical Probability' based on?",
-            "options":["Theoretical calculations", "Personal beliefs", "Observed data from experiments", "Mathematical axioms"],
+            "options": [
+                "Theoretical calculations",
+                "Personal beliefs",
+                "Observed data from experiments",
+                "Mathematical axioms",
+            ],
             "answer": "Observed data from experiments",
-            "solution": "Empirical probability is derived from actual experiments or observations."
+            "solution": "Empirical probability is derived from actual experiments or observations.",
         },
         {
             "question": "If events A and B are independent, then P(A ∩ B) = ?",
             "options": ["P(A) + P(B)", "P(A) * P(B)", "0", "1"],
             "answer": "P(A) * P(B)",
-            "solution": "This is the condition for independence of events."
+            "solution": "This is the condition for independence of events.",
         },
         {
             "question": "In Bayes' Theorem, P(A) represents the:",
-            "options":["Posterior probability", "Likelihood", "Prior probability", "Evidence"],
+            "options": [
+                "Posterior probability",
+                "Likelihood",
+                "Prior probability",
+                "Evidence",
+            ],
             "answer": "Prior probability",
-            "solution": "P(A) is the prior probability of event A, before considering event B."
+            "solution": "P(A) is the prior probability of event A, before considering event B.",
         },
         {
             "question": "Which field does NOT heavily rely on probability theory?",
             "options": ["Finance", "Physics", "Literature", "Machine Learning"],
             "answer": "Literature",
-            "solution": "While probability might indirectly influence narrative structure in literature, it is not a *foundational* tool in the same way as in the other fields."
+            "solution": "While probability might indirectly influence narrative structure in literature, it is not a *foundational* tool in the same way as in the other fields.",
         },
         {
             "question": "What is a 'sample space'?",
-            "options":["A subset of possible outcomes", "The set of all possible outcomes of an experiment", "A visual representation of probabilities", "A measure of risk"],
+            "options": [
+                "A subset of possible outcomes",
+                "The set of all possible outcomes of an experiment",
+                "A visual representation of probabilities",
+                "A measure of risk",
+            ],
             "answer": "The set of all possible outcomes of an experiment",
-            "solution": "The sample space is the foundation for defining events and probabilities."
-        }
+            "solution": "The sample space is the foundation for defining events and probabilities.",
+        },
     ]
 
     user_answers = []
     for i, question in enumerate(quiz_questions):
         st.markdown(f"**{i + 1}. {question['question']}**")
-        user_answer = st.radio(f"Select an answer:", question["options"], key=f"quiz_{i}")
+        user_answer = st.radio(
+            f"Select an answer:", question["options"], key=f"quiz_{i}"
+        )
         user_answers.append(user_answer)
 
     if st.button("Submit Quiz"):
@@ -624,11 +857,15 @@ def main():
         for i, (user_answer, question) in enumerate(zip(user_answers, quiz_questions)):
             if user_answer == question["answer"]:
                 correct_count += 1
-                st.success(f"Question {i+1}: Correct! 🎉") # More engaging feedback
+                st.success(f"Question {i+1}: Correct! 🎉")  # More engaging feedback
             else:
-                st.error(f"Question {i+1}: Incorrect. Let's review the solution below. 🧐") # More encouraging tone
+                st.error(
+                    f"Question {i+1}: Incorrect. Let's review the solution below. 🧐"
+                )  # More encouraging tone
 
-        st.write(f"You got {correct_count} out of {len(quiz_questions)} questions correct.")
+        st.write(
+            f"You got {correct_count} out of {len(quiz_questions)} questions correct."
+        )
 
         with st.expander("Show Detailed Solutions"):
             for i, question in enumerate(quiz_questions):
@@ -636,10 +873,11 @@ def main():
                 st.markdown(f"**Your Answer:** {user_answers[i]}")
                 st.markdown(f"**Correct Answer:** {question['answer']}")
                 st.markdown(f"**Solution:** {question['solution']}")
-                if user_answers[i] == question['answer']:
+                if user_answers[i] == question["answer"]:
                     st.success("Correct!")
                 else:
                     st.error("Incorrect.")
+
 
 if __name__ == "__main__":
     main()

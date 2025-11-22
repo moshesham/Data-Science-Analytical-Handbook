@@ -1,13 +1,13 @@
-import streamlit as st
-import pandas as pd
 import matplotlib.pyplot as plt
+import pandas as pd
+import streamlit as st
 from stats_utils import (
     calculate_mean,
     calculate_median,
     calculate_mode,
-    calculate_variance,
     calculate_std_dev,
-    plot_histogram
+    calculate_variance,
+    plot_histogram,
 )
 
 # --- DATA ACQUISITION ---
@@ -19,7 +19,6 @@ st.header("Data Acquisition")
 def load_data(file_path):
     df = pd.read_csv(file_path)
     return df
-
 
 
 uploaded_file = st.file_uploader("Choose a CSV file", type="csv")
@@ -73,7 +72,7 @@ if uploaded_file is not None:
     # Example Matplotlib code for a bar chart
     with st.echo():
         # Sample data
-        categories = ['A', 'B', 'C', 'D']
+        categories = ["A", "B", "C", "D"]
         values = [10, 15, 7, 12]
 
         # Create the bar chart
