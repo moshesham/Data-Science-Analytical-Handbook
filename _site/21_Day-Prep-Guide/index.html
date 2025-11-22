@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>The Ultimate 21-Day Analytical Interview Prep Plan</title>
+    <meta name="description" content="A handbook for preparing for analytical/data-science interviews">
+
+    <!-- MathJax -->
+    <script async src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+
+    <!-- Site CSS -->
+    <link rel="stylesheet" href="/assets/css/style.css">
+  </head>
+  <body>
+    <aside class="sidebar">
+  <h2>Contents</h2>
+  <ul class="nav-list">
+    <li><a href="/introduction/" class="">I. Introduction</a>
+      <ul>
+        <li><a href="/introduction/#welcome">1. Welcome and Purpose of this Handbook</a></li>
+        <li><a href="/introduction/#meta-data-science-role">2. What to Expect: The Meta Data Science Role</a></li>
+        <li><a href="/introduction/#interview-process">3. Navigating the Meta Interview Process</a></li>
+        <li><a href="/introduction/#handbook-usage">4. How to Use This Handbook</a></li>
+      </ul>
+    </li>
+    <li><a href="/foundational_knowledge/1/">II. Foundational Knowledge & Skills</a></li>
+    <li><a href="/interview_preparation/technical_skills/">III. Interview Preparation</a></li>
+    <li><a href="/meta_specificity/">IV. Meta Specificity</a></li>
+    <li><a href="/resources_practice/">V. Resources and Practice</a></li>
+    <li><a href="/conclusion/">VI. Conclusion</a></li>
+    <li><a href="/appendix/">Appendix</a></li>
+  </ul>
+</aside>
+
+
+    <main class="main-content">
+      <h1 id="the-ultimate-21-day-analytical-interview-prep-plan">The Ultimate 21-Day Analytical Interview Prep Plan</h1>
+
+<p>This intensive 21-day plan is structured to build your skills from the ground up, moving from core technical abilities to strategic product thinking and, finally, to interview execution. Each day includes a primary focus, a specific “Do This” action, and targeted resources.</p>
+
+<h2 id="week-1-core-skills---sql-and-statistics-mastery">Week 1: Core Skills - SQL and Statistics Mastery</h2>
+
+<p><strong>Goal:</strong> Build a rock-solid, practical foundation in the two most critical technical areas.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Day</th>
+      <th>Topic Focus</th>
+      <th>Do This</th>
+      <th>Handbook Reference</th>
+      <th>External Resources</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>SQL Fundamentals</td>
+      <td>Complete SQLBolt’s interactive tutorials from start to finish. Focus on understanding JOIN logic.</td>
+      <td><a href="../Data-Science-Analytical-Interview-Preparation-Handbook.MD#sql--data-manipulation">SQL &amp; Data Manipulation</a></td>
+      <td><a href="https://sqlbolt.com/">SQLBolt</a></td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>Intermediate SQL</td>
+      <td>Solve 5 medium-difficulty problems on DataLemur involving GROUP BY, HAVING, and subqueries.</td>
+      <td><a href="../Data-Science-Analytical-Interview-Preparation-Handbook.MD#sql--data-manipulation">SQL &amp; Data Manipulation</a></td>
+      <td><a href="https://datalemur.com/questions">DataLemur Questions</a></td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>Advanced SQL: Window Functions</td>
+      <td>Read Mode’s guide on Window Functions. Then, solve 3 problems on StrataScratch that specifically require RANK(), LAG(), or ROW_NUMBER().</td>
+      <td><a href="../Data-Science-Analytical-Interview-Preparation-Handbook.MD#sql--data-manipulation">SQL &amp; Data Manipulation</a></td>
+      <td><a href="https://mode.com/sql-tutorial/sql-window-functions/">Mode’s Window Functions Guide</a>, <a href="https://platform.stratascratch.com/coding">StrataScratch</a></td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>Applied Statistics: Probability &amp; Distributions</td>
+      <td>Watch the StatQuest videos on Probability, Binomial, and Poisson distributions. For each, write down one product-related example.</td>
+      <td><a href="../Data-Science-Analytical-Interview-Preparation-Handbook.MD#statistics--probability">Statistics &amp; Probability</a></td>
+      <td><a href="https://www.youtube.com/watch?v=uzkc-qNVoOk">StatQuest: Probability</a>, <a href="https://www.youtube.com/watch?v=qIzC1-9PwQo">Binomial</a>, <a href="https://www.youtube.com/watch?v=cxqkenTyZ-Q">Poisson</a></td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td>Applied Statistics: Hypothesis Testing</td>
+      <td>Read the “Trustworthy Online Controlled Experiments” book summary. Explain p-values, confidence intervals, and statistical power out loud.</td>
+      <td><a href="../Data-Science-Analytical-Interview-Preparation-Handbook.MD#3-hypothesis-testing">Hypothesis Testing</a></td>
+      <td><a href="https://www.goodreads.com/book/show/48570077-trustworthy-online-controlled-experiments">Summary of “Trustworthy Online Controlled Experiments”</a></td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td>Python for Data Analysis</td>
+      <td>Complete a full data cleaning and exploration project using Pandas to load, clean, and analyze a dataset.</td>
+      <td><a href="../Data-Science-Analytical-Interview-Preparation-Handbook.MD#programming-pythonr---focus-on-data-analysis">Programming (Python/R)</a></td>
+      <td><a href="https://www.kaggle.com/learn/data-cleaning">Kaggle: “Data Cleaning Challenge”</a></td>
+    </tr>
+    <tr>
+      <td>7</td>
+      <td>Week 1 Review &amp; Synthesis</td>
+      <td>Write a SQL query using a window function. Then, use Python to calculate the statistical significance of a hypothetical A/B test result.</td>
+      <td><a href="../Data-Science-Analytical-Interview-Preparation-Handbook.MD#foundational-knowledge--skills">SQL &amp; Stats Sections</a></td>
+      <td>Use your own project or a <a href="https://www.kaggle.com/datasets">Kaggle dataset</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="week-2-product-thinking--experimentation">Week 2: Product Thinking &amp; Experimentation</h2>
+
+<p><strong>Goal:</strong> Shift from how to analyze data to what to analyze and why. This week is about product sense, metrics, and A/B testing.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Day</th>
+      <th>Topic Focus</th>
+      <th>Do This</th>
+      <th>Handbook Reference</th>
+      <th>External Resources</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>8</td>
+      <td>Developing Product Sense</td>
+      <td>Pick a feature on Facebook or Instagram. Deconstruct it: What user problem does it solve? Who is the target user? How does it help the business?</td>
+      <td><a href="../Data-Science-Analytical-Interview-Preparation-Handbook.MD#analytical-reasoningproduct-sense-interview">Analytical Reasoning/Product Sense Interview</a></td>
+      <td><a href="https://www.lennysnewsletter.com/p/how-to-develop-product-sense">Lenny’s Newsletter: “How to Develop Product Sense”</a></td>
+    </tr>
+    <tr>
+      <td>9</td>
+      <td>Metrics Frameworks (HEART/AARRR)</td>
+      <td>Read about the HEART and AARRR frameworks. Apply one of them to the feature you analyzed on Day 8.</td>
+      <td><a href="../Data-Science-Analytical-Interview-Preparation-Handbook.MD#analytical-reasoningproduct-sense-interview">Metrics Frameworks</a></td>
+      <td><a href="https://library.gv.com/how-to-choose-the-right-ux-metrics-for-your-product-5f46359ab5be">Google’s HEART Framework</a>, <a href="https://www.slideshare.net/dmc500hats/startup-metrics-for-pirates-long-version">AARRR Framework</a></td>
+    </tr>
+    <tr>
+      <td>10</td>
+      <td>Case Study Framework</td>
+      <td>Learn a structured approach for case studies. Outline a response to: “User engagement on Instagram Reels has dropped by 5%. How would you investigate?”</td>
+      <td><a href="../Data-Science-Analytical-Interview-Preparation-Handbook.MD#analytical-executioncase-study-interview">Analytical Execution/Case Study Interview</a></td>
+      <td><a href="https://www.tryexponent.com/courses/data-science-interview">Exponent’s Guide to Data Science Case Studies</a></td>
+    </tr>
+    <tr>
+      <td>11</td>
+      <td>A/B Testing Deep Dive: Design</td>
+      <td>Read Airbnb’s blog post on experimentation. Design an A/B test: form a hypothesis, choose success/guardrail metrics, and estimate sample size.</td>
+      <td><a href="../Data-Science-Analytical-Interview-Preparation-Handbook.MD#5-experimental-design">Experimental Design</a></td>
+      <td><a href="https://medium.com/airbnb-engineering/experiments-at-airbnb-e2db3abf39e7">Airbnb: “Experimentation &amp; Measurement”</a></td>
+    </tr>
+    <tr>
+      <td>12</td>
+      <td>A/B Testing Deep Dive: Analysis</td>
+      <td>Read Netflix’s blog on interpreting A/B test results. Analyze a hypothetical result: What if your primary metric improves but a guardrail metric declines?</td>
+      <td><a href="../Data-Science-Analytical-Interview-Preparation-Handbook.MD#3-hypothesis-testing">Hypothesis Testing &amp; A/B</a></td>
+      <td><a href="https://netflixtechblog.com/interpreting-a-b-test-results-false-positives-and-statistical-significance-c1522d0db27a">Netflix: “Interpreting A/B test results”</a></td>
+    </tr>
+    <tr>
+      <td>13</td>
+      <td>Product Case Study Practice</td>
+      <td>Complete one full case study walk-through. Record yourself speaking or write out a detailed document.</td>
+      <td><a href="../Data-Science-Analytical-Interview-Preparation-Handbook.MD#analytical-executioncase-study-interview">Analytical Execution/Case Study</a></td>
+      <td><a href="https://platform.stratascratch.com/coding?code_type=5">StrataScratch’s Product Sense Questions</a></td>
+    </tr>
+    <tr>
+      <td>14</td>
+      <td>Week 2 Review &amp; Synthesis</td>
+      <td>Propose a new feature for a product you use daily. Define its North Star metric, design an A/B test, and explain how you would analyze the results.</td>
+      <td><a href="../Data-Science-Analytical-Interview-Preparation-Handbook.MD#analytical-reasoningproduct-sense-interview">Product Sense</a></td>
+      <td>Apply concepts from this week</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="week-3-execution-storytelling--mock-interviews">Week 3: Execution, Storytelling &amp; Mock Interviews</h2>
+
+<p><strong>Goal:</strong> Synthesize all your skills and practice delivering your analysis under pressure.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Day</th>
+      <th>Topic Focus</th>
+      <th>Do This</th>
+      <th>Handbook Reference</th>
+      <th>External Resources</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>15</td>
+      <td>Behavioral Interview: STAR Method</td>
+      <td>Prepare 3 stories using the STAR method: 1) A complex project, 2) Dealing with ambiguity, 3) Influencing a decision with data.</td>
+      <td><a href="../Data-Science-Analytical-Interview-Preparation-Handbook.MD#behavioral-interview-preparation-for-meta-data-science-roles">Behavioral Interview Preparation</a></td>
+      <td><a href="https://www.indeed.com/career-advice/interviewing/how-to-use-the-star-interview-response-technique">The STAR Method Guide</a></td>
+    </tr>
+    <tr>
+      <td>16</td>
+      <td>Data Storytelling</td>
+      <td>Watch a talk on data storytelling. Create a 3-slide presentation for your project from Day 6: 1) Problem, 2) Analysis &amp; Insight, 3) Recommendation.</td>
+      <td><a href="../Data-Science-Analytical-Interview-Preparation-Handbook.MD#behavioral-interview-preparation-for-meta-data-science-roles">Communication in Analysis</a></td>
+      <td><a href="https://www.youtube.com/watch?v=A_GUFUwAMF8">Brent Dykes: “Winning The Insights War”</a></td>
+    </tr>
+    <tr>
+      <td>17</td>
+      <td>Timed SQL + Python Challenge</td>
+      <td>Give yourself 45 minutes. Complete one hard SQL question and one medium Python/Pandas question back-to-back.</td>
+      <td><a href="../Data-Science-Analytical-Interview-Preparation-Handbook.MD#technical-skills-interview-codingsql">Technical Skills Interview</a></td>
+      <td><a href="https://leetcode.com/problemset/database/">LeetCode</a> or <a href="https://www.hackerrank.com/domains/sql">HackerRank</a></td>
+    </tr>
+    <tr>
+      <td>18</td>
+      <td>Full Mock Interview 1 (Technical)</td>
+      <td>Conduct a mock technical interview with a peer or on a platform. Focus on thinking out loud and explaining your code.</td>
+      <td><a href="../Data-Science-Analytical-Interview-Preparation-Handbook.MD#technical-skills-interview-codingsql">Technical Skills Interview</a></td>
+      <td><a href="https://www.pramp.com/">Pramp (free peer-to-peer mocks)</a></td>
+    </tr>
+    <tr>
+      <td>19</td>
+      <td>Full Mock Interview 2 (Product/Case)</td>
+      <td>Conduct a mock product sense or case study interview. Focus on asking clarifying questions and presenting a structured conclusion.</td>
+      <td><a href="../Data-Science-Analytical-Interview-Preparation-Handbook.MD#analytical-executioncase-study-interview">Analytical Execution/Case Study</a></td>
+      <td><a href="https://www.pramp.com/">Pramp</a>, or record yourself</td>
+    </tr>
+    <tr>
+      <td>20</td>
+      <td>Review, Refine &amp; Rest</td>
+      <td>Review your notes from the mock interviews. Identify your single biggest area for improvement and do one focused exercise on it. Then, rest.</td>
+      <td>Your own notes</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>21</td>
+      <td>Final Polish &amp; Mindset</td>
+      <td>Review Meta’s core values. Re-read your 3 STAR stories and align them with those values. Do a light 30-minute review of key concepts.</td>
+      <td><a href="../Data-Science-Analytical-Interview-Preparation-Handbook.MD#behavioral-interview-preparation-for-meta-data-science-roles">Behavioral Interview Preparation</a></td>
+      <td><a href="https://www.metacareers.com/life/diversity-and-inclusion/">Meta’s Core Values</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="key-success-metrics">Key Success Metrics</h2>
+
+<ul>
+  <li><strong>Week 1:</strong> Master SQL fundamentals and statistical concepts</li>
+  <li><strong>Week 2:</strong> Develop product intuition and experimentation skills</li>
+  <li><strong>Week 3:</strong> Perfect interview execution and storytelling</li>
+</ul>
+
+<h2 id="additional-helpful-resources">Additional Helpful Resources</h2>
+
+<p>You might also find these to be helpful practices:</p>
+<ul>
+  <li>For statistics practice: <a href="../Extra-Review-Problems/Statistics-Probability-Example-Questions.MD">Statistics &amp; Probability Example Questions</a></li>
+  <li>For SQL practice: <a href="../Extra-Review-Problems/sql-example-problems.md">SQL Example Problems</a></li>
+  <li>For behavioral question practice: <a href="../Extra-Review-Problems/Behavioral-Mock-Interview.MD">Behavioral Mock Interview</a></li>
+</ul>
+
+<h2 id="daily-commitment">Daily Commitment</h2>
+
+<ul>
+  <li><strong>Time Investment:</strong> 2-3 hours per day</li>
+  <li><strong>Focus Areas:</strong> Technical skills → Product thinking → Interview execution</li>
+  <li><strong>Practice Method:</strong> Active learning with real projects and mock interviews</li>
+</ul>
+
+      <footer>
+        <p>© 2025 </p>
+      </footer>
+    </main>
+  </body>
+</html>

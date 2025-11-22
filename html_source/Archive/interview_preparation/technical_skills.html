@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Master Product Data Analytics</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <h2>Contents</h2>
+            <ul class="nav-list">
+                <li><a href="../introduction.html">I. Introduction</a></li>
+                <ul>
+                    <li><a href="../introduction.html#welcome">1. Welcome and Purpose of this Handbook</a></li>
+                    <li><a href="../introduction.html#meta-data-science-role">2. What to Expect: The Meta Data Science Role</a></li>
+                    <li><a href="../introduction.html#interview-process">3. Navigating the Meta Interview Process</a></li>
+                    <li><a href="../introduction.html#handbook-usage">4. How to Use This Handbook</a></li>
+                </ul>
+                <li><a href="../foundational_knowledge/1.html">II. Foundational Knowledge & Skills</a></li>
+                <ul>
+                    <li><a href="../foundational_knowledge/1.html">1. Statistics & Probability</a></li>
+                    <ul>
+                        <li><a href="../foundational_knowledge/1.html#descriptive_statistics">1.1 Descriptive Statistics</a></li>
+                        <li><a href="../foundational_knowledge/1.html#probability">1.2 Probability</a></li>
+                         <li><a href="../foundational_knowledge/1.html#probability-distributions">1.3 Probability Distributions</a></li>
+                        <li><a href="../foundational_knowledge/1.html#hypothesis-testing">1.4 Hypothesis Testing</a></li>
+                        <li><a href="../foundational_knowledge/1.html#regression-analysis">1.5 Regression Analysis</a></li>
+                        <li><a href="../foundational_knowledge/1.html#experimental-design">1.6 Experimental Design</a></li>
+                        <li><a href="../foundational_knowledge/1.html#bayesian-methods">1.7 Bayesian Methods</a></li>
+                    </ul>
+                   <li><a href="../foundational_knowledge/2-SQL.html">2. SQL & Data Manipulation</a></li>
+                    <ul>
+                        <li><a href="../foundational_knowledge/2-SQL.html#core-sql-syntax">2.1 Core SQL Syntax</a></li>
+                        <li><a href="../foundational_knowledge/2-SQL.html#advanced-sql-techniques">2.2 Advanced SQL Techniques</a></li>
+                        <li><a href="../foundational_knowledge/2-SQL.html#query-optimization">2.3 Query Optimization</a></li>
+                        <li><a href="../foundational_knowledge/2-SQL.html#data-cleaning-sql">2.4 Data Cleaning with SQL</a></li>
+                    </ul>
+                     <li><a href="../foundational_knowledge/3.html">3. Programming (Python/R) for Data Analysis</a></li>
+                    <ul>
+                         <li><a href="../foundational_knowledge/3.html#python-fundamentals">3.1 Python Fundamentals for Data Science</a></li>
+                         <li><a href="../foundational_knowledge/3.html#data-manipulation-pandas">3.2 Data Manipulation with Pandas</a></li>
+                        <li><a href="../foundational_knowledge/3.html#numerical-computing-numpy">3.3 Numerical Computing with NumPy</a></li>
+                        <li><a href="../foundational_knowledge/3.html#data-visualization">3.4 Data Visualization</a></li>
+                        <li><a href="../foundational_knowledge/3.html#statistical-modeling-libraries">3.5 (Optional) Statistical Modeling Libraries</a></li>
+                    </ul>
+                </ul>
+                <li><a href="interview_preparation/technical_skills.html">III. Interview Preparation</a></li>
+                <ul>
+                     <li><a href="interview_preparation/technical_skills.html#technical-skills-interview">1. Technical Skills Interview</a></li>
+                    <ul>
+                        <li><a href="interview_preparation/technical_skills.html#sql-deep-dive">1.1 SQL Deep Dive</a></li>
+                        <li><a href="interview_preparation/technical_skills.html#python-r-data-manipulation">1.2 Python/R for Data Manipulation</a></li>
+                         <li><a href="interview_preparation/technical_skills.html#mock-interview-practice-sql-python">1.3 Mock Interview Practice</a></li>
+                    </ul>
+                    <li><a href="interview_preparation/analytical_execution.html">2. Analytical Execution Interview</a></li>
+                    <ul>
+                        <li><a href="interview_preparation/analytical_execution.html#framework-case-studies">2.1 Framework for Approaching Case Studies</a></li>
+                        <li><a href="interview_preparation/analytical_execution.html#hypothesis-generation-testing">2.2 Hypothesis Generation and Testing</a></li>
+                         <li><a href="interview_preparation/analytical_execution.html#quantitative-analysis-techniques">2.3 Quantitative Analysis Techniques</a></li>
+                         <li><a href="interview_preparation/analytical_execution.html#goal-setting-kpis">2.4 Goal Setting and KPIs</a></li>
+                        <li><a href="interview_preparation/analytical_execution.html#trade-off-analysis">2.5 Trade-off Analysis</a></li>
+                         <li><a href="interview_preparation/analytical_execution.html#dealing-ambiguity-changing-requirements">2.6 Dealing with Ambiguity and Changing Requirements</a></li>
+                        <li><a href="interview_preparation/analytical_execution.html#case-study-examples">2.7 Case Study Examples</a></li>
+                         <li><a href="interview_preparation/analytical_execution.html#mock-interview-practice-case-studies">2.8 Mock Interview Practice</a></li>
+                    </ul>
+                      <li><a href="interview_preparation/analytical_reasoning.html">3. Analytical Reasoning/Product Sense Interview</a></li>
+                    <ul>
+                        <li><a href="interview_preparation/analytical_reasoning.html#developing-product-sense">3.1 Developing Strong Product Sense</a></li>
+                        <li><a href="interview_preparation/analytical_reasoning.html#framework-answering-product-sense-questions">3.2 A Framework for Answering Product Sense Questions</a></li>
+                        <li><a href="interview_preparation/analytical_reasoning.html#defining-evaluating-metrics">3.3 Defining and Evaluating Metrics</a></li>
+                         <li><a href="interview_preparation/analytical_reasoning.html#experimentation-social-networks">3.4 Experimentation in Social Networks</a></li>
+                        <li><a href="interview_preparation/analytical_reasoning.html#identifying-mitigating-biases">3.5 Identifying and Mitigating Biases</a></li>
+                        <li><a href="interview_preparation/analytical_reasoning.html#communicating-data-driven-decisions">3.6 Communicating Data-Driven Product Decisions</a></li>
+                        <li><a href="interview_preparation/analytical_reasoning.html#example-product-sense-questions-answers">3.7 Example Product Sense Questions and Answers</a></li>
+                         <li><a href="interview_preparation/analytical_reasoning.html#mock-interview-practice-product-sense">3.8 Mock Interview Practice</a></li>
+                    </ul>
+                     <li><a href="interview_preparation/behavioral_interview.html">4. Behavioral Interview</a></li>
+                     <ul>
+                        <li><a href="interview_preparation/behavioral_interview.html#star-method">4.1 The STAR Method</a></li>
+                        <li><a href="interview_preparation/behavioral_interview.html#common-behavioral-questions">4.2 Common Behavioral Interview Questions</a></li>
+                         <li><a href="interview_preparation/behavioral_interview.html#meta-specific-behavioral-questions">4.3 Meta-Specific Behavioral Questions</a></li>
+                        <li><a href="interview_preparation/behavioral_interview.html#sample-star-responses">4.4 Sample STAR Responses</a></li>
+                        <li><a href="interview_preparation/behavioral_interview.html#mock-interview-practice-behavioral">4.5 Mock Interview Practice</a></li>
+                    </ul>
+                </ul>
+                 <li><a href="../meta_specificity.html">IV. Meta Specificity</a></li>
+                <ul>
+                    <li><a href="../meta_specificity.html#deep-dive-meta-interview">1. Deep Dive into Meta's Interview Process</a></li>
+                    <li><a href="../meta_specificity.html#meta-data-science-culture">2. Meta's Data Science Culture</a></li>
+                    <li><a href="../meta_specificity.html#internal-tools-technologies">3. Internal Tools and Technologies</a></li>
+                     <li><a href="../meta_specificity.html#product-deep-dives">4. Product Deep Dives</a></li>
+                </ul>
+                 <li><a href="../resources_practice.html">V. Resources and Practice</a></li>
+                <ul>
+                    <li><a href="../resources_practice.html#sql-practice-platforms">1. SQL Practice Platforms</a></li>
+                    <li><a href="../resources_practice.html#python-r-resources">2. Python/R Resources</a></li>
+                    <li><a href="../resources_practice.html#statistical-learning-resources">3. Statistical Learning Resources</a></li>
+                    <li><a href="../resources_practice.html#product-sense-development">4. Product Sense Development</a></li>
+                    <li><a href="../resources_practice.html#mock-interview-platforms">5. Mock Interview Platforms</a></li>
+                     <li><a href="../resources_practice.html#community-forums-groups">6. Community Forums and Groups</a></li>
+                     <li><a href="../resources_practice.html#a-b-testing-experimentation">7. A/B Testing and Experimentation</a></li>
+                    <li><a href="../resources_practice.html#business-analytics-case-studies">8. Business Analytics and Case Studies</a></li>
+                     <li><a href="../resources_practice.html#youtube-social-media-channels">9. YouTube and Social Media Channels</a></li>
+                    <li><a href="../resources_practice.html#company-blogs-case-studies">10. Company Blogs and Case Studies</a></li>
+                </ul>
+                <li><a href="../conclusion.html">VI. Conclusion</a></li>
+                <ul>
+                    <li><a href="../conclusion.html#recap-key-takeaways">1. Recap of Key Takeaways</a></li>
+                    <li><a href="../conclusion.html#encouragement-motivation">2. Encouragement and Motivation</a></li>
+                    <li><a href="../conclusion.html#final-tips-success">3. Final Tips for Success</a></li>
+                </ul>
+                 <li><a href="appendix.html">Appendix</a></li>
+                <ul>
+                    <li><a href="appendix.html#glossary-terms">Glossary of Terms</a></li>
+                    <li><a href="appendix.html#cheatsheets">Cheatsheets (SQL, Pandas, etc.)</a></li>
+                </ul>
+            </ul>
+        </div>
+        <div class="main-content">
+            <div class="breadcrumb">
+                 <a href="/index.html">Home</a> <span>></span>
+                <a href="interview_preparation/technical_skills.html">Interview Preparation</a> <span>></span>
+                 <span>Technical Skills Interview</span>
+            </div>
+            <div class="header">
+                <h1>Master Product Data Analytics</h1>
+                <p>Your Guide To Data Analytics Mastery</p>
+            </div>
+             <div class="section" id="technical-skills-interview">
+                <h2 class="section-title">1. Technical Skills Interview (Coding/SQL)</h2>
+                <p>The technical screen is your first big hurdle. It's typically a phone or video call with a data scientist or engineer where you'll be asked to demonstrate your coding and problem-solving abilities. While the specific questions can vary, the focus is usually on SQL and sometimes Python or R (though for analytical roles, SQL is the star of the show). This section is all about getting you ready to crush this technical interview. 🎯</p>
+                <hr>
+                <div class="card" id="sql-deep-dive">
+                    <h4>1.1 SQL Deep Dive</h4>
+                    <p>SQL is your bread and butter for data analysis. You'll need to be able to write efficient, accurate queries to extract and manipulate data effectively. Let's break down what you need to master.</p>
+                    <ul>
+                        <li>
+                            <b>1.1.1 Common SQL Interview Question Patterns</b>
+                            <p>Many SQL interview questions fall into common patterns. Here are a few you should be prepared for:</p>
+                            <ul>
+                                <li>
+                                    <b>Data Aggregation and Filtering:</b> These questions test your ability to use `GROUP BY`, `HAVING`, `WHERE`, and aggregate functions (e.g., `SUM`, `AVG`, `COUNT`) to summarize data.
+                                    <p><b>Example:</b> "Find the top 10 users with the highest total order value."</p>
+                                </li>
+                                <li>
+                                    <b>JOINs:</b> These questions test your ability to combine data from multiple tables using various types of JOINs (`INNER`, `LEFT`, `RIGHT`, `FULL OUTER`).
+                                    <p><b>Example:</b> "Calculate the average order value for customers in each country."</p>
+                                </li>
+                                <li>
+                                    <b>Subqueries and CTEs:</b> These questions test your ability to write nested queries or use Common Table Expressions to break down complex problems into smaller parts.
+                                    <p><b>Example:</b> "Find the users who have made more orders than the average number of orders per user."</p>
+                                </li>
+                                <li>
+                                    <b>Window Functions:</b> These questions test your ability to use window functions (e.g., `RANK`, `ROW_NUMBER`, `LAG`, `LEAD`) to perform calculations across a set of rows related to the current row.
+                                    <p><b>Example:</b> "Calculate the 7-day rolling average of daily active users."</p>
+                                </li>
+                                <li>
+                                    <b>Data Cleaning and Transformation:</b> These questions test your ability to handle missing values, convert data types, and manipulate strings using SQL functions.
+                                    <p><b>Example:</b> "Clean a messy dataset by handling NULL values, converting date strings to the correct format, and removing duplicates."</p>
+                                </li>
+                            </ul>
+                             <p><b>Practice Resources:</b></p>
+                            <ul>
+                                <li><a href="https://www.stratascratch.com/">StrataScratch</a>: Offers a large number of real SQL interview questions from top companies, including Meta.</li>
+                                <li><a href="https://leetcode.com/">LeetCode</a>: Has a database section with many SQL problems of varying difficulty.</li>
+                                <li><a href="https://www.hackerrank.com/domains/sql">HackerRank</a>: Provides a platform to practice SQL and other programming languages.</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <b>1.1.2 Practice Problems (with Solutions and Explanations)</b>
+                            <p>Let's put your SQL skills to the test with some practice problems. (Remember, these are just examples. You'll need to practice a wide range of problems to be fully prepared.)</p>
+                            <p><b>Example Problem 1:</b></p>
+                           <p>Given a table of user activity with columns `user_id`, `event_date`, and `event_type`, write a SQL query to find the percentage of users who had at least one 'login' event type for each day.</p>
+                            <p><b>Solution and Explanation:</b></p>
+                            <div class="code-block">
+                            <pre>
+                                <code>
+                                    WITH DailyLogins AS (
+                                        SELECT event_date, user_id
+                                        FROM user_activity
+                                        WHERE event_type = 'login'
+                                        GROUP BY event_date, user_id
+                                    ),
+                                    DailyUsers AS (
+                                        SELECT event_date, COUNT(DISTINCT user_id) AS total_users
+                                        FROM user_activity
+                                        GROUP BY event_date
+                                    )
+                                    SELECT 
+                                        dl.event_date, 
+                                        (COUNT(DISTINCT dl.user_id) * 100.0 / du.total_users) AS login_percentage
+                                    FROM DailyLogins dl
+                                    JOIN DailyUsers du ON dl.event_date = du.event_date
+                                    GROUP BY dl.event_date, du.total_users
+                                    ORDER BY dl.event_date;
+                                </code>
+                            </pre>
+                             </div>
+                            <p><b>Explanation:</b></p>
+                             <ol>
+                                 <li>The `DailyLogins` CTE selects the `event_date` and `user_id` for events where `event_type` is 'login'. The `GROUP BY` clause ensures that we count each user only once per day, even if they logged in multiple times.</li>
+                                 <li>The `DailyUsers` CTE calculates the total number of distinct users for each day.</li>
+                                 <li>The final `SELECT` statement joins these two CTEs on `event_date`. It then calculates the percentage of users who logged in on each day by dividing the number of distinct users who logged in (from `DailyLogins`) by the total number of distinct users on that day (from `DailyUsers`). The result is multiplied by 100.0 to get a percentage.</li>
+                                 <li>The results are then grouped by `event_date` and `total_users` to get the percentage for each day and ordered by `event_date` to show the trend over time.</li>
+                             </ol>
+                            <p><b>Example Problem 2:</b></p>
+                            <p>Given a table `orders` with columns `order_id`, `customer_id`, `order_date`, and `amount`, write a SQL query to find the top 5 customers who have spent the most money in total.</p>
+                             <p><b>Solution and Explanation:</b></p>
+                            <div class="code-block">
+                            <pre>
+                                <code>
+                                    SELECT customer_id, SUM(amount) AS total_spent
+                                    FROM orders
+                                    GROUP BY customer_id
+                                    ORDER BY total_spent DESC
+                                    LIMIT 5;
+                                </code>
+                            </pre>
+                            </div>
+                             <p><b>Explanation:</b></p>
+                             <ol>
+                                 <li>The `GROUP BY` clause groups the rows by `customer_id`, so we get one row for each customer.</li>
+                                 <li>The `SUM(amount)` function calculates the total amount spent for each customer.</li>
+                                <li>The `ORDER BY total_spent DESC` sorts the results in descending order of the total amount spent.</li>
+                                <li>The `LIMIT 5` clause restricts the output to the top 5 rows.</li>
+                             </ol>
+                            <p><b>More Practice:</b> I highly recommend working through as many practice problems as you can. The more you practice, the more comfortable you'll become with writing SQL queries.</p>
+                        </li>
+                         <li>
+                            <b>1.1.3 Tips for Writing Clean and Efficient SQL Code</b>
+                            <p>In an interview setting, it's not just about getting the right answer. It's also about writing clean, efficient, and readable code. Here are some tips:</p>
+                            <ul>
+                                <li><b>Use meaningful aliases:</b> Give your tables and columns meaningful aliases to make your queries easier to understand.</li>
+                                <li><b>Format your code consistently:</b> Use consistent indentation and spacing to make your code more readable.</li>
+                                <li><b>Add comments:</b> Explain your logic and the purpose of each part of your query.</li>
+                                <li><b>Optimize for performance:</b> Think about the most efficient way to write your query. Use appropriate JOINs, filter data early, and avoid using `SELECT *` when you only need specific columns.</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <b>1.1.4 How to Explain Your SQL Code to an Interviewer</b>
+                            <p>Being able to explain your thought process is just as important as writing the code itself. Here's how to do it effectively:</p>
+                             <ul>
+                                <li><b>Start with the problem:</b> Briefly restate the problem you're trying to solve.</li>
+                                <li><b>Explain your approach:</b> Describe the steps you're going to take to solve the problem.</li>
+                                 <li><b>Walk through your code:</b> Explain each part of your query and why you wrote it that way.</li>
+                                 <li><b>Justify your choices:</b> Explain why you chose a particular JOIN type, aggregate function, or filtering condition.</li>
+                                <li><b>Consider alternatives:</b> If there are other ways to solve the problem, mention them and explain why you chose the approach you did.</li>
+                                <li><b>Be prepared to answer follow-up questions:</b> The interviewer may ask you to modify your query, optimize it further, or handle edge cases.</li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <hr>
+                </div>
+                <div class="card" id="python-r-data-manipulation">
+                    <h4>1.2 Python for Data Manipulation</h4>
+                    <p>While SQL is essential for data extraction and manipulation, Python (specifically the Pandas library) is often used for more complex data analysis and transformation tasks. You might encounter some basic Python data manipulation questions in the technical screen, so let's prepare for those.</p>
+                     <ul>
+                        <li>
+                            <b>1.2.1 Common Data Manipulation Tasks in Interviews</b>
+                            <p>Here are some common data manipulation tasks you might be asked to perform using Python and Pandas:</p>
+                            <ul>
+                                <li><b>Filtering data:</b> Selecting rows based on certain conditions.</li>
+                                <li><b>Sorting data:</b> Ordering rows based on one or more columns.</li>
+                                 <li><b>Adding/removing columns:</b> Creating new columns or dropping existing ones.</li>
+                                <li><b>Grouping and aggregating data:</b> Similar to SQL's `GROUP BY`.</li>
+                                <li><b>Joining/merging DataFrames:</b> Similar to SQL JOINs.</li>
+                                 <li><b>Handling missing values:</b> Imputing or removing missing data.</li>
+                                <li><b>Reshaping data:</b> Pivoting, melting, or stacking data.</li>
+                            </ul>
+                        </li>
+                         <li>
+                            <b>1.2.2 Practice Problems (with Solutions and Explanations)</b>
+                            <p>Let's work through a few examples to solidify your understanding of these concepts.</p>
+                            <p><b>Example Problem 1:</b></p>
+                           <p>Given a Pandas DataFrame `df` with columns 'user_id', 'name', and 'age', filter the DataFrame to include only users who are older than 25.</p>
+                             <p><b>Solution and Explanation:</b></p>
+                             <div class="code-block">
+                             <pre>
+                                <code>
+                        import pandas as pd
+                        
+                        # Sample DataFrame
+                        data = {'user_id': [1, 2, 3, 4, 5],
+                                'name': ['Alice', 'Bob', 'Charlie', 'David', 'Eve'],
+                                'age': [24, 30, 22, 35, 27]}
+                        df = pd.DataFrame(data)
+                        
+                        # Filtering the DataFrame
+                        filtered_df = df[df['age'] > 25]
+                        
+                        print(filtered_df)
+                                </code>
+                            </pre>
+                            </div>
+                             <p><b>Explanation:</b> We use boolean indexing to select rows where the 'age' column is greater than 25. The expression `df['age'] > 25` creates a boolean Series, which is then used to filter the DataFrame.</p>
+                            <p><b>Example Problem 2:</b></p>
+                           <p>Given a Pandas DataFrame `df` with columns 'product_id', 'category', and 'sales', find the top 3 product categories with the highest total sales.</p>
+                            <p><b>Solution and Explanation:</b></p>
+                             <div class="code-block">
+                            <pre>
+                                <code>
+                        import pandas as pd
+                        
+                        # Sample DataFrame
+                        data = {'product_id': [1, 2, 3, 4, 5, 6],
+                                'category': ['A', 'B', 'A', 'C', 'B', 'A'],
+                                'sales': [100, 150, 200, 50, 120, 180]}
+                        df = pd.DataFrame(data)
+                        
+                        # Grouping by category and calculating total sales
+                        category_sales = df.groupby('category')['sales'].sum()
+                        
+                        # Sorting in descending order and selecting the top 3
+                        top_3_categories = category_sales.sort_values(ascending=False).head(3)
+                        
+                        print(top_3_categories)
+                                </code>
+                            </pre>
+                            </div>
+                             <p><b>Explanation:</b></p>
+                            <ol>
+                                <li>We group the DataFrame by the 'category' column using `groupby()`.</li>
+                                 <li>We calculate the sum of 'sales' for each category using `sum()`.</li>
+                                 <li>We sort the resulting Series in descending order using `sort_values(ascending=False)`.</li>
+                                 <li>We select the top 3 categories using `head(3)`.</li>
+                             </ol>
+                         </li>
+                         <li>
+                            <b>1.2.3 Tips for Writing Efficient and Readable Code</b>
+                            <p>Similar to SQL, writing clean and efficient Python code is important in an interview setting:</p>
+                            <ul>
+                                <li><b>Use meaningful variable names:</b> Make your code self-explanatory.</li>
+                                <li><b>Comment your code:</b> Explain your logic and the purpose of each step.</li>
+                                <li><b>Use built-in functions and libraries:</b> Leverage the power of Pandas and NumPy for common data manipulation tasks.</li>
+                                <li><b>Avoid unnecessary loops:</b> Pandas and NumPy are optimized for vectorized operations, which are often much faster than explicit loops.</li>
+                                <li><b>Break down complex tasks:</b> Use functions and helper variables to make your code more modular and easier to understand.</li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <hr>
+                </div>
+                 <div class="card" id="mock-interview-practice-sql-python">
+                    <h4>1.3 Mock Interview Practice (SQL and Python/R)</h4>
+                    <p>The best way to prepare for the technical screen is to practice, practice, practice! Here are some resources and tips for conducting mock interviews:</p>
+                     <ul>
+                         <li><b>Online Platforms:</b>
+                            <ul>
+                                 <li><b>LeetCode:</b> Offers a wide range of coding problems, including SQL and Python.</li>
+                                <li><b>HackerRank:</b> Provides coding challenges and mock interviews.</li>
+                                 <li><b>StrataScratch:</b> Focuses specifically on data science interview questions, including SQL and Python.</li>
+                                <li><b>Pramp:</b> A peer-to-peer mock interview platform where you can practice with other candidates.</li>
+                                 <li><b>Interviewing.io:</b> Offers anonymous technical mock interviews with experienced engineers.</li>
+                            </ul>
+                        </li>
+                        <li><b>Practice with a Friend or Colleague:</b> Find someone else who is preparing for data science interviews and take turns interviewing each other.</li>
+                         <li><b>Record Yourself:</b> Record your mock interviews (with your partner's permission) and review them later to identify areas for improvement.</li>
+                        <li><b>Focus on Communication:</b> Remember that the interviewer is not just evaluating your technical skills but also your ability to communicate your thought process clearly and effectively.</li>
+                         <li><b>Time Yourself:</b> Practice solving problems under time pressure to simulate the real interview environment.</li>
+                        <li><b>Ask for Feedback:</b> After each mock interview, ask for feedback on your performance. What did you do well? What could you improve?</li>
+                    </ul>
+                    <hr>
+                </div>
+            </div>
+              <div class="navigation-buttons">
+                  <a href="../foundational_knowledge/3.html">Previous: Programming (Python/R)</a>
+                <a href="interview_preparation/analytical_execution.html">Next: Analytical Execution Interview</a>
+             </div>
+        </div>
+    </div>
+     <div class="footer-banner">
+        </div>
+    <footer>
+        <p>© 2025 Moshe Shamouilian</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,514 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Mastering SQL: Analytical Patterns for LeetCode and Beyond</title>
+    <meta name="description" content="A handbook for preparing for analytical/data-science interviews">
+
+    <!-- MathJax -->
+    <script async src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+
+    <!-- Site CSS -->
+    <link rel="stylesheet" href="/assets/css/style.css">
+  </head>
+  <body>
+    <aside class="sidebar">
+  <h2>Contents</h2>
+  <ul class="nav-list">
+    <li><a href="/introduction/" class="">I. Introduction</a>
+      <ul>
+        <li><a href="/introduction/#welcome">1. Welcome and Purpose of this Handbook</a></li>
+        <li><a href="/introduction/#meta-data-science-role">2. What to Expect: The Meta Data Science Role</a></li>
+        <li><a href="/introduction/#interview-process">3. Navigating the Meta Interview Process</a></li>
+        <li><a href="/introduction/#handbook-usage">4. How to Use This Handbook</a></li>
+      </ul>
+    </li>
+    <li><a href="/foundational_knowledge/1/">II. Foundational Knowledge & Skills</a></li>
+    <li><a href="/interview_preparation/technical_skills/">III. Interview Preparation</a></li>
+    <li><a href="/meta_specificity/">IV. Meta Specificity</a></li>
+    <li><a href="/resources_practice/">V. Resources and Practice</a></li>
+    <li><a href="/conclusion/">VI. Conclusion</a></li>
+    <li><a href="/appendix/">Appendix</a></li>
+  </ul>
+</aside>
+
+
+    <main class="main-content">
+      <h1 id="mastering-sql-analytical-patterns-for-leetcode-and-beyond">Mastering SQL: Analytical Patterns for LeetCode and Beyond</h1>
+<p><em>A Comprehensive Guide to SQL Problem-Solving Patterns</em></p>
+
+<h2 id="table-of-contents">Table of Contents</h2>
+<ol>
+  <li>Introduction</li>
+  <li>The Core Process</li>
+  <li>Specific Analytical Patterns and Techniques
+    <ul>
+      <li>3.1 Common PostgreSQL Syntax</li>
+    </ul>
+  </li>
+  <li>Common LeetCode Problems by Pattern</li>
+  <li>Tips and Practice Recommendations</li>
+  <li>Additional Topics and Resources</li>
+</ol>
+
+<h2 id="1-introduction">1. Introduction</h2>
+
+<p>This guide provides a structured approach to solving SQL problems, moving beyond simple syntax and focusing on the underlying analytical patterns. By understanding these patterns, you can tackle a wide range of SQL challenges more effectively. Remember, SQL isn’t just about writing queries; it’s about translating business problems into logical steps.</p>
+
+<h2 id="2-the-core-process">2. The Core Process</h2>
+
+<h3 id="core-analytical-task">Core Analytical Task</h3>
+<ul>
+  <li>Before writing any SQL, understand exactly what the problem asks you to analyze or find</li>
+  <li>Identify if it’s a straightforward question or needs breaking down</li>
+  <li>Look for keywords and focus on the intent</li>
+</ul>
+
+<h3 id="data-relationships">Data Relationships</h3>
+<ul>
+  <li>Identify relevant tables and their relationships</li>
+  <li>Determine necessary joins</li>
+  <li>Identify unique identifiers linking tables</li>
+  <li>Understand the underlying data model</li>
+</ul>
+
+<h3 id="sql-techniques">SQL Techniques</h3>
+<ul>
+  <li>Choose specific techniques based on analytical intent</li>
+  <li>Consider: aggregations, filtering, self-joins</li>
+  <li>Match the right tool to the analytical task</li>
+</ul>
+
+<h3 id="ctes-for-structure">CTEs For Structure</h3>
+<ul>
+  <li>Consider using Common Table Expressions (CTEs)</li>
+  <li>Break down queries into logical, manageable parts</li>
+  <li>Improve query structure and readability</li>
+  <li>Consider CTEs even for seemingly simple queries</li>
+</ul>
+
+<h3 id="execution-plan">Execution Plan</h3>
+<ul>
+  <li>Develop logical progression for problem-solving</li>
+  <li>Start with a plan before coding</li>
+  <li>Essential for complex problems</li>
+</ul>
+
+<h2 id="3-specific-analytical-patterns-and-techniques">3. Specific Analytical Patterns and Techniques</h2>
+
+<h3 id="31-common-postgresql-syntax">3.1 Common PostgreSQL Syntax</h3>
+
+<p>This section details common syntax in PostgreSQL, especially for functions related to aggregation, date manipulation, and window functions. These are often used in complex analytical SQL queries.</p>
+
+<h4 id="a-aggregation-functions-postgresql">A. Aggregation Functions (PostgreSQL)</h4>
+
+<p><strong>Basic Aggregates:</strong></p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">COUNT(expression)</code>: Returns the number of rows where expression is not NULL. <code class="language-plaintext highlighter-rouge">COUNT(*)</code> counts all rows.</li>
+  <li><code class="language-plaintext highlighter-rouge">SUM(expression)</code>: Returns the sum of all values of the expression.</li>
+  <li><code class="language-plaintext highlighter-rouge">AVG(expression)</code>: Returns the average of all values of the expression.</li>
+  <li><code class="language-plaintext highlighter-rouge">MIN(expression)</code>: Returns the minimum of all values of the expression.</li>
+  <li><code class="language-plaintext highlighter-rouge">MAX(expression)</code>: Returns the maximum of all values of the expression.</li>
+</ul>
+
+<p><strong>Grouping:</strong></p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">GROUP BY</code>: Groups rows that have the same values in specified columns into summary rows.</li>
+  <li><code class="language-plaintext highlighter-rouge">HAVING</code>: A clause for filtering groups based on aggregated values. It’s used with <code class="language-plaintext highlighter-rouge">GROUP BY</code>.</li>
+</ul>
+
+<p><strong>Handling NULLs in Aggregates:</strong></p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">COALESCE(value1, value2, ...)</code>: Returns the first non-NULL value from the list. Often used to handle NULLs in calculations.</li>
+  <li><code class="language-plaintext highlighter-rouge">NULLIF(value1, value2)</code>: Returns NULL if <code class="language-plaintext highlighter-rouge">value1</code> equals <code class="language-plaintext highlighter-rouge">value2</code>, otherwise returns <code class="language-plaintext highlighter-rouge">value1</code>.</li>
+</ul>
+
+<p><strong>Example of Aggregation Functions:</strong></p>
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span>
+    <span class="n">department_id</span><span class="p">,</span>
+    <span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="k">AS</span> <span class="n">employee_count</span><span class="p">,</span>
+    <span class="k">AVG</span><span class="p">(</span><span class="n">COALESCE</span><span class="p">(</span><span class="n">salary</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span> <span class="k">AS</span> <span class="n">avg_salary</span><span class="p">,</span>
+    <span class="k">MAX</span><span class="p">(</span><span class="n">salary</span><span class="p">)</span> <span class="k">AS</span> <span class="n">max_salary</span>
+<span class="k">FROM</span> <span class="n">employees</span>
+<span class="k">GROUP</span> <span class="k">BY</span> <span class="n">department_id</span>
+<span class="k">HAVING</span> <span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">10</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h4 id="b-common-date-manipulation-functions-postgresql">B. Common Date Manipulation Functions (PostgreSQL)</h4>
+
+<p><strong>Extracting Date Components:</strong></p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">EXTRACT(part FROM timestamp)</code>: Extracts specific components like YEAR, MONTH, DAY, HOUR, etc., from a timestamp.</li>
+  <li><code class="language-plaintext highlighter-rouge">date_part('part', timestamp)</code>: Similar to EXTRACT, but uses string arguments for the part.</li>
+</ul>
+
+<p><strong>Date Arithmetic:</strong></p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">timestamp +/- interval</code>: Adds or subtracts an interval from a timestamp (e.g., timestamp + INTERVAL ‘1 day’).</li>
+</ul>
+
+<p><strong>Date Truncation:</strong></p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">DATE_TRUNC('unit', timestamp)</code>: Truncates a timestamp to a specific unit (e.g., DATE_TRUNC(‘month’, timestamp)).</li>
+</ul>
+
+<p><strong>Formatting Dates:</strong></p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">TO_CHAR(timestamp, 'format')</code>: Converts a timestamp to a string using a specified format.</li>
+</ul>
+
+<p><strong>Example of Date Functions:</strong></p>
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span>
+   <span class="k">EXTRACT</span><span class="p">(</span><span class="nb">YEAR</span> <span class="k">FROM</span> <span class="n">order_date</span><span class="p">)</span> <span class="k">AS</span> <span class="n">order_year</span><span class="p">,</span>
+   <span class="n">DATE_TRUNC</span><span class="p">(</span><span class="s1">'month'</span><span class="p">,</span> <span class="n">order_date</span><span class="p">)</span> <span class="k">AS</span> <span class="n">order_month</span><span class="p">,</span>
+   <span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span>
+<span class="k">FROM</span> <span class="n">orders</span>
+<span class="k">WHERE</span> <span class="n">order_date</span> <span class="o">&gt;</span> <span class="k">CURRENT_DATE</span> <span class="o">-</span> <span class="n">INTERVAL</span> <span class="s1">'1 year'</span>
+<span class="k">GROUP</span> <span class="k">BY</span> <span class="n">DATE_TRUNC</span><span class="p">(</span><span class="s1">'month'</span><span class="p">,</span> <span class="n">order_date</span><span class="p">)</span>
+<span class="k">ORDER</span> <span class="k">BY</span> <span class="n">order_year</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h4 id="c-window-functions-postgresql">C. Window Functions (PostgreSQL)</h4>
+
+<p><strong>Ranking Functions:</strong></p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">RANK() OVER (PARTITION BY ... ORDER BY ...)</code>: Assigns ranks within a partition, with gaps for ties.</li>
+  <li><code class="language-plaintext highlighter-rouge">DENSE_RANK() OVER (PARTITION BY ... ORDER BY ...)</code>: Assigns ranks within a partition, no gaps for ties.</li>
+  <li><code class="language-plaintext highlighter-rouge">ROW_NUMBER() OVER (PARTITION BY ... ORDER BY ...)</code>: Assigns unique row numbers within a partition.</li>
+</ul>
+
+<p><strong>Analytical Functions:</strong></p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">LAG(expression, offset, default) OVER (PARTITION BY ... ORDER BY ...)</code>: Accesses a row at a given offset before the current row.</li>
+  <li><code class="language-plaintext highlighter-rouge">LEAD(expression, offset, default) OVER (PARTITION BY ... ORDER BY ...)</code>: Accesses a row at a given offset after the current row.</li>
+</ul>
+
+<p><strong>Aggregate Window Functions:</strong></p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">SUM() OVER (PARTITION BY ... ORDER BY ...)</code>: A running sum, calculated in a window.</li>
+  <li><code class="language-plaintext highlighter-rouge">AVG() OVER (PARTITION BY ... ORDER BY ...)</code>: A running average, calculated in a window.</li>
+</ul>
+
+<p><strong>Example of Window Functions:</strong></p>
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span>
+   <span class="n">order_id</span><span class="p">,</span>
+   <span class="n">customer_id</span><span class="p">,</span>
+   <span class="n">order_date</span><span class="p">,</span>
+   <span class="n">order_amount</span><span class="p">,</span>
+   <span class="n">RANK</span><span class="p">()</span> <span class="n">OVER</span> <span class="p">(</span><span class="k">PARTITION</span> <span class="k">BY</span> <span class="n">customer_id</span> <span class="k">ORDER</span> <span class="k">BY</span> <span class="n">order_date</span><span class="p">)</span> <span class="k">as</span> <span class="n">customer_order_rank</span><span class="p">,</span>
+   <span class="k">SUM</span><span class="p">(</span><span class="n">order_amount</span><span class="p">)</span> <span class="n">OVER</span> <span class="p">(</span><span class="k">PARTITION</span> <span class="k">BY</span> <span class="n">customer_id</span> <span class="k">ORDER</span> <span class="k">BY</span> <span class="n">order_date</span><span class="p">)</span> <span class="k">AS</span> <span class="n">customer_running_total</span><span class="p">,</span>
+   <span class="n">LAG</span><span class="p">(</span><span class="n">order_date</span><span class="p">)</span> <span class="n">OVER</span> <span class="p">(</span><span class="k">PARTITION</span> <span class="k">BY</span> <span class="n">customer_id</span> <span class="k">ORDER</span> <span class="k">BY</span> <span class="n">order_date</span><span class="p">)</span> <span class="k">as</span> <span class="n">previous_order_date</span>
+<span class="k">FROM</span> <span class="n">orders</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h3 id="pattern-examples">Pattern Examples</h3>
+
+<h4 id="a-aggregation-and-grouping">A. Aggregation and Grouping</h4>
+<p>Analytical Intent: To summarize data over groups</p>
+
+<p><strong>Example (184 - Department Highest Salary):</strong></p>
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">WITH</span> <span class="n">MaxSalaries</span> <span class="k">AS</span> <span class="p">(</span>
+  <span class="k">SELECT</span> <span class="n">DepartmentId</span><span class="p">,</span> <span class="k">MAX</span><span class="p">(</span><span class="n">COALESCE</span><span class="p">(</span><span class="n">Salary</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span> <span class="k">AS</span> <span class="n">MaxSalary</span>
+  <span class="k">FROM</span> <span class="n">Employee</span>
+  <span class="k">GROUP</span> <span class="k">BY</span> <span class="n">DepartmentId</span>
+<span class="p">)</span>
+<span class="k">SELECT</span> <span class="n">d</span><span class="p">.</span><span class="n">Name</span> <span class="k">AS</span> <span class="n">Department</span><span class="p">,</span>
+       <span class="n">e</span><span class="p">.</span><span class="n">Name</span> <span class="k">AS</span> <span class="n">Employee</span><span class="p">,</span>
+       <span class="n">e</span><span class="p">.</span><span class="n">Salary</span>
+<span class="k">FROM</span> <span class="n">Employee</span> <span class="n">e</span>
+<span class="k">JOIN</span> <span class="n">MaxSalaries</span> <span class="n">ms</span>
+  <span class="k">ON</span> <span class="n">e</span><span class="p">.</span><span class="n">DepartmentId</span> <span class="o">=</span> <span class="n">ms</span><span class="p">.</span><span class="n">DepartmentId</span>
+  <span class="k">AND</span> <span class="n">COALESCE</span><span class="p">(</span><span class="n">e</span><span class="p">.</span><span class="n">Salary</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">=</span> <span class="n">ms</span><span class="p">.</span><span class="n">MaxSalary</span>
+<span class="k">JOIN</span> <span class="n">Department</span> <span class="n">d</span> <span class="k">ON</span> <span class="n">e</span><span class="p">.</span><span class="n">DepartmentId</span> <span class="o">=</span> <span class="n">d</span><span class="p">.</span><span class="n">Id</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h4 id="b-filtering-and-selection">B. Filtering and Selection</h4>
+<p>Analytical Intent: Retrieve specific subsets based on conditions</p>
+
+<p><strong>Example (183 - Customers Who Never Order):</strong></p>
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">WITH</span> <span class="n">OrderedCustomers</span> <span class="k">AS</span> <span class="p">(</span>
+  <span class="k">SELECT</span> <span class="n">CustomerId</span> <span class="k">FROM</span> <span class="n">Orders</span>
+<span class="p">)</span>
+<span class="k">SELECT</span> <span class="n">Name</span>
+<span class="k">FROM</span> <span class="n">Customers</span>
+<span class="k">WHERE</span> <span class="n">Id</span> <span class="k">NOT</span> <span class="k">IN</span> <span class="p">(</span>
+  <span class="k">SELECT</span> <span class="n">COALESCE</span><span class="p">(</span><span class="n">CustomerId</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+  <span class="k">FROM</span> <span class="n">OrderedCustomers</span>
+<span class="p">);</span>
+</code></pre></div></div>
+
+<h4 id="c-self-joins">C. Self-Joins</h4>
+<p>Analytical Intent: Compare rows within a single table</p>
+
+<p><strong>Example (180 - Consecutive Numbers):</strong></p>
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">WITH</span> <span class="n">LaggedLogs</span> <span class="k">AS</span> <span class="p">(</span>
+  <span class="k">SELECT</span>
+    <span class="n">Id</span><span class="p">,</span>
+    <span class="n">Num</span><span class="p">,</span>
+    <span class="n">LAG</span><span class="p">(</span><span class="n">Num</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="k">NULL</span><span class="p">)</span> <span class="n">OVER</span> <span class="p">(</span><span class="k">ORDER</span> <span class="k">BY</span> <span class="n">Id</span><span class="p">)</span> <span class="k">AS</span> <span class="n">prev_num1</span><span class="p">,</span>
+    <span class="n">LAG</span><span class="p">(</span><span class="n">Num</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="k">NULL</span><span class="p">)</span> <span class="n">OVER</span> <span class="p">(</span><span class="k">ORDER</span> <span class="k">BY</span> <span class="n">Id</span><span class="p">)</span> <span class="k">AS</span> <span class="n">prev_num2</span>
+  <span class="k">FROM</span> <span class="n">Logs</span>
+<span class="p">)</span>
+<span class="k">SELECT</span> <span class="k">DISTINCT</span> <span class="n">Num</span>
+<span class="k">FROM</span> <span class="n">LaggedLogs</span>
+<span class="k">WHERE</span> <span class="n">Num</span> <span class="o">=</span> <span class="n">prev_num1</span>
+  <span class="k">AND</span> <span class="n">Num</span> <span class="o">=</span> <span class="n">prev_num2</span>
+  <span class="k">AND</span> <span class="n">Num</span> <span class="k">IS</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h4 id="d-ranking-and-ordering">D. Ranking and Ordering</h4>
+<p>Analytical Intent: Find relative position of records</p>
+
+<p><strong>Example (176 - Second Highest Salary):</strong></p>
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">WITH</span> <span class="n">RankedSalaries</span> <span class="k">AS</span> <span class="p">(</span>
+  <span class="k">SELECT</span>
+    <span class="n">Salary</span><span class="p">,</span>
+    <span class="n">DENSE_RANK</span><span class="p">()</span> <span class="n">OVER</span> <span class="p">(</span>
+      <span class="k">ORDER</span> <span class="k">BY</span> <span class="n">COALESCE</span><span class="p">(</span><span class="n">Salary</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="k">DESC</span>
+    <span class="p">)</span> <span class="k">as</span> <span class="n">rank_num</span>
+  <span class="k">FROM</span> <span class="n">Employee</span>
+<span class="p">)</span>
+<span class="k">SELECT</span>
+  <span class="k">CASE</span>
+    <span class="k">WHEN</span> <span class="p">(</span><span class="k">SELECT</span> <span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="k">FROM</span> <span class="n">RankedSalaries</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">2</span> <span class="k">THEN</span> <span class="k">NULL</span>
+    <span class="k">ELSE</span> <span class="p">(</span><span class="k">SELECT</span> <span class="n">Salary</span> <span class="k">FROM</span> <span class="n">RankedSalaries</span> <span class="k">WHERE</span> <span class="n">rank_num</span> <span class="o">=</span> <span class="mi">2</span><span class="p">)</span>
+  <span class="k">END</span> <span class="k">AS</span> <span class="n">SecondHighestSalary</span>
+<span class="k">FROM</span> <span class="p">(</span><span class="k">SELECT</span> <span class="mi">1</span> <span class="k">as</span> <span class="n">dummy_column</span><span class="p">)</span> <span class="k">as</span> <span class="n">dummy_table</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h2 id="4-common-leetcode-sql-problems-by-pattern">4. Common LeetCode SQL Problems by Pattern</h2>
+
+<h3 id="pattern-based-quick-reference">Pattern-Based Quick Reference</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Pattern &amp; Problem</th>
+      <th>Difficulty</th>
+      <th>Key Concepts</th>
+      <th>Common Pitfalls</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Aggregation</strong></td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>184 - Dept Highest Salary</td>
+      <td>Medium</td>
+      <td>GROUP BY, MAX</td>
+      <td>NULL handling</td>
+    </tr>
+    <tr>
+      <td>185 - Dept Top 3 Salaries</td>
+      <td>Hard</td>
+      <td>Window funcs</td>
+      <td>Duplicates</td>
+    </tr>
+    <tr>
+      <td>262 - Trips and Users</td>
+      <td>Hard</td>
+      <td>Multi-join</td>
+      <td>Date filtering</td>
+    </tr>
+    <tr>
+      <td><strong>Filtering</strong></td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>183 - Customers No Orders</td>
+      <td>Easy</td>
+      <td>NOT IN</td>
+      <td>NULL in subquery</td>
+    </tr>
+    <tr>
+      <td>196 - Delete Duplicates</td>
+      <td>Easy</td>
+      <td>Self-JOIN</td>
+      <td>Row deletion</td>
+    </tr>
+    <tr>
+      <td>1251 - Avg Selling Price</td>
+      <td>Easy</td>
+      <td>JOIN</td>
+      <td>Date ranges</td>
+    </tr>
+    <tr>
+      <td><strong>Self-Joins</strong></td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>180 - Consecutive Numbers</td>
+      <td>Medium</td>
+      <td>LAG</td>
+      <td>Row sequence</td>
+    </tr>
+    <tr>
+      <td>197 - Rising Temperature</td>
+      <td>Easy</td>
+      <td>Self-JOIN</td>
+      <td>Date compare</td>
+    </tr>
+    <tr>
+      <td>1270 - Manager Hierarchy</td>
+      <td>Medium</td>
+      <td>Multi-join</td>
+      <td>Recursion</td>
+    </tr>
+    <tr>
+      <td><strong>Ranking</strong></td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>176 - Second High Salary</td>
+      <td>Medium</td>
+      <td>DENSE_RANK</td>
+      <td>NULL result</td>
+    </tr>
+    <tr>
+      <td>177 - Nth High Salary</td>
+      <td>Medium</td>
+      <td>ROW_NUMBER</td>
+      <td>Variable N</td>
+    </tr>
+    <tr>
+      <td>178 - Rank Scores</td>
+      <td>Medium</td>
+      <td>DENSE_RANK</td>
+      <td>Tie handling</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="5-tips-and-practice-recommendations">5. Tips and Practice Recommendations</h2>
+
+<h3 id="pattern-recognition-tips">Pattern Recognition Tips</h3>
+
+<p><strong>Aggregation Problems:</strong></p>
+<ul>
+  <li>Look for: “highest,” “average,” “total”</li>
+  <li>Consider NULL handling in aggregations</li>
+  <li>Watch for grouping requirements</li>
+</ul>
+
+<p><strong>Filtering Problems:</strong></p>
+<ul>
+  <li>Keywords: “never,” “not in,” “exclude”</li>
+  <li>Consider date range conditions</li>
+  <li>Watch for multiple conditions</li>
+</ul>
+
+<p><strong>Self-Join Problems:</strong></p>
+<ul>
+  <li>Look for consecutive values</li>
+  <li>Consider hierarchical relationships</li>
+  <li>Watch for row comparisons</li>
+</ul>
+
+<p><strong>Ranking Problems:</strong></p>
+<ul>
+  <li>Keywords: “nth highest,” “top k”</li>
+  <li>Consider tie handling</li>
+  <li>Watch for NULL values</li>
+</ul>
+
+<h3 id="practice-strategy">Practice Strategy</h3>
+
+<p><strong>Start Simple:</strong></p>
+<ul>
+  <li>Begin with easy problems in each pattern</li>
+  <li>Master basic patterns before combinations</li>
+  <li>Practice NULL handling consistently</li>
+</ul>
+
+<p><strong>Build Complexity:</strong></p>
+<ul>
+  <li>Move to medium difficulty</li>
+  <li>Combine multiple patterns</li>
+  <li>Focus on performance optimization</li>
+</ul>
+
+<p><strong>Review and Reflect:</strong></p>
+<ul>
+  <li>Document common mistakes</li>
+  <li>Create pattern templates</li>
+  <li>Build a personal problem-solving framework</li>
+</ul>
+
+<h3 id="common-mistakes-to-avoid">Common Mistakes to Avoid</h3>
+
+<p><strong>Technical Mistakes:</strong></p>
+<ul>
+  <li>Forgetting NULL handling</li>
+  <li>Incorrect join conditions</li>
+  <li>Missing edge cases</li>
+</ul>
+
+<p><strong>Logical Mistakes:</strong></p>
+<ul>
+  <li>Misinterpreting requirements</li>
+  <li>Overlooking business rules</li>
+  <li>Incorrect aggregation logic</li>
+</ul>
+
+<p><strong>Performance Mistakes:</strong></p>
+<ul>
+  <li>Unnecessary subqueries</li>
+  <li>Inefficient joins</li>
+  <li>Missing indexes consideration</li>
+</ul>
+
+<h2 id="6-additional-topics-and-resources">6. Additional Topics and Resources</h2>
+
+<h3 id="advanced-sql-concepts">Advanced SQL Concepts</h3>
+
+<p><strong>Subqueries and CTEs:</strong></p>
+<ul>
+  <li>Explore different types of subqueries and when to use each</li>
+  <li>Delve into advanced CTE use cases, such as recursive queries</li>
+</ul>
+
+<p><strong>Performance Tuning:</strong></p>
+<ul>
+  <li>Learn about query optimization techniques</li>
+  <li>Consider indexes, explain plans, and query profiling</li>
+</ul>
+
+<p><strong>Advanced Joins:</strong></p>
+<ul>
+  <li>Practice different types of joins, like LEFT JOIN, RIGHT JOIN, FULL JOIN</li>
+  <li>Learn the nuances of join conditions and when to use them</li>
+</ul>
+
+<p><strong>Data Modeling:</strong></p>
+<ul>
+  <li>Explore database schema designs</li>
+  <li>Learn about normalization and denormalization</li>
+</ul>
+
+<p><strong>String Manipulation:</strong></p>
+<ul>
+  <li>Deepen your understanding of various string functions</li>
+</ul>
+
+
+      <footer>
+        <p>© 2025 </p>
+      </footer>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Data Science Analytical Handbook</title>
+    <meta name="description" content="A handbook for preparing for analytical/data-science interviews">
+
+    <!-- MathJax -->
+    <script async src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+
+    <!-- Site CSS -->
+    <link rel="stylesheet" href="/assets/css/style.css">
+  </head>
+  <body>
+    <aside class="sidebar">
+  <h2>Contents</h2>
+  <ul class="nav-list">
+    <li><a href="/introduction/" class="">I. Introduction</a>
+      <ul>
+        <li><a href="/introduction/#welcome">1. Welcome and Purpose of this Handbook</a></li>
+        <li><a href="/introduction/#meta-data-science-role">2. What to Expect: The Meta Data Science Role</a></li>
+        <li><a href="/introduction/#interview-process">3. Navigating the Meta Interview Process</a></li>
+        <li><a href="/introduction/#handbook-usage">4. How to Use This Handbook</a></li>
+      </ul>
+    </li>
+    <li><a href="/foundational_knowledge/1/">II. Foundational Knowledge & Skills</a></li>
+    <li><a href="/interview_preparation/technical_skills/">III. Interview Preparation</a></li>
+    <li><a href="/meta_specificity/">IV. Meta Specificity</a></li>
+    <li><a href="/resources_practice/">V. Resources and Practice</a></li>
+    <li><a href="/conclusion/">VI. Conclusion</a></li>
+    <li><a href="/appendix/">Appendix</a></li>
+  </ul>
+</aside>
+
+
+    <main class="main-content">
+      <p>** Real-World Datasets, Their Distributions, Statistical Analysis and Relevant Equations**</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Dataset Category</th>
+      <th>Example Dataset(s)</th>
+      <th>Description</th>
+      <th>Likely Data Distribution(s) &amp; Explanation</th>
+      <th>Potential Data Science Applications</th>
+      <th>Statistical Summary &amp; Analysis</th>
+      <th>Relevant Statistical Equations &amp; Techniques</th>
+      <th> </th>
+      <th> </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>E-commerce &amp; Retail</strong></td>
+      <td>Amazon product reviews, customer purchase history</td>
+      <td>Data on customer interactions, product ratings, purchase patterns, demographics.</td>
+      <td><strong>Power Law (Zipfian):</strong> Product sales, review counts often follow a power law where a few items are very popular, and many are less so. <strong>Normal (ish):</strong> Customer age, income (though often skewed).</td>
+      <td>Recommender systems, sentiment analysis, sales forecasting, market basket analysis, customer segmentation</td>
+      <td><strong>Product Sales Analysis:</strong> - <strong>Mean Sales:</strong> Low skewed due to power law. Use weighted mean for product popularity, <strong>Variance:</strong> Weighted variance based on product popularity. <strong>Skewness &amp; Kurtosis:</strong> Assess the power-law impact. <strong>Other:</strong>  Rank-frequency plots for power-law visualization. <strong>Customer Demographics Analysis:</strong>  <strong>Mean Age/Income</strong>: Centered mean; potentially log-scaled income. <strong>Variance</strong> Calculate unbiased sample variance and std deviation. <strong>Dist. Modeling:</strong>  Fit distributions and get best-fit parameters via MLE.</td>
+      <td><strong>Product Sales:</strong> Weighted Mean: $\mu_w = \frac{\sum w_i x_i}{\sum w_i}$, Weighted Variance: $\sigma^2_w = \frac{\sum w_i(x_i - \mu_w)^2}{\sum w_i}$, Maximum Likelihood Estimation (MLE):  Maximize Likelihood function $L(\theta;x)$,  <strong>Customer Demo:</strong> Sample Mean: $\mu = \frac{\sum x_i}{N}$, Sample Variance: $\sigma^2 = \frac{\sum (x_i - \mu)^2}{N-1}$,   Log-Transformation: $y = \log(x + C)$; where $C &gt; 0$</td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><strong>Social Media</strong></td>
+      <td>Twitter posts, Facebook user activity, Instagram data</td>
+      <td>Text, user engagement metrics, network graphs, timestamps of user activity.</td>
+      <td><strong>Power Law (Zipfian):</strong> Number of followers, likes, shares often exhibits a power law. <strong>Log-Normal:</strong> Time between posts.  <strong>Categorical/Multinomial:</strong> User demographics, post categories.</td>
+      <td>Sentiment analysis, social network analysis, influencer identification, trend detection, personalized content delivery</td>
+      <td><strong>Engagement Metric Analysis:</strong> - <strong>Mean/Var Follower, Likes, Shares:</strong>   Low biased due to skew; median&lt;mean, high variance, log transform prior to calculations to obtain normalized data. <strong>Time Between Posts Analysis:</strong>  - <strong>Mean/Var time:</strong> Calculate moving averages and std dev, for trend. Fit time series models like AR, MA.  <strong>Categorical/Topic Data</strong> Frequency of Categories (via histogram); Shannon Entropy (for informational content and randomness).</td>
+      <td><strong>Engagement Metrics:</strong> Log-Transformation (if data skewed); Sample Mean/Var;  Moving Average: $\mu_t = \frac{1}{w} \sum_{i=t-w+1}^{t} x_i$ where $w$ = sliding window,   AR, MA, ARIMA (auto-regressive) Time series models; <strong>Text Data</strong>: Shannon Entropy: $H = -\sum p(x) \log p(x)$.</td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><strong>Finance</strong></td>
+      <td>Stock market prices, credit card transactions</td>
+      <td>Time-series data of financial instruments, transaction details, and demographics.</td>
+      <td><strong>Normal/Gaussian-like (with heavy tails):</strong> Stock price changes (can deviate significantly). <strong>Skewed:</strong> Loan amounts, transaction amounts (often many small and fewer large). <strong>Categorical:</strong> Transaction type, merchant category</td>
+      <td>Algorithmic trading, fraud detection, risk management, credit scoring, financial forecasting</td>
+      <td><strong>Time Series Analysis of Stock:</strong> - <strong>Mean/Variance Stock Change:</strong> Historical moving averages of return over timeframes and variances with dynamic time windows; Use rolling stats; volatility of std change (Volatility = std-dev (return)). <strong>Transactional Data Analysis:</strong> - <strong>Mean / Var / Skewness of Transactions/ Loans:</strong> (as appropriate), median often preferred for skewed, Robust estimates are important to account for outliers,  <strong>Categorical Data:</strong> Frequency Analysis via historgam; Fraud score (conditional probability approach on type).</td>
+      <td><strong>Stock Analysis:</strong>  Volatility: Standard deviation of stock return within time frame/windows $\sigma_t  = \sqrt{\frac{1}{n-1}\sum(r_i -  \mu)^2}$, EWMA Exponential Weighted moving avg with $\lambda$; Historical volatility metrics over the period window/frames;   <strong>Transaction Data:</strong>  Median of  Transactions; Median absolute deviation; Robust Regression methods, Conditional probability: $p(A</td>
+      <td>B) = \frac{p(A \cap B)}{p(B)}$</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><strong>Healthcare</strong></td>
+      <td>Patient medical records, genomic data</td>
+      <td>Patient demographics, diagnoses, test results, treatment information, gene sequences, biological data.</td>
+      <td><strong>Normal (ish):</strong> Patient height/weight, blood pressure. <strong>Skewed:</strong> Number of hospital visits, disease prevalence. <strong>Categorical:</strong> Disease type, treatment type. <strong>High-Dimensional:</strong> Genomic data.</td>
+      <td>Disease diagnosis, drug discovery, personalized medicine, patient risk prediction, epidemiological studies</td>
+      <td><strong>Physiological Data:</strong> - <strong>Mean/Var of Height, Weight, BP:</strong> Robust mean, standard deviation, boxplots; Check for modality of distributions; Shapiro-Wilks test; if multi-modal: estimate stats separately.   <strong>Visits, Prevalence Analysis:</strong> - <strong>Median and IQR</strong> due to skew and outliers; use Gamma family to check fits; Robust Variance based on rank analysis.   <strong>Categorical:</strong> Frequency (Histogram), Contingency table; Association tests such as Chi-squared and odds ratio. <strong>Genomic Data:</strong> (not simple statistics): dimensionality reduction techniques PCA/t-SNE and differential gene expression (statistical significance methods with multiple testing consideration).</td>
+      <td><strong>Physiological Data:</strong>  Robust Mean &amp; Var, Boxplot Analysis, Normal Distribution Tests like Shapiro-Wilks test, Gaussian Mixture models to model multimodal data, <strong>Visits / Prevalance:</strong> IQR ($Q_3 - Q_1$) Quantile metrics (e.g. median = $Q_2$), Gamma Distribution: for skewed data.  <strong>Categorical data:</strong>  Chi-squared:  $\sum \frac{(O - E)^2}{E}$ , where O is observed and E is expected values, Odds Ratio:  OD = $\frac{A/B}{C/D}$; <strong>Genomic Data:</strong>  Differential Expression Techniques (e.g., DESeq2, Limma).  PCA / t-SNE.</td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><strong>Weather &amp; Climate</strong></td>
+      <td>Temperature readings, precipitation data</td>
+      <td>Time-series of atmospheric measurements and geographic location.</td>
+      <td><strong>Normal (ish):</strong> Temperature (at specific locations). <strong>Cyclical:</strong> Temperature, rainfall across seasons. <strong>Spatial:</strong> Correlated weather patterns across locations.</td>
+      <td>Weather forecasting, climate change modeling, agricultural planning, disaster prediction</td>
+      <td><strong>Temperature Analysis:</strong> - <strong>Mean/Var per timeframe, seasonal, moving averages and standard deviation:</strong>  Seasonally Decompose data using STL; Trend Analysis with smoothing using Kalman filter.  <strong>Precipitation Data Analysis:</strong> - <strong>Moving sum / average of rainfall:</strong>  Quantiles of rain per season; frequency of precipitation; Poisson process may be good to model, with time varying average intensity;  <strong>Spatial Data Analysis:</strong> Spatial correlation analysis to find localized weather pockets by use of (Variogram)  (see equations) and clustering algorithms.</td>
+      <td><strong>Time Series Analysis</strong>:  STL decomposition: Breaks time series into trend, seasonality, and residual components, Kalman Filtering: Recursive estimation of state of system; AR / ARMA modeling. <strong>Spatial data</strong>: Variogram: $\gamma(h) = \frac{1}{2}\text{Var}(Z(x) - Z(x + h))$, Spatial interpolation (Kriging). Poisson Process based statistical modeling of event counts over a period</td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><strong>Transportation</strong></td>
+      <td>Taxi trip data, traffic sensor readings</td>
+      <td>Trip origins, destinations, times, road conditions, traffic flow.</td>
+      <td><strong>Skewed:</strong> Trip distances. <strong>Bimodal/Multimodal:</strong> Traffic flow (peak hours vs. non-peak hours). <strong>Spatial:</strong> Vehicle density, traffic congestion patterns.</td>
+      <td>Route optimization, traffic management, ride-sharing analysis, predicting travel times</td>
+      <td><strong>Trip Data Analysis:</strong> - <strong>Mean/Variance Distance:</strong> Trimmed Mean (Remove top and bottom outliers to reduce effect). Kernel Density plots on distances. <strong>Traffic Flow Analysis:</strong> Decompose for day/night cycles and time of week for finding congestion periods via auto-correlations. Mixture models for multimodal behavior of traffic (peak vs non-peak hours).   <strong>Spatial Data Analysis:</strong> Compute localized traffic congestion; via Moran’s I; also density maps; heatmaps etc.</td>
+      <td><strong>Trip analysis:</strong> Trimmed Mean : Avg. after trimming a fraction, Kernel density estimation : $KDE(x)= \frac{1}{nh} \sum K(\frac{x-x_i}{h})$, $h$: bandwidth;   <strong>Traffic Time series</strong> auto-correlation,   mixture model to combine gaussian behaviors of traffic. Spatial metrics (Moran’s I): to assess the overall clustering of spatial data using location correlations.</td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><strong>Sensor Data</strong></td>
+      <td>IoT sensor data, environmental monitoring data</td>
+      <td>Time-series data from various sensors (temperature, humidity, light, pressure), often geo-located.</td>
+      <td><strong>Normal/Gaussian:</strong> Temperature (stable conditions). <strong>Time-Series with trends/seasonality:</strong> Temperature, light intensity (depending on location/time of day). <strong>Spatial:</strong> Sensor network measurements</td>
+      <td>Anomaly detection, predictive maintenance, environmental monitoring, smart city applications</td>
+      <td><strong>Sensor Data Analysis</strong>:- <strong>Mean/Var/std of sensor values:</strong> Time series analysis for trends/seasonality removal by filtering methods; Frequency Domain Analysis for any oscillations using DFT/FFT. <strong>Sensor Spatial Data</strong> Cluster Analysis on where to perform local analysis. Cross correlation to detect correlation among multiple sensors.  Anomaly Detection: statistical thresholding and outlier detection. Kalman filtering if state transitions are needed</td>
+      <td><strong>Time-Series Analysis</strong> : Fourier transform : $X(k) = \sum x_i  e^{((-j 2\pi ki)/N)}$,  , Kalman Filter : Recursive process that estimates internal states by a transition matrix and sensor input data, ,  Anomaly Score $= \frac{</td>
+      <td>data_{pt} - \mu</td>
+      <td>}{\sigma}$; threshold based score, Sensor Data : Cross correlation (cross-covariance among multiple data time series.)</td>
+    </tr>
+    <tr>
+      <td><strong>Text &amp; Documents</strong></td>
+      <td>News articles, research papers, website text</td>
+      <td>Natural language data with varying document lengths, vocabulary, and topics.</td>
+      <td><strong>Power Law (Zipfian):</strong> Word frequencies (some words appear very often, many rarely). <strong>Categorical/Multinomial:</strong>  Topic categories, document types, parts of speech.</td>
+      <td>Text classification, information retrieval, topic modeling, sentiment analysis, language translation</td>
+      <td><strong>Document Statistics:</strong> - <strong>Mean/Variance:</strong> Document Length, Words/Document; trimmed or robust approach might help deal with extreme long documents; word rank frequencies to test for Power-law nature.   <strong>Text Analysis:</strong>   -  Word/Term frequencies (TF); TF-IDF to find important words; N-gram frequency for text context  <strong>Categorical Data</strong> Frequency count of categories and association rule mining.</td>
+      <td><strong>Text Processing Stats</strong> TF-IDF: $W(t,d) = TF \times \log(\frac{N}{n})$, document d term t, document frequency n/total doc N; Rank based Frequency $f(r) \propto \frac{1}{r^k}$, N-grams; topic models such as Latent Dirichlet allocation for topic clustering.</td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><strong>Image &amp; Video</strong></td>
+      <td>Image datasets (e.g., ImageNet), surveillance footage</td>
+      <td>Pixel data (color or grayscale) for images, video frames.</td>
+      <td><strong>High-dimensional, Complex:</strong> Image data is not easily summarized with simple distributions. Pixel values themselves might resemble a normal distribution, but overall data structure is complex. <strong>Spatial:</strong> Data within an image is locally correlated.</td>
+      <td>Image classification, object detection, facial recognition, video analysis, scene understanding</td>
+      <td><strong>Image Statistics:</strong> - <strong>Mean/Std Pixel Data:</strong>  For each channel calculate per image or across all images to model general behaviors;  Calculate Histogram and Color Moment (Skewness and kurtosis). Calculate localized metrics by dividing an image using Kernel Convolutions.    <strong>Image Structure &amp; Spatial analysis:</strong> Fourier Transformation on images; Wavelet transforms  . <strong>Video Analysis</strong> optical flow detection based on intensity changes  , compute metrics per frame and track/visualize.</td>
+      <td><strong>Image stats :</strong> Convolution K for localized regions with filter convolution $Img * K$;  Image Moments: $\mu_1 = \frac{1}{N} \sum(x)$, skewness: $\frac{1}{N} \frac{\sum(x - \text{mean})^3}{\text{std}^3}$, Kurtosis:$\frac{1}{N} \frac{\sum(x - \text{mean})^4}{\text{std}^4}$. Discrete Fourier Transforms: $F(k_1,k_2) =  \sum  \text{img}(m,n) e^{((-j 2\pi (k_1m+k_2n))/N)}$,   <strong>Video</strong> Optical Flow metrics</td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><strong>Geospatial Data</strong></td>
+      <td>Satellite imagery, census data, GIS data</td>
+      <td>Spatial data with geographic coordinates, population density, and other geographically-related attributes.</td>
+      <td><strong>Spatial:</strong> Data exhibits spatial autocorrelation, where nearby locations are more similar than those farther away. <strong>Skewed:</strong> Population density in urban areas. <strong>Categorical:</strong> Land use classification, neighborhood types.</td>
+      <td>Spatial analysis, urban planning, environmental modeling, location-based services, resource allocation</td>
+      <td><strong>Spatial Data Analysis:</strong> - <strong>Mean Population Density:</strong> Use of local averages with bandwidth adjustment to deal with local concentrations. <strong>Spatial Autocorrelation Metrics (Moran’s I; LISA):</strong> assess global and local clustering pattern of pop,  . <strong>Point Pattern Analysis</strong> test data distribution for significance (Ripley’s K function);  Spatial Regression to capture impact of spatial features; <strong>categorical data:</strong> use of land-use categories using conditional probability measures. <strong>Use of Spatial interpolation:</strong> Spatial Interpolation by Kriging for spatial continuous behavior of properties in geographical region using spatial covariance structures.</td>
+      <td><strong>Spatial Statistics:</strong>  Moran’s I spatial autocorrelation index; Local Indicators of Spatial Association (LISA); Ripley’s K-Function to assess clustering  , Spatial Kriging for spatial property interpolation  using covariance matrix; $Z(\mathbf{s}) =  \sum_i  \lambda_i Z(s_i)$: using different methods for $\lambda$ based on geostatistics;  Spatial Regression for feature/prediction models; Logistical regression: $P(Y=1) = \frac{1}{1 +  e^{-(\beta x+\alpha)}}$</td>
+      <td> </td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+      <footer>
+        <p>© 2025 </p>
+      </footer>
+    </main>
+  </body>
+</html>
