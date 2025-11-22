@@ -222,8 +222,8 @@ def main():
             if csv_data:
                 try:
                     data = pd.read_csv(StringIO(csv_data))
-                except:
-                    st.error(f"Error: {e}")
+                except Exception as e:
+                    st.error(f"Error reading pasted CSV data: {e}")
                     data = None
             else:
                 data = None

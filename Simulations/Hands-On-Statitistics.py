@@ -71,6 +71,7 @@
 # %%
 import os
 import pandas as pd
+from IPython.display import display
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns

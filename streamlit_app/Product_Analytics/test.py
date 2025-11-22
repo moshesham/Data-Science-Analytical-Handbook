@@ -21,6 +21,7 @@ COMMODITY_MAPPING = {
 
 import streamlit as st
 import pandas as pd
+import os
 import matplotlib.pyplot as plt
 import matplotlib.colors
 import numpy as np
@@ -73,7 +74,7 @@ def fetch_market_data(tickers: Dict[str, str], start_date: str, end_date: str, u
     return all_data
 
 @st.cache_data(ttl="24h")
-def fetch_fred_data(series_dict: Dict[str, str], _fred: Fred, start_date: str, end_date: str) -> pd.DataFrame: # <---- fetch_fred_data() DEFINITION RE-INSERTED
+def fetch_fred_data(series_dict: Dict[str, str], _fred: Optional[Fred], start_date: str, end_date: str) -> pd.DataFrame: # <---- fetch_fred_data() DEFINITION RE-INSERTED
     all_data = pd.DataFrame()
     if _fred is None:
         error_msg = "FRED API client not initialized. Check API key."
@@ -335,7 +336,7 @@ def main() -> None: # <---- main() DEFINITION NOW *AFTER* display_correlation_an
         moving_average_option = st.selectbox("Moving Average:", options=list(MOVING_AVERAGE_OPTIONS.keys()), index=0)
 
     display_mode_value = 'normalized' if display_mode == 'Normalized (Rebased to 100)' else 'level'
-    moving_average_period = MOVING_AVERAGE_OPTIONS[ma_option]
+    moving_average_period = MOVING_AVERAGE_OPTIONS[moving_average_option]
     end_date = date.today()
     start_date = end_date - timedelta(days=preset_ranges[selected_range])
     date_range_str = f"{start_date.strftime('%Y-%m-%d')} to {end_date.strftime('%Y-%m-%d')}"
@@ -352,6 +353,33 @@ def main() -> None: # <---- main() DEFINITION NOW *AFTER* display_correlation_an
     display_market_overview(equity_data, treasury_data, commodity_data, fred_data)
     display_market_performance_charts(equity_data, treasury_data, commodity_data, fred_data, display_mode_value, moving_average_period, date_range_str)
     display_correlation_analysis(equity_data, treasury_data, commodity_data, fred_data)
+
+
+def initialize_fred_api() -> Optional[Fred]:
+    """Initializes the FRED API client using environment variable or Streamlit secrets.
+
+    Returns None when an API key is not available or initialization fails.
+    """
+    api_key = os.environ.get(FRED_API_KEY_NAME)
+    # fall back to Streamlit secrets if available
+    try:
+        if not api_key and hasattr(st, 'secrets') and isinstance(st.secrets, dict) and 'FRED_API_KEY' in st.secrets:
+            api_key = st.secrets.get('FRED_API_KEY')
+    except Exception:
+        # st.secrets may not be available in some contexts
+        pass
+
+    if not api_key:
+        st.warning("FRED API key not found in environment or Streamlit secrets; FRED data will be skipped.")
+        return None
+
+    try:
+        fred_client = Fred(api_key=api_key)
+        return fred_client
+    except Exception as e:
+        st.error(f"Error initializing FRED API client: {e}")
+        st.session_state.api_error = str(e)
+        return None
 
 
 preset_ranges = {'1M': 30, '3M': 90, '6M': 180, 'YTD': (date.today() - date(date.today().year, 1, 1)).days, '1Y': 365, '2Y': 730, '2Y': 730}

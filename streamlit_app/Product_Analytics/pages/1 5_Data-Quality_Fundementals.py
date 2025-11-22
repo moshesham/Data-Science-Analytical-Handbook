@@ -1,4 +1,5 @@
 import streamlit as st
+import pandas as pd
 
 def main():
     st.set_page_config(page_title="Data Governance Essentials", page_icon="🛡️", layout="wide")
