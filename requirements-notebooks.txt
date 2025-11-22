@@ -1,0 +1,11 @@
+numpy
+pandas
+scipy
+statsmodels
+ipywidgets
+matplotlib
+seaborn
+scikit-learn
+nbval
+jupyter
+pytest

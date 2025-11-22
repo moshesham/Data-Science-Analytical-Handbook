@@ -36,8 +36,10 @@ jobs:
         python-version: '3.9'
     - name: Install dependencies
       run: |
-        python -m pip install --upgrade pip
-        pip install nbval jupyter pytest
+        python -m pip install --upgrade pip setuptools wheel
+        # Install test tooling + runtime dependencies used by notebooks.
+        # If a dedicated requirements file exists, use it for reproducible installs.
+        if [ -f requirements-notebooks.txt ]; then pip install -r requirements-notebooks.txt; else pip install nbval jupyter pytest numpy pandas scipy statsmodels ipywidgets matplotlib seaborn scikit-learn; fi
     - name: Validate notebooks
       run: |
         python -m pytest --nbval --ignore=streamlit_app/Product_Analytics/data/
