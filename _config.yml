@@ -1,0 +1,27 @@
+title: "Data Science Analytical Handbook"
+description: "A handbook for preparing for analytical/data-science interviews"
+baseurl: "" # change if served from a subpath, e.g. /repo-name
+url: "" # set to your site URL, e.g. https://username.github.io
+
+markdown: kramdown
+kramdown:
+  input: GFM
+  auto_id_prefix: "id-"
+
+  # Prevent inline styles for table alignment
+  table_align_class: true
+
+permalink: /:categories/:title/
+
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+
+collections:
+  pages:
+    output: true
+
+exclude:
+  - Gemfile.lock
+  - streamlit_app
+  - streamlit_app/**

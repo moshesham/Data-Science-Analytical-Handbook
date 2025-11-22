@@ -1,17 +1,31 @@
-import streamlit as st
-import pandas as pd
-import numpy as np
-import plotly.express as px
-import streamlit.components.v1 as components
-import folium
-from streamlit_folium import folium_static
-from sklearn.cluster import KMeans, DBSCAN
-from sklearn.preprocessing import StandardScaler
 import random
 
-def generate_transaction_data(num_transactions, anomaly_rate=0.05, geographic_anomalies=False, merchant_category_anomalies=False):
+import folium
+import numpy as np
+import pandas as pd
+import plotly.express as px
+import streamlit as st
+from sklearn.cluster import DBSCAN
+from sklearn.preprocessing import StandardScaler
+from streamlit_folium import folium_static
+
+
+def generate_transaction_data(
+    num_transactions,
+    anomaly_rate=0.05,
+    geographic_anomalies=False,
+    merchant_category_anomalies=False,
+):
     """Generates simulated transaction data with optional anomalies."""
-    categories = ['Grocery', 'Electronics', 'Clothing', 'Restaurant', 'Travel', 'Home Goods', 'Entertainment']
+    categories = [
+        "Grocery",
+        "Electronics",
+        "Clothing",
+        "Restaurant",
+        "Travel",
+        "Home Goods",
+        "Entertainment",
+    ]
     locations = [
         {"city": "New York", "lat": 40.7128, "lon": -74.0060},
         {"city": "London", "lat": 51.5074, "lon": 0.1278},
@@ -19,7 +33,7 @@ def generate_transaction_data(num_transactions, anomaly_rate=0.05, geographic_an
         {"city": "Sydney", "lat": -33.8688, "lon": 151.2093},
         {"city": "Paris", "lat": 48.8566, "lon": 2.3522},
         {"city": "Rio de Janeiro", "lat": -22.9068, "lon": -43.1729},
-        {"city": "Cairo", "lat": 30.0444, "lon": 31.2357}
+        {"city": "Cairo", "lat": 30.0444, "lon": 31.2357},
     ]
     data = []
     for i in range(num_transactions):
@@ -27,31 +41,51 @@ def generate_transaction_data(num_transactions, anomaly_rate=0.05, geographic_an
         is_anomaly = np.random.rand() < anomaly_rate
         category = random.choice(categories)
         location = random.choice(locations)
-        timestamp = pd.to_datetime('now') - pd.to_timedelta(np.random.randint(0, 30), unit='days') + pd.to_timedelta(np.random.randint(0, 24*60), unit='minutes')
+        timestamp = (
+            pd.to_datetime("now")
+            - pd.to_timedelta(np.random.randint(0, 30), unit="days")
+            + pd.to_timedelta(np.random.randint(0, 24 * 60), unit="minutes")
+        )
 
         if is_anomaly:
-            amount = np.random.uniform(150, 400) # Higher amounts for anomalies
+            amount = np.random.uniform(150, 400)  # Higher amounts for anomalies
             if merchant_category_anomalies:
-                category = "Luxury Goods" # Unusual category
+                category = "Luxury Goods"  # Unusual category
             if geographic_anomalies:
-                location = {"city": "Dubai", "lat": 25.2048, "lon": 55.2708} #Unusual location
+                location = {
+                    "city": "Dubai",
+                    "lat": 25.2048,
+                    "lon": 55.2708,
+                }  # Unusual location
 
-
-        data.append({
-            'Transaction ID': i + 1,
-            'Timestamp': timestamp,
-            'Amount': amount,
-            'Category': category,
-            'Location': location['city'],
-            'Latitude': location['lat'],
-            'Longitude': location['lon'],
-            'Is Anomaly': is_anomaly
-        })
+        data.append(
+            {
+                "Transaction ID": i + 1,
+                "Timestamp": timestamp,
+                "Amount": amount,
+                "Category": category,
+                "Location": location["city"],
+                "Latitude": location["lat"],
+                "Longitude": location["lon"],
+                "Is Anomaly": is_anomaly,
+            }
+        )
     return pd.DataFrame(data)
 
-def generate_transaction_data_interactive(num_transactions, anomaly_rate=0.05, anomaly_type="amount"):
+
+def generate_transaction_data_interactive(
+    num_transactions, anomaly_rate=0.05, anomaly_type="amount"
+):
     """Generates simulated transaction data with different types of anomalies."""
-    categories = ['Grocery', 'Electronics', 'Clothing', 'Restaurant', 'Travel', 'Home Goods', 'Entertainment']
+    categories = [
+        "Grocery",
+        "Electronics",
+        "Clothing",
+        "Restaurant",
+        "Travel",
+        "Home Goods",
+        "Entertainment",
+    ]
     locations = [
         {"city": "New York", "lat": 40.7128, "lon": -74.0060},
         {"city": "London", "lat": 51.5074, "lon": 0.1278},
@@ -59,7 +93,7 @@ def generate_transaction_data_interactive(num_transactions, anomaly_rate=0.05, a
         {"city": "Sydney", "lat": -33.8688, "lon": 151.2093},
         {"city": "Paris", "lat": 48.8566, "lon": 2.3522},
         {"city": "Rio de Janeiro", "lat": -22.9068, "lon": -43.1729},
-        {"city": "Cairo", "lat": 30.0444, "lon": 31.2357}
+        {"city": "Cairo", "lat": 30.0444, "lon": 31.2357},
     ]
     data = []
     for i in range(num_transactions):
@@ -67,38 +101,56 @@ def generate_transaction_data_interactive(num_transactions, anomaly_rate=0.05, a
         is_anomaly = np.random.rand() < anomaly_rate
         category = random.choice(categories)
         location = random.choice(locations)
-        timestamp = pd.to_datetime('now') - pd.to_timedelta(np.random.randint(0, 30), unit='days') + pd.to_timedelta(np.random.randint(0, 24*60), unit='minutes')
+        timestamp = (
+            pd.to_datetime("now")
+            - pd.to_timedelta(np.random.randint(0, 30), unit="days")
+            + pd.to_timedelta(np.random.randint(0, 24 * 60), unit="minutes")
+        )
 
         if is_anomaly:
             if anomaly_type == "amount":
-                amount = np.random.uniform(150, 400) # Higher amounts for anomalies
+                amount = np.random.uniform(150, 400)  # Higher amounts for anomalies
             elif anomaly_type == "location":
-                location = {"city": "Dubai", "lat": 25.2048, "lon": 55.2708} #Unusual location
+                location = {
+                    "city": "Dubai",
+                    "lat": 25.2048,
+                    "lon": 55.2708,
+                }  # Unusual location
             elif anomaly_type == "category":
-                category = "Luxury Goods" # Unusual category
+                category = "Luxury Goods"  # Unusual category
             elif anomaly_type == "velocity":
-                timestamp = pd.to_datetime('now') # Recent timestamp for velocity simulation
+                timestamp = pd.to_datetime(
+                    "now"
+                )  # Recent timestamp for velocity simulation
 
-        data.append({
-            'Transaction ID': i + 1,
-            'Timestamp': timestamp,
-            'Amount': amount,
-            'Category': category,
-            'Location': location['city'],
-            'Latitude': location['lat'],
-            'Longitude': location['lon'],
-            'Is Anomaly': is_anomaly
-        })
+        data.append(
+            {
+                "Transaction ID": i + 1,
+                "Timestamp": timestamp,
+                "Amount": amount,
+                "Category": category,
+                "Location": location["city"],
+                "Latitude": location["lat"],
+                "Longitude": location["lon"],
+                "Is Anomaly": is_anomaly,
+            }
+        )
     return pd.DataFrame(data)
 
+
 def main():
-    st.set_page_config(page_title="Fraud & Risk Data Analytics", page_icon="🛡️", layout="wide")
+    st.set_page_config(
+        page_title="Fraud & Risk Data Analytics", page_icon="🛡️", layout="wide"
+    )
 
     st.title("🛡️ Data Analytics for Fraud and Risk Detection")
-    st.write("Explore how data analytics empowers organizations to proactively combat fraud and manage risks effectively in today's digital age.")
+    st.write(
+        "Explore how data analytics empowers organizations to proactively combat fraud and manage risks effectively in today's digital age."
+    )
 
     with st.expander("📖 1. Understanding Fraud and Risk", expanded=False):
-        st.markdown("""
+        st.markdown(
+            """
         ### 1.1 Defining Fraud in Business 🎭
 
         **Definition:** Fraud is an intentional act of deception for unlawful gain or to deprive another of something valuable. In business, fraud can manifest in various forms causing financial, operational, and reputational damage. It's crucial to understand that fraud is not accidental; it's a deliberate action.
@@ -122,9 +174,11 @@ def main():
         <p style="font-weight: bold;">Key Takeaway:</p>
         <p>Fraud is intentional deception aimed at personal or organizational gain at the expense of others. Understanding the diverse types of fraud is the first step in effective detection and prevention.</p>
         </div>
-        """)
+        """
+        )
 
-        st.markdown("""
+        st.markdown(
+            """
         ### 1.2 Defining Risk in Business ⚠️
 
         **Definition:** Risk is the potential for negative outcomes or losses due to internal or external events. Business risks span a wide range of uncertainties that can impact organizational objectives. Risk implies uncertainty and the possibility of loss.
@@ -149,9 +203,11 @@ def main():
         <p style="font-weight: bold;">Key Takeaway:</p>
         <p>Risk is inherent in all business operations. Identifying, assessing, and mitigating various types of risks is crucial for organizational resilience and sustainability.</p>
         </div>
-        """)
+        """
+        )
 
-        st.markdown("""
+        st.markdown(
+            """
         ### 1.3 The Fraud-Risk Interconnection 🔗
 
         Fraud is often categorized as a significant subset of **operational risk**. Fraudulent activities are a major source of operational losses and can quickly escalate into broader financial and reputational risks, creating a cascading effect across the organization.
@@ -169,10 +225,12 @@ def main():
         <p style="font-weight: bold;">Key Takeaway:</p>
         <p>Fraud acts as a key trigger and amplifier of broader business risks.  A strong fraud defense is integral to overall risk management and organizational stability.</p>
         </div>
-        """)
+        """
+        )
 
     with st.expander("📖 2. Data Analytics Fundamentals 📊", expanded=False):
-        st.markdown("""
+        st.markdown(
+            """
         ### 2.1 Data Types for Fraud and Risk Detection 🗂️
 
         Effective data analytics starts with identifying and leveraging relevant data sources. In fraud and risk detection, diverse data types play crucial and often complementary roles:
@@ -205,9 +263,11 @@ def main():
         <p style="font-weight: bold;">Key Takeaway:</p>
         <p>A diverse range of data types, from transactional records to unstructured content, is essential for comprehensive fraud and risk detection. The key is to select and integrate data sources relevant to the specific fraud and risk scenarios being addressed.</p>
         </div>
-        """)
+        """
+        )
 
-        st.markdown("""
+        st.markdown(
+            """
         ### 2.2 Data Preprocessing and Feature Engineering ⚙️
 
         Raw data is rarely directly usable for effective analysis. Preprocessing is essential to transform data into an analysis-ready format, and feature engineering extracts valuable information to enhance model performance.
@@ -230,9 +290,11 @@ def main():
         <p style="font-weight: bold;">Key Takeaway:</p>
         <p>Data preprocessing and feature engineering are critical foundations for effective data analytics in fraud and risk. Well-engineered features, derived from clean and transformed data, are often more impactful than just choosing sophisticated algorithms.</p>
         </div>
-        """)
+        """
+        )
 
-        st.markdown("""
+        st.markdown(
+            """
         ### 2.3 Key Data Analytics Techniques 🧮
 
         Data analytics techniques for fraud and risk detection can be categorized into four progressively advanced types, each serving different analytical purposes:
@@ -261,9 +323,11 @@ def main():
         <p style="font-weight: bold;">Key Takeaway:</p>
         <p>Data analytics techniques progress from describing past events to diagnosing causes, predicting future outcomes, and finally, prescribing optimal actions. A comprehensive fraud and risk management strategy often utilizes a combination of these techniques, moving towards more proactive and automated approaches.</p>
         </div>
-        """)
+        """
+        )
 
-        st.markdown("""
+        st.markdown(
+            """
         ### 2.4 Deep Dive into Key Algorithms 🚀
 
         Let's delve deeper into some of the most commonly used algorithms in data analytics for fraud and risk detection, highlighting their strengths and applications:
@@ -306,10 +370,12 @@ def main():
         <p style="font-weight: bold;">Key Takeaway:</p>
         <p>The choice of algorithm depends heavily on the specific fraud/risk problem, data characteristics, and desired outcome (interpretability, accuracy, speed). Often, a combination of algorithms and techniques is used for a robust and comprehensive fraud and risk detection system. Deep Learning and Graph Analytics are increasingly important for handling complex and evolving fraud scenarios.</p>
         </div>
-        """)
+        """
+        )
 
     with st.expander("📖 3. Business Use Cases Across Industries 🏢", expanded=False):
-        st.markdown("""
+        st.markdown(
+            """
         ### 3. Business Use Cases Across Industries 🏢
 
         Data analytics for fraud and risk detection is not confined to a single industry; its principles and techniques are broadly applicable across diverse sectors. Here are key use cases highlighting industry-specific applications:
@@ -370,10 +436,12 @@ def main():
         <p style="font-weight: bold;">Key Takeaway:</p>
         <p>Data analytics is a versatile tool applicable across industries for fraud and risk detection.  Industry-specific use cases demonstrate the broad applicability and tailored approaches needed to address diverse fraud and risk challenges in each sector. The underlying principles of data analysis and algorithm application, however, remain consistent across these diverse applications.</p>
         </div>
-        """)
+        """
+        )
 
     with st.expander("📖 4. Tools and Technologies 🛠️", expanded=False):
-        st.markdown("""
+        st.markdown(
+            """
         ### 4. Tools and Technologies for Data Analytics in Fraud and Risk Detection 🛠️
 
         A robust technology stack is indispensable for building and deploying effective data analytics solutions for fraud and risk detection. The landscape includes a variety of tools, each with specific strengths and purposes:
@@ -419,10 +487,12 @@ def main():
         <p style="font-weight: bold;">Key Takeaway:</p>
         <p>A comprehensive technology stack for fraud and risk analytics encompasses programming languages, visualization tools, machine learning platforms, big data technologies, and specialized databases. The selection of tools depends on the scale of data, complexity of analysis, and specific requirements of the fraud and risk detection use cases.</p>
         </div>
-        """)
+        """
+        )
 
     with st.expander("📖 5. Challenges and Best Practices 🚧", expanded=False):
-        st.markdown("""
+        st.markdown(
+            """
         ### 5. Challenges and Best Practices in Implementation 🚧
 
         Implementing effective data analytics for fraud and risk detection is not without its challenges. Addressing these challenges requires adherence to best practices across data management, model development, and deployment:
@@ -450,9 +520,11 @@ def main():
         <p style="font-weight: bold;">Key Takeaway:</p>
         <p>Implementing data analytics for fraud and risk detection is a complex undertaking requiring careful planning and execution. Addressing challenges proactively through best practices in data management, model development, ethical considerations, and collaboration is crucial for building robust and effective systems.</p>
         </div>
-        """)
+        """
+        )
 
-        st.markdown("""
+        st.markdown(
+            """
         ### 6. Future Trends in Data Analytics for Fraud and Risk Detection 🔮
 
         The field of data analytics for fraud and risk detection is continuously evolving, driven by rapid technological advancements and the increasingly sophisticated nature of fraud and risk. Key future trends shaping the field include:
@@ -481,149 +553,354 @@ def main():
         <p style="font-weight: bold;">Key Takeaway:</p>
         <p>The future of data analytics in fraud and risk detection is characterized by a move towards real-time, AI-driven, privacy-conscious, and network-centric approaches. Explainable and trustworthy AI will be paramount, and emerging technologies like quantum computing hold long-term potential to reshape the landscape. Staying ahead requires continuous learning and adaptation to these evolving trends.</p>
         </div>
-        """)
+        """
+        )
 
-    interactive_section = st.expander("🕹️ 2. Interactive Probability Explorations", expanded = True)
-    
-    with st.expander(" 📈 Interactive Transaction Anomaly Simulation", expanded = True):
+    # interactive_section removed (was assigned but unused)
+
+    with st.expander(" 📈 Interactive Transaction Anomaly Simulation", expanded=True):
         st.subheader("Interactive Transaction Anomaly Simulation")
-        num_transactions_sim = st.slider("Number of Transactions:", min_value=100, max_value=1000, value=500, key="num_trans_slider")
-        anomaly_rate_sim = st.slider("Anomaly Rate (%):", min_value=0, max_value=20, value=5, key="anom_rate_slider") / 100.0
-        anomaly_type_sim = st.selectbox("Anomaly Type:", ["amount", "location", "category", "velocity"], index=0, key="anom_type_selectbox")
+        num_transactions_sim = st.slider(
+            "Number of Transactions:",
+            min_value=100,
+            max_value=1000,
+            value=500,
+            key="num_trans_slider",
+        )
+        anomaly_rate_sim = (
+            st.slider(
+                "Anomaly Rate (%):",
+                min_value=0,
+                max_value=20,
+                value=5,
+                key="anom_rate_slider",
+            )
+            / 100.0
+        )
+        anomaly_type_sim = st.selectbox(
+            "Anomaly Type:",
+            ["amount", "location", "category", "velocity"],
+            index=0,
+            key="anom_type_selectbox",
+        )
 
         if st.button("Simulate Transactions", key="sim_button"):
-            df_sim = generate_transaction_data_interactive(num_transactions_sim, anomaly_rate_sim, anomaly_type_sim)
-            fig_scatter = px.scatter(df_sim, x="Transaction ID", y="Amount", color="Is Anomaly",
-                                     title="Simulated Transactions with Anomalies",
-                                     color_discrete_map={False: "blue", True: "red"})
+            df_sim = generate_transaction_data_interactive(
+                num_transactions_sim, anomaly_rate_sim, anomaly_type_sim
+            )
+            fig_scatter = px.scatter(
+                df_sim,
+                x="Transaction ID",
+                y="Amount",
+                color="Is Anomaly",
+                title="Simulated Transactions with Anomalies",
+                color_discrete_map={False: "blue", True: "red"},
+            )
             st.plotly_chart(fig_scatter)
-            st.write("This simulation visualizes transaction amounts. Red points indicate anomalies. Anomalies are introduced based on the 'Anomaly Type' selected. In a real-world scenario, anomaly detection algorithms would automatically flag these deviations.")
+            st.write(
+                "This simulation visualizes transaction amounts. Red points indicate anomalies. Anomalies are introduced based on the 'Anomaly Type' selected. In a real-world scenario, anomaly detection algorithms would automatically flag these deviations."
+            )
 
-            time_hist = px.histogram(df_sim, x=df_sim['Timestamp'].dt.hour, nbins=24, title="Transaction Time Distribution (Hour of Day)")
+            time_hist = px.histogram(
+                df_sim,
+                x=df_sim["Timestamp"].dt.hour,
+                nbins=24,
+                title="Transaction Time Distribution (Hour of Day)",
+            )
             st.plotly_chart(time_hist)
-            st.write("Transaction Time Distribution: Observe the typical hours for transactions. Anomalous transactions might occur outside normal hours, especially with velocity anomalies.")
+            st.write(
+                "Transaction Time Distribution: Observe the typical hours for transactions. Anomalous transactions might occur outside normal hours, especially with velocity anomalies."
+            )
 
-            if anomaly_type_sim == 'location':
+            if anomaly_type_sim == "location":
                 st.subheader("Geographic Transaction Visualization")
-                m = folium.Map(location=[0, 0], zoom_start=2) # World map centered
+                m = folium.Map(location=[0, 0], zoom_start=2)  # World map centered
                 for index, row in df_sim.iterrows():
-                    folium.Marker([row['Latitude'], row['Longitude']], popup=f"Transaction ID: {row['Transaction ID']}, Location: {row['Location']}, Anomaly: {row['Is Anomaly']}").add_to(m)
+                    folium.Marker(
+                        [row["Latitude"], row["Longitude"]],
+                        popup=f"Transaction ID: {row['Transaction ID']}, Location: {row['Location']}, Anomaly: {row['Is Anomaly']}",
+                    ).add_to(m)
                 folium_static(m)
-                st.write("Geographic Anomalies: Red markers might represent transactions in unusual or high-risk locations when 'location' anomaly type is selected.")
+                st.write(
+                    "Geographic Anomalies: Red markers might represent transactions in unusual or high-risk locations when 'location' anomaly type is selected."
+                )
 
-            category_bar = px.bar(df_sim['Category'].value_counts(), title="Merchant Category Distribution", labels={'value': 'Number of Transactions', 'index': 'Merchant Category'})
+            category_bar = px.bar(
+                df_sim["Category"].value_counts(),
+                title="Merchant Category Distribution",
+                labels={
+                    "value": "Number of Transactions",
+                    "index": "Merchant Category",
+                },
+            )
             st.plotly_chart(category_bar)
-            st.write("Merchant Category Distribution: View the distribution of transactions across different merchant categories. Anomalous transactions might disproportionately occur in unusual or high-risk categories when 'category' anomaly type is selected.")
+            st.write(
+                "Merchant Category Distribution: View the distribution of transactions across different merchant categories. Anomalous transactions might disproportionately occur in unusual or high-risk categories when 'category' anomaly type is selected."
+            )
 
-            amount_box = px.box(df_sim, y="Amount", title="Transaction Amount Distribution (Box Plot)")
+            amount_box = px.box(
+                df_sim, y="Amount", title="Transaction Amount Distribution (Box Plot)"
+            )
             st.plotly_chart(amount_box)
-            st.write("Transaction Amount Distribution: A box plot provides a view of the distribution of transaction amounts, highlighting potential outliers (anomalies) with unusually high amounts, especially when 'amount' anomaly type is selected.")
+            st.write(
+                "Transaction Amount Distribution: A box plot provides a view of the distribution of transaction amounts, highlighting potential outliers (anomalies) with unusually high amounts, especially when 'amount' anomaly type is selected."
+            )
 
     with st.expander(" 🚦 Interactive Rule-Based Fraud Detection", expanded=False):
         st.subheader("Interactive Rule-Based Fraud Detection System")
         st.write("Define and test your own fraud rules on simulated transactions.")
 
-        rule_amount_threshold = st.slider("Amount Threshold for Rule 1:", min_value=100, max_value=500, value=300)
-        rule_category_options = ['Luxury Goods', 'Entertainment', 'Travel', 'Electronics', 'Restaurant', 'Clothing', 'Grocery', 'Home Goods']
-        rule_category = st.multiselect("Merchant Categories for Rule 1:", rule_category_options, default=['Luxury Goods', 'Entertainment'])
-        rule_location_options = ["Dubai", "New York", "London", "Tokyo", "Sydney", "Paris", "Rio de Janeiro", "Cairo"]
-        rule_location = st.multiselect("Locations for Rule 2 (High-Risk Locations):", rule_location_options, default=['Dubai'])
-        velocity_threshold = st.slider("Velocity Threshold (Transactions per Hour) for Rule 3:", min_value=1, max_value=10, value=3)
-        time_of_day_rule3 = st.select_slider("Time of Day for Rule 3 (Night Hours):", options=['Night', 'Morning', 'Afternoon', 'Evening'], value=('Night'))
+        rule_amount_threshold = st.slider(
+            "Amount Threshold for Rule 1:", min_value=100, max_value=500, value=300
+        )
+        rule_category_options = [
+            "Luxury Goods",
+            "Entertainment",
+            "Travel",
+            "Electronics",
+            "Restaurant",
+            "Clothing",
+            "Grocery",
+            "Home Goods",
+        ]
+        rule_category = st.multiselect(
+            "Merchant Categories for Rule 1:",
+            rule_category_options,
+            default=["Luxury Goods", "Entertainment"],
+        )
+        rule_location_options = [
+            "Dubai",
+            "New York",
+            "London",
+            "Tokyo",
+            "Sydney",
+            "Paris",
+            "Rio de Janeiro",
+            "Cairo",
+        ]
+        rule_location = st.multiselect(
+            "Locations for Rule 2 (High-Risk Locations):",
+            rule_location_options,
+            default=["Dubai"],
+        )
+        st.slider(
+            "Velocity Threshold (Transactions per Hour) for Rule 3:",
+            min_value=1,
+            max_value=10,
+            value=3,
+        )
+        time_of_day_rule3 = st.select_slider(
+            "Time of Day for Rule 3 (Night Hours):",
+            options=["Night", "Morning", "Afternoon", "Evening"],
+            value=("Night"),
+        )
 
         if st.button("Apply Rules and Detect Fraud"):
-            rule_based_df = generate_transaction_data_interactive(num_transactions=500) #Generate data for rule testing
+            rule_based_df = generate_transaction_data_interactive(
+                num_transactions=500
+            )  # Generate data for rule testing
 
             # Rule 1: High Amount in Specific Categories
-            rule1_mask = (rule_based_df['Amount'] > rule_amount_threshold) & (rule_based_df['Category'].isin(rule_category))
-            rule_based_df['Rule 1 Flag'] = rule1_mask
+            rule1_mask = (rule_based_df["Amount"] > rule_amount_threshold) & (
+                rule_based_df["Category"].isin(rule_category)
+            )
+            rule_based_df["Rule 1 Flag"] = rule1_mask
 
             # Rule 2: Transactions in High-Risk Locations
-            rule2_mask = (rule_based_df['Location'].isin(rule_location))
-            rule_based_df['Rule 2 Flag'] = rule2_mask
+            rule2_mask = rule_based_df["Location"].isin(rule_location)
+            rule_based_df["Rule 2 Flag"] = rule2_mask
 
             # Rule 3: High Velocity Transactions at Night (Conceptual - requires more complex velocity calculation in real-time)
             # For simplicity, we'll flag all transactions in 'Night' time for demonstration in this simplified interactive example
-            rule_based_df['Hour'] = rule_based_df['Timestamp'].dt.hour
+            rule_based_df["Hour"] = rule_based_df["Timestamp"].dt.hour
+
             def categorize_time(hour):
-                if 22 <= hour or hour < 6: return 'Night' #Simplified night definition
-                else: return 'Day'
-            rule_based_df['Time Category'] = rule_based_df['Hour'].apply(categorize_time)
-            rule3_mask = (rule_based_df['Time Category'] == time_of_day_rule3) #Simplified time based rule - velocity requires more complex logic
-            rule_based_df['Rule 3 Flag'] = rule3_mask
+                if 22 <= hour or hour < 6:
+                    return "Night"  # Simplified night definition
+                else:
+                    return "Day"
+
+            rule_based_df["Time Category"] = rule_based_df["Hour"].apply(
+                categorize_time
+            )
+            rule3_mask = (
+                rule_based_df["Time Category"] == time_of_day_rule3
+            )  # Simplified time based rule - velocity requires more complex logic
+            rule_based_df["Rule 3 Flag"] = rule3_mask
 
             # Combine Rules: Flag if ANY rule is triggered
-            rule_based_df['Rule-Based Fraud Flag'] = rule_based_df[['Rule 1 Flag', 'Rule 2 Flag', 'Rule 3 Flag']].any(axis=1)
+            rule_based_df["Rule-Based Fraud Flag"] = rule_based_df[
+                ["Rule 1 Flag", "Rule 2 Flag", "Rule 3 Flag"]
+            ].any(axis=1)
 
-            st.dataframe(rule_based_df[['Transaction ID', 'Amount', 'Category', 'Location', 'Timestamp', 'Rule 1 Flag', 'Rule 2 Flag', 'Rule 3 Flag', 'Rule-Based Fraud Flag']])
+            st.dataframe(
+                rule_based_df[
+                    [
+                        "Transaction ID",
+                        "Amount",
+                        "Category",
+                        "Location",
+                        "Timestamp",
+                        "Rule 1 Flag",
+                        "Rule 2 Flag",
+                        "Rule 3 Flag",
+                        "Rule-Based Fraud Flag",
+                    ]
+                ]
+            )
 
-            fraud_count = rule_based_df['Rule-Based Fraud Flag'].sum()
+            fraud_count = rule_based_df["Rule-Based Fraud Flag"].sum()
             total_transactions = len(rule_based_df)
-            fraud_percentage = (fraud_count / total_transactions) * 100 if total_transactions > 0 else 0
+            fraud_percentage = (
+                (fraud_count / total_transactions) * 100
+                if total_transactions > 0
+                else 0
+            )
 
-            st.write(f"Transactions Flagged as Potentially Fraudulent by Rules: **{fraud_count} out of {total_transactions} ({fraud_percentage:.2f}%)**")
-            st.info("Experiment with different rule parameters (thresholds, categories, locations, velocity) to see how the number of flagged transactions changes. Rule-based systems are effective for known fraud patterns but may miss new or subtle fraud schemes.")
+            st.write(
+                f"Transactions Flagged as Potentially Fraudulent by Rules: **{fraud_count} out of {total_transactions} ({fraud_percentage:.2f}%)**"
+            )
+            st.info(
+                "Experiment with different rule parameters (thresholds, categories, locations, velocity) to see how the number of flagged transactions changes. Rule-based systems are effective for known fraud patterns but may miss new or subtle fraud schemes."
+            )
 
     with st.expander(" 🔍 Interactive Feature Importance Exploration", expanded=False):
         st.subheader("Interactive Feature Importance Exploration with a Simple Model")
-        st.write("Explore how different features contribute to fraud prediction in a basic Logistic Regression model.")
+        st.write(
+            "Explore how different features contribute to fraud prediction in a basic Logistic Regression model."
+        )
 
-        feature_importance_df = generate_transaction_data_interactive(num_transactions=500, anomaly_rate=0.1) # Higher anomaly rate for better demonstration
-        feature_importance_df['time_of_day'] = feature_importance_df['Timestamp'].dt.hour
-        feature_importance_df['is_weekend'] = (feature_importance_df['Timestamp'].dt.dayofweek >= 5).astype(int) #Weekend Feature
-        feature_importance_df['location_risk'] = feature_importance_df['Location'].apply(lambda loc: 1 if loc in ['Dubai', 'Cairo'] else 0) #Example location risk
+        feature_importance_df = generate_transaction_data_interactive(
+            num_transactions=500, anomaly_rate=0.1
+        )  # Higher anomaly rate for better demonstration
+        feature_importance_df["time_of_day"] = feature_importance_df[
+            "Timestamp"
+        ].dt.hour
+        feature_importance_df["is_weekend"] = (
+            feature_importance_df["Timestamp"].dt.dayofweek >= 5
+        ).astype(
+            int
+        )  # Weekend Feature
+        feature_importance_df["location_risk"] = feature_importance_df[
+            "Location"
+        ].apply(
+            lambda loc: 1 if loc in ["Dubai", "Cairo"] else 0
+        )  # Example location risk
 
-        features_for_model = ['Amount', 'time_of_day', 'is_weekend', 'location_risk'] #Features for Logistic Regression
+        features_for_model = [
+            "Amount",
+            "time_of_day",
+            "is_weekend",
+            "location_risk",
+        ]  # Features for Logistic Regression
         X = feature_importance_df[features_for_model]
-        y = feature_importance_df['Is Anomaly'].astype(int)
+        y = feature_importance_df["Is Anomaly"].astype(int)
 
         from sklearn.linear_model import LogisticRegression
+
         model = LogisticRegression()
         model.fit(X, y)
 
-        importance_scores = model.coef_[0] #Coefficients from Logistic Regression as feature importance
-        feature_importance_plot_df = pd.DataFrame({'Feature': features_for_model, 'Importance Score': importance_scores})
-        feature_importance_plot_df = feature_importance_plot_df.sort_values(by='Importance Score', ascending=False)
+        importance_scores = model.coef_[
+            0
+        ]  # Coefficients from Logistic Regression as feature importance
+        feature_importance_plot_df = pd.DataFrame(
+            {"Feature": features_for_model, "Importance Score": importance_scores}
+        )
+        feature_importance_plot_df = feature_importance_plot_df.sort_values(
+            by="Importance Score", ascending=False
+        )
 
-        fig_importance = px.bar(feature_importance_plot_df, x='Feature', y='Importance Score', title="Feature Importance Scores from Logistic Regression",
-                                labels={'Importance Score': 'Coefficient Value (Magnitude indicates Importance)'})
+        fig_importance = px.bar(
+            feature_importance_plot_df,
+            x="Feature",
+            y="Importance Score",
+            title="Feature Importance Scores from Logistic Regression",
+            labels={
+                "Importance Score": "Coefficient Value (Magnitude indicates Importance)"
+            },
+        )
         st.plotly_chart(fig_importance)
-        st.write("Feature Importance from Logistic Regression: This chart shows the coefficients from a Logistic Regression model trained to predict 'Is Anomaly'. The magnitude of the coefficient indicates the feature's importance in the model's decision. Positive or negative sign indicates the direction of the feature's impact (though sign interpretation can be complex in Logistic Regression).")
-        st.info("Observe which features the simple Logistic Regression model deems most important for fraud detection based on the simulated data. In real-world models, feature importance analysis helps understand model behavior and refine feature engineering.")
+        st.write(
+            "Feature Importance from Logistic Regression: This chart shows the coefficients from a Logistic Regression model trained to predict 'Is Anomaly'. The magnitude of the coefficient indicates the feature's importance in the model's decision. Positive or negative sign indicates the direction of the feature's impact (though sign interpretation can be complex in Logistic Regression)."
+        )
+        st.info(
+            "Observe which features the simple Logistic Regression model deems most important for fraud detection based on the simulated data. In real-world models, feature importance analysis helps understand model behavior and refine feature engineering."
+        )
 
-    with st.expander(" 🗺️ Interactive Anomaly Detection with Clustering", expanded=False):
+    with st.expander(
+        " 🗺️ Interactive Anomaly Detection with Clustering", expanded=False
+    ):
         st.subheader("Interactive Anomaly Detection using Clustering (DBSCAN)")
-        st.write("Visualize how clustering algorithms like DBSCAN can identify anomalies (outliers) in transaction data.")
+        st.write(
+            "Visualize how clustering algorithms like DBSCAN can identify anomalies (outliers) in transaction data."
+        )
 
-        num_samples_cluster = st.slider("Number of Data Points for Clustering:", min_value=200, max_value=1000, value=500, key="cluster_slider")
-        epsilon_dbscan = st.slider("DBSCAN Epsilon (ε - Radius):", min_value=0.1, max_value=2.0, value=0.5, step=0.1, key="epsilon_slider")
-        min_samples_dbscan = st.slider("DBSCAN Min Samples:", min_value=2, max_value=20, value=5, step=1, key="min_samples_slider")
+        num_samples_cluster = st.slider(
+            "Number of Data Points for Clustering:",
+            min_value=200,
+            max_value=1000,
+            value=500,
+            key="cluster_slider",
+        )
+        epsilon_dbscan = st.slider(
+            "DBSCAN Epsilon (ε - Radius):",
+            min_value=0.1,
+            max_value=2.0,
+            value=0.5,
+            step=0.1,
+            key="epsilon_slider",
+        )
+        min_samples_dbscan = st.slider(
+            "DBSCAN Min Samples:",
+            min_value=2,
+            max_value=20,
+            value=5,
+            step=1,
+            key="min_samples_slider",
+        )
 
         if st.button("Run DBSCAN Clustering for Anomaly Detection"):
-            cluster_df = generate_transaction_data_interactive(num_transactions=num_samples_cluster, anomaly_rate=0.1, anomaly_type='amount') # Amount anomalies for visual clarity
-            cluster_df['time_of_day'] = cluster_df['Timestamp'].dt.hour
-            cluster_data = cluster_df[['Amount', 'time_of_day']].copy() # Using Amount and time_of_day for 2D clustering
+            cluster_df = generate_transaction_data_interactive(
+                num_transactions=num_samples_cluster,
+                anomaly_rate=0.1,
+                anomaly_type="amount",
+            )  # Amount anomalies for visual clarity
+            cluster_df["time_of_day"] = cluster_df["Timestamp"].dt.hour
+            cluster_data = cluster_df[
+                ["Amount", "time_of_day"]
+            ].copy()  # Using Amount and time_of_day for 2D clustering
 
-            scaler = StandardScaler() # Standardize features for DBSCAN
+            scaler = StandardScaler()  # Standardize features for DBSCAN
             scaled_data = scaler.fit_transform(cluster_data)
 
             dbscan = DBSCAN(eps=epsilon_dbscan, min_samples=min_samples_dbscan)
             clusters = dbscan.fit_predict(scaled_data)
-            cluster_df['Cluster'] = clusters #Add cluster labels to dataframe
+            cluster_df["Cluster"] = clusters  # Add cluster labels to dataframe
 
-            fig_cluster = px.scatter(cluster_df, x='time_of_day', y='Amount', color='Cluster',
-                                    title="DBSCAN Clustering for Anomaly Detection (Anomalies in Cluster -1)",
-                                    labels={'Cluster': 'Cluster ID (-1 = Anomalies/Noise)'},
-                                    color_continuous_scale=px.colors.qualitative.Set1) #Color scale for clusters
+            fig_cluster = px.scatter(
+                cluster_df,
+                x="time_of_day",
+                y="Amount",
+                color="Cluster",
+                title="DBSCAN Clustering for Anomaly Detection (Anomalies in Cluster -1)",
+                labels={"Cluster": "Cluster ID (-1 = Anomalies/Noise)"},
+                color_continuous_scale=px.colors.qualitative.Set1,
+            )  # Color scale for clusters
             st.plotly_chart(fig_cluster)
 
-            st.write("DBSCAN Clustering Results: DBSCAN has clustered transactions based on 'Amount' and 'Time of Day'. Points in Cluster '-1' are considered noise or anomalies by DBSCAN (outliers that do not belong to any dense cluster). Experiment with different 'Epsilon' (radius) and 'Min Samples' parameters to see how cluster formation and anomaly detection changes. Higher epsilon expands cluster radius, lower min_samples makes clusters easier to form (more noise/anomalies might be classified as clusters).")
-            st.info("Clustering-based anomaly detection is useful for identifying outliers without pre-defined labels. DBSCAN is effective in finding clusters of arbitrary shapes and identifying noise points as anomalies.")
-    
-    with st.expander("💪 3. Practice Exercises", expanded = False):
+            st.write(
+                "DBSCAN Clustering Results: DBSCAN has clustered transactions based on 'Amount' and 'Time of Day'. Points in Cluster '-1' are considered noise or anomalies by DBSCAN (outliers that do not belong to any dense cluster). Experiment with different 'Epsilon' (radius) and 'Min Samples' parameters to see how cluster formation and anomaly detection changes. Higher epsilon expands cluster radius, lower min_samples makes clusters easier to form (more noise/anomalies might be classified as clusters)."
+            )
+            st.info(
+                "Clustering-based anomaly detection is useful for identifying outliers without pre-defined labels. DBSCAN is effective in finding clusters of arbitrary shapes and identifying noise points as anomalies."
+            )
+
+    with st.expander("💪 3. Practice Exercises", expanded=False):
         st.subheader("Practice Exercises to Apply Your Knowledge")
 
-        st.markdown("""
+        st.markdown(
+            """
         **Exercise 3.1: Feature Engineering for Transaction Data (Conceptual)**
 
         Imagine you have transaction data with columns: `transaction_id`, `customer_id`, `timestamp`, `amount`, `location`, `merchant_category`.
@@ -659,9 +936,11 @@ def main():
         # 3. Location Risk Feature (Conceptual - outline - assuming location_risk_df loaded)
         # # df = pd.merge(df, location_risk_df, on='location', how='left') # Merge based on 'location' column
         ```
-        """)
+        """
+        )
 
-        st.markdown("""
+        st.markdown(
+            """
         **Exercise 3.2: Rule-Based Fraud Detection (Design Exercise)**
 
         Design a more nuanced rule-based system to flag potentially fraudulent transactions. Consider these factors:
@@ -673,9 +952,11 @@ def main():
         Combine these rules: A transaction is flagged as potentially fraudulent if it satisfies *any* of these *combined* rules.
 
         *Challenge:*  Describe in detail how you would implement this rule-based system.  Focus on the *logic and steps* for checking each rule and combining them. Discuss scenarios where such rule-based systems are effective, and where they might fall short compared to machine learning models.*
-        """)
+        """
+        )
 
-        st.markdown("""
+        st.markdown(
+            """
         **Exercise 3.3: Understanding Class Imbalance (Conceptual)**
 
         Revisit the concept of class imbalance in fraud detection.
@@ -683,12 +964,14 @@ def main():
         1.  Explain *in your own words* why training a standard classification model on a dataset with extreme class imbalance (e.g., 99% non-fraudulent, 1% fraudulent) can lead to misleadingly high accuracy but poor fraud detection.  Focus on what the model *actually learns* in such scenarios.
         2.  Describe *two different techniques* (oversampling and undersampling) to mitigate class imbalance. Explain *how each technique works* and what their potential drawbacks are.
         3.  Beyond accuracy, list *three evaluation metrics* that are more appropriate for assessing the performance of fraud detection models in imbalanced datasets. Explain *why* these metrics are better suited than accuracy in this context.
-        """)
+        """
+        )
 
-    with st.expander("🏢 4. Real-World Applications - Case Studies", expanded = False):
+    with st.expander("🏢 4. Real-World Applications - Case Studies", expanded=False):
         st.subheader("Real-World Case Studies of Data Analytics in Fraud and Risk")
 
-        st.markdown("""
+        st.markdown(
+            """
         **Case Study 4.1: Credit Card Fraud Detection in Retail Banking (Enhanced Detail)**
 
         *   **Industry:** Retail Banking
@@ -732,9 +1015,11 @@ def main():
                 *   **Proactive Alerts and Intervention:** Real-time alerts triggered for suspicious emails and user behavior, enabling security teams to intervene proactively and prevent fraudulent transactions.
                 *   **Reduced Financial Losses:** Substantial reduction in successful BEC fraud incidents and associated financial losses for corporate clients.
                 *   **Improved Client Trust:** Enhanced security measures improved client confidence in the bank's ability to protect corporate accounts from sophisticated cyber-financial threats like BEC.
-        """)
+        """
+        )
 
-        st.markdown("""
+        st.markdown(
+            """
         **Case Study 4.3: Claims Fraud Detection in Auto Insurance**
 
         *   **Industry:** Auto Insurance
@@ -760,69 +1045,124 @@ def main():
                 *   **Faster Claim Processing for Legitimate Claims:** Automation of initial fraud screening allowed for faster processing of legitimate claims, improving customer satisfaction.
                 *   **Significant Cost Savings:** Substantial reduction in fraudulent payouts and operational costs associated with fraud investigations.
                 *   **Enhanced Investigative Efficiency:** Fraud investigators could focus their efforts on genuinely high-risk claims, improving efficiency and resource allocation.
-        """)
+        """
+        )
 
-    with st.expander("❓ 5. Knowledge Check Quiz", expanded = False):
+    with st.expander("❓ 5. Knowledge Check Quiz", expanded=False):
         st.subheader("Knowledge Check Quiz: Test Your Understanding")
 
         quiz_questions = [
             {
                 "question": "Which type of fraud primarily involves intentional misrepresentation of a company's financial statements?",
-                "options": ["Asset Misappropriation", "Financial Statement Fraud", "Customer Fraud", "Cyber Fraud"],
-                "answer": "Financial Statement Fraud"
+                "options": [
+                    "Asset Misappropriation",
+                    "Financial Statement Fraud",
+                    "Customer Fraud",
+                    "Cyber Fraud",
+                ],
+                "answer": "Financial Statement Fraud",
             },
             {
                 "question": "Diagnostic analytics is best suited for answering which of the following questions in fraud and risk detection?",
-                "options": ["What fraud or risks might occur in the future?", "What actions should be taken to prevent fraud?", "Why did a particular fraud or risk event happen?", "What types of fraud and risks have occurred in the past?"],
-                "answer": "Why did a particular fraud or risk event happen?"
+                "options": [
+                    "What fraud or risks might occur in the future?",
+                    "What actions should be taken to prevent fraud?",
+                    "Why did a particular fraud or risk event happen?",
+                    "What types of fraud and risks have occurred in the past?",
+                ],
+                "answer": "Why did a particular fraud or risk event happen?",
             },
             {
                 "question": "Which anomaly detection algorithm is known for its efficiency in isolating anomalies by random data partitioning, especially in high-dimensional data?",
-                "options": ["Logistic Regression", "K-Means Clustering", "Isolation Forest", "One-Class SVM"],
-                "answer": "Isolation Forest"
+                "options": [
+                    "Logistic Regression",
+                    "K-Means Clustering",
+                    "Isolation Forest",
+                    "One-Class SVM",
+                ],
+                "answer": "Isolation Forest",
             },
             {
                 "question": "In credit card fraud detection, identifying 'deviation from typical spending location' for a customer is an example of leveraging a:",
-                "options": ["Transaction-based feature", "Merchant-related feature", "Time-based feature", "Behavioral feature"],
-                "answer": "Behavioral feature"
+                "options": [
+                    "Transaction-based feature",
+                    "Merchant-related feature",
+                    "Time-based feature",
+                    "Behavioral feature",
+                ],
+                "answer": "Behavioral feature",
             },
             {
                 "question": "What primary challenge arises when building machine learning models for fraud detection due to the inherent nature of fraud incidents being rare?",
-                "options": ["Data scarcity", "Evolving fraud tactics", "Class imbalance", "Lack of relevant features"],
-                "answer": "Class imbalance"
+                "options": [
+                    "Data scarcity",
+                    "Evolving fraud tactics",
+                    "Class imbalance",
+                    "Lack of relevant features",
+                ],
+                "answer": "Class imbalance",
             },
-             {
+            {
                 "question": "For real-time credit card fraud detection requiring immediate transaction scoring, which algorithm type would generally be preferred due to its speed and interpretability?",
-                "options": ["Deep Neural Networks", "Random Forests", "Logistic Regression", "Support Vector Machines"],
-                "answer": "Logistic Regression"
+                "options": [
+                    "Deep Neural Networks",
+                    "Random Forests",
+                    "Logistic Regression",
+                    "Support Vector Machines",
+                ],
+                "answer": "Logistic Regression",
             },
             {
                 "question": "Analyzing relationships between claimants, repair shops, and medical providers to detect potential fraud rings in auto insurance claims is a use case for:",
-                "options": ["Time Series Analysis", "Regression Analysis", "Graph Analytics", "Clustering Algorithms"],
-                "answer": "Graph Analytics"
+                "options": [
+                    "Time Series Analysis",
+                    "Regression Analysis",
+                    "Graph Analytics",
+                    "Clustering Algorithms",
+                ],
+                "answer": "Graph Analytics",
             },
             {
                 "question": "Which ethical consideration is most critical in deploying AI-driven fraud detection systems to ensure fairness and avoid discrimination?",
-                "options": ["Data Security", "Model Interpretability", "Bias Mitigation", "Privacy Preservation"],
-                "answer": "Bias Mitigation"
+                "options": [
+                    "Data Security",
+                    "Model Interpretability",
+                    "Bias Mitigation",
+                    "Privacy Preservation",
+                ],
+                "answer": "Bias Mitigation",
             },
             {
                 "question": "Federated learning is emerging as a key trend in fraud analytics primarily to address which challenge?",
-                "options": ["Evolving fraud tactics", "Data quality issues", "Class imbalance", "Privacy and data sharing limitations"],
-                "answer": "Privacy and data sharing limitations"
+                "options": [
+                    "Evolving fraud tactics",
+                    "Data quality issues",
+                    "Class imbalance",
+                    "Privacy and data sharing limitations",
+                ],
+                "answer": "Privacy and data sharing limitations",
             },
             {
                 "question": "Which future trend in fraud detection focuses on analyzing unstructured data like emails and voice interactions to identify fraud clues?",
-                "options": ["Real-time Analytics", "Behavioral Biometrics", "Natural Language Processing", "Quantum Computing"],
-                "answer": "Natural Language Processing"
-            }
+                "options": [
+                    "Real-time Analytics",
+                    "Behavioral Biometrics",
+                    "Natural Language Processing",
+                    "Quantum Computing",
+                ],
+                "answer": "Natural Language Processing",
+            },
         ]
 
         user_answers = {}
         for i, question_data in enumerate(quiz_questions):
             question_num = i + 1
             st.markdown(f"**Question {question_num}:** {question_data['question']}")
-            user_answer = st.radio(f"Select your answer for Q{question_num}", question_data["options"], key=f"q{question_num}")
+            user_answer = st.radio(
+                f"Select your answer for Q{question_num}",
+                question_data["options"],
+                key=f"q{question_num}",
+            )
             user_answers[question_num] = user_answer
 
         if st.button("Submit Quiz", key="quiz_submit_button"):
@@ -833,9 +1173,14 @@ def main():
                     correct_count += 1
                     st.success(f"Question {question_num}: Correct! ✅")
                 else:
-                    st.error(f"Question {question_num}: Incorrect. ❌ Correct answer is: **{question_data['answer']}**")
+                    st.error(
+                        f"Question {question_num}: Incorrect. ❌ Correct answer is: **{question_data['answer']}**"
+                    )
 
-            st.write(f"\n**Quiz Result: You scored {correct_count} out of {len(quiz_questions)}.**")
+            st.write(
+                f"\n**Quiz Result: You scored {correct_count} out of {len(quiz_questions)}.**"
+            )
+
 
 if __name__ == "__main__":
     main()

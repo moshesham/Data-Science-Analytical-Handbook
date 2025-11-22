@@ -1,63 +1,86 @@
-import streamlit as st
+from itertools import product
+
+import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
-import matplotlib.pyplot as plt
-import seaborn as sns
 import plotly.express as px
-from scipy.stats import bernoulli, binom, poisson, geom, randint, uniform, expon, norm, chi2, t
-from itertools import product
+import streamlit as st
 from numpy import random
+from scipy.stats import (
+    bernoulli,
+    binom,
+    chi2,
+    expon,
+    geom,
+    norm,
+    poisson,
+    randint,
+    t,
+    uniform,
+)
 
 
 def generate_bernoulli_samples(p, size):
     """Generates Bernoulli samples."""
     return bernoulli.rvs(p, size=size)
 
+
 def generate_binomial_samples(n, p, size):
     """Generates Binomial samples."""
     return binom.rvs(n, p, size=size)
+
 
 def generate_poisson_samples(mu, size):
     """Generates Poisson samples."""
     return poisson.rvs(mu=mu, size=size)
 
+
 def generate_geometric_samples(p, size):
     """Generates Geometric samples."""
     return geom.rvs(p=p, size=size)
+
 
 def generate_discrete_uniform_samples(low, high, size):
     """Generates Discrete Uniform samples."""
     return randint.rvs(low=low, high=high, size=size)
 
+
 def generate_continuous_uniform_samples(low, high, size):
     """Generates Continuous Uniform samples."""
-    return uniform.rvs(loc=low, scale=high-low, size=size)
+    return uniform.rvs(loc=low, scale=high - low, size=size)
+
 
 def generate_exponential_samples(scale, size):
     """Generates Exponential samples."""
     return expon.rvs(scale=scale, size=size)
 
+
 def generate_normal_samples(mu, sigma, size):
     """Generates Normal samples."""
     return norm.rvs(loc=mu, scale=sigma, size=size)
+
 
 def generate_chisquare_samples(df, size):
     """Generates Chi-Squared samples."""
     return chi2.rvs(df=df, size=size)
 
+
 def generate_t_samples(df, size):
     """Generates t-distribution samples."""
     return t.rvs(df=df, size=size)
 
+
 def generate_dice_roll(num_rolls=1):
     """Simulates dice rolls."""
     return [random.randint(1, 6) for _ in range(num_rolls)]
+
 
 def calculate_empirical_probability(outcomes, event):
     """Calculates empirical probability."""
     favorable_outcomes = sum(1 for outcome in outcomes if event(outcome))
     total_outcomes = len(outcomes)
     return favorable_outcomes / total_outcomes if total_outcomes > 0 else 0
+
 
 def plot_discrete_distribution(distribution_type, params, num_points=15):
     """Plots PMF and CDF for discrete distributions."""
@@ -68,7 +91,7 @@ def plot_discrete_distribution(distribution_type, params, num_points=15):
 
     if distribution_type == "Bernoulli":
         p = params.get("p", 0.5)
-        probs = binom.pmf(x_vals, 1, p) # Bernoulli is Binomial(n=1)
+        probs = binom.pmf(x_vals, 1, p)  # Bernoulli is Binomial(n=1)
         cdf_vals = binom.cdf(x_vals, 1, p)
     elif distribution_type == "Binomial":
         n = params.get("n", 10)
@@ -81,25 +104,24 @@ def plot_discrete_distribution(distribution_type, params, num_points=15):
         cdf_vals = poisson.cdf(x_vals, mu)
     elif distribution_type == "Geometric":
         p = params.get("p", 0.3)
-        probs = geom.pmf(x_vals + 1, p) # Geometric starts at 1 in scipy.stats
+        probs = geom.pmf(x_vals + 1, p)  # Geometric starts at 1 in scipy.stats
         cdf_vals = geom.cdf(x_vals + 1, p)
     elif distribution_type == "Discrete Uniform":
         low = params.get("low", 1)
         high = params.get("high", 6)
-        x_vals = np.arange(low, high + 1) # Adjust x_vals for uniform range
-        probs = [1/(high - low + 1)] * len(x_vals)
+        x_vals = np.arange(low, high + 1)  # Adjust x_vals for uniform range
+        probs = [1 / (high - low + 1)] * len(x_vals)
         cdf_vals = np.cumsum(probs)
 
+    axes[0].bar(x_vals, probs, color="skyblue")
+    axes[0].set_title(f"{distribution_type} PMF")
+    axes[0].set_xlabel("Value (x)")
+    axes[0].set_ylabel("P(X=x)")
 
-    axes[0].bar(x_vals, probs, color='skyblue')
-    axes[0].set_title(f'{distribution_type} PMF')
-    axes[0].set_xlabel('Value (x)')
-    axes[0].set_ylabel('P(X=x)')
-
-    axes[1].step(x_vals, cdf_vals, where='post', color='coral')
-    axes[1].set_title(f'{distribution_type} CDF')
-    axes[1].set_xlabel('Value (x)')
-    axes[1].set_ylabel('P(X≤x)')
+    axes[1].step(x_vals, cdf_vals, where="post", color="coral")
+    axes[1].set_title(f"{distribution_type} CDF")
+    axes[1].set_xlabel("Value (x)")
+    axes[1].set_ylabel("P(X≤x)")
     axes[1].set_ylim([0, 1.1])
 
     plt.tight_layout()
@@ -109,7 +131,9 @@ def plot_discrete_distribution(distribution_type, params, num_points=15):
 def plot_continuous_distribution(distribution_type, params):
     """Plots PDF and CDF for continuous distributions."""
     fig, axes = plt.subplots(1, 2, figsize=(12, 4))
-    x_vals = np.linspace(params.get('x_min', -5), params.get('x_max', 5), 500) # Default x range
+    x_vals = np.linspace(
+        params.get("x_min", -5), params.get("x_max", 5), 500
+    )  # Default x range
 
     pdf_vals = []
     cdf_vals = []
@@ -117,45 +141,48 @@ def plot_continuous_distribution(distribution_type, params):
     if distribution_type == "Uniform (Continuous)":
         a = params.get("a", 0)
         b = params.get("b", 1)
-        pdf_vals = uniform.pdf(x_vals, loc=a, scale=b-a)
-        cdf_vals = uniform.cdf(x_vals, loc=a, scale=b-a)
+        pdf_vals = uniform.pdf(x_vals, loc=a, scale=b - a)
+        cdf_vals = uniform.cdf(x_vals, loc=a, scale=b - a)
     elif distribution_type == "Exponential":
         lam = params.get("lambda", 1)
-        pdf_vals = expon.pdf(x_vals, scale=1/lam) # Scale is 1/lambda in scipy
-        cdf_vals = expon.cdf(x_vals, scale=1/lam)
+        pdf_vals = expon.pdf(x_vals, scale=1 / lam)  # Scale is 1/lambda in scipy
+        cdf_vals = expon.cdf(x_vals, scale=1 / lam)
     elif distribution_type == "Normal (Gaussian)":
         mu = params.get("mu", 0)
         sigma = params.get("sigma", 1)
         pdf_vals = norm.pdf(x_vals, loc=mu, scale=sigma)
         cdf_vals = norm.cdf(x_vals, loc=mu, scale=sigma)
-    elif distribution_type == "Standard Normal": #No params needed - fixed mean=0, std=1
+    elif (
+        distribution_type == "Standard Normal"
+    ):  # No params needed - fixed mean=0, std=1
         pdf_vals = norm.pdf(x_vals, loc=0, scale=1)
         cdf_vals = norm.cdf(x_vals, loc=0, scale=1)
     elif distribution_type == "Chi-Squared":
         df = params.get("df", 5)
         pdf_vals = chi2.pdf(x_vals, df)
         cdf_vals = chi2.cdf(x_vals, df)
-        x_vals = x_vals[x_vals>=0] # Chi-Squared is for non-negative values, adjust x_vals to avoid errors in plotting for negative range.
-        pdf_vals = pdf_vals[x_vals>=0]
-        cdf_vals = cdf_vals[x_vals>=0]
+        x_vals = x_vals[
+            x_vals >= 0
+        ]  # Chi-Squared is for non-negative values, adjust x_vals to avoid errors in plotting for negative range.
+        pdf_vals = pdf_vals[x_vals >= 0]
+        cdf_vals = cdf_vals[x_vals >= 0]
 
     elif distribution_type == "t-Distribution":
         df = params.get("df", 5)
         pdf_vals = t.pdf(x_vals, df)
         cdf_vals = t.cdf(x_vals, df)
 
+    axes[0].plot(x_vals, pdf_vals, color="skyblue")
+    axes[0].fill_between(x_vals, pdf_vals, color="skyblue", alpha=0.4)
+    axes[0].set_title(f"{distribution_type} PDF")
+    axes[0].set_xlabel("Value (x)")
+    axes[0].set_ylabel("f(x)")  # PDF is density, not probability directly
 
-    axes[0].plot(x_vals, pdf_vals, color='skyblue')
-    axes[0].fill_between(x_vals, pdf_vals, color='skyblue', alpha=0.4)
-    axes[0].set_title(f'{distribution_type} PDF')
-    axes[0].set_xlabel('Value (x)')
-    axes[0].set_ylabel('f(x)') # PDF is density, not probability directly
-
-    axes[1].plot(x_vals, cdf_vals, color='coral')
-    axes[1].fill_between(x_vals, cdf_vals, color='coral', alpha=0.4)
-    axes[1].set_title(f'{distribution_type} CDF')
-    axes[1].set_xlabel('Value (x)')
-    axes[1].set_ylabel('P(X≤x)')
+    axes[1].plot(x_vals, cdf_vals, color="coral")
+    axes[1].fill_between(x_vals, cdf_vals, color="coral", alpha=0.4)
+    axes[1].set_title(f"{distribution_type} CDF")
+    axes[1].set_xlabel("Value (x)")
+    axes[1].set_ylabel("P(X≤x)")
     axes[1].set_ylim([0, 1.1])
 
     plt.tight_layout()
@@ -164,12 +191,15 @@ def plot_continuous_distribution(distribution_type, params):
 
 def main():
     st.set_page_config(page_title="Probability Theory", page_icon="🎲", layout="wide")
-    
+
     st.title("Probability Distributions: A Comprehensive Guide")
-    st.write("Explore random variables, discrete and continuous probability distributions, joint distributions, expectation, variance, and limit theorems.")
+    st.write(
+        "Explore random variables, discrete and continuous probability distributions, joint distributions, expectation, variance, and limit theorems."
+    )
 
     with st.expander("📚 Random Variables"):
-        st.markdown("""
+        st.markdown(
+            """
         ### 5. Random Variables
         #### Definition of a Random Variable
         A **random variable (RV)** is a variable whose value is a numerical outcome of a random phenomenon or experiment. Formally, it is a function that maps outcomes from the sample space to the real numbers.
@@ -203,20 +233,23 @@ def main():
                 *   **Stock prices** (over short time scales, can be modeled as continuous).
 
         The distinction between discrete and continuous random variables is crucial as it dictates the type of probability distribution and mathematical tools used for their analysis. Discrete variables are associated with probability mass functions (PMFs) and summations, while continuous variables are associated with probability density functions (PDFs) and integrals.
-        """)
+        """
+        )
 
     with st.expander("📊Discrete Probability Distributions"):
-        st.markdown(""" 
+        st.markdown(
+            """
         ### Discrete Probability Distributions
         #### Probability Mass Function (PMF)
-        For a discrete random variable, the **Probability Mass Function (PMF)**, denoted as P(X=x) or f(x), gives the probability that the random variable X takes on a specific value x.  It is the discrete counterpart to the Probability Density Function (PDF) for continuous variables.
+        For a discrete random variable, the **Probability Mass Function (PMF)**, denoted as P(X=x) or f(x), gives the probability that the random variable X takes on a specific value x. It is the discrete counterpart to the Probability Density Function (PDF) for continuous variables.
 
-        *   **Formal Definition:**  For a discrete random variable X, the PMF is a function f(x) that satisfies:
+        *   **Formal Definition:** For a discrete random variable X, the PMF is a function f(x) that satisfies:
             *   f(x) = P(X = x)
             *   f(x) ≥ 0 for all x (Probabilities are non-negative)
             *   Σ f(x) = 1, where the sum is over all possible values of X (Total probability sums to 1)
 
-        *   **Interpretation:** The PMF directly gives the probability of each possible outcome for a discrete random variable.  For example, if X is the outcome of a die roll, the PMF tells you P(X=1), P(X=2), P(X=3), ..., P(X=6).
+        *   **Interpretation:** The PMF directly gives the probability of each possible outcome for a discrete random variable.
+            For example, if X is the outcome of a die roll, the PMF tells you P(X=1), P(X=2), P(X=3), ..., P(X=6).
 
         #### 6.2 Cumulative Distribution Function (CDF) for Discrete Variables
         The **Cumulative Distribution Function (CDF)**, denoted as F(x) or P(X ≤ x), for a discrete random variable X gives the probability that X takes a value less than or equal to x.  It provides the cumulative probability up to a certain point.
@@ -235,10 +268,12 @@ def main():
 
     ####  Common Discrete Distributions:
     Let's explore some of the most frequently encountered discrete probability distributions:
-    """)
-    
+    """
+        )
+
     with st.expander("Bernoulli Distribution"):
-        st.markdown("""
+        st.markdown(
+            """
         ##### Bernoulli Distribution
         *   **Description:** The simplest discrete distribution, the Bernoulli distribution models a single binary trial or experiment that can have only two possible outcomes: "success" or "failure".  It's like a single flip of a potentially biased coin.
         *   **Examples:**
@@ -263,16 +298,39 @@ def main():
         *   **Variance:** Var(X) = *p*(1 - *p*)
             *   The variance is maximized when p=0.5 (equal probability of success and failure) and minimized when p is close to 0 or 1.
 
-        """)
-        p_bernoulli = st.slider("Bernoulli p (Probability of Success):", min_value=0.01, max_value=1.0, value=0.3, step=0.01, format="%.2f", key="bernoulli_p_slider")
-        num_samples_bernoulli = st.slider("Number of Samples (Bernoulli):", min_value=100, max_value=10000, value=1000, step=100, key="bernoulli_sample_slider")
+        """
+        )
+        p_bernoulli = st.slider(
+            "Bernoulli p (Probability of Success):",
+            min_value=0.01,
+            max_value=1.0,
+            value=0.3,
+            step=0.01,
+            format="%.2f",
+            key="bernoulli_p_slider",
+        )
+        num_samples_bernoulli = st.slider(
+            "Number of Samples (Bernoulli):",
+            min_value=100,
+            max_value=10000,
+            value=1000,
+            step=100,
+            key="bernoulli_sample_slider",
+        )
         if st.button("Generate Bernoulli Samples", key="bernoulli_button"):
-            samples_bernoulli = generate_bernoulli_samples(p_bernoulli, num_samples_bernoulli)
-            fig_bernoulli = px.histogram(x=samples_bernoulli, title="Bernoulli Distribution Samples", labels={'x': 'Outcome (0 or 1)'})
+            samples_bernoulli = generate_bernoulli_samples(
+                p_bernoulli, num_samples_bernoulli
+            )
+            fig_bernoulli = px.histogram(
+                x=samples_bernoulli,
+                title="Bernoulli Distribution Samples",
+                labels={"x": "Outcome (0 or 1)"},
+            )
             st.plotly_chart(fig_bernoulli)
 
     with st.expander("Binomial Distribution"):
-        st.markdown("""
+        st.markdown(
+            """
         ##### Binomial Distribution
         *   **Description:** The Binomial distribution is one of the most fundamental discrete distributions. It models the **number of successes** in a fixed number (*n*) of independent and identical Bernoulli trials.  Imagine repeating a Bernoulli experiment (like a coin flip) *n* times and counting how many times you get "success".
 
@@ -301,18 +359,49 @@ def main():
         *   **Variance:** Var(X) = *n* * *p* * (1 - *p*)
             *   The variance increases with both *n* and *p*, being maximized when p=0.5.
 
-        """)
-        n_binomial = st.slider("Binomial n (Number of Trials):", min_value=1, max_value=100, value=10, step=1, key="binomial_n_slider")
-        p_binomial = st.slider("Binomial p (Probability of Success):", min_value=0.01, max_value=1.0, value=0.3, step=0.01, format="%.2f", key="binomial_p_slider")
-        num_samples_binomial = st.slider("Number of Samples (Binomial):", min_value=100, max_value=10000, value=1000, step=100, key="binomial_sample_slider")
+        """
+        )
+        n_binomial = st.slider(
+            "Binomial n (Number of Trials):",
+            min_value=1,
+            max_value=100,
+            value=10,
+            step=1,
+            key="binomial_n_slider",
+        )
+        p_binomial = st.slider(
+            "Binomial p (Probability of Success):",
+            min_value=0.01,
+            max_value=1.0,
+            value=0.3,
+            step=0.01,
+            format="%.2f",
+            key="binomial_p_slider",
+        )
+        num_samples_binomial = st.slider(
+            "Number of Samples (Binomial):",
+            min_value=100,
+            max_value=10000,
+            value=1000,
+            step=100,
+            key="binomial_sample_slider",
+        )
 
         if st.button("Generate Binomial Samples", key="binomial_button"):
-            samples_binomial = generate_binomial_samples(n_binomial, p_binomial, num_samples_binomial)
-            fig_binomial = px.histogram(x=samples_binomial, nbins=n_binomial+1, title="Binomial Distribution Samples", labels={'x': 'Number of Successes'})
+            samples_binomial = generate_binomial_samples(
+                n_binomial, p_binomial, num_samples_binomial
+            )
+            fig_binomial = px.histogram(
+                x=samples_binomial,
+                nbins=n_binomial + 1,
+                title="Binomial Distribution Samples",
+                labels={"x": "Number of Successes"},
+            )
             st.plotly_chart(fig_binomial)
 
     with st.expander("Poisson Distribution"):
-        st.markdown("""
+        st.markdown(
+            """
         ##### Poisson Distribution
         *   **Description:** The Poisson distribution is crucial for modeling the **number of rare events** that occur in a fixed interval of time or space.  It's applicable when events happen randomly and independently at a constant average rate. Think of things that happen infrequently but you are counting how many occur within a given window.
 
@@ -342,16 +431,38 @@ def main():
         *   **Variance:** Var(X) = μ
             *   A key property of the Poisson distribution is that its variance is equal to its mean.
 
-        """)
-        mu_poisson = st.slider("Poisson μ (Average Rate):", min_value=0.1, max_value=20.0, value=3.0, step=0.1, format="%.1f", key="poisson_mu_slider")
-        num_samples_poisson = st.slider("Number of Samples (Poisson):", min_value=100, max_value=10000, value=1000, step=100, key="poisson_sample_slider")
+        """
+        )
+        mu_poisson = st.slider(
+            "Poisson μ (Average Rate):",
+            min_value=0.1,
+            max_value=20.0,
+            value=3.0,
+            step=0.1,
+            format="%.1f",
+            key="poisson_mu_slider",
+        )
+        num_samples_poisson = st.slider(
+            "Number of Samples (Poisson):",
+            min_value=100,
+            max_value=10000,
+            value=1000,
+            step=100,
+            key="poisson_sample_slider",
+        )
         if st.button("Generate Poisson Samples", key="poisson_button"):
             samples_poisson = generate_poisson_samples(mu_poisson, num_samples_poisson)
-            fig_poisson = px.histogram(x=samples_poisson, nbins=15, title="Poisson Distribution Samples", labels={'x': 'Number of Events'})
+            fig_poisson = px.histogram(
+                x=samples_poisson,
+                nbins=15,
+                title="Poisson Distribution Samples",
+                labels={"x": "Number of Events"},
+            )
             st.plotly_chart(fig_poisson)
 
     with st.expander("Geometric Distribution"):
-        st.markdown("""
+        st.markdown(
+            """
         ##### Geometric Distribution
         *   **Description:** The Geometric distribution models the **number of trials needed until the *first* success** occurs in a sequence of independent Bernoulli trials. Think of it as asking "How many times do I have to try until I finally succeed?".
 
@@ -380,16 +491,40 @@ def main():
         *   **Variance:** Var(X) = (1 - *p*) / *p*^2
             *   The variance is higher when *p* is small (success is rare), indicating more variability in the number of trials needed.
 
-        """)
-        p_geometric = st.slider("Geometric p (Probability of Success):", min_value=0.01, max_value=1.0, value=0.5, step=0.01, format="%.2f", key="geometric_p_slider")
-        num_samples_geometric = st.slider("Number of Samples (Geometric):", min_value=100, max_value=10000, value=1000, step=100, key="geometric_sample_slider")
+        """
+        )
+        p_geometric = st.slider(
+            "Geometric p (Probability of Success):",
+            min_value=0.01,
+            max_value=1.0,
+            value=0.5,
+            step=0.01,
+            format="%.2f",
+            key="geometric_p_slider",
+        )
+        num_samples_geometric = st.slider(
+            "Number of Samples (Geometric):",
+            min_value=100,
+            max_value=10000,
+            value=1000,
+            step=100,
+            key="geometric_sample_slider",
+        )
         if st.button("Generate Geometric Samples", key="geometric_button"):
-            samples_geometric = generate_geometric_samples(p_geometric, num_samples_geometric)
-            fig_geometric = px.histogram(x=samples_geometric, nbins=20, title="Geometric Distribution Samples", labels={'x': 'Trials until First Success'})
+            samples_geometric = generate_geometric_samples(
+                p_geometric, num_samples_geometric
+            )
+            fig_geometric = px.histogram(
+                x=samples_geometric,
+                nbins=20,
+                title="Geometric Distribution Samples",
+                labels={"x": "Trials until First Success"},
+            )
             st.plotly_chart(fig_geometric)
 
     with st.expander("Discrete Uniform Distribution"):
-        st.markdown("""
+        st.markdown(
+            """
         ##### Discrete Uniform Distribution
         *   **Description:** The Discrete Uniform distribution is used when all possible outcomes in a *finite* set are **equally likely**.  It's the discrete version of "perfect fairness" – every value has the same chance of occurring.
 
@@ -420,18 +555,51 @@ def main():
         *   **Variance:** Var(X) = ((*b* - *a*)^2 - 1) / 12
             *   The variance depends on the spread of the range (*b* - *a*). A wider range leads to higher variance.
 
-        """)
-        low_uniform_discrete = st.slider("Discrete Uniform Low (a):", min_value=1, max_value=5, value=1, step=1, key="uniform_discrete_low_slider")
-        high_uniform_discrete = st.slider("Discrete Uniform High (b):", min_value=6, max_value=10, value=7, step=1, key="uniform_discrete_high_slider")
-        num_samples_uniform_discrete = st.slider("Number of Samples (Discrete Uniform):", min_value=100, max_value=10000, value=1000, step=100, key="uniform_discrete_sample_slider")
+        """
+        )
+        low_uniform_discrete = st.slider(
+            "Discrete Uniform Low (a):",
+            min_value=1,
+            max_value=5,
+            value=1,
+            step=1,
+            key="uniform_discrete_low_slider",
+        )
+        high_uniform_discrete = st.slider(
+            "Discrete Uniform High (b):",
+            min_value=6,
+            max_value=10,
+            value=7,
+            step=1,
+            key="uniform_discrete_high_slider",
+        )
+        num_samples_uniform_discrete = st.slider(
+            "Number of Samples (Discrete Uniform):",
+            min_value=100,
+            max_value=10000,
+            value=1000,
+            step=100,
+            key="uniform_discrete_sample_slider",
+        )
 
-        if st.button("Generate Discrete Uniform Samples", key="uniform_discrete_button"):
-            samples_uniform_discrete = generate_discrete_uniform_samples(low_uniform_discrete, high_uniform_discrete, num_samples_uniform_discrete)
-            fig_uniform_discrete = px.histogram(x=samples_uniform_discrete, title="Discrete Uniform Distribution Samples", labels={'x': 'Outcome Value'})
+        if st.button(
+            "Generate Discrete Uniform Samples", key="uniform_discrete_button"
+        ):
+            samples_uniform_discrete = generate_discrete_uniform_samples(
+                low_uniform_discrete,
+                high_uniform_discrete,
+                num_samples_uniform_discrete,
+            )
+            fig_uniform_discrete = px.histogram(
+                x=samples_uniform_discrete,
+                title="Discrete Uniform Distribution Samples",
+                labels={"x": "Outcome Value"},
+            )
             st.plotly_chart(fig_uniform_discrete)
 
     with st.expander("📈 Continuous Probability Distributions"):
-        st.markdown("""
+        st.markdown(
+            """
         ### 7. Continuous Probability Distributions
         #### 7.1 Probability Density Function (PDF)
         For continuous random variables, probability is described using the **Probability Density Function (PDF)**, denoted as f(x).  Unlike PMFs, the PDF itself does *not* give the probability of X taking on a specific value. Instead, the **probability of X falling within a range [a, b]** is given by the **area under the PDF curve between a and b**.
@@ -460,10 +628,12 @@ def main():
 
         #### 7.3 Common Continuous Distributions:
         Let's explore some essential continuous probability distributions:
-        """)
+        """
+        )
 
     with st.expander("Continuous Uniform Distribution"):
-        st.markdown("""
+        st.markdown(
+            """
         ##### Continuous Uniform Distribution
         *   **Description:** The Continuous Uniform distribution (also just called Uniform distribution when the context is clear) models situations where a random variable is **equally likely to take any value within a specified continuous interval**.  It's the continuous counterpart to the Discrete Uniform distribution and represents "perfect randomness" over a continuous range.
 
@@ -495,18 +665,54 @@ def main():
         *   **Variance:** Var(X) = (*b* - *a*)^2 / 12
             *   The variance depends on the square of the interval width (*b* - *a*)^2. A wider interval leads to a larger variance, reflecting greater spread.
 
-        """)
-        low_uniform_continuous = st.slider("Continuous Uniform Low (a):", min_value=-5.0, max_value=0.0, value=0.0, step=0.1, format="%.1f", key="uniform_continuous_low_slider")
-        high_uniform_continuous = st.slider("Continuous Uniform High (b):", min_value=5.0, max_value=10.0, value=5.0, step=0.1, format="%.1f", key="uniform_continuous_high_slider")
-        num_samples_uniform_continuous = st.slider("Number of Samples (Continuous Uniform):", min_value=100, max_value=10000, value=1000, step=100, key="uniform_continuous_sample_slider")
+        """
+        )
+        low_uniform_continuous = st.slider(
+            "Continuous Uniform Low (a):",
+            min_value=-5.0,
+            max_value=0.0,
+            value=0.0,
+            step=0.1,
+            format="%.1f",
+            key="uniform_continuous_low_slider",
+        )
+        high_uniform_continuous = st.slider(
+            "Continuous Uniform High (b):",
+            min_value=5.0,
+            max_value=10.0,
+            value=5.0,
+            step=0.1,
+            format="%.1f",
+            key="uniform_continuous_high_slider",
+        )
+        num_samples_uniform_continuous = st.slider(
+            "Number of Samples (Continuous Uniform):",
+            min_value=100,
+            max_value=10000,
+            value=1000,
+            step=100,
+            key="uniform_continuous_sample_slider",
+        )
 
-        if st.button("Generate Continuous Uniform Samples", key="uniform_continuous_button"):
-            samples_uniform_continuous = generate_continuous_uniform_samples(low_uniform_continuous, high_uniform_continuous, num_samples_uniform_continuous)
-            fig_uniform_continuous = px.histogram(x=samples_uniform_continuous, nbins=20, title="Continuous Uniform Distribution Samples", labels={'x': 'Outcome Value'})
+        if st.button(
+            "Generate Continuous Uniform Samples", key="uniform_continuous_button"
+        ):
+            samples_uniform_continuous = generate_continuous_uniform_samples(
+                low_uniform_continuous,
+                high_uniform_continuous,
+                num_samples_uniform_continuous,
+            )
+            fig_uniform_continuous = px.histogram(
+                x=samples_uniform_continuous,
+                nbins=20,
+                title="Continuous Uniform Distribution Samples",
+                labels={"x": "Outcome Value"},
+            )
             st.plotly_chart(fig_uniform_continuous)
 
     with st.expander("Exponential Distribution"):
-        st.markdown("""
+        st.markdown(
+            """
         ##### 7.3.2 Exponential Distribution
         *   **Description:** The Exponential distribution models the **time until an event occurs** in a Poisson process, where events happen continuously and independently at a constant average rate.  It is often used for modeling waiting times, survival times, or the duration of events.  A key characteristic is its "memoryless" property: the probability of an event occurring in the *next* time interval is independent of how much time has *already passed* without an event.
 
@@ -541,17 +747,41 @@ def main():
         *   **Memoryless Property:**  P(X > s + t | X > s) = P(X > t) for any s, t ≥ 0.
             *   This means that if an event has not occurred up to time *s*, the probability of it occurring after an *additional* time *t* is the same as the probability of it occurring after time *t* from the beginning.  The past has no bearing on future probabilities.
 
-        """)
-        scale_exponential = st.slider("Exponential Scale (Average Time):", min_value=0.1, max_value=10.0, value=1.0, step=0.1, format="%.1f", key="exponential_scale_slider")
-        num_samples_exponential = st.slider("Number of Samples (Exponential):", min_value=100, max_value=10000, value=1000, step=100, key="exponential_sample_slider")
+        """
+        )
+        scale_exponential = st.slider(
+            "Exponential Scale (Average Time):",
+            min_value=0.1,
+            max_value=10.0,
+            value=1.0,
+            step=0.1,
+            format="%.1f",
+            key="exponential_scale_slider",
+        )
+        num_samples_exponential = st.slider(
+            "Number of Samples (Exponential):",
+            min_value=100,
+            max_value=10000,
+            value=1000,
+            step=100,
+            key="exponential_sample_slider",
+        )
 
         if st.button("Generate Exponential Samples", key="exponential_button"):
-            samples_exponential = generate_exponential_samples(scale_exponential, num_samples_exponential)
-            fig_exponential = px.histogram(x=samples_exponential, nbins=20, title="Exponential Distribution Samples", labels={'x': 'Time until Event'})
+            samples_exponential = generate_exponential_samples(
+                scale_exponential, num_samples_exponential
+            )
+            fig_exponential = px.histogram(
+                x=samples_exponential,
+                nbins=20,
+                title="Exponential Distribution Samples",
+                labels={"x": "Time until Event"},
+            )
             st.plotly_chart(fig_exponential)
 
     with st.expander("Normal Distribution (Gaussian Distribution)"):
-        st.markdown("""
+        st.markdown(
+            """
         ##### Normal Distribution (Gaussian Distribution)
         *   **Description:** The Normal distribution, also known as the Gaussian distribution or "bell curve", is arguably the **most important and widely used continuous distribution in statistics and probability**.  It models a vast array of natural phenomena where values tend to cluster around a mean, with symmetrical spread.  It's central to the Central Limit Theorem, making it fundamental to statistical inference.
 
@@ -583,18 +813,50 @@ def main():
         *   **Variance:** Var(X) = σ^2
             *   The variance is the square of the standard deviation σ.  Standard deviation σ itself is often used to describe the spread, as it's in the original units of X.
 
-        """)
-        mu_normal = st.slider("Normal μ (Mean):", min_value=-5.0, max_value=5.0, value=0.0, step=0.1, format="%.1f", key="normal_mu_slider")
-        sigma_normal = st.slider("Normal σ (Standard Deviation):", min_value=0.1, max_value=5.0, value=1.0, step=0.1, format="%.1f", key="normal_sigma_slider")
-        num_samples_normal = st.slider("Number of Samples (Normal):", min_value=100, max_value=10000, value=1000, step=100, key="normal_sample_slider")
+        """
+        )
+        mu_normal = st.slider(
+            "Normal μ (Mean):",
+            min_value=-5.0,
+            max_value=5.0,
+            value=0.0,
+            step=0.1,
+            format="%.1f",
+            key="normal_mu_slider",
+        )
+        sigma_normal = st.slider(
+            "Normal σ (Standard Deviation):",
+            min_value=0.1,
+            max_value=5.0,
+            value=1.0,
+            step=0.1,
+            format="%.1f",
+            key="normal_sigma_slider",
+        )
+        num_samples_normal = st.slider(
+            "Number of Samples (Normal):",
+            min_value=100,
+            max_value=10000,
+            value=1000,
+            step=100,
+            key="normal_sample_slider",
+        )
 
         if st.button("Generate Normal Samples", key="normal_button"):
-            samples_normal = generate_normal_samples(mu_normal, sigma_normal, num_samples_normal)
-            fig_normal = px.histogram(x=samples_normal, nbins=20, title="Normal Distribution Samples", labels={'x': 'Outcome Value'})
+            samples_normal = generate_normal_samples(
+                mu_normal, sigma_normal, num_samples_normal
+            )
+            fig_normal = px.histogram(
+                x=samples_normal,
+                nbins=20,
+                title="Normal Distribution Samples",
+                labels={"x": "Outcome Value"},
+            )
             st.plotly_chart(fig_normal)
 
     with st.expander("Standard Normal Distribution"):
-        st.markdown("""
+        st.markdown(
+            """
         ##### Standard Normal Distribution
         *   **Description:** The Standard Normal distribution is a **special case of the Normal distribution** where the mean (μ) is 0 and the standard deviation (σ) is 1. It is denoted as Z ~ N(0, 1).  It serves as a fundamental reference distribution in statistics.  Any normal distribution can be standardized (transformed into a standard normal distribution) by subtracting the mean and dividing by the standard deviation.
 
@@ -614,16 +876,32 @@ def main():
 
         *   **Variance:** Var(Z) = 1
 
-        """)
-        num_samples_standard_normal = st.slider("Number of Samples (Standard Normal):", min_value=100, max_value=10000, value=1000, step=100, key="standard_normal_sample_slider")
+        """
+        )
+        num_samples_standard_normal = st.slider(
+            "Number of Samples (Standard Normal):",
+            min_value=100,
+            max_value=10000,
+            value=1000,
+            step=100,
+            key="standard_normal_sample_slider",
+        )
 
         if st.button("Generate Standard Normal Samples", key="standard_normal_button"):
-            samples_standard_normal = generate_normal_samples(0, 1, num_samples_standard_normal) #mu=0, sigma=1
-            fig_standard_normal = px.histogram(x=samples_standard_normal, nbins=20, title="Standard Normal Distribution Samples", labels={'x': 'Outcome Value (Z)'})
+            samples_standard_normal = generate_normal_samples(
+                0, 1, num_samples_standard_normal
+            )  # mu=0, sigma=1
+            fig_standard_normal = px.histogram(
+                x=samples_standard_normal,
+                nbins=20,
+                title="Standard Normal Distribution Samples",
+                labels={"x": "Outcome Value (Z)"},
+            )
             st.plotly_chart(fig_standard_normal)
 
     with st.expander("Chi-Squared Distribution"):
-        st.markdown("""
+        st.markdown(
+            """
         ##### Chi-Squared Distribution (χ²)
         *   **Description:** The Chi-Squared distribution (χ²) arises frequently in statistics, particularly in hypothesis testing and constructing confidence intervals for variances.  It is fundamentally related to the Normal distribution: if you square a standard normal random variable (Z ~ N(0, 1)), you get a Chi-Squared distribution with 1 degree of freedom.  More generally, if you sum the squares of *df* independent standard normal random variables, you get a Chi-Squared distribution with *df* degrees of freedom.
 
@@ -650,17 +928,40 @@ def main():
         *   **Variance:** Var(X) = 2 * *df*
             *   The variance is twice the degrees of freedom.
 
-        """)
-        df_chisquare = st.slider("Chi-Squared Degrees of Freedom (df):", min_value=1, max_value=20, value=3, step=1, key="chisquare_df_slider")
-        num_samples_chisquare = st.slider("Number of Samples (Chi-Squared):", min_value=100, max_value=10000, value=1000, step=100, key="chisquare_sample_slider")
+        """
+        )
+        df_chisquare = st.slider(
+            "Chi-Squared Degrees of Freedom (df):",
+            min_value=1,
+            max_value=20,
+            value=3,
+            step=1,
+            key="chisquare_df_slider",
+        )
+        num_samples_chisquare = st.slider(
+            "Number of Samples (Chi-Squared):",
+            min_value=100,
+            max_value=10000,
+            value=1000,
+            step=100,
+            key="chisquare_sample_slider",
+        )
 
         if st.button("Generate Chi-Squared Samples", key="chisquare_button"):
-            samples_chisquare = generate_chisquare_samples(df_chisquare, num_samples_chisquare)
-            fig_chisquare = px.histogram(x=samples_chisquare, nbins=20, title="Chi-Squared Distribution Samples", labels={'x': 'Outcome Value'})
+            samples_chisquare = generate_chisquare_samples(
+                df_chisquare, num_samples_chisquare
+            )
+            fig_chisquare = px.histogram(
+                x=samples_chisquare,
+                nbins=20,
+                title="Chi-Squared Distribution Samples",
+                labels={"x": "Outcome Value"},
+            )
             st.plotly_chart(fig_chisquare)
 
     with st.expander("t-Distribution (Student's t-distribution)"):
-        st.markdown("""
+        st.markdown(
+            """
         ##### t-Distribution (Student's t-distribution)
         *   **Description:** The t-Distribution, also known as Student's t-distribution, is another crucial distribution in statistics, especially when dealing with **small sample sizes** and **unknown population standard deviation** when making inferences about population means. It is similar in shape to the Normal distribution – bell-shaped and symmetric – but has **heavier tails**. This means it has more probability in the tails (far from the mean) and less in the center compared to a Normal distribution, especially for low degrees of freedom.  As the degrees of freedom increase, the t-distribution approaches the Standard Normal distribution.
 
@@ -687,17 +988,38 @@ def main():
         *   **Variance:** Var(X) = df / (df - 2)   (for df > 2)
             *   The variance is always greater than 1 (variance of Standard Normal), reflecting the heavier tails. As *df* increases, the variance approaches 1, and the t-distribution approaches the Standard Normal. For df ≤ 2, the variance is technically infinite (or undefined).
 
-        """)
-        df_t = st.slider("t-Distribution Degrees of Freedom (df):", min_value=1, max_value=30, value=5, step=1, key="t_df_slider")
-        num_samples_t = st.slider("Number of Samples (t-Distribution):", min_value=100, max_value=10000, value=1000, step=100, key="t_sample_slider")
+        """
+        )
+        df_t = st.slider(
+            "t-Distribution Degrees of Freedom (df):",
+            min_value=1,
+            max_value=30,
+            value=5,
+            step=1,
+            key="t_df_slider",
+        )
+        num_samples_t = st.slider(
+            "Number of Samples (t-Distribution):",
+            min_value=100,
+            max_value=10000,
+            value=1000,
+            step=100,
+            key="t_sample_slider",
+        )
 
         if st.button("Generate t-Distribution Samples", key="t_button"):
             samples_t = generate_t_samples(df_t, num_samples_t)
-            fig_t = px.histogram(x=samples_t, nbins=20, title="t-Distribution Samples", labels={'x': 'Outcome Value (t-statistic)'})
+            fig_t = px.histogram(
+                x=samples_t,
+                nbins=20,
+                title="t-Distribution Samples",
+                labels={"x": "Outcome Value (t-statistic)"},
+            )
             st.plotly_chart(fig_t)
 
     with st.expander("🤝 Joint Probability Distributions"):
-        st.markdown("""
+        st.markdown(
+            """
         ### 8. Joint Probability Distributions
         #### 8.1 Bivariate and Multivariate Distributions
         *   **Bivariate Distribution:**  Describes the probability distribution of **two random variables** considered together (e.g., height and weight of individuals). It tells you how these two variables vary jointly and any relationships between them.
@@ -741,10 +1063,12 @@ def main():
             *   **Unitless:** Correlation is a pure number between -1 and +1, allowing for comparison across different variable pairs.
 
         **Important Note:** Correlation and covariance only measure *linear* relationships. Two variables can be highly dependent but have zero correlation if their relationship is non-linear (e.g., quadratic, cyclical). Also, correlation does not imply causation!
-        """)
+        """
+        )
 
     with st.expander("🧮 9. Expectation and Variance"):
-        st.markdown("""
+        st.markdown(
+            """
         ### 9. Expectation and Variance
         #### 9.1 Expected Value (Mean) of a Random Variable (E[X] or μ)
         The **Expected Value** (or Mean) of a random variable X, denoted as E[X] or μ, represents the **average value** we expect X to take in the long run, over many repetitions of the random experiment. It's a measure of the "center" of the distribution.
@@ -789,10 +1113,12 @@ def main():
             *   **Important:** Var(X + Y) ≠ Var(X) + Var(Y) if X and Y are *dependent*. In general: Var(X + Y) = Var(X) + Var(Y) + 2*Cov(X, Y)
 
         These properties are fundamental for simplifying calculations involving expected values and variances of linear combinations of random variables.
-        """)
+        """
+        )
 
     with st.expander("📜 10. Limit Theorems"):
-        st.markdown("""
+        st.markdown(
+            """
         ### 10. Limit Theorems: Cornerstones of Statistical Inference
         Limit theorems are fundamental results in probability theory that describe the **behavior of sequences of random variables as the number of variables grows infinitely large**. They are absolutely crucial for statistical inference because they provide the theoretical foundation for using sample statistics to make inferences about population parameters, especially when sample sizes are large.
 
@@ -833,10 +1159,12 @@ def main():
             *   **Explains Ubiquity of Normal Distribution:**  The CLT explains why the normal distribution appears so often in nature and various fields. Many observed phenomena are effectively sums or averages of many underlying random factors, and thus tend to be normally distributed due to the CLT.
 
         **Key Takeaway on Limit Theorems:** The Law of Large Numbers and the Central Limit Theorem are not just abstract mathematical results; they are the workhorses of statistical inference. They bridge the gap between sample data and population characteristics, allowing us to make valid and powerful statistical conclusions and predictions from limited data, which is essential in virtually all data-driven fields.
-        """)
+        """
+        )
 
     with st.expander("📚 Resources for Further Learning"):
-        st.markdown("""
+        st.markdown(
+            """
         To deepen your understanding of probability distributions and related concepts, consider these resources:
 
         *   **Textbooks:**
@@ -853,7 +1181,8 @@ def main():
             *   **Wolfram MathWorld - Probability and Statistics:** A comprehensive online resource for mathematical definitions, formulas, and explanations related to probability and statistics. [https://mathworld.wolfram.com/ProbabilityandStatistics.html](https://mathworld.wolfram.com/ProbabilityandStatistics.html)
             *   **Seeing Theory: A Visual Introduction to Probability and Statistics:**  Excellent website with interactive visualizations to build intuition for probability and statistics concepts. [https://seeingtheory.brown.edu/](https://seeingtheory.brown.edu/)
             *   **Wikipedia - Probability Distribution:**  A good starting point for overviews and quick definitions of various probability distributions. [https://en.wikipedia.org/wiki/Probability_distribution](https://en.wikipedia.org/wiki/Probability_distribution)
-        """)
+        """
+        )
 
     st.header("🕹️ Interactive Probability Explorations")
 
@@ -869,135 +1198,257 @@ def main():
             "Weight of a bag of apples",
             "Number of emails received per day",
             "Daily rainfall in millimeters",
-            "Exam score (percentage)"
+            "Exam score (percentage)",
         ]
-        selected_rv_example = st.selectbox("Select a Random Variable Example:", rv_examples)
+        selected_rv_example = st.selectbox(
+            "Select a Random Variable Example:", rv_examples
+        )
         variable_type = "Unknown"
 
-        if selected_rv_example in ["Number of heads in 5 coin flips", "Number of cars passing a point on a highway per hour", "Shoe size of a randomly selected adult", "Number of emails received per day", "Exam score (percentage)"]: #Exam score can be discrete if only integer percentages are allowed.
+        if selected_rv_example in [
+            "Number of heads in 5 coin flips",
+            "Number of cars passing a point on a highway per hour",
+            "Shoe size of a randomly selected adult",
+            "Number of emails received per day",
+            "Exam score (percentage)",
+        ]:  # Exam score can be discrete if only integer percentages are allowed.
             variable_type = "Discrete"
-        elif selected_rv_example in ["Height of a randomly selected person", "Temperature of a room", "Time it takes for a light bulb to burn out", "Weight of a bag of apples", "Daily rainfall in millimeters"]:
+        elif selected_rv_example in [
+            "Height of a randomly selected person",
+            "Temperature of a room",
+            "Time it takes for a light bulb to burn out",
+            "Weight of a bag of apples",
+            "Daily rainfall in millimeters",
+        ]:
             variable_type = "Continuous"
 
         st.write(f"You selected: **{selected_rv_example}**")
         st.write(f"This Random Variable is likely **{variable_type}**.")
         if variable_type == "Discrete":
-            st.success("Correct! Discrete random variables take countable values, often integers (counts).")
+            st.success(
+                "Correct! Discrete random variables take countable values, often integers (counts)."
+            )
         elif variable_type == "Continuous":
-            st.success("Correct! Continuous random variables can take any value within a range (measurements).")
+            st.success(
+                "Correct! Continuous random variables can take any value within a range (measurements)."
+            )
         else:
             st.warning("Try selecting an example to see its classification.")
 
     with st.expander("🎲 Discrete Probability Distributions"):
         st.subheader("Explore Discrete Distributions")
-        dist_options_discrete = ["Bernoulli", "Binomial", "Poisson", "Geometric", "Discrete Uniform"]
-        selected_discrete_dist = st.selectbox("Choose a Discrete Distribution:", dist_options_discrete)
+        dist_options_discrete = [
+            "Bernoulli",
+            "Binomial",
+            "Poisson",
+            "Geometric",
+            "Discrete Uniform",
+        ]
+        selected_discrete_dist = st.selectbox(
+            "Choose a Discrete Distribution:", dist_options_discrete
+        )
 
         st.write(f"### {selected_discrete_dist} Distribution")
 
-        dist_params_discrete = {} # Dictionary to hold parameters
+        dist_params_discrete = {}  # Dictionary to hold parameters
         if selected_discrete_dist == "Bernoulli":
-            dist_params_discrete['p'] = st.slider("Probability of success (p):", 0.01, 1.0, 0.5, step=0.05)
-            st.write("*(Represents the probability of success in a single trial, like a single coin flip)*")
+            dist_params_discrete["p"] = st.slider(
+                "Probability of success (p):", 0.01, 1.0, 0.5, step=0.05
+            )
+            st.write(
+                "*(Represents the probability of success in a single trial, like a single coin flip)*"
+            )
         elif selected_discrete_dist == "Binomial":
-            dist_params_discrete['n'] = st.slider("Number of trials (n):", min_value=1, max_value=50, value=10, step=1)
-            dist_params_discrete['p'] = st.slider("Probability of success (p):", 0.01, 1.0, 0.5, step=0.05)
-            st.write("*(Models the number of successes in a fixed number of independent trials)*")
+            dist_params_discrete["n"] = st.slider(
+                "Number of trials (n):", min_value=1, max_value=50, value=10, step=1
+            )
+            dist_params_discrete["p"] = st.slider(
+                "Probability of success (p):", 0.01, 1.0, 0.5, step=0.05
+            )
+            st.write(
+                "*(Models the number of successes in a fixed number of independent trials)*"
+            )
         elif selected_discrete_dist == "Poisson":
-            dist_params_discrete['mu'] = st.slider("Average rate of events (λ):", min_value=0.1, max_value=20.0, value=5.0, step=0.5)
-            st.write("*(Describes the number of events occurring in a fixed interval of time or space)*")
+            dist_params_discrete["mu"] = st.slider(
+                "Average rate of events (λ):",
+                min_value=0.1,
+                max_value=20.0,
+                value=5.0,
+                step=0.5,
+            )
+            st.write(
+                "*(Describes the number of events occurring in a fixed interval of time or space)*"
+            )
         elif selected_discrete_dist == "Geometric":
-            dist_params_discrete['p'] = st.slider("Probability of success (p):", 0.01, 1.0, 0.3, step=0.05)
+            dist_params_discrete["p"] = st.slider(
+                "Probability of success (p):", 0.01, 1.0, 0.3, step=0.05
+            )
             st.write("*(Models the number of trials needed until the first success)*")
         elif selected_discrete_dist == "Discrete Uniform":
-            dist_params_discrete['low'] = st.slider("Lower bound:", min_value=1, max_value=10, value=1, step=1)
-            dist_params_discrete['high'] = st.slider("Upper bound:", min_value=dist_params_discrete['low'], max_value=20, value=6, step=1)
+            dist_params_discrete["low"] = st.slider(
+                "Lower bound:", min_value=1, max_value=10, value=1, step=1
+            )
+            dist_params_discrete["high"] = st.slider(
+                "Upper bound:",
+                min_value=dist_params_discrete["low"],
+                max_value=20,
+                value=6,
+                step=1,
+            )
             st.write("*(All outcomes within a range are equally likely)*")
 
         if selected_discrete_dist != "Discrete Uniform":
-            st.pyplot(plot_discrete_distribution(selected_discrete_dist, dist_params_discrete))
+            st.pyplot(
+                plot_discrete_distribution(selected_discrete_dist, dist_params_discrete)
+            )
         else:
-            st.pyplot(plot_discrete_distribution(selected_discrete_dist, dist_params_discrete, num_points=dist_params_discrete['high']+5)) #Adjust num_points for uniform range
+            st.pyplot(
+                plot_discrete_distribution(
+                    selected_discrete_dist,
+                    dist_params_discrete,
+                    num_points=dist_params_discrete["high"] + 5,
+                )
+            )  # Adjust num_points for uniform range
 
-        st.markdown("""
+        st.markdown(
+            """
         **Key Concepts:**
         *   **Probability Mass Function (PMF):**  Gives the probability that a discrete random variable is exactly equal to a certain value.
         *   **Cumulative Distribution Function (CDF):** Gives the probability that a discrete random variable is less than or equal to a certain value.
-        """)
+        """
+        )
 
     with st.expander("📈 Continuous Probability Distributions"):
         st.subheader("Explore Continuous Distributions")
-        dist_options_continuous = ["Uniform (Continuous)", "Exponential", "Normal (Gaussian)", "Standard Normal", "Chi-Squared", "t-Distribution"]
-        selected_continuous_dist = st.selectbox("Choose a Continuous Distribution:", dist_options_continuous)
+        dist_options_continuous = [
+            "Uniform (Continuous)",
+            "Exponential",
+            "Normal (Gaussian)",
+            "Standard Normal",
+            "Chi-Squared",
+            "t-Distribution",
+        ]
+        selected_continuous_dist = st.selectbox(
+            "Choose a Continuous Distribution:", dist_options_continuous
+        )
 
         st.write(f"### {selected_continuous_dist} Distribution")
 
-        dist_params_continuous = {'x_min': -10, 'x_max': 10} #Default x range, adjustable
+        dist_params_continuous = {
+            "x_min": -10,
+            "x_max": 10,
+        }  # Default x range, adjustable
         if selected_continuous_dist == "Uniform (Continuous)":
-            dist_params_continuous['a'] = st.slider("Lower bound (a):", -10.0, 10.0, 0.0, step=1.0)
-            dist_params_continuous['b'] = st.slider("Upper bound (b):", dist_params_continuous['a'], 20.0, 5.0, step=1.0)
+            dist_params_continuous["a"] = st.slider(
+                "Lower bound (a):", -10.0, 10.0, 0.0, step=1.0
+            )
+            dist_params_continuous["b"] = st.slider(
+                "Upper bound (b):", dist_params_continuous["a"], 20.0, 5.0, step=1.0
+            )
             st.write("*(Every value within the range [a, b] is equally likely)*")
-            dist_params_continuous['x_min'] = dist_params_continuous['a'] - 2
-            dist_params_continuous['x_max'] = dist_params_continuous['b'] + 2 #Adjust x range for uniform plot
+            dist_params_continuous["x_min"] = dist_params_continuous["a"] - 2
+            dist_params_continuous["x_max"] = (
+                dist_params_continuous["b"] + 2
+            )  # Adjust x range for uniform plot
         elif selected_continuous_dist == "Exponential":
-            dist_params_continuous['lambda'] = st.slider("Rate parameter (λ):", 0.1, 5.0, 1.0, step=0.1)
-            st.write("*(Models the time until an event occurs, often used for waiting times)*")
-            dist_params_continuous['x_min'] = 0 # Exponential is for positive values
-            dist_params_continuous['x_max'] = 10
+            dist_params_continuous["lambda"] = st.slider(
+                "Rate parameter (λ):", 0.1, 5.0, 1.0, step=0.1
+            )
+            st.write(
+                "*(Models the time until an event occurs, often used for waiting times)*"
+            )
+            dist_params_continuous["x_min"] = 0  # Exponential is for positive values
+            dist_params_continuous["x_max"] = 10
         elif selected_continuous_dist == "Normal (Gaussian)":
-            dist_params_continuous['mu'] = st.slider("Mean (μ):", -5.0, 5.0, 0.0, step=0.5)
-            dist_params_continuous['sigma'] = st.slider("Standard deviation (σ):", 0.1, 3.0, 1.0, step=0.1)
-            st.write("*(The most famous distribution, bell-shaped, describes many natural phenomena)*")
+            dist_params_continuous["mu"] = st.slider(
+                "Mean (μ):", -5.0, 5.0, 0.0, step=0.5
+            )
+            dist_params_continuous["sigma"] = st.slider(
+                "Standard deviation (σ):", 0.1, 3.0, 1.0, step=0.1
+            )
+            st.write(
+                "*(The most famous distribution, bell-shaped, describes many natural phenomena)*"
+            )
         elif selected_continuous_dist == "Standard Normal":
             st.write("*(Normal distribution with mean=0 and standard deviation=1)*")
             st.write("**Parameters are fixed: μ=0, σ=1**")
         elif selected_continuous_dist == "Chi-Squared":
-            dist_params_continuous['df'] = st.slider("Degrees of freedom (df):", min_value=1, max_value=20, value=5, step=1)
-            st.write("*(Arises in statistics, related to sums of squared standard normal variables)*")
-            dist_params_continuous['x_min'] = 0 # Chi-Squared is for positive values
-            dist_params_continuous['x_max'] = 20
+            dist_params_continuous["df"] = st.slider(
+                "Degrees of freedom (df):", min_value=1, max_value=20, value=5, step=1
+            )
+            st.write(
+                "*(Arises in statistics, related to sums of squared standard normal variables)*"
+            )
+            dist_params_continuous["x_min"] = 0  # Chi-Squared is for positive values
+            dist_params_continuous["x_max"] = 20
         elif selected_continuous_dist == "t-Distribution":
-            dist_params_continuous['df'] = st.slider("Degrees of freedom (df):", min_value=1, max_value=30, value=5, step=1)
-            st.write("*(Similar to Normal but with heavier tails, used when population standard deviation is unknown)*")
+            dist_params_continuous["df"] = st.slider(
+                "Degrees of freedom (df):", min_value=1, max_value=30, value=5, step=1
+            )
+            st.write(
+                "*(Similar to Normal but with heavier tails, used when population standard deviation is unknown)*"
+            )
 
-        st.pyplot(plot_continuous_distribution(selected_continuous_dist, dist_params_continuous))
+        st.pyplot(
+            plot_continuous_distribution(
+                selected_continuous_dist, dist_params_continuous
+            )
+        )
 
-        st.markdown("""
+        st.markdown(
+            """
         **Key Concepts:**
         *   **Probability Density Function (PDF):**  Describes the relative likelihood for a continuous random variable to take on a given value. The area under the PDF curve over an interval gives the probability.
         *   **Cumulative Distribution Function (CDF):** Gives the probability that a continuous random variable is less than or equal to a certain value.
-        """)
-
+        """
+        )
 
     with st.expander("🤝 Joint Probability Distributions (Simplified Example)"):
         st.subheader("Bivariate Distribution: Sum of Two Dice Revisited")
-        st.write("Let's visualize the joint distribution of the outcomes when rolling two dice, focusing on their sum.")
+        st.write(
+            "Let's visualize the joint distribution of the outcomes when rolling two dice, focusing on their sum."
+        )
 
         if st.button("Show Joint Distribution of Two Dice Sums"):
             sample_space_two_dice = list(product(range(1, 7), range(1, 7)))
             dice_sums = [sum(outcome) for outcome in sample_space_two_dice]
             sum_counts = pd.Series(dice_sums).value_counts().sort_index()
-            sum_probs = sum_counts / len(sample_space_two_dice) # Probability of each sum
+            sum_probs = sum_counts / len(
+                sample_space_two_dice
+            )  # Probability of each sum
 
-            joint_dist_df = pd.DataFrame({'Sum': sum_probs.index, 'Probability': sum_probs.values})
+            joint_dist_df = pd.DataFrame(
+                {"Sum": sum_probs.index, "Probability": sum_probs.values}
+            )
 
-            fig_joint_dice = px.bar(joint_dist_df, x='Sum', y='Probability',
-                                     title="Probability Distribution of Sum of Two Dice (Bivariate)",
-                                     labels={'Sum': 'Sum of Dice', 'Probability': 'P(Sum)'})
+            fig_joint_dice = px.bar(
+                joint_dist_df,
+                x="Sum",
+                y="Probability",
+                title="Probability Distribution of Sum of Two Dice (Bivariate)",
+                labels={"Sum": "Sum of Dice", "Probability": "P(Sum)"},
+            )
             st.plotly_chart(fig_joint_dice)
 
-            st.markdown("""
+            st.markdown(
+                """
             *   This bar chart represents a **marginal distribution** – specifically, the marginal distribution of the *sum* of the two dice. We've effectively 'marginalized' over the individual die outcomes to focus on the sum.
             *   In a true **joint distribution**, we'd consider the probability of each *pair* of outcomes (e.g., P(Die1=1, Die2=1), P(Die1=1, Die2=2), etc.). Visualizing this directly is a 2D or 3D table or heatmap. This example simplifies to show the distribution of the sum, a derived variable.
-            """)
-            st.info("For truly joint distributions of two or more variables, we analyze the probabilities of combinations of their values. This example simplifies to the sum as a derived variable.")
-
+            """
+            )
+            st.info(
+                "For truly joint distributions of two or more variables, we analyze the probabilities of combinations of their values. This example simplifies to the sum as a derived variable."
+            )
 
     with st.expander("📊 Expectation and Variance"):
         st.subheader("Calculate Expectation and Variance Interactively")
-        st.write("Define a simple discrete random variable and see how expectation and variance change.")
+        st.write(
+            "Define a simple discrete random variable and see how expectation and variance change."
+        )
 
-        num_outcomes_exp_var = st.number_input("Number of Possible Outcomes:", min_value=2, max_value=6, value=3, step=1)
+        num_outcomes_exp_var = st.number_input(
+            "Number of Possible Outcomes:", min_value=2, max_value=6, value=3, step=1
+        )
         outcomes_exp_var = []
         probabilities_exp_var = []
 
@@ -1005,41 +1456,77 @@ def main():
         for i in range(num_outcomes_exp_var):
             col1, col2 = st.columns(2)
             with col1:
-                outcome = st.number_input(f"Outcome {i+1}:", value=i+1, key=f"outcome_{i}")
+                outcome = st.number_input(
+                    f"Outcome {i+1}:", value=i + 1, key=f"outcome_{i}"
+                )
                 outcomes_exp_var.append(outcome)
             with col2:
-                probability = st.number_input(f"Probability {i+1}:", min_value=0.0, max_value=1.0, value=1.0/num_outcomes_exp_var, step=0.05, format="%.2f", key=f"prob_{i}")
+                probability = st.number_input(
+                    f"Probability {i+1}:",
+                    min_value=0.0,
+                    max_value=1.0,
+                    value=1.0 / num_outcomes_exp_var,
+                    step=0.05,
+                    format="%.2f",
+                    key=f"prob_{i}",
+                )
                 probabilities_exp_var.append(probability)
 
-        if len(probabilities_exp_var) == num_outcomes_exp_var: # Ensure probabilities are entered
-            if abs(sum(probabilities_exp_var) - 1.0) > 1e-6: # Check if probabilities sum to approximately 1
+        if (
+            len(probabilities_exp_var) == num_outcomes_exp_var
+        ):  # Ensure probabilities are entered
+            if (
+                abs(sum(probabilities_exp_var) - 1.0) > 1e-6
+            ):  # Check if probabilities sum to approximately 1
                 st.error("Probabilities must sum to 1. Please adjust.")
             else:
-                expected_value = sum([outcomes_exp_var[i] * probabilities_exp_var[i] for i in range(num_outcomes_exp_var)])
-                variance = sum([(outcomes_exp_var[i] - expected_value)**2 * probabilities_exp_var[i] for i in range(num_outcomes_exp_var)])
+                expected_value = sum(
+                    [
+                        outcomes_exp_var[i] * probabilities_exp_var[i]
+                        for i in range(num_outcomes_exp_var)
+                    ]
+                )
+                variance = sum(
+                    [
+                        (outcomes_exp_var[i] - expected_value) ** 2
+                        * probabilities_exp_var[i]
+                        for i in range(num_outcomes_exp_var)
+                    ]
+                )
                 std_deviation = variance**0.5
 
                 st.write(f"**Expected Value (Mean):** {expected_value:.3f}")
                 st.write(f"**Variance:** {variance:.3f}")
                 st.write(f"**Standard Deviation:** {std_deviation:.3f}")
 
-                st.markdown("""
+                st.markdown(
+                    """
                 **Key Concepts:**
                 *   **Expected Value (Mean):** The average value you would expect to get if you repeated the experiment many times. It's a measure of central tendency.
                 *   **Variance:**  Measures the spread or dispersion of the random variable around its mean.
                 *   **Standard Deviation:** The square root of the variance, also measures spread but in the original units of the random variable.
-                """)
+                """
+                )
 
-
-    with st.expander("📈 Limit Theorems: Law of Large Numbers & Central Limit Theorem (Visual Demos)"):
+    with st.expander(
+        "📈 Limit Theorems: Law of Large Numbers & Central Limit Theorem (Visual Demos)"
+    ):
         st.subheader("Visualizing Limit Theorems")
 
         st.subheader("Law of Large Numbers (LLN)")
-        st.write("See how the sample mean approaches the true mean as sample size increases.")
-        num_trials_lln = st.slider("Number of Trials (LLN Demo):", min_value=100, max_value=10000, value=1000, step=100, key="lln_slider")
+        st.write(
+            "See how the sample mean approaches the true mean as sample size increases."
+        )
+        num_trials_lln = st.slider(
+            "Number of Trials (LLN Demo):",
+            min_value=100,
+            max_value=10000,
+            value=1000,
+            step=100,
+            key="lln_slider",
+        )
 
         if st.button("Run LLN Demo (Dice Rolls)"):
-            sample_means = []
             cumulative_means = []
             dice_rolls_lln = generate_dice_roll(num_trials_lln)
 
@@ -1049,47 +1536,85 @@ def main():
                 cumulative_means.append(sample_mean)
 
             fig_lln, ax_lln = plt.subplots()
-            ax_lln.plot(range(1, num_trials_lln + 1), cumulative_means, label='Cumulative Sample Mean')
-            ax_lln.axhline(y=3.5, color='r', linestyle='--', label='True Mean (3.5)')
+            ax_lln.plot(
+                range(1, num_trials_lln + 1),
+                cumulative_means,
+                label="Cumulative Sample Mean",
+            )
+            ax_lln.axhline(y=3.5, color="r", linestyle="--", label="True Mean (3.5)")
             ax_lln.set_xlabel("Number of Rolls")
             ax_lln.set_ylabel("Cumulative Sample Mean")
             ax_lln.set_title("Law of Large Numbers Demo")
             ax_lln.legend()
             st.pyplot(fig_lln)
-            st.info("Observe how the cumulative sample mean converges towards the true mean (3.5) of a fair die as the number of rolls increases.")
-
+            st.info(
+                "Observe how the cumulative sample mean converges towards the true mean (3.5) of a fair die as the number of rolls increases."
+            )
 
         st.subheader("Central Limit Theorem (CLT)")
-        st.write("See how the distribution of sample means approaches a Normal distribution, regardless of the original population distribution.")
-        sample_size_clt = st.slider("Sample Size (for CLT, n):", min_value=2, max_value=50, value=10, step=1, key="clt_sample_size")
-        num_samples_clt = st.slider("Number of Samples (CLT Demo):", min_value=100, max_value=5000, value=1000, step=100, key="clt_num_samples")
-        population_dist_clt = st.selectbox("Choose Population Distribution:", ["Uniform (Discrete)", "Exponential"], index=0, key="clt_dist_select")
+        st.write(
+            "See how the distribution of sample means approaches a Normal distribution, regardless of the original population distribution."
+        )
+        sample_size_clt = st.slider(
+            "Sample Size (for CLT, n):",
+            min_value=2,
+            max_value=50,
+            value=10,
+            step=1,
+            key="clt_sample_size",
+        )
+        num_samples_clt = st.slider(
+            "Number of Samples (CLT Demo):",
+            min_value=100,
+            max_value=5000,
+            value=1000,
+            step=100,
+            key="clt_num_samples",
+        )
+        population_dist_clt = st.selectbox(
+            "Choose Population Distribution:",
+            ["Uniform (Discrete)", "Exponential"],
+            index=0,
+            key="clt_dist_select",
+        )
 
         if st.button("Run CLT Demo"):
             sample_means_clt = []
             with st.spinner("Simulating Central Limit Theorem..."):
                 for _ in range(num_samples_clt):
                     if population_dist_clt == "Uniform (Discrete)":
-                        population_samples = [random.randint(1, 6) for _ in range(sample_size_clt)] # Discrete Uniform (Dice)
+                        population_samples = [
+                            random.randint(1, 6) for _ in range(sample_size_clt)
+                        ]  # Discrete Uniform (Dice)
                     elif population_dist_clt == "Exponential":
-                        population_samples = np.random.exponential(scale=1, size=sample_size_clt) # Exponential (mean=1)
+                        population_samples = np.random.exponential(
+                            scale=1, size=sample_size_clt
+                        )  # Exponential (mean=1)
                     sample_mean_clt = np.mean(population_samples)
                     sample_means_clt.append(sample_mean_clt)
 
-                fig_clt = px.histogram(sample_means_clt, nbins=30, title=f"Central Limit Theorem Demo (Population: {population_dist_clt}, Sample Size n={sample_size_clt})",
-                                        labels={'value': 'Sample Mean', 'count': 'Frequency'})
+                fig_clt = px.histogram(
+                    sample_means_clt,
+                    nbins=30,
+                    title=f"Central Limit Theorem Demo (Population: {population_dist_clt}, Sample Size n={sample_size_clt})",
+                    labels={"value": "Sample Mean", "count": "Frequency"},
+                )
                 st.plotly_chart(fig_clt)
-                st.info("Notice how the distribution of sample means becomes approximately Normal (bell-shaped) as the number of samples increases, even if the original population distribution is not Normal (like Uniform or Exponential).")
+                st.info(
+                    "Notice how the distribution of sample means becomes approximately Normal (bell-shaped) as the number of samples increases, even if the original population distribution is not Normal (like Uniform or Exponential)."
+                )
 
-        st.markdown("""
+        st.markdown(
+            """
         **Key Concepts:**
         *   **Law of Large Numbers (LLN):**  The average of the results obtained from a large number of trials should be close to the expected value, and will tend to become closer as more trials are performed.
         *   **Central Limit Theorem (CLT):**  The distribution of the *sum* (or average) of a large number of independent, identically-distributed random variables, regardless of the original distribution's form, will be approximately a normal distribution. This is incredibly powerful in statistics!
-        """)
-
+        """
+        )
 
     st.header("💪 Practice Exercises")
-    st.markdown("""
+    st.markdown(
+        """
     1.  **Bernoulli Distribution:**
         *   Consider a biased coin with probability of heads p=0.6. What is the probability of getting tails in a single flip? Calculate the mean and variance of this Bernoulli distribution.
         *   Simulate 1000 flips of this biased coin and calculate the empirical probability of heads. How close is it to the theoretical probability?
@@ -1116,77 +1641,115 @@ def main():
     7. **Covariance and Correlation:**
         *   Consider two random variables, X = height and Y = weight of individuals.  Explain whether you would expect a positive, negative, or zero covariance/correlation between them. Why?
         *   Think of two variables that you would expect to have a negative correlation. Provide a real-world example.
-    """)
+    """
+    )
 
     st.header("✅ Knowledge Check: Test Your Understanding")
-    
-    quiz_questions = [ # Quiz questions - same as before for now
+
+    quiz_questions = [  # Quiz questions - same as before for now
         {
             "question": "Which of the following is NOT a fundamental axiom of probability?",
-            "options": ["Non-negativity: P(E) ≥ 0", "Probability of Sample Space: P(S) = 1", "Additivity for Mutually Exclusive Events", "Multiplicativity for Independent Events"],
+            "options": [
+                "Non-negativity: P(E) ≥ 0",
+                "Probability of Sample Space: P(S) = 1",
+                "Additivity for Mutually Exclusive Events",
+                "Multiplicativity for Independent Events",
+            ],
             "answer": "Multiplicativity for Independent Events",
-            "solution": "Multiplicativity for independent events is a consequence of the axioms, not an axiom itself. The three axioms are Non-negativity, Probability of Sample Space, and Additivity for Mutually Exclusive Events."
+            "solution": "Multiplicativity for independent events is a consequence of the axioms, not an axiom itself. The three axioms are Non-negativity, Probability of Sample Space, and Additivity for Mutually Exclusive Events.",
         },
         {
             "question": "What is the formula for calculating classical probability?",
-            "options": ["P(Event) = (Number of favorable outcomes) / (Total number of possible outcomes)", "P(Event) ≈ (Number of times event occurred) / (Total trials)", "P(A|B) = P(A ∩ B) / P(B)", "P(A|B) = [P(B|A) * P(A)] / P(B)"],
+            "options": [
+                "P(Event) = (Number of favorable outcomes) / (Total number of possible outcomes)",
+                "P(Event) ≈ (Number of times event occurred) / (Total trials)",
+                "P(A|B) = P(A ∩ B) / P(B)",
+                "P(A|B) = [P(B|A) * P(A)] / P(B)",
+            ],
             "answer": "P(Event) = (Number of favorable outcomes) / (Total number of possible outcomes)",
-            "solution": "Classical probability applies when all outcomes are equally likely."
+            "solution": "Classical probability applies when all outcomes are equally likely.",
         },
         {
             "question": "If events A and B are mutually exclusive, what is P(A ∩ B)?",
             "options": ["P(A) + P(B)", "P(A) * P(B)", "0", "1"],
             "answer": "0",
-            "solution": "Mutually exclusive events cannot occur together, so their intersection is empty, and its probability is 0."
+            "solution": "Mutually exclusive events cannot occur together, so their intersection is empty, and its probability is 0.",
         },
         {
             "question": "Bayes' Theorem is used to:",
-            "options": ["Calculate empirical probability", "Reverse conditional probability", "Determine if events are independent", "Calculate classical probability"],
+            "options": [
+                "Calculate empirical probability",
+                "Reverse conditional probability",
+                "Determine if events are independent",
+                "Calculate classical probability",
+            ],
             "answer": "Reverse conditional probability",
-            "solution": "Bayes' Theorem allows us to find P(A|B) if we know P(B|A), P(A), and P(B)."
+            "solution": "Bayes' Theorem allows us to find P(A|B) if we know P(B|A), P(A), and P(B).",
         },
         {
             "question": "Which type of random variable can take on any value within a given range?",
-            "options": ["Discrete Random Variable", "Continuous Random Variable", "Categorical Random Variable", "Binary Random Variable"],
+            "options": [
+                "Discrete Random Variable",
+                "Continuous Random Variable",
+                "Categorical Random Variable",
+                "Binary Random Variable",
+            ],
             "answer": "Continuous Random Variable",
-            "solution": "Continuous random variables have uncountable possible values within a range."
+            "solution": "Continuous random variables have uncountable possible values within a range.",
         },
         {
             "question": "What is 'Empirical Probability' based on?",
-            "options":["Theoretical calculations", "Personal beliefs", "Observed data from experiments", "Mathematical axioms"],
+            "options": [
+                "Theoretical calculations",
+                "Personal beliefs",
+                "Observed data from experiments",
+                "Mathematical axioms",
+            ],
             "answer": "Observed data from experiments",
-            "solution": "Empirical probability is derived from actual experiments or observations."
+            "solution": "Empirical probability is derived from actual experiments or observations.",
         },
         {
             "question": "If events A and B are independent, then P(A ∩ B) = ?",
             "options": ["P(A) + P(B)", "P(A) * P(B)", "0", "1"],
             "answer": "P(A) * P(B)",
-            "solution": "This is the condition for independence of events."
+            "solution": "This is the condition for independence of events.",
         },
         {
             "question": "In Bayes' Theorem, P(A) represents the:",
-            "options":["Posterior probability", "Likelihood", "Prior probability", "Evidence"],
+            "options": [
+                "Posterior probability",
+                "Likelihood",
+                "Prior probability",
+                "Evidence",
+            ],
             "answer": "Prior probability",
-            "solution": "P(A) is the prior probability of event A, before considering event B."
+            "solution": "P(A) is the prior probability of event A, before considering event B.",
         },
         {
             "question": "Which field does NOT heavily rely on probability theory?",
             "options": ["Finance", "Physics", "Literature", "Machine Learning"],
             "answer": "Literature",
-            "solution": "While probability might indirectly influence narrative structure in literature, it is not a *foundational* tool in the same way as in the other fields."
+            "solution": "While probability might indirectly influence narrative structure in literature, it is not a *foundational* tool in the same way as in the other fields.",
         },
         {
             "question": "What is a 'sample space'?",
-            "options":["A subset of possible outcomes", "The set of all possible outcomes of an experiment", "A visual representation of probabilities", "A measure of risk"],
+            "options": [
+                "A subset of possible outcomes",
+                "The set of all possible outcomes of an experiment",
+                "A visual representation of probabilities",
+                "A measure of risk",
+            ],
             "answer": "The set of all possible outcomes of an experiment",
-            "solution": "The sample space is the foundation for defining events and probabilities."
-        }
+            "solution": "The sample space is the foundation for defining events and probabilities.",
+        },
     ]
 
     user_answers = []
     for i, question in enumerate(quiz_questions):
         st.markdown(f"**{i + 1}. {question['question']}**")
-        user_answer = st.radio(f"Select an answer:", question["options"], key=f"quiz_{i}")
+        user_answer = st.radio(
+            "Select an answer:", question["options"], key=f"quiz_{i}"
+        )
         user_answers.append(user_answer)
 
     if st.button("Submit Quiz"):
@@ -1194,11 +1757,15 @@ def main():
         for i, (user_answer, question) in enumerate(zip(user_answers, quiz_questions)):
             if user_answer == question["answer"]:
                 correct_count += 1
-                st.success(f"Question {i+1}: Correct! 🎉") # More engaging feedback
+                st.success(f"Question {i+1}: Correct! 🎉")  # More engaging feedback
             else:
-                st.error(f"Question {i+1}: Incorrect. Let's review the solution below. 🧐") # More encouraging tone
+                st.error(
+                    f"Question {i+1}: Incorrect. Let's review the solution below. 🧐"
+                )  # More encouraging tone
 
-        st.write(f"You got {correct_count} out of {len(quiz_questions)} questions correct.")
+        st.write(
+            f"You got {correct_count} out of {len(quiz_questions)} questions correct."
+        )
 
         with st.expander("Show Detailed Solutions"):
             for i, question in enumerate(quiz_questions):
@@ -1206,13 +1773,14 @@ def main():
                 st.markdown(f"**Your Answer:** {user_answers[i]}")
                 st.markdown(f"**Correct Answer:** {question['answer']}")
                 st.markdown(f"**Solution:** {question['solution']}")
-                if user_answers[i] == question['answer']:
+                if user_answers[i] == question["answer"]:
                     st.success("Correct!")
                 else:
                     st.error("Incorrect.")
 
     st.header("🌐 Real-World Applications of Probability")
-    st.markdown("""
+    st.markdown(
+        """
     Probability theory is not just abstract math—it's a fundamental tool that shapes our understanding and interacts with the world around us. Here are just a few examples:
 
     *   **Finance:**  From pricing options and managing risk in investment portfolios to developing algorithmic trading strategies, probability and statistics are at the heart of modern finance. Models like Geometric Brownian Motion (a stochastic process) are used to describe stock price movements, though more sophisticated models are constantly being developed.
@@ -1227,7 +1795,8 @@ def main():
     *   **Scientific Research (across disciplines):**  Probability and statistics are the bedrock of empirical research in nearly every scientific field. From designing experiments and collecting data to analyzing results and drawing conclusions, probability provides the tools to handle uncertainty and make inferences from data.
 
     These examples barely scratch the surface. Probability is a universal language for dealing with uncertainty, and its applications are constantly expanding as our ability to collect and analyze data grows.
-    """)
+    """
+    )
 
 
 if __name__ == "__main__":

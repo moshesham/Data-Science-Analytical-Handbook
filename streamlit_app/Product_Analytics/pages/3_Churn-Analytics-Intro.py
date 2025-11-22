@@ -1,20 +1,23 @@
-import streamlit as st
-import numpy as np
-import pandas as pd
-import matplotlib.pyplot as plt
-import seaborn as sns
 import random
+
+import pandas as pd
 import plotly.express as px
-from itertools import product
+import streamlit as st
+
 
 def main():
-    st.set_page_config(page_title="Churn Rate Analysis Guide", page_icon="📉", layout="wide")
+    st.set_page_config(
+        page_title="Churn Rate Analysis Guide", page_icon="📉", layout="wide"
+    )
 
     st.title("Churn Rate Analysis: A Comprehensive Guide 📉")
-    st.write("Understand customer churn, its impact, and strategies to reduce it. This guide covers everything from fundamentals to advanced techniques.")
+    st.write(
+        "Understand customer churn, its impact, and strategies to reduce it. This guide covers everything from fundamentals to advanced techniques."
+    )
 
     with st.expander("📖 1. Fundamentals of Churn Rate"):
-        st.markdown("""
+        st.markdown(
+            """
         ### 1.1. Defining Churn Rate
         Churn rate, also known as attrition rate or customer churn, is the **percentage of customers who stop doing business with a company over a specific period.**  It's a critical metric, especially for subscription-based businesses, as it directly reflects customer retention and business sustainability.
 
@@ -83,10 +86,12 @@ def main():
 
             **Example:** Imagine losing 100 basic subscribers and 10 premium subscribers. Customer churn might look acceptable, but revenue churn could be significant if premium subscribers pay much more.  Track both for a complete picture!
 
-        """)
+        """
+        )
 
     with st.expander("🔢 2. Calculating Churn Rate"):
-        st.markdown("""
+        st.markdown(
+            """
         ### 2.1. Basic Churn Rate Formula
         The fundamental formula to calculate churn rate is simple and widely used:
 
@@ -168,10 +173,12 @@ def main():
 
             This accounts for customer base changes throughout the period, giving a more accurate churn picture, especially with aggressive customer acquisition.
 
-        """)
+        """
+        )
 
     with st.expander("🤔 3. Understanding the Drivers of Churn"):
-        st.markdown("""
+        st.markdown(
+            """
         ### 3.1. Identifying Common Churn Factors: Product, Service, Price, Competition, Experience
         Calculating churn is just the first step. To reduce it, you MUST understand **WHY** customers are leaving. Here are common categories of churn drivers:
 
@@ -281,10 +288,12 @@ def main():
 
         **By combining qualitative and quantitative data, you get a 360-degree view of churn drivers and can prioritize your retention efforts effectively!**
 
-        """)
+        """
+        )
 
     with st.expander("📈 4. Analyzing Churn Rate Data"):
-        st.markdown("""
+        st.markdown(
+            """
         ### 4.1. Trend Analysis: Identifying Patterns Over Time ⏳
         Churn rate isn't static; it fluctuates. **Trend analysis** is about tracking churn over different time periods to spot patterns and changes:
 
@@ -365,10 +374,12 @@ def main():
 
         **By using these analysis techniques, you move beyond just *knowing* your churn rate to *understanding* it deeply and identifying actionable insights to drive reduction strategies.**
 
-        """)
+        """
+        )
 
     with st.expander("🛠️ 5. Strategies for Churn Reduction"):
-        st.markdown("""
+        st.markdown(
+            """
         ### 5.1. Proactive vs. Reactive Churn Management
         Churn management can be approached in two main ways:
 
@@ -534,10 +545,12 @@ def main():
 
         **By closing the loop and using churn insights to drive product and service improvements, you create a virtuous cycle of continuous improvement, leading to higher customer satisfaction and reduced churn over time.**
 
-        """)
+        """
+        )
 
     with st.expander("🚀 6. Advanced Churn Analysis Techniques"):
-        st.markdown("""
+        st.markdown(
+            """
         ### 6.1. Predictive Churn Modeling: Using Machine Learning to Forecast Churn 🤖
         Move beyond just understanding past churn to **predicting future churn** with machine learning. Predictive churn modeling uses historical data to identify patterns and build models that can score current customers based on their churn probability:
 
@@ -616,10 +629,12 @@ def main():
 
         **By integrating churn analysis with CLTV, you can make data-driven decisions about customer retention that are directly aligned with maximizing long-term business value.**
 
-        """)
+        """
+        )
 
     with st.expander("📊 7. Industry Benchmarks and Context"):
-        st.markdown("""
+        st.markdown(
+            """
         ### 7.1. Churn Rate Benchmarks Across Different Industries 🎯
         What's considered a "good" or "bad" churn rate varies significantly across industries. Benchmarks provide a general context, but remember that your ideal churn rate depends on your specific business model and goals.
 
@@ -699,10 +714,12 @@ def main():
 
         **By understanding industry context and tailoring your churn analysis to your specific business needs, you can make churn management a powerful engine for sustainable growth and customer success.**
 
-        """)
+        """
+        )
 
     with st.expander("🧰 8. Tools and Technologies for Churn Analysis"):
-        st.markdown("""
+        st.markdown(
+            """
         ### 8.1. CRM Systems and Churn Tracking Features ⚙️
         Customer Relationship Management (CRM) systems are central hubs for customer data and often include built-in churn tracking or reporting features:
 
@@ -773,10 +790,12 @@ def main():
 
         **Select survey and feedback tools that match your data collection needs and integrate well with your existing systems. Direct customer input is vital for understanding the 'why' behind churn.**
 
-        """)
+        """
+        )
 
     with st.expander("✅ 9. Best Practices and Common Pitfalls in Churn Analysis"):
-        st.markdown("""
+        st.markdown(
+            """
         ### 9.1. Setting Realistic Churn Rate Goals 🎯
         Setting appropriate churn rate goals is crucial for effective churn management. Unrealistic goals can lead to frustration, while too lenient goals can lead to complacency:
 
@@ -846,10 +865,14 @@ def main():
 
         **Continuous monitoring and iteration, combined with a customer-centric approach, are essential for building a sustainable churn management system that drives long-term business success.**
 
-        """)
+        """
+        )
 
-    with st.expander("📚 Conclusion: Churn Rate Analysis - Your Path to Sustainable Growth"):
-        st.markdown("""
+    with st.expander(
+        "📚 Conclusion: Churn Rate Analysis - Your Path to Sustainable Growth"
+    ):
+        st.markdown(
+            """
         Churn rate analysis is far more than just tracking a number; it's about understanding the heartbeat of your customer relationships. By mastering the fundamentals, diving into the drivers, employing effective analysis techniques, and implementing proactive strategies, you can transform churn from a threat into an opportunity for sustainable growth.
 
         **Key Takeaways:**
@@ -863,10 +886,12 @@ def main():
         *   **Continuous Improvement is Essential:** Churn management is an ongoing process of monitoring, analysis, and iteration.
 
         By making churn rate analysis a core part of your business operations, you'll gain a significant competitive advantage, build stronger customer relationships, and pave the way for long-term success.  Start analyzing, start acting, and start retaining!
-        """)
+        """
+        )
 
     with st.expander("📖 Further Reading and Resources"):
-        st.markdown("""
+        st.markdown(
+            """
         To deepen your understanding of churn rate analysis and related topics, explore these resources:
 
         *   **Books:**
@@ -888,15 +913,22 @@ def main():
             *   **Kissmetrics Blog:** Kissmetrics (marketing and product analytics) blog has articles on customer retention, SaaS metrics, and churn analysis. [https://www.kissmetric .com/blog/](https://www.kissmetrics.com/blog/)
 
         Stay curious and keep learning! Churn analysis is a dynamic field, and continuous learning will help you stay ahead.
-        """)
+        """
+        )
 
     st.header("🕹️ Interactive Churn Explorations")
 
     with st.expander("📊 1. Basic Churn Rate Calculator"):
         st.subheader("Calculate Monthly Customer Churn Rate")
-        st.write("Enter the number of customers at the start of the month and the number of customers lost during the month to calculate the churn rate.")
-        start_customers = st.number_input("Customers at the beginning of the month:", min_value=0, value=1000)
-        lost_customers = st.number_input("Customers lost during the month:", min_value=0, value=50)
+        st.write(
+            "Enter the number of customers at the start of the month and the number of customers lost during the month to calculate the churn rate."
+        )
+        start_customers = st.number_input(
+            "Customers at the beginning of the month:", min_value=0, value=1000
+        )
+        lost_customers = st.number_input(
+            "Customers lost during the month:", min_value=0, value=50
+        )
 
         if st.button("Calculate Churn Rate"):
             if start_customers == 0:
@@ -907,70 +939,148 @@ def main():
 
     with st.expander("📈 2. Visualize Churn Trends Over Time"):
         st.subheader("Explore Simulated Churn Rate Trends")
-        st.write("See how different churn trends (increasing, decreasing, seasonal) look visually.")
-        trend_type = st.selectbox("Choose a Churn Trend:", ["Increasing", "Decreasing", "Seasonal", "Stable"])
-        num_months = st.slider("Number of Months to Simulate:", min_value=6, max_value=36, value=24)
+        st.write(
+            "See how different churn trends (increasing, decreasing, seasonal) look visually."
+        )
+        trend_type = st.selectbox(
+            "Choose a Churn Trend:", ["Increasing", "Decreasing", "Seasonal", "Stable"]
+        )
+        num_months = st.slider(
+            "Number of Months to Simulate:", min_value=6, max_value=36, value=24
+        )
 
         if st.button("Generate Trend Chart"):
             months = range(1, num_months + 1)
             if trend_type == "Increasing":
-                churn_rates = [2 + i * 0.2 + random.uniform(-0.5, 0.5) for i in months] # Start at 2%, increase by 0.2% each month + noise
+                churn_rates = [
+                    2 + i * 0.2 + random.uniform(-0.5, 0.5) for i in months
+                ]  # Start at 2%, increase by 0.2% each month + noise
             elif trend_type == "Decreasing":
-                churn_rates = [8 - i * 0.3 + random.uniform(-0.5, 0.5) for i in months] # Start at 8%, decrease by 0.3% each month + noise
+                churn_rates = [
+                    8 - i * 0.3 + random.uniform(-0.5, 0.5) for i in months
+                ]  # Start at 8%, decrease by 0.3% each month + noise
             elif trend_type == "Seasonal":
                 base_churn = 4
-                seasonal_factor = [0, 0.5, 1, 0.5, 0, -0.5, -1, -0.5, 0, 0.5, 1, 0.5] # Example seasonal pattern
-                churn_rates = [base_churn + seasonal_factor[i % 12] + random.uniform(-0.3, 0.3) for i in months]
-            else: # Stable
-                churn_rates = [5 + random.uniform(-0.8, 0.8) for _ in months] # Around 5% with noise
+                seasonal_factor = [
+                    0,
+                    0.5,
+                    1,
+                    0.5,
+                    0,
+                    -0.5,
+                    -1,
+                    -0.5,
+                    0,
+                    0.5,
+                    1,
+                    0.5,
+                ]  # Example seasonal pattern
+                churn_rates = [
+                    base_churn + seasonal_factor[i % 12] + random.uniform(-0.3, 0.3)
+                    for i in months
+                ]
+            else:  # Stable
+                churn_rates = [
+                    5 + random.uniform(-0.8, 0.8) for _ in months
+                ]  # Around 5% with noise
 
-            churn_rates = [max(0, rate) for rate in churn_rates] # Ensure no negative churn rates
+            churn_rates = [
+                max(0, rate) for rate in churn_rates
+            ]  # Ensure no negative churn rates
 
-            fig = px.line(x=months, y=churn_rates, labels={'x': 'Month', 'y': 'Churn Rate (%)'},
-                          title=f"Simulated {trend_type} Churn Trend")
+            fig = px.line(
+                x=months,
+                y=churn_rates,
+                labels={"x": "Month", "y": "Churn Rate (%)"},
+                title=f"Simulated {trend_type} Churn Trend",
+            )
             st.plotly_chart(fig, use_container_width=True)
-            st.info("Observe how different trends manifest visually. Trend analysis helps in early detection of churn issues.")
+            st.info(
+                "Observe how different trends manifest visually. Trend analysis helps in early detection of churn issues."
+            )
 
     with st.expander("✂️ 3. Segmentation & Churn Rate Comparison"):
         st.subheader("Compare Churn Rates Across Customer Segments")
-        st.write("Explore how churn rates can differ across customer segments. Define segment names and churn rates to visualize.")
+        st.write(
+            "Explore how churn rates can differ across customer segments. Define segment names and churn rates to visualize."
+        )
 
         segment_names = []
         churn_values = []
-        num_segments = st.slider("Number of Segments to Compare:", min_value=2, max_value=5, value=3)
+        num_segments = st.slider(
+            "Number of Segments to Compare:", min_value=2, max_value=5, value=3
+        )
 
         for i in range(num_segments):
             col1, col2 = st.columns(2)
             with col1:
-                segment_name = st.text_input(f"Segment {i+1} Name:", value=f"Segment {i+1}")
+                segment_name = st.text_input(
+                    f"Segment {i+1} Name:", value=f"Segment {i+1}"
+                )
                 segment_names.append(segment_name)
             with col2:
-                churn_value = st.number_input(f"Churn Rate (%) for {segment_name}:", min_value=0.0, max_value=100.0, value=5.0 + i * 2.0, step=0.5)
+                churn_value = st.number_input(
+                    f"Churn Rate (%) for {segment_name}:",
+                    min_value=0.0,
+                    max_value=100.0,
+                    value=5.0 + i * 2.0,
+                    step=0.5,
+                )
                 churn_values.append(churn_value)
 
         if st.button("Visualize Segmented Churn"):
             if not segment_names or not churn_values:
                 st.warning("Please define segment names and churn rates.")
             else:
-                segment_data = pd.DataFrame({'Segment': segment_names, 'Churn Rate (%)': churn_values})
-                fig = px.bar(segment_data, x='Segment', y='Churn Rate (%)',
-                             title="Churn Rate Comparison Across Customer Segments", color='Segment')
+                segment_data = pd.DataFrame(
+                    {"Segment": segment_names, "Churn Rate (%)": churn_values}
+                )
+                fig = px.bar(
+                    segment_data,
+                    x="Segment",
+                    y="Churn Rate (%)",
+                    title="Churn Rate Comparison Across Customer Segments",
+                    color="Segment",
+                )
                 st.plotly_chart(fig, use_container_width=True)
-                st.info("Segmentation highlights which customer groups have higher churn, enabling targeted retention efforts.")
+                st.info(
+                    "Segmentation highlights which customer groups have higher churn, enabling targeted retention efforts."
+                )
 
     with st.expander("📉 4. Revenue vs. Customer Churn Impact"):
         st.subheader("Illustrate Revenue vs. Customer Churn")
-        st.write("See how customer churn and revenue churn can differ, and why revenue churn is critical for financial health.")
+        st.write(
+            "See how customer churn and revenue churn can differ, and why revenue churn is critical for financial health."
+        )
 
-        start_mrr = st.number_input("Starting Monthly Recurring Revenue (MRR):", min_value=10000, value=100000, step=10000)
-        start_customers_rev = st.number_input("Starting Number of Customers:", min_value=100, value=1000, step=100)
-        customer_churn_rate_input = st.slider("Customer Churn Rate (%):", min_value=1.0, max_value=20.0, value=5.0, step=0.5)
-        avg_mrr_per_churned_customer = st.number_input("Average MRR per Churned Customer:", min_value=10, value=100, step=10)
+        start_mrr = st.number_input(
+            "Starting Monthly Recurring Revenue (MRR):",
+            min_value=10000,
+            value=100000,
+            step=10000,
+        )
+        start_customers_rev = st.number_input(
+            "Starting Number of Customers:", min_value=100, value=1000, step=100
+        )
+        customer_churn_rate_input = st.slider(
+            "Customer Churn Rate (%):",
+            min_value=1.0,
+            max_value=20.0,
+            value=5.0,
+            step=0.5,
+        )
+        avg_mrr_per_churned_customer = st.number_input(
+            "Average MRR per Churned Customer:", min_value=10, value=100, step=10
+        )
 
         if st.button("Calculate and Compare Churns"):
-            customers_churned_num = (customer_churn_rate_input / 100) * start_customers_rev
+            customers_churned_num = (
+                customer_churn_rate_input / 100
+            ) * start_customers_rev
             revenue_churn_lost = customers_churned_num * avg_mrr_per_churned_customer
-            revenue_churn_rate = (revenue_churn_lost / start_mrr) * 100 if start_mrr > 0 else 0
+            revenue_churn_rate = (
+                (revenue_churn_lost / start_mrr) * 100 if start_mrr > 0 else 0
+            )
 
             col1, col2 = st.columns(2)
             with col1:
@@ -978,49 +1088,86 @@ def main():
             with col2:
                 st.metric("Revenue Churn Rate", f"{revenue_churn_rate:.2f}%")
 
-            st.info("Notice how revenue churn can be different from customer churn, especially if churned customers are high-value. Revenue churn provides a direct financial perspective.")
+            st.info(
+                "Notice how revenue churn can be different from customer churn, especially if churned customers are high-value. Revenue churn provides a direct financial perspective."
+            )
 
     with st.expander("📝 5. Explore Potential Churn Drivers (Simulated Feedback)"):
         st.subheader("Simulated Customer Feedback and Churn Drivers")
-        st.write("Interact with simulated customer feedback to identify potential churn drivers. This is a simplified example of qualitative data analysis.")
+        st.write(
+            "Interact with simulated customer feedback to identify potential churn drivers. This is a simplified example of qualitative data analysis."
+        )
 
         feedback_examples = [
-            "\"The product is too complex to use. I couldn't get started even after watching the tutorials.\"",
-            "\"Customer support was slow to respond and didn't resolve my issue effectively.\"",
-            "\"The pricing increased recently, and I don't see enough new value for the higher price.\"",
-            "\"A competitor is offering a similar service with more features at a lower price.\"",
-            "\"Overall, I'm just not satisfied with the experience. It feels clunky and outdated.\"",
-            "\"I'm changing my business direction and no longer need this type of service.\"", # Changed Needs
-            "\"I'm moving to an area where your service isn't available.\"", # Involuntary
-            "\"Billing errors are frequent and frustrating.\"", # Service/Operational
-            "\"The app crashes often and is unreliable.\"", # Product quality
-            "\"I wish there were more integrations with other tools I use.\"" # Product feature gap
+            '"The product is too complex to use. I couldn\'t get started even after watching the tutorials."',
+            '"Customer support was slow to respond and didn\'t resolve my issue effectively."',
+            '"The pricing increased recently, and I don\'t see enough new value for the higher price."',
+            '"A competitor is offering a similar service with more features at a lower price."',
+            '"Overall, I\'m just not satisfied with the experience. It feels clunky and outdated."',
+            '"I\'m changing my business direction and no longer need this type of service."',  # Changed Needs
+            "\"I'm moving to an area where your service isn't available.\"",  # Involuntary
+            '"Billing errors are frequent and frustrating."',  # Service/Operational
+            '"The app crashes often and is unreliable."',  # Product quality
+            '"I wish there were more integrations with other tools I use."',  # Product feature gap
         ]
-        selected_feedback = st.selectbox("Select a Customer Feedback Example:", feedback_examples)
+        selected_feedback = st.selectbox(
+            "Select a Customer Feedback Example:", feedback_examples
+        )
 
         st.write("**Selected Feedback:**")
         st.write(f"> *{selected_feedback}*")
 
         potential_drivers = []
-        if "complex to use" in selected_feedback.lower() or "clunky" in selected_feedback.lower():
+        if (
+            "complex to use" in selected_feedback.lower()
+            or "clunky" in selected_feedback.lower()
+        ):
             potential_drivers.append("Product Usability (UX/UI)")
-        if "customer support" in selected_feedback.lower() or "slow to respond" in selected_feedback.lower() or "didn't resolve my issue":
+        if (
+            "customer support" in selected_feedback.lower()
+            or "slow to respond" in selected_feedback.lower()
+            or "didn't resolve my issue"
+        ):
             potential_drivers.append("Customer Service Quality")
-        if "pricing increased" in selected_feedback.lower() or "higher price" in selected_feedback.lower():
+        if (
+            "pricing increased" in selected_feedback.lower()
+            or "higher price" in selected_feedback.lower()
+        ):
             potential_drivers.append("Price Sensitivity / Value Perception")
-        if "competitor" in selected_feedback.lower() or "more features at a lower price" in selected_feedback.lower():
+        if (
+            "competitor" in selected_feedback.lower()
+            or "more features at a lower price" in selected_feedback.lower()
+        ):
             potential_drivers.append("Competitive Pressure")
-        if "not satisfied" in selected_feedback.lower() or "outdated" in selected_feedback.lower():
+        if (
+            "not satisfied" in selected_feedback.lower()
+            or "outdated" in selected_feedback.lower()
+        ):
             potential_drivers.append("Overall Customer Experience")
-        if "no longer need" in selected_feedback.lower() or "changing business direction" in selected_feedback.lower():
+        if (
+            "no longer need" in selected_feedback.lower()
+            or "changing business direction" in selected_feedback.lower()
+        ):
             potential_drivers.append("Changing Customer Needs")
-        if "not available" in selected_feedback.lower() or "moving to an area" in selected_feedback.lower():
+        if (
+            "not available" in selected_feedback.lower()
+            or "moving to an area" in selected_feedback.lower()
+        ):
             potential_drivers.append("Involuntary Churn Factor (Service Availability)")
-        if "billing errors" in selected_feedback.lower() or "frustrating" in selected_feedback.lower():
+        if (
+            "billing errors" in selected_feedback.lower()
+            or "frustrating" in selected_feedback.lower()
+        ):
             potential_drivers.append("Service/Operational Issues (Billing)")
-        if "crashes often" in selected_feedback.lower() or "unreliable" in selected_feedback.lower():
+        if (
+            "crashes often" in selected_feedback.lower()
+            or "unreliable" in selected_feedback.lower()
+        ):
             potential_drivers.append("Product Quality/Performance")
-        if "more integrations" in selected_feedback.lower() or "wish there were" in selected_feedback.lower():
+        if (
+            "more integrations" in selected_feedback.lower()
+            or "wish there were" in selected_feedback.lower()
+        ):
             potential_drivers.append("Product Feature Gaps")
 
         if potential_drivers:
@@ -1028,10 +1175,13 @@ def main():
             for driver in potential_drivers:
                 st.write(f"- {driver}")
         else:
-            st.info("No specific churn drivers strongly indicated in this feedback (could be general dissatisfaction or other unstated reasons).")
+            st.info(
+                "No specific churn drivers strongly indicated in this feedback (could be general dissatisfaction or other unstated reasons)."
+            )
 
     st.header("💪 Practice Exercises: Churn Rate Analysis Challenges")
-    st.markdown("""
+    st.markdown(
+        """
     Test your knowledge by solving these churn analysis problems. Hints are available if you get stuck!
 
     1. **Churn Rate Calculation - Different Time Periods:**
@@ -1085,10 +1235,12 @@ def main():
        *   Think about the likely motivations and behaviors of users who sign up for free trials. They may be less invested or price-sensitive.
        *   Strategies could focus on increasing engagement *during* the trial period and demonstrating value *before* the trial ends, and providing incentives for conversion to paid subscriptions.
        </details>
-    """)
+    """
+    )
 
     st.header("🏢 Real-World Applications of Churn Rate Analysis")
-    st.markdown("""
+    st.markdown(
+        """
     Churn rate analysis is applied across diverse industries to understand customer attrition and improve retention. Here are some examples:
 
     *   **Software as a Service (SaaS):**  Crucial for subscription revenue stability and growth. SaaS companies constantly analyze churn to optimize pricing, features, customer onboarding, and support. Predictive churn models are widely used for proactive retention.
@@ -1108,178 +1260,305 @@ def main():
     *   **Gaming (Subscription-Based Online Games):** Player churn impacts recurring revenue. Game companies analyze gameplay patterns, player satisfaction, and community engagement to reduce churn. Content updates, community events, and personalized offers are used for retention.
 
     In essence, any business that relies on building and maintaining customer relationships can benefit significantly from implementing robust churn rate analysis and developing data-driven retention strategies.
-    """)
+    """
+    )
 
     st.header("❓ Knowledge Check Quiz: Churn Rate Analysis Expertise")
     quiz_questions = [
         {
             "question": "What is the basic definition of churn rate?",
-            "options": ["The total number of customers acquired in a period", "The percentage of customers who stop doing business with a company over a period", "The average spending of customers per transaction", "The rate at which new customers are acquired"],
+            "options": [
+                "The total number of customers acquired in a period",
+                "The percentage of customers who stop doing business with a company over a period",
+                "The average spending of customers per transaction",
+                "The rate at which new customers are acquired",
+            ],
             "answer": "The percentage of customers who stop doing business with a company over a period",
-            "solution": "Churn rate, also known as attrition rate, measures customer attrition over time."
+            "solution": "Churn rate, also known as attrition rate, measures customer attrition over time.",
         },
         {
             "question": "Why is a high churn rate detrimental to a business?",
-            "options": ["It increases customer lifetime value", "It signals strong customer acquisition", "It leads to decreased revenue and profitability, and higher acquisition costs", "It indicates high customer satisfaction"],
+            "options": [
+                "It increases customer lifetime value",
+                "It signals strong customer acquisition",
+                "It leads to decreased revenue and profitability, and higher acquisition costs",
+                "It indicates high customer satisfaction",
+            ],
             "answer": "It leads to decreased revenue and profitability, and higher acquisition costs",
-            "solution": "High churn directly reduces revenue, increases the need for expensive customer acquisition, and lowers profitability."
+            "solution": "High churn directly reduces revenue, increases the need for expensive customer acquisition, and lowers profitability.",
         },
         {
             "question": "What is the difference between voluntary and involuntary churn?",
-            "options": ["Voluntary churn is due to payment failures, involuntary churn is due to customer dissatisfaction", "Voluntary churn is customer-initiated (e.g., cancellation), involuntary churn is unintentional (e.g., payment issues)", "Voluntary churn is always higher than involuntary churn", "There is no significant difference between them"],
+            "options": [
+                "Voluntary churn is due to payment failures, involuntary churn is due to customer dissatisfaction",
+                "Voluntary churn is customer-initiated (e.g., cancellation), involuntary churn is unintentional (e.g., payment issues)",
+                "Voluntary churn is always higher than involuntary churn",
+                "There is no significant difference between them",
+            ],
             "answer": "Voluntary churn is customer-initiated (e.g., cancellation), involuntary churn is unintentional (e.g., payment issues)",
-            "solution": "Voluntary churn is a conscious decision by the customer, while involuntary churn is usually due to operational or external factors."
+            "solution": "Voluntary churn is a conscious decision by the customer, while involuntary churn is usually due to operational or external factors.",
         },
         {
             "question": "Which formula correctly calculates customer churn rate?",
-            "options": ["(Number of New Customers / Total Customers) * 100%", "(Number of Customers Lost / Number of Customers at Start) * 100%", "(Number of Customers at Start / Number of Customers Lost) * 100%", "(Total Revenue / Number of Customers Lost) * 100%"],
+            "options": [
+                "(Number of New Customers / Total Customers) * 100%",
+                "(Number of Customers Lost / Number of Customers at Start) * 100%",
+                "(Number of Customers at Start / Number of Customers Lost) * 100%",
+                "(Total Revenue / Number of Customers Lost) * 100%",
+            ],
             "answer": "(Number of Customers Lost / Number of Customers at Start) * 100%",
-            "solution": "This is the basic and most common formula for customer churn rate calculation."
+            "solution": "This is the basic and most common formula for customer churn rate calculation.",
         },
         {
             "question": "What is 'Revenue Churn Rate' primarily focused on measuring?",
-            "options": ["The number of customers lost", "The percentage of revenue lost due to churned customers", "The average revenue per customer", "The total revenue generated by new customers"],
+            "options": [
+                "The number of customers lost",
+                "The percentage of revenue lost due to churned customers",
+                "The average revenue per customer",
+                "The total revenue generated by new customers",
+            ],
             "answer": "The percentage of revenue lost due to churned customers",
-            "solution": "Revenue churn rate provides a financial perspective, focusing on the value of lost revenue, not just customer count."
+            "solution": "Revenue churn rate provides a financial perspective, focusing on the value of lost revenue, not just customer count.",
         },
         {
             "question": "Which time period is generally most granular for monitoring churn?",
             "options": ["Annual", "Quarterly", "Monthly", "Decadal"],
             "answer": "Monthly",
-            "solution": "Monthly churn rate provides the most frequent and detailed view of churn trends."
+            "solution": "Monthly churn rate provides the most frequent and detailed view of churn trends.",
         },
         {
             "question": "What is 'Cohort Analysis' in the context of churn analysis?",
-            "options": ["Analyzing churn rates based on customer demographics", "Grouping customers by acquisition time and tracking their churn over time", "Analyzing churn rates in different geographical cohorts", "Comparing churn rates with competitor cohorts"],
+            "options": [
+                "Analyzing churn rates based on customer demographics",
+                "Grouping customers by acquisition time and tracking their churn over time",
+                "Analyzing churn rates in different geographical cohorts",
+                "Comparing churn rates with competitor cohorts",
+            ],
             "answer": "Grouping customers by acquisition time and tracking their churn over time",
-            "solution": "Cohort analysis helps understand if churn patterns differ for customers acquired at different times."
+            "solution": "Cohort analysis helps understand if churn patterns differ for customers acquired at different times.",
         },
         {
             "question": "Which of these is an example of a 'Proactive' churn management strategy?",
-            "options": ["Sending exit surveys to churned customers", "Launching win-back campaigns for former customers", "Improving customer onboarding process for new users", "Offering discounts to customers who are about to cancel"],
+            "options": [
+                "Sending exit surveys to churned customers",
+                "Launching win-back campaigns for former customers",
+                "Improving customer onboarding process for new users",
+                "Offering discounts to customers who are about to cancel",
+            ],
             "answer": "Improving customer onboarding process for new users",
-            "solution": "Proactive strategies aim to prevent churn *before* it happens, and onboarding is a key point to influence early churn."
+            "solution": "Proactive strategies aim to prevent churn *before* it happens, and onboarding is a key point to influence early churn.",
         },
         {
             "question": "What is the role of 'Predictive Churn Modeling'?",
-            "options": ["To analyze past churn data only", "To predict which current customers are likely to churn in the future", "To calculate the average churn rate", "To implement reactive churn strategies"],
+            "options": [
+                "To analyze past churn data only",
+                "To predict which current customers are likely to churn in the future",
+                "To calculate the average churn rate",
+                "To implement reactive churn strategies",
+            ],
             "answer": "To predict which current customers are likely to churn in the future",
-            "solution": "Predictive churn modeling uses machine learning to forecast future churn based on historical data patterns."
+            "solution": "Predictive churn modeling uses machine learning to forecast future churn based on historical data patterns.",
         },
         {
             "question": "How can 'Customer Lifetime Value (CLTV)' be integrated with churn analysis?",
-            "options": ["CLTV is not related to churn analysis", "Use churn rate in CLTV calculation to prioritize retention of high-CLTV customers", "CLTV is used to calculate churn rate", "Churn analysis is used to calculate CLTV, but they are not integrated for strategy"],
+            "options": [
+                "CLTV is not related to churn analysis",
+                "Use churn rate in CLTV calculation to prioritize retention of high-CLTV customers",
+                "CLTV is used to calculate churn rate",
+                "Churn analysis is used to calculate CLTV, but they are not integrated for strategy",
+            ],
             "answer": "Use churn rate in CLTV calculation to prioritize retention of high-CLTV customers",
-            "solution": "Churn rate is a key input in CLTV calculations. Integrating them helps prioritize retention efforts for the most valuable customers at risk."
+            "solution": "Churn rate is a key input in CLTV calculations. Integrating them helps prioritize retention efforts for the most valuable customers at risk.",
         },
         {
             "question": "Which is a common tool for visualizing churn trends and segment performance?",
-            "options": ["CRM systems only", "Survey platforms only", "Data analytics platforms like Tableau or Power BI", "Email marketing software"],
+            "options": [
+                "CRM systems only",
+                "Survey platforms only",
+                "Data analytics platforms like Tableau or Power BI",
+                "Email marketing software",
+            ],
             "answer": "Data analytics platforms like Tableau or Power BI",
-            "solution": "Data analytics platforms excel at data visualization and dashboarding for metrics like churn rate."
+            "solution": "Data analytics platforms excel at data visualization and dashboarding for metrics like churn rate.",
         },
         {
             "question": "In survival analysis for churn, what does 'censoring' refer to?",
-            "options": ["Customers who have already churned", "Customers who are still active at the time of analysis", "Customers with incomplete data", "Churn events that were predicted incorrectly"],
+            "options": [
+                "Customers who have already churned",
+                "Customers who are still active at the time of analysis",
+                "Customers with incomplete data",
+                "Churn events that were predicted incorrectly",
+            ],
             "answer": "Customers who are still active at the time of analysis",
-            "solution": "Censoring in survival analysis refers to cases where the event (churn) hasn't occurred yet for some individuals (customers) by the end of the observation period."
+            "solution": "Censoring in survival analysis refers to cases where the event (churn) hasn't occurred yet for some individuals (customers) by the end of the observation period.",
         },
         {
             "question": "What is a key benefit of using 'Segmentation Analysis' for churn?",
-            "options": ["It averages out churn rates across all customer types", "It reveals if churn is concentrated in specific customer segments, enabling targeted actions", "It eliminates the need for trend analysis", "It makes churn data easier to ignore"],
+            "options": [
+                "It averages out churn rates across all customer types",
+                "It reveals if churn is concentrated in specific customer segments, enabling targeted actions",
+                "It eliminates the need for trend analysis",
+                "It makes churn data easier to ignore",
+            ],
             "answer": "It reveals if churn is concentrated in specific customer segments, enabling targeted actions",
-            "solution": "Segmentation helps identify high-churn segments for focused retention strategies, instead of a one-size-fits-all approach."
+            "solution": "Segmentation helps identify high-churn segments for focused retention strategies, instead of a one-size-fits-all approach.",
         },
         {
             "question": "Which factor is LEAST likely to be a direct driver of involuntary churn?",
-            "options": ["Credit card expiry", "Customer dissatisfaction with product features", "Insufficient funds for payment", "Technical issues with billing system"],
+            "options": [
+                "Credit card expiry",
+                "Customer dissatisfaction with product features",
+                "Insufficient funds for payment",
+                "Technical issues with billing system",
+            ],
             "answer": "Customer dissatisfaction with product features",
-            "solution": "Involuntary churn is primarily driven by payment and operational issues, not customer product satisfaction."
+            "solution": "Involuntary churn is primarily driven by payment and operational issues, not customer product satisfaction.",
         },
         {
             "question": "Why is 'Customer Onboarding' considered a crucial stage for churn reduction?",
-            "options": ["Onboarding happens after customers have already decided to churn", "A poor onboarding experience can lead to early frustration and churn", "Onboarding is only relevant for complex products, not simple services", "Effective onboarding increases acquisition costs"],
+            "options": [
+                "Onboarding happens after customers have already decided to churn",
+                "A poor onboarding experience can lead to early frustration and churn",
+                "Onboarding is only relevant for complex products, not simple services",
+                "Effective onboarding increases acquisition costs",
+            ],
             "answer": "A poor onboarding experience can lead to early frustration and churn",
-            "solution": "The initial customer experience, especially onboarding, sets the stage for long-term engagement or early attrition."
+            "solution": "The initial customer experience, especially onboarding, sets the stage for long-term engagement or early attrition.",
         },
         {
             "question": "What is the purpose of 'Exit Surveys' in churn analysis?",
-            "options": ["To predict future churn", "To prevent customers from churning", "To understand the reasons why customers have already churned", "To onboard new customers more effectively"],
+            "options": [
+                "To predict future churn",
+                "To prevent customers from churning",
+                "To understand the reasons why customers have already churned",
+                "To onboard new customers more effectively",
+            ],
             "answer": "To understand the reasons why customers have already churned",
-            "solution": "Exit surveys are a reactive method to gather qualitative data about the reasons for churn after it has occurred."
+            "solution": "Exit surveys are a reactive method to gather qualitative data about the reasons for churn after it has occurred.",
         },
         {
             "question": "In the context of setting churn rate goals, what does 'Incremental Improvement' refer to?",
-            "options": ["Aiming for drastic churn reductions immediately", "Focusing on gradual, sustainable reductions over time", "Ignoring churn goals in the short term", "Setting only annual churn goals, not monthly"],
+            "options": [
+                "Aiming for drastic churn reductions immediately",
+                "Focusing on gradual, sustainable reductions over time",
+                "Ignoring churn goals in the short term",
+                "Setting only annual churn goals, not monthly",
+            ],
             "answer": "Focusing on gradual, sustainable reductions over time",
-            "solution": "Incremental improvement is a realistic approach, focusing on consistent, small reductions rather than unrealistic drastic changes."
+            "solution": "Incremental improvement is a realistic approach, focusing on consistent, small reductions rather than unrealistic drastic changes.",
         },
         {
             "question": "Why is it important to track both 'Customer Churn Rate' and 'Revenue Churn Rate'?",
-            "options": ["They always provide the same information", "Customer churn is more important than revenue churn", "Revenue churn provides a direct financial impact view, which customer churn may not capture if churned customers are low-value", "Tracking both is unnecessary and redundant"],
+            "options": [
+                "They always provide the same information",
+                "Customer churn is more important than revenue churn",
+                "Revenue churn provides a direct financial impact view, which customer churn may not capture if churned customers are low-value",
+                "Tracking both is unnecessary and redundant",
+            ],
             "answer": "Revenue churn provides a direct financial impact view, which customer churn may not capture if churned customers are low-value",
-            "solution": "Revenue churn gives a financially weighted perspective, highlighting the impact of losing higher-value customers which customer churn rate alone might obscure."
+            "solution": "Revenue churn gives a financially weighted perspective, highlighting the impact of losing higher-value customers which customer churn rate alone might obscure.",
         },
         {
             "question": "Which of these data sources would be most helpful in identifying 'Product-Related' churn drivers?",
-            "options": ["Customer payment history", "Website traffic analytics", "Customer support tickets and exit surveys", "Marketing campaign performance data"],
+            "options": [
+                "Customer payment history",
+                "Website traffic analytics",
+                "Customer support tickets and exit surveys",
+                "Marketing campaign performance data",
+            ],
             "answer": "Customer support tickets and exit surveys",
-            "solution": "Support tickets and exit surveys are direct sources of customer feedback about product issues, usability, and feature gaps."
+            "solution": "Support tickets and exit surveys are direct sources of customer feedback about product issues, usability, and feature gaps.",
         },
         {
             "question": "What is the primary goal of implementing 'Customer Loyalty Programs' in churn reduction?",
-            "options": ["To increase customer acquisition costs", "To decrease customer engagement", "To build stronger customer relationships and incentivize retention", "To make the product more expensive"],
+            "options": [
+                "To increase customer acquisition costs",
+                "To decrease customer engagement",
+                "To build stronger customer relationships and incentivize retention",
+                "To make the product more expensive",
+            ],
             "answer": "To build stronger customer relationships and incentivize retention",
-            "solution": "Loyalty programs are designed to reward and retain existing customers, fostering long-term relationships and reducing churn."
+            "solution": "Loyalty programs are designed to reward and retain existing customers, fostering long-term relationships and reducing churn.",
         },
         {
             "question": "What is a potential pitfall of relying *solely* on industry churn rate benchmarks?",
-            "options": ["Benchmarks are always perfectly accurate", "Benchmarks are universally applicable to all businesses", "Your ideal churn rate should depend on your specific business model and goals, not just averages", "Industry benchmarks are always too lenient"],
+            "options": [
+                "Benchmarks are always perfectly accurate",
+                "Benchmarks are universally applicable to all businesses",
+                "Your ideal churn rate should depend on your specific business model and goals, not just averages",
+                "Industry benchmarks are always too lenient",
+            ],
             "answer": "Your ideal churn rate should depend on your specific business model and goals, not just averages",
-            "solution": "Industry benchmarks are guides, not absolute targets. Business-specific factors should heavily influence churn goals."
+            "solution": "Industry benchmarks are guides, not absolute targets. Business-specific factors should heavily influence churn goals.",
         },
         {
             "question": "When analyzing churn data, why is it important to look at 'Leading Indicators' in addition to 'Lagging Indicators'?",
-            "options": ["Lagging indicators are more important than leading indicators", "Leading indicators help predict future churn and enable proactive intervention, while lagging indicators only show past churn", "Leading indicators are easier to calculate than lagging indicators", "There is no difference between leading and lagging indicators in churn analysis"],
+            "options": [
+                "Lagging indicators are more important than leading indicators",
+                "Leading indicators help predict future churn and enable proactive intervention, while lagging indicators only show past churn",
+                "Leading indicators are easier to calculate than lagging indicators",
+                "There is no difference between leading and lagging indicators in churn analysis",
+            ],
             "answer": "Leading indicators help predict future churn and enable proactive intervention, while lagging indicators only show past churn",
-            "solution": "Leading indicators (like engagement metrics) provide early warning signs, enabling proactive measures before churn actually occurs (lagging indicator)."
+            "solution": "Leading indicators (like engagement metrics) provide early warning signs, enabling proactive measures before churn actually occurs (lagging indicator).",
         },
         {
             "question": "Which advanced technique is specifically used to analyze the *time* until customer churn occurs?",
-            "options": ["Regression Analysis", "Cohort Analysis", "Predictive Churn Modeling", "Survival Analysis"],
+            "options": [
+                "Regression Analysis",
+                "Cohort Analysis",
+                "Predictive Churn Modeling",
+                "Survival Analysis",
+            ],
             "answer": "Survival Analysis",
-            "solution": "Survival analysis is designed for time-to-event data, making it ideal for understanding customer lifetime and churn timing."
+            "solution": "Survival analysis is designed for time-to-event data, making it ideal for understanding customer lifetime and churn timing.",
         },
         {
             "question": "If your Revenue Churn Rate is higher than your Customer Churn Rate, what might this indicate?",
-            "options": ["Customer acquisition is very efficient", "Churned customers were, on average, lower-paying customers", "Churned customers were, on average, higher-paying customers", "Customer satisfaction is very high"],
+            "options": [
+                "Customer acquisition is very efficient",
+                "Churned customers were, on average, lower-paying customers",
+                "Churned customers were, on average, higher-paying customers",
+                "Customer satisfaction is very high",
+            ],
             "answer": "Churned customers were, on average, higher-paying customers",
-            "solution": "A higher revenue churn rate suggests that the customers who churned contribute more significantly to revenue compared to the average customer."
+            "solution": "A higher revenue churn rate suggests that the customers who churned contribute more significantly to revenue compared to the average customer.",
         },
-         {
+        {
             "question": "What is the purpose of 'Win-back Campaigns' in churn management?",
-            "options": ["To prevent customers from churning in the first place", "To re-engage customers who have already churned and encourage them to return", "To improve customer onboarding for new users", "To predict future churn"],
+            "options": [
+                "To prevent customers from churning in the first place",
+                "To re-engage customers who have already churned and encourage them to return",
+                "To improve customer onboarding for new users",
+                "To predict future churn",
+            ],
             "answer": "To re-engage customers who have already churned and encourage them to return",
-            "solution": "Win-back campaigns are a reactive strategy to try and recover customers who have already churned, though they are often less effective than proactive retention."
-        }
+            "solution": "Win-back campaigns are a reactive strategy to try and recover customers who have already churned, though they are often less effective than proactive retention.",
+        },
     ]
 
     user_answers = []
     for i, question in enumerate(quiz_questions):
         st.markdown(f"**{i + 1}. {question['question']}**")
-        user_answer = st.radio(f"Select an answer:", question["options"], key=f"quiz_{i}")
+        user_answer = st.radio(
+            "Select an answer:", question["options"], key=f"quiz_{i}"
+        )
         user_answers.append(user_answer)
 
-    if st.button("Submit Quiz", key="quiz_submit_button"): # Unique key for the button
+    if st.button("Submit Quiz", key="quiz_submit_button"):  # Unique key for the button
         correct_count = 0
         for i, (user_answer, question) in enumerate(zip(user_answers, quiz_questions)):
             if user_answer == question["answer"]:
                 correct_count += 1
                 st.success(f"Question {i+1}: Correct! 🎉")
             else:
-                st.error(f"Question {i+1}: Incorrect. Let's review the solution below. 🧐")
+                st.error(
+                    f"Question {i+1}: Incorrect. Let's review the solution below. 🧐"
+                )
 
-        st.write(f"You got {correct_count} out of {len(quiz_questions)} questions correct.")
+        st.write(
+            f"You got {correct_count} out of {len(quiz_questions)} questions correct."
+        )
 
         with st.expander("Show Detailed Solutions"):
             for i, question in enumerate(quiz_questions):
@@ -1287,10 +1566,11 @@ def main():
                 st.markdown(f"**Your Answer:** {user_answers[i]}")
                 st.markdown(f"**Correct Answer:** {question['answer']}")
                 st.markdown(f"**Solution:** {question['solution']}")
-                if user_answers[i] == question['answer']:
+                if user_answers[i] == question["answer"]:
                     st.success("Correct!")
                 else:
                     st.error("Incorrect.")
+
 
 if __name__ == "__main__":
     main()

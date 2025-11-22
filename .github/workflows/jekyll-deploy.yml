@@ -1,0 +1,24 @@
+name: Jekyll build and deploy
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build Jekyll with Docker
+        run: |
+          if [ -f docker-compose.yml ]; then
+            docker compose -f docker-compose.yml run --rm jekyll jekyll build --destination /work/_site
+          else
+            echo 'Docker compose not present; please ensure CI runner has Ruby/Bundler to build Jekyll.'
+            exit 1
+          fi
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./_site
