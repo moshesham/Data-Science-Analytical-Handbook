@@ -1,7 +1,7 @@
 ---
 layout: default
 title: "Resources and Practice"
-permalink: /resources_practice/
+permalink: /resources-practice/
 ---
 
 <div class="breadcrumb">
@@ -30,7 +30,7 @@ permalink: /resources_practice/
   </div>
 
   <div class="navigation-buttons">
-    <a href="{{ '/meta_specificity/' | relative_url }}">Previous: Meta Specificity</a>
+    <a href="{{ '/meta-specificity/' | relative_url }}">Previous: Meta Specificity</a>
     <a href="{{ '/conclusion/' | relative_url }}">Next: Conclusion</a>
   </div>
 </div>

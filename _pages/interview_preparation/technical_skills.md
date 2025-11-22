@@ -1,7 +1,7 @@
 ---
 layout: default
 title: "Technical Skills Interview"
-permalink: /interview_preparation/technical_skills/
+permalink: /interview-preparation/technical-skills/
 ---
 
 <div class="breadcrumb">
@@ -26,7 +26,7 @@ permalink: /interview_preparation/technical_skills/
   </div>
 </div>
 
-<div class="navigation-buttons">
+  <div class="navigation-buttons">
   <a href="{{ '/foundational_knowledge/3/' | relative_url }}">Previous: Foundational Knowledge</a>
-  <a href="{{ '/interview_preparation/analytical_execution/' | relative_url }}">Next: Analytical Execution</a>
+  <a href="{{ '/interview-preparation/analytical-execution/' | relative_url }}">Next: Analytical Execution</a>
 </div>

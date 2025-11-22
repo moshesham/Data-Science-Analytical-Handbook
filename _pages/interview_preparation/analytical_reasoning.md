@@ -1,7 +1,7 @@
 ---
 layout: default
 title: "Analytical Reasoning / Product Sense"
-permalink: /interview_preparation/analytical_reasoning/
+permalink: /interview-preparation/analytical-reasoning/
 ---
 
 <div class="breadcrumb">
@@ -26,7 +26,7 @@ permalink: /interview_preparation/analytical_reasoning/
   </div>
 </div>
 
-<div class="navigation-buttons">
-  <a href="{{ '/interview_preparation/analytical_execution/' | relative_url }}">Previous: Analytical Execution</a>
-  <a href="{{ '/interview_preparation/behavioral_interview/' | relative_url }}">Next: Behavioral Interview</a>
-</div>
+  <div class="navigation-buttons">
+  <a href="{{ '/interview-preparation/analytical-execution/' | relative_url }}">Previous: Analytical Execution</a>
+  <a href="{{ '/interview-preparation/behavioral-interview/' | relative_url }}">Next: Behavioral Interview</a>
+  </div>

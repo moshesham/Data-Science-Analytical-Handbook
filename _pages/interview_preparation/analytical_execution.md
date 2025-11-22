@@ -1,7 +1,7 @@
 ---
 layout: default
 title: "Analytical Execution Interview"
-permalink: /interview_preparation/analytical_execution/
+permalink: /interview-preparation/analytical-execution/
 ---
 
 <div class="breadcrumb">
@@ -27,6 +27,6 @@ permalink: /interview_preparation/analytical_execution/
 </div>
 
 <div class="navigation-buttons">
-  <a href="{{ '/interview_preparation/technical_skills/' | relative_url }}">Previous: Technical Skills</a>
-  <a href="{{ '/interview_preparation/analytical_reasoning/' | relative_url }}">Next: Analytical Reasoning</a>
+  <a href="{{ '/interview-preparation/technical-skills/' | relative_url }}">Previous: Technical Skills</a>
+  <a href="{{ '/interview-preparation/analytical-reasoning/' | relative_url }}">Next: Analytical Reasoning</a>
 </div>

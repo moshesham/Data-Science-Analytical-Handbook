@@ -19,11 +19,13 @@
   <body>
     {% include sidebar.html %}
 
-    <main class="main-content">
-      {{ content }}
-      <footer>
-        <p>© {{ site.time | date: "%Y" }} {{ site.author | default: "" }}</p>
-      </footer>
-    </main>
+    <div class="container">
+      <main class="main-content">
+        {{ content }}
+        <footer>
+          <p>© {{ site.time | date: "%Y" }} {{ site.author | default: "" }}</p>
+        </footer>
+      </main>
+    </div>
   </body>
 </html>

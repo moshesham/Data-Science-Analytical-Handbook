@@ -1,7 +1,7 @@
 ---
 layout: default
 title: "Behavioral Interview"
-permalink: /interview_preparation/behavioral_interview/
+permalink: /interview-preparation/behavioral-interview/
 ---
 
 <div class="breadcrumb">
@@ -27,6 +27,6 @@ permalink: /interview_preparation/behavioral_interview/
 </div>
 
 <div class="navigation-buttons">
-  <a href="{{ '/interview_preparation/analytical_reasoning/' | relative_url }}">Previous: Analytical Reasoning</a>
-  <a href="{{ '/meta_specificity/' | relative_url }}">Next: Meta Specificity</a>
+  <a href="{{ '/interview-preparation/analytical-reasoning/' | relative_url }}">Previous: Analytical Reasoning</a>
+  <a href="{{ '/meta-specificity/' | relative_url }}">Next: Meta Specificity</a>
 </div>

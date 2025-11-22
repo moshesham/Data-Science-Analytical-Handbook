@@ -1,7 +1,7 @@
 ---
 layout: default
 title: "Meta Specificity"
-permalink: /meta_specificity/
+permalink: /meta-specificity/
 ---
 
 <div class="breadcrumb">
@@ -51,8 +51,8 @@ permalink: /meta_specificity/
   </div>
 
   <div class="navigation-buttons">
-    <a href="{{ '/interview_preparation/behavioral_interview/' | relative_url }}">Previous: Interview Preparation</a>
-    <a href="{{ '/resources_practice/' | relative_url }}">Next: Resources and Practice</a>
+    <a href="{{ '/interview-preparation/behavioral-interview/' | relative_url }}">Previous: Interview Preparation</a>
+    <a href="{{ '/resources-practice/' | relative_url }}">Next: Resources and Practice</a>
   </div>
 
 </div>

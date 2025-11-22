@@ -9,11 +9,11 @@
         <li><a href="{{ '/introduction/#handbook-usage' | relative_url }}">4. How to Use This Handbook</a></li>
       </ul>
     </li>
-    <li><a href="{{ '/foundational_knowledge/1/' | relative_url }}">II. Foundational Knowledge & Skills</a></li>
-    <li><a href="{{ '/interview_preparation/technical_skills/' | relative_url }}">III. Interview Preparation</a></li>
-    <li><a href="{{ '/meta_specificity/' | relative_url }}">IV. Meta Specificity</a></li>
-    <li><a href="{{ '/resources_practice/' | relative_url }}">V. Resources and Practice</a></li>
-    <li><a href="{{ '/conclusion/' | relative_url }}">VI. Conclusion</a></li>
-    <li><a href="{{ '/appendix/' | relative_url }}">Appendix</a></li>
+  <li><a href="{{ '/foundational_knowledge/1/' | relative_url }}" class="{% if page.url contains '/foundational_knowledge/' %}active{% endif %}">II. Foundational Knowledge & Skills</a></li>
+  <li><a href="{{ '/interview-preparation/technical-skills/' | relative_url }}" class="{% if page.url contains '/interview-preparation/' %}active{% endif %}">III. Interview Preparation</a></li>
+  <li><a href="{{ '/meta-specificity/' | relative_url }}" class="{% if page.url contains '/meta-specificity/' %}active{% endif %}">IV. Meta Specificity</a></li>
+  <li><a href="{{ '/resources-practice/' | relative_url }}" class="{% if page.url contains '/resources-practice/' %}active{% endif %}">V. Resources and Practice</a></li>
+  <li><a href="{{ '/conclusion/' | relative_url }}" class="{% if page.url contains '/conclusion/' %}active{% endif %}">VI. Conclusion</a></li>
+  <li><a href="{{ '/appendix/' | relative_url }}" class="{% if page.url contains '/appendix/' %}active{% endif %}">Appendix</a></li>
   </ul>
 </aside>
