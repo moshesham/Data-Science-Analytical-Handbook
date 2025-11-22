@@ -1,0 +1,10 @@
+# Jekyll build output
+_site/
+
+# Ruby & Bundler
+.bundle/
+vendor/bundle/
+
+# OS files
+Thumbs.db
+.DS_Store
