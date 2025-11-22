@@ -6,7 +6,7 @@ permalink: /interview-preparation/behavioral-interview/
 
 <div class="breadcrumb">
   <a href="{{ '/' | relative_url }}">Home</a> <span>&gt;</span>
-  <a href="{{ '/interview_preparation/behavioral_interview/' | relative_url }}">Interview Preparation</a> <span>&gt;</span>
+  <a href="{{ '/interview-preparation/behavioral-interview/' | relative_url }}">Interview Preparation</a> <span>&gt;</span>
   <span>Behavioral Interview</span>
 </div>
 

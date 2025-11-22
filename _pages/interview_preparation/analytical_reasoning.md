@@ -6,7 +6,7 @@ permalink: /interview-preparation/analytical-reasoning/
 
 <div class="breadcrumb">
   <a href="{{ '/' | relative_url }}">Home</a> <span>&gt;</span>
-  <a href="{{ '/interview_preparation/analytical_reasoning/' | relative_url }}">Interview Preparation</a> <span>&gt;</span>
+  <a href="{{ '/interview-preparation/analytical-reasoning/' | relative_url }}">Interview Preparation</a> <span>&gt;</span>
   <span>Analytical Reasoning / Product Sense</span>
 </div>
 

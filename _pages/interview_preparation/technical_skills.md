@@ -6,7 +6,7 @@ permalink: /interview-preparation/technical-skills/
 
 <div class="breadcrumb">
   <a href="{{ '/' | relative_url }}">Home</a> <span>&gt;</span>
-  <a href="{{ '/interview_preparation/technical_skills/' | relative_url }}">Interview Preparation</a> <span>&gt;</span>
+  <a href="{{ '/interview-preparation/technical-skills/' | relative_url }}">Interview Preparation</a> <span>&gt;</span>
   <span>Technical Skills Interview</span>
 </div>
 
