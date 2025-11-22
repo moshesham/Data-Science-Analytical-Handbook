@@ -19,3 +19,5 @@ collections:
 
 exclude:
   - Gemfile.lock
+  - streamlit_app
+  - streamlit_app/**
