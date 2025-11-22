@@ -2,7 +2,7 @@ import streamlit as st
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-import seaborn as sns
+import plotly.express as px
 import plotly.express as px
 from scipy.stats import bernoulli, binom, poisson, geom, randint, uniform, expon, norm, chi2, t
 from itertools import product

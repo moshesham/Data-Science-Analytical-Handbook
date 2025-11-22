@@ -1,23 +1,3 @@
-import yfinance as yf
-
-# fred_api_key = "2a7b6bb56f29dddaa0a4a3bc0690a057"
-# fred = Fred(api_key=fred_api_key)
-
-spy_data = yf.download('^TYX', period='1mo') # Download 1 month of SPY data
-if not spy_data.empty:
-    print("Successfully downloaded SPY data from Yahoo Finance.")
-    print(spy_data.head()) # Print the first few rows to check
-else:
-    print("Failed to download SPY data from Yahoo Finance.")
-
-COMMODITY_MAPPING = {
-    'CL=F': 'Crude Oil',
-    'GC=F': 'Gold',
-    'SI=F': 'Silver',  # Added Silver
-    'HG=F': 'Copper'
-}
-
-
 
 import streamlit as st
 import pandas as pd
@@ -103,7 +83,6 @@ def fetch_fred_data(series_dict: Dict[str, str], _fred: Optional[Fred], start_da
 
 
 # --- Visualization Functions (Matplotlib) ---
-import numpy as np
 
 def create_correlation_heatmap_mpl(data: pd.DataFrame, title: str = "Market Correlations") -> plt.Figure:
     """Creates correlation heatmap using Matplotlib."""
@@ -383,7 +362,6 @@ def initialize_fred_api() -> Optional[Fred]:
 
 
 preset_ranges = {'1M': 30, '3M': 90, '6M': 180, 'YTD': (date.today() - date(date.today().year, 1, 1)).days, '1Y': 365, '2Y': 730, '2Y': 730}
-import numpy as np
 
 if __name__ == "__main__":
     main() # <---- main() CALL IS *AFTER* ITS DEFINITION

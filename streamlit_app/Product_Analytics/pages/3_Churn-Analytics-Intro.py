@@ -1,11 +1,7 @@
 import streamlit as st
-import numpy as np
 import pandas as pd
-import matplotlib.pyplot as plt
-import seaborn as sns
 import random
 import plotly.express as px
-from itertools import product
 
 def main():
     st.set_page_config(page_title="Churn Rate Analysis Guide", page_icon="📉", layout="wide")

@@ -1,12 +1,9 @@
 # pages/5_hypothesis_testing.py
 import streamlit as st
-import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy import stats
-from utils import data_utils, stats_utils, viz_utils, style_utils  # Import utility functions
-from statsmodels.stats.power import TTestIndPower
-import math
+from utils import stats_utils, viz_utils  # Import utility functions used on this page
 
 
 def main():

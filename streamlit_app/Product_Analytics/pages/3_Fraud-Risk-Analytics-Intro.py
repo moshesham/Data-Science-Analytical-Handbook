@@ -2,10 +2,9 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import plotly.express as px
-import streamlit.components.v1 as components
 import folium
 from streamlit_folium import folium_static
-from sklearn.cluster import KMeans, DBSCAN
+from sklearn.cluster import DBSCAN
 from sklearn.preprocessing import StandardScaler
 import random
 

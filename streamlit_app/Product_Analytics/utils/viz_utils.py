@@ -3,7 +3,6 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import numpy as np
 import pandas as pd
-from typing import List
 
 def plot_histogram(data: np.ndarray, title: str = "Histogram", xlabel: str = "Value", ylabel: str = "Frequency") -> plt.Figure:
     """Plots a histogram for a given dataset."""

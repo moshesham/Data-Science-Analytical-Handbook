@@ -1,4 +1,5 @@
 # %% [markdown]
+# flake8: noqa  # Exempt this converted notebook script from module-level import ordering checks
 # # Jupyter Notebook for Statistical Concepts: A Meta Data Science Focus
 # 
 # **Introduction:**

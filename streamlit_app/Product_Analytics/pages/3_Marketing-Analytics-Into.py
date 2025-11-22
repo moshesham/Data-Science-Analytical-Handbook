@@ -2,7 +2,6 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import plotly.express as px
-from itertools import product
 import random
 
 def generate_website_dashboard_data(days=90, channels=['Organic', 'Paid Ads', 'Social', 'Email'], devices=['Desktop', 'Mobile', 'Tablet'], countries=['USA', 'Canada', 'UK']):
