@@ -1,5 +1,6 @@
 import streamlit as st
 import math
+from math import comb
 from itertools import permutations, combinations
 import time
 import numpy as np  # Used for stars and bars visualization
