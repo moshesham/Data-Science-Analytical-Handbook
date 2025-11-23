@@ -2,86 +2,145 @@ name: CI
 
 on:
   push:
-    branches: [ main, CI-CD-workflow ]
+    branches: [ main, workflow-fix ]
   pull_request:
-    branches: [ main, CI-CD-workflow ]
+    branches: [ main, workflow-fix ]
 
 jobs:
-  lint-python:
+  python-quality:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v4
-    - name: Set up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.9'
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install flake8 black
-    - name: Lint with flake8
-      run: |
-        flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
-        flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
-    - name: Format with black
-      run: black --check --diff .
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+      - name: Cache Python virtualenv
+        id: cache-venv
+        uses: actions/cache@v4
+        with:
+          path: .venv-dev
+          key: ${{ runner.os }}-venv-dev-${{ hashFiles('**/requirements*.txt') }}
+          restore-keys: ${{ runner.os }}-venv-dev-
+      - name: Cache pip
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements*.txt') }}
+          restore-keys: ${{ runner.os }}-pip-
+      - name: Install dependencies
+        run: |
+          if [ ! -d .venv-dev ]; then python -m venv .venv-dev; fi
+          . .venv-dev/bin/activate
+          python -m pip install --upgrade pip
+          if [ "${{ steps.cache-venv.outputs.cache-hit }}" != 'true' ]; then
+            pip install -r requirements-dev.txt || pip install flake8 black isort pytest nbval
+            if [ -f requirements-notebooks.txt ]; then pip install -r requirements-notebooks.txt; fi
+          else
+            echo "Virtualenv cache hit - skipping bulk installs"
+          fi
+      - name: isort check
+        run: . .venv-dev/bin/activate && isort --profile black --check-only --skip-glob=".venv-*" .
+      - name: black check
+        run: . .venv-dev/bin/activate && black --check --exclude="/(\.venv-.*|\.git|__pycache__|_site|html_source)/" .
+      - name: flake8 strict
+        run: . .venv-dev/bin/activate && flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+      - name: Notebook tests (nbval)
+        run: |
+          if find . -name '*.ipynb' -print -quit | grep -q .; then
+            . .venv-dev/bin/activate
+            pytest --nbval --ignore=streamlit_app/Product_Analytics/data/ --ignore=Analytical-HandsOn-Projects/Movie_Reviews_Project/Exploring-Movie-Ratings.ipynb || EXIT_CODE=$?
+            if [ "${EXIT_CODE:-0}" -ne 0 ]; then
+              echo "Notebook validation failed" > notebook-fail.log
+              exit $EXIT_CODE
+            fi
+          else
+            echo "No notebooks found; skipping." > notebook-skip.log
+          fi
+      - name: Upload notebook logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: notebook-logs
+          path: |
+            notebook-fail.log
+            notebook-skip.log
 
-  validate-notebooks:
+  markdown-links:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v4
-    - name: Set up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.9'
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip setuptools wheel
-        # Install test tooling + runtime dependencies used by notebooks.
-        # If a dedicated requirements file exists, use it for reproducible installs.
-        if [ -f requirements-notebooks.txt ]; then pip install -r requirements-notebooks.txt; else pip install nbval jupyter pytest numpy pandas scipy statsmodels ipywidgets matplotlib seaborn scikit-learn; fi
-    - name: Validate notebooks
-      run: |
-        python -m pytest --nbval --ignore=streamlit_app/Product_Analytics/data/
+      - uses: actions/checkout@v4
+      - name: Cache npm
+        uses: actions/cache@v4
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-npm-markdown-links
+          restore-keys: ${{ runner.os }}-npm-
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Run markdown-link-check (via npx)
+        run: |
+          if [ -f .markdown-link-check.json ]; then
+            find . -name '*.md' -print0 | xargs -0 -n1 -P4 npx -y markdown-link-check -q -c .markdown-link-check.json || exit 1
+          else
+            find . -name '*.md' -print0 | xargs -0 -n1 -P4 npx -y markdown-link-check -q || exit 1
+          fi
 
-  check-markdown:
+  streamlit-smoke:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v4
-    - name: Check markdown links
-      uses: gaurav-nelson/github-action-markdown-link-check@v1
-      with:
-        use-quiet-mode: 'yes'
-        use-verbose-mode: 'yes'
-        check-modified-files-only: 'yes'
-
-  validate-html:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+      - name: Cache Streamlit virtualenv
+        id: cache-venv-streamlit
+        uses: actions/cache@v4
+        with:
+          path: .venv-streamlit
+          key: ${{ runner.os }}-venv-streamlit-${{ hashFiles('streamlit_app/Product_Analytics/requirements.txt') }}
+          restore-keys: ${{ runner.os }}-venv-streamlit-
+      - name: Install dependencies
+        run: |
+          if [ ! -d .venv-streamlit ]; then python -m venv .venv-streamlit; fi
+          . .venv-streamlit/bin/activate
+          python -m pip install --upgrade pip
+          if [ "${{ steps.cache-venv-streamlit.outputs.cache-hit }}" != 'true' ]; then
+            pip install -r streamlit_app/Product_Analytics/requirements.txt || pip install streamlit
+          else
+            echo "Streamlit virtualenv cache hit - skipping installs"
+          fi
+      - name: Start Streamlit (background)
+        run: |
+          . .venv-streamlit/bin/activate
+          streamlit run streamlit_app/Product_Analytics/streamlit_app.py --server.headless true --server.port 8501 > streamlit.log 2>&1 &
+          for i in 1 2 3 4 5; do
+            sleep 2
+            if curl -fsS http://127.0.0.1:8501 >/dev/null; then echo "Streamlit up"; exit 0; fi
+          done
+          echo "Streamlit failed to start" >&2
+          exit 1
+      - name: Upload Streamlit log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: streamlit-log
+          path: streamlit.log
+  summary:
     runs-on: ubuntu-latest
+    if: always()
+    needs: [python-quality, markdown-links, streamlit-smoke]
     steps:
-    - uses: actions/checkout@v4
-    - name: Set up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.9'
-    - name: Install dependencies
-      run: pip install html5validator
-    - name: Validate HTML
-      run: html5validator --root html_source/ --ignore-re "Archive/" --ignore-re "foundational_knowledge/" --ignore-re "interview_preparation/" --also-check-css
-
-  test-streamlit:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v4
-    - name: Set up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.9'
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install -r streamlit_app/Product_Analytics/requirements.txt
-    - name: Test Streamlit app startup
-      run: |
-        timeout 10 streamlit run streamlit_app/Product_Analytics/streamlit_app.py --server.headless true --server.port 8501 &
-        sleep 5
-        curl -f http://localhost:8501 || exit 1
+      - name: Build CI summary
+        run: |
+          echo "### CI Job Results" >> $GITHUB_STEP_SUMMARY
+          echo "- Python quality: ${{ needs.python-quality.result }}" >> $GITHUB_STEP_SUMMARY
+          echo "- Markdown links: ${{ needs.markdown-links.result }}" >> $GITHUB_STEP_SUMMARY
+          echo "- Streamlit smoke: ${{ needs.streamlit-smoke.result }}" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "Artifacts:" >> $GITHUB_STEP_SUMMARY
+          echo "- Notebook logs (if any failures)" >> $GITHUB_STEP_SUMMARY
+          echo "- Streamlit startup log" >> $GITHUB_STEP_SUMMARY

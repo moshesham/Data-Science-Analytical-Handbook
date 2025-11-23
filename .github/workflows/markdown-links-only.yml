@@ -1,0 +1,24 @@
+name: Markdown Links (manual)
+
+on:
+  workflow_dispatch:
+
+jobs:
+  markdown-links:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Cache npm
+        uses: actions/cache@v4
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-npm-markdown-links
+          restore-keys: ${{ runner.os }}-npm-
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Run markdown-link-check (via npx)
+        run: |
+          if [ -f .markdown-link-check.json ]; then CFG="-c .markdown-link-check.json"; fi
+          find . -name '*.md' -print0 | xargs -0 -n1 -P4 npx -y markdown-link-check -q $CFG || exit 1

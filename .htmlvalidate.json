@@ -1,0 +1,10 @@
+{
+  "extends": ["html-validate:recommended"],
+  "rules": {
+    "no-trailing-whitespace": "error",
+    "void-content": "error",
+    "no-raw-characters": "error",
+    "attr-quotes": "error",
+    "id-pattern": ["error", { "pattern": "^[a-z][a-zA-Z0-9_-]*$" }]
+  }
+}

@@ -113,9 +113,11 @@ for name, data in data_sets.items():
             "Distribution": name,
             "Mean": np.mean(data),
             "Median": np.median(data),
-            "Mode": stats.mode(data)[0][0]
-            if len(np.unique(data)) < 500
-            else "Not well-defined",  # check to avoid errors if there are too many unique values for the mode
+            "Mode": (
+                stats.mode(data)[0][0]
+                if len(np.unique(data)) < 500
+                else "Not well-defined"
+            ),  # check to avoid errors if there are too many unique values for the mode
             "Range": np.max(data) - np.min(data),
             "Variance": np.var(data),
             "Standard Deviation": np.std(data),

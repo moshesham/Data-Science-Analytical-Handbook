@@ -17,10 +17,6 @@ plugins:
   - jekyll-feed
   - jekyll-sitemap
 
-collections:
-  pages:
-    output: true
-
 exclude:
   - Gemfile.lock
   - streamlit_app

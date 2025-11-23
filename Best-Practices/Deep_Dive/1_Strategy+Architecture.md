@@ -114,7 +114,7 @@ A Data Capability Maturity Model (DCMM) provides a structured framework for asse
 
 For organizations dealing with high-velocity and high-volume data, understanding data maturity is especially critical.  Immature data capabilities can quickly become overwhelmed by the scale and speed of data, leading to data swamps, data quality issues, and ultimately, failure to extract value from data.  A DCMM helps identify areas that need strengthening to effectively handle and leverage large, fast-moving datasets.
 
-![Alt text](/resources/four-step-data-maturity-model.png)
+![Alt text](../../resources/four-step-data-maturity-model.png)
 
 source: https://www.grantthornton.co.uk/insights/data-maturity-models-how-to-build-your-data-capability/
 
@@ -176,7 +176,7 @@ The Data Value Chain is a visual representation and conceptual framework that ma
 
 For high-velocity and high-volume data, visualizing the data value chain is essential for managing the complexity and scale of data pipelines. It helps identify critical points where performance optimization, scalability, and resilience are paramount.  Understanding the flow also aids in pinpointing potential data quality issues that can propagate through the chain and impact downstream value.
 
-![Alt text](/resources/Data_value_chain.png)
+![Alt text](../../resources/Data_value_chain.png)
 
 **Best Practices:**
 

@@ -1,0 +1,5 @@
+flake8
+black
+isort
+pytest
+nbval

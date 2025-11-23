@@ -125,12 +125,8 @@ def main():
 
     if technical_explanation:
         st.write("Rephrase this explanation for:")
-        st.text_area(
-            "Non-Technical Audience (e.g., Executive Summary):", ""
-        )
-        st.text_area(
-            "Technical Audience (e.g., Data Science Team):", ""
-        )
+        st.text_area("Non-Technical Audience (e.g., Executive Summary):", "")
+        st.text_area("Technical Audience (e.g., Data Science Team):", "")
 
         st.write("Compare and Contrast:")
         st.write(

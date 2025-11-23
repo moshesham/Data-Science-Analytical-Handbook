@@ -6,25 +6,26 @@ This section provides complex SQL practice problems designed to simulate real-wo
 
 | Problem | Difficulty | Type of Problem             | Link                               |
 | :------ | :--------- | :-------------------------- | :--------------------------------- |
-| 1       | Medium     | Joins, Aggregations         | [#problem-1-department-highest-salary](##problem-1-department-highest-salary) |
-| 2       | Medium     | Self Joins, Consecutive Rows | [#problem-2-consecutive-numbers](##problem-2-consecutive-numbers) |
-| 3       | Medium     | Subqueries, NOT IN          | [#problem-3-customers-who-never-order](##problem-3-customers-who-never-order) |
-| 4       | Medium     | Subqueries, MAX             | [#problem-4-second-highest-salary](##problem-4-second-highest-salary) |
-| 5       | Medium     | Self Joins, Date Functions   | [#problem-5-rising-temperature](##problem-5-rising-temperature) |
-| 6       | Advanced   | Joins, Aggregations, Dates  | [#problem-6-engagement-rate-by-content-type](##problem-6-engagement-rate-by-content-type) |
-| 7       | Advanced   | Self Joins, Date Functions, Churn | [#problem-7-churn-rate-by-user-segment](##problem-7-churn-rate-by-user-segment) |
-| 8       | Advanced   | Self Joins, Date Differences | [#problem-8-average-time-between-posts](##problem-8-average-time-between-posts) |
-| 9       | Advanced   | String Manipulation, Window Functions, Dates | [#problem-9-most-popular-hashtags-by-week](##problem-9-most-popular-hashtags-by-week) |
-| 10      | Advanced   | Cohort Analysis, Date Functions | [#problem-10-retained-users-by-cohort](##problem-10-retained-users-by-cohort) |
-| 11      | Advanced   | Self Joins, Counting Connections | [#problem-11-mutual-connections](##problem-11-mutual-connections) |
-| 12      | Advanced   | Joins, Aggregations, Age Grouping | [#problem-12-average-post-engagement-by-user-age-group](##problem-12-average-post-engagement-by-user-age-group) |
-| 13      | Advanced   | Time Series Analysis, Percentage Change | [#problem-13-trending-topics-over-time](##problem-13-trending-topics-over-time) |
-| 14      | Advanced   | Funnel Analysis, Conversion Rates | [#problem-14-user-engagement-funnel](##problem-14-user-engagement-funnel) |
+| 1       | Medium     | Joins, Aggregations         | [#problem-1-department-highest-salary](#problem-1-department-highest-salary) |
+| 2       | Medium     | Self Joins, Consecutive Rows | [#problem-2-consecutive-numbers](#problem-2-consecutive-numbers) |
+| 3       | Medium     | Subqueries, NOT IN          | [#problem-3-customers-who-never-order](#problem-3-customers-who-never-order) |
+| 4       | Medium     | Subqueries, MAX             | [#problem-4-second-highest-salary](#problem-4-second-highest-salary) |
+| 5       | Medium     | Self Joins, Date Functions   | [#problem-5-rising-temperature](#problem-5-rising-temperature) |
+| 6       | Advanced   | Joins, Aggregations, Dates  | [#problem-6-engagement-rate-by-content-type](#problem-6-engagement-rate-by-content-type) |
+| 7       | Advanced   | Self Joins, Date Functions, Churn | [#problem-7-churn-rate-by-user-segment](#problem-7-churn-rate-by-user-segment) |
+| 8       | Advanced   | Self Joins, Date Differences | [#problem-8-average-time-between-posts](#problem-8-average-time-between-posts) |
+| 9       | Advanced   | String Manipulation, Window Functions, Dates | [#problem-9-most-popular-hashtags-by-week](#problem-9-most-popular-hashtags-by-week) |
+| 10      | Advanced   | Cohort Analysis, Date Functions | [#problem-10-retained-users-by-cohort](#problem-10-retained-users-by-cohort) |
+| 11      | Advanced   | Self Joins, Counting Connections | [#problem-11-mutual-connections](#problem-11-mutual-connections) |
+| 12      | Advanced   | Joins, Aggregations, Age Grouping | [#problem-12-average-post-engagement-by-user-age-group](#problem-12-average-post-engagement-by-user-age-group) |
+| 13      | Advanced   | Time Series Analysis, Percentage Change | [#problem-13-trending-topics-over-time](#problem-13-trending-topics-over-time) |
+| 14      | Advanced   | Funnel Analysis, Conversion Rates | [#problem-14-user-engagement-funnel](#problem-14-user-engagement-funnel) |
 
 
 ---
 <div style="page-break-before: always;"></div> 
 
+<a id="problem-1-department-highest-salary"></a>
 ## Problem 1: Department Highest Salary (LeetCode 184)
 
 **Problem Statement:** Write an SQL query to find employees who have the highest salary in each of their departments.
@@ -70,6 +71,7 @@ This section provides complex SQL practice problems designed to simulate real-wo
 ---
 <div style="page-break-before: always;"></div> 
 
+<a id="problem-2-consecutive-numbers"></a>
 ## Problem 2: Consecutive Numbers (LeetCode 180)
 
 **Problem Statement:** Write an SQL query to find all numbers that appear at least three times consecutively.
@@ -104,6 +106,7 @@ This section provides complex SQL practice problems designed to simulate real-wo
 ---
 <div style="page-break-before: always;"></div> 
 
+<a id="problem-3-customers-who-never-order"></a>
 ## Problem 3: Customers Who Never Order (LeetCode 183)
 
 **Problem Statement:** Write an SQL query to find all customers who never place an order.
@@ -146,6 +149,7 @@ This section provides complex SQL practice problems designed to simulate real-wo
 ---
 <div style="page-break-before: always;"></div> 
 
+<a id="problem-4-second-highest-salary"></a>
 ## Problem 4: Second Highest Salary (LeetCode 176)
 
 **Problem Statement:** Write an SQL query to get the second highest salary from the `Employee` table. If there is no second highest salary, then the query should return `null`.
@@ -176,6 +180,7 @@ This section provides complex SQL practice problems designed to simulate real-wo
 ---
 <div style="page-break-before: always;"></div> 
 
+<a id="problem-5-rising-temperature"></a>
 ## Problem 5: Rising Temperature (LeetCode 197)
 
 **Problem Statement:** Write an SQL query to find all dates' `Id` with higher temperatures compared to its previous dates (yesterday's dates).
@@ -211,6 +216,7 @@ This section provides complex SQL practice problems designed to simulate real-wo
 
 
 
+<a id="problem-6-engagement-rate-by-content-type"></a>
 ## Problem 6: Engagement Rate by Content Type
 
 **Problem Statement:** You are a data scientist at a social media platform. The product team is considering investing in more video content. You need to analyze user engagement across different content types (photo, video, text) to determine if this is a worthwhile investment. Write an SQL query to calculate the average engagement rate (likes + comments + shares / impressions) for each content type, broken down by month.
@@ -266,6 +272,7 @@ This section provides complex SQL practice problems designed to simulate real-wo
 
 <div style="page-break-before: always;"></div> 
 
+<a id="problem-7-churn-rate-by-user-segment"></a>
 ## Problem 7: Churn Rate by User Segment
 
 **Problem Statement:** You are tasked with analyzing user churn. Calculate the churn rate for different user segments based on their signup date (users who signed up in the first half of the month vs. the second half). Churn is defined as users who were active in the previous month but did not have any activity in the current month.
@@ -311,6 +318,7 @@ This section provides complex SQL practice problems designed to simulate real-wo
 
 <div style="page-break-before: always;"></div> 
 
+<a id="problem-8-average-time-between-posts"></a>
 ## Problem 8: Average Time Between Posts
 
 **Problem Statement:** Analyze how frequently users post. Calculate the average time (in days) between posts for users who have made at least two posts.
@@ -343,6 +351,7 @@ This section provides complex SQL practice problems designed to simulate real-wo
 
 <div style="page-break-before: always;"></div> 
 
+<a id="problem-9-most-popular-hashtags-by-week"></a>
 ## Problem 9: Most Popular Hashtags by Week
 
 **Problem Statement:** Determine the most popular hashtags used each week. "Popularity" is defined by the number of posts containing the hashtag.
@@ -376,6 +385,7 @@ This section provides complex SQL practice problems designed to simulate real-wo
 
 <div style="page-break-before: always;"></div> 
 
+<a id="problem-10-retained-users-by-cohort"></a>
 ## Problem 10: Retained Users by Cohort
 
 **Problem Statement:** Analyze user retention by cohort. A cohort is defined by the month a user signed up. Calculate the percentage of users from each cohort who are still active (have at least one activity) in the current month (let's assume it's March 2024 for this example).
@@ -431,6 +441,7 @@ This section provides complex SQL practice problems designed to simulate real-wo
 
 <div style="page-break-before: always;"></div> 
 
+<a id="problem-11-mutual-connections"></a>
 ## Problem 11: Mutual Connections
 
 **Problem Statement:** You are analyzing user connections on the platform. Write an SQL query to find all pairs of users who have at least three mutual connections.
@@ -475,6 +486,7 @@ This section provides complex SQL practice problems designed to simulate real-wo
 
 <div style="page-break-before: always;"></div> 
 
+<a id="problem-12-average-post-engagement-by-user-age-group"></a>
 ## Problem 12: Average Post Engagement by User Age Group
 
 **Problem Statement:** You are analyzing post engagement based on user demographics. Calculate the average number of likes, comments, and shares per post for different user age groups (e.g., 18-24, 25-34, 35+).
@@ -510,6 +522,7 @@ This section provides complex SQL practice problems designed to simulate real-wo
 
 <div style="page-break-before: always;"></div> 
 
+<a id="problem-13-trending-topics-over-time"></a>
 ## Problem 13: Trending Topics Over Time
 
 **Problem Statement:** Identify trending topics on the platform over time. A topic is represented by a keyword. A topic is considered trending in a given week if its usage (number of posts containing the keyword) increases by at least 20% compared to the previous week.
@@ -535,6 +548,7 @@ This section provides complex SQL practice problems designed to simulate real-wo
 
 <div style="page-break-before: always;"></div> 
 
+<a id="problem-14-user-engagement-funnel"></a>
 ## Problem 14: User Engagement Funnel
 
 **Problem Statement:** Analyze the user engagement funnel for a specific feature (e.g., creating a story). Calculate the conversion rates between different stages of the funnel:

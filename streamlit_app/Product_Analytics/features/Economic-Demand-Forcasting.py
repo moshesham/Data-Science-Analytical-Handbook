@@ -323,9 +323,11 @@ def main():
             with col4:
                 st.metric(
                     "MAPE (%)",
-                    f"{metrics['MAPE (%)']:.2f}"
-                    if not np.isnan(metrics["MAPE (%)"])
-                    else "Undefined (Zeros in Data)",
+                    (
+                        f"{metrics['MAPE (%)']:.2f}"
+                        if not np.isnan(metrics["MAPE (%)"])
+                        else "Undefined (Zeros in Data)"
+                    ),
                 )  # Handle NaN MAPE
 
     st.header("💪 Practice Exercises")

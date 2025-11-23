@@ -207,13 +207,13 @@ def create_performance_chart_mpl(
     if moving_average_period and moving_average_period > 1:
         ma_data = data.rolling(window=moving_average_period).mean()
         ma_data_to_plot = ma_data.apply(
-            lambda x: (x / x.iloc[moving_average_period - 1]) * 100
-            if display_mode == "normalized"
-            and moving_average_period - 1 < len(x)
-            and not x.iloc[moving_average_period - 1] == 0
-            else x
-            if display_mode == "level"
-            else x
+            lambda x: (
+                (x / x.iloc[moving_average_period - 1]) * 100
+                if display_mode == "normalized"
+                and moving_average_period - 1 < len(x)
+                and not x.iloc[moving_average_period - 1] == 0
+                else x if display_mode == "level" else x
+            )
         )
         for column in ma_data_to_plot.columns:
             ax.plot(
@@ -295,18 +295,26 @@ def display_correlation_analysis(
     ):
         all_data = pd.concat(
             [
-                equity_data["SPY"]
-                if not equity_data.empty and "SPY" in equity_data
-                else pd.Series(),
-                treasury_data["^TNX"]
-                if not treasury_data.empty and "^TNX" in treasury_data
-                else pd.Series(),
-                commodity_data["CL=F"]
-                if not commodity_data.empty and "CL=F" in commodity_data
-                else pd.Series(),
-                fred_data["CPIAUCSL"]
-                if not fred_data.empty and "CPIAUCSL" in fred_data
-                else pd.Series(),
+                (
+                    equity_data["SPY"]
+                    if not equity_data.empty and "SPY" in equity_data
+                    else pd.Series()
+                ),
+                (
+                    treasury_data["^TNX"]
+                    if not treasury_data.empty and "^TNX" in treasury_data
+                    else pd.Series()
+                ),
+                (
+                    commodity_data["CL=F"]
+                    if not commodity_data.empty and "CL=F" in commodity_data
+                    else pd.Series()
+                ),
+                (
+                    fred_data["CPIAUCSL"]
+                    if not fred_data.empty and "CPIAUCSL" in fred_data
+                    else pd.Series()
+                ),
             ],
             axis=1,
         ).dropna()
