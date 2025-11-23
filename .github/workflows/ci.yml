@@ -80,7 +80,7 @@ jobs:
         with:
           node-version: '20'
       - name: Install markdown-link-check
-        run: npm install -g markdown-link-check@4
+        run: npm install -g markdown-link
       - name: Run markdown-link-check
         run: |
           if [ -f .markdown-link-check.json ]; then CFG="-c .markdown-link-check.json"; fi
