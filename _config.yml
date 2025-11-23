@@ -21,6 +21,7 @@ exclude:
   - Gemfile
   - Gemfile.lock
   - vendor
-  - vendor/**
+  - .bundle
+  - node_modules
   - streamlit_app
   - streamlit_app/**
