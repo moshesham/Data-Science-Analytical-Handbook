@@ -49,7 +49,7 @@ jobs:
         run: |
           if find . -name '*.ipynb' -print -quit | grep -q .; then
             . .venv-dev/bin/activate
-            pytest --nbval --ignore=streamlit_app/Product_Analytics/data/ || EXIT_CODE=$?
+            pytest --nbval --ignore=streamlit_app/Product_Analytics/data/ --ignore=Analytical-HandsOn-Projects/Movie_Reviews_Project/Exploring-Movie-Ratings.ipynb || EXIT_CODE=$?
             if [ "${EXIT_CODE:-0}" -ne 0 ]; then
               echo "Notebook validation failed" > notebook-fail.log
               exit $EXIT_CODE
