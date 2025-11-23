@@ -19,9 +19,9 @@ jobs:
         id: cache-venv
         uses: actions/cache@v4
         with:
-          path: .venv
-          key: ${{ runner.os }}-venv-${{ hashFiles('**/requirements*.txt') }}
-          restore-keys: ${{ runner.os }}-venv-
+          path: .venv-dev
+          key: ${{ runner.os }}-venv-dev-${{ hashFiles('**/requirements*.txt') }}
+          restore-keys: ${{ runner.os }}-venv-dev-
       - name: Cache pip
         uses: actions/cache@v4
         with:
@@ -30,8 +30,8 @@ jobs:
           restore-keys: ${{ runner.os }}-pip-
       - name: Install dependencies
         run: |
-          if [ ! -d .venv ]; then python -m venv .venv; fi
-          . .venv/bin/activate
+          if [ ! -d .venv-dev ]; then python -m venv .venv-dev; fi
+          . .venv-dev/bin/activate
           python -m pip install --upgrade pip
           if [ "${{ steps.cache-venv.outputs.cache-hit }}" != 'true' ]; then
             pip install -r requirements-dev.txt || pip install flake8 black isort pytest nbval
@@ -40,17 +40,20 @@ jobs:
             echo "Virtualenv cache hit - skipping bulk installs"
           fi
       - name: isort check
-        run: . .venv/bin/activate && isort --profile black --check-only .
+        run: . .venv-dev/bin/activate && isort --profile black --check-only --skip-glob=".venv-*" .
       - name: black check
-        run: . .venv/bin/activate && black --check .
+        run: . .venv-dev/bin/activate && black --check --exclude="/(\.venv-.*|\.git|__pycache__|_site|html_source)/" .
       - name: flake8 strict
-        run: . .venv/bin/activate && flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+        run: . .venv-dev/bin/activate && flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
       - name: Notebook tests (nbval)
         run: |
-          if ls **/*.ipynb >/dev/null 2>&1; then
-            . .venv/bin/activate
+          if find . -name '*.ipynb' -print -quit | grep -q .; then
+            . .venv-dev/bin/activate
             pytest --nbval --ignore=streamlit_app/Product_Analytics/data/ || EXIT_CODE=$?
-            if [ -n "$EXIT_CODE" ]; then echo "Notebook validation failed" > notebook-fail.log; exit $EXIT_CODE; fi
+            if [ "${EXIT_CODE:-0}" -ne 0 ]; then
+              echo "Notebook validation failed" > notebook-fail.log
+              exit $EXIT_CODE
+            fi
           else
             echo "No notebooks found; skipping." > notebook-skip.log
           fi
@@ -79,8 +82,11 @@ jobs:
           node-version: '20'
       - name: Run markdown-link-check (via npx)
         run: |
-          if [ -f .markdown-link-check.json ]; then CFG="-c .markdown-link-check.json"; fi
-          find . -name '*.md' -print0 | xargs -0 -n1 -P4 npx -y markdown-link-check -q $CFG || exit 1
+          if [ -f .markdown-link-check.json ]; then
+            find . -name '*.md' -print0 | xargs -0 -n1 -P4 npx -y markdown-link-check -q -c .markdown-link-check.json || exit 1
+          else
+            find . -name '*.md' -print0 | xargs -0 -n1 -P4 npx -y markdown-link-check -q || exit 1
+          fi
 
   streamlit-smoke:
     runs-on: ubuntu-latest
@@ -94,13 +100,13 @@ jobs:
         id: cache-venv-streamlit
         uses: actions/cache@v4
         with:
-          path: .venv
+          path: .venv-streamlit
           key: ${{ runner.os }}-venv-streamlit-${{ hashFiles('streamlit_app/Product_Analytics/requirements.txt') }}
           restore-keys: ${{ runner.os }}-venv-streamlit-
       - name: Install dependencies
         run: |
-          if [ ! -d .venv ]; then python -m venv .venv; fi
-          . .venv/bin/activate
+          if [ ! -d .venv-streamlit ]; then python -m venv .venv-streamlit; fi
+          . .venv-streamlit/bin/activate
           python -m pip install --upgrade pip
           if [ "${{ steps.cache-venv-streamlit.outputs.cache-hit }}" != 'true' ]; then
             pip install -r streamlit_app/Product_Analytics/requirements.txt || pip install streamlit
@@ -109,7 +115,7 @@ jobs:
           fi
       - name: Start Streamlit (background)
         run: |
-          . .venv/bin/activate
+          . .venv-streamlit/bin/activate
           streamlit run streamlit_app/Product_Analytics/streamlit_app.py --server.headless true --server.port 8501 > streamlit.log 2>&1 &
           for i in 1 2 3 4 5; do
             sleep 2
@@ -125,6 +131,7 @@ jobs:
           path: streamlit.log
   summary:
     runs-on: ubuntu-latest
+    if: always()
     needs: [python-quality, markdown-links, streamlit-smoke]
     steps:
       - name: Build CI summary

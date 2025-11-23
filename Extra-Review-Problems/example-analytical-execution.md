@@ -249,7 +249,7 @@ Let's illustrate the statistical analysis with a concrete example using syntheti
 
 The key change is the focus on Average Session Duration as the primary metric and the corresponding use of a Z-test for means. The example calculation now uses means and standard deviations, and the effect size is calculated using Cohen's d, which is appropriate for comparing means. The interpretations are also adjusted to reflect the change in metric.
 
-![alt text](image.png)
+![alt text](../resources/problem_flow_diagram.png)
 
 
 **5. Addressing Potential Concerns:**
