@@ -18,6 +18,9 @@ plugins:
   - jekyll-sitemap
 
 exclude:
+  - Gemfile
   - Gemfile.lock
+  - vendor
+  - vendor/**
   - streamlit_app
   - streamlit_app/**
