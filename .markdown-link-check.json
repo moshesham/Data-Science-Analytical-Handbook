@@ -1,7 +1,7 @@
 {
   "ignorePatterns": [
-    { "pattern": "^https://localhost" },
-    { "pattern": "^https://127.0.0.1" },
+    { "pattern": "^https?://localhost" },
+    { "pattern": "^https?://127.0.0.1" },
     { "pattern": "^https://example.com" },
     { "pattern": "^https://dev.mysql.com/doc/" },
     { "pattern": "^https://manpages.ubuntu.com/" },
