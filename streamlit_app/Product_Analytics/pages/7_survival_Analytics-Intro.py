@@ -263,9 +263,7 @@ def validate_cox_model_data(data, data_source):
 
     # Data validation
     if data[time_col].isnull().any() or data[event_col].isnull().any():
-        st.error(
-            f"Missing values in Time ({time_col}) or Event ({event_col}) columns."
-        )
+        st.error(f"Missing values in Time ({time_col}) or Event ({event_col}) columns.")
         return None, None, None, None
 
     if not all(data[event_col].isin([0, 1])):
@@ -286,7 +284,11 @@ def validate_cox_model_data(data, data_source):
 def plot_cox_model_results(data, time_col, event_col, covariate_cols):
     # Fit Cox model
     cph = CoxPHFitter()
-    cph.fit(data[[time_col, event_col] + covariate_cols], duration_col=time_col, event_col=event_col)
+    cph.fit(
+        data[[time_col, event_col] + covariate_cols],
+        duration_col=time_col,
+        event_col=event_col,
+    )
 
     # Display results
     st.write("Model Summary:")
@@ -301,7 +303,9 @@ def plot_cox_model_results(data, time_col, event_col, covariate_cols):
     # Check proportional hazards assumption
     if st.button("Check Proportional Hazards Assumption"):
         try:
-            cph.check_assumptions(data[[time_col, event_col] + covariate_cols], p_value_threshold=0.05)
+            cph.check_assumptions(
+                data[[time_col, event_col] + covariate_cols], p_value_threshold=0.05
+            )
             st.success("Proportional hazards assumption appears to hold.")
         except Exception as e:
             st.error(f"Proportional hazards assumption may be violated: {e}")

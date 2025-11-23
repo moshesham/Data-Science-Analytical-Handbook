@@ -551,7 +551,9 @@ def main():  # noqa: C901
     show_types_of_analytics()
     show_challenges_and_best_practices()
     st.header("🕹️ Interactive Marketing Analytics Explorations")
-    with st.expander("📊 Website Traffic Dashboard (Descriptive Analytics)", expanded=True):
+    with st.expander(
+        "📊 Website Traffic Dashboard (Descriptive Analytics)", expanded=True
+    ):
         st.subheader("Interactive Website Traffic Dashboard")
         st.write(
             "Explore website performance across different dimensions and metrics. Use the filters below to investigate trends and patterns."
