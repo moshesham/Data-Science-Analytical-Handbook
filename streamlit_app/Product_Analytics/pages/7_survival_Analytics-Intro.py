@@ -1,5 +1,4 @@
 from io import StringIO  # For handling CSV input as string
-from typing import Optional  # For type hinting
 
 import matplotlib.pyplot as plt
 import numpy as np
@@ -9,14 +8,7 @@ from lifelines import CoxPHFitter, KaplanMeierFitter
 from lifelines.datasets import load_rossi  # Example dataset
 
 
-def main():
-    st.set_page_config(page_title="Survival Analysis", page_icon="⏳", layout="wide")
-
-    st.title("Survival Analysis: Time-to-Event Modeling")
-    st.write(
-        "Understand and predict the time until a specific event, like customer churn or equipment failure, using robust statistical methods."
-    )  # More concise intro
-
+def show_theoretical_concepts():
     with st.expander("📖 Theoretical Concepts"):
         st.markdown(
             """
@@ -81,426 +73,353 @@ def main():
         """
         )
 
-    st.header("🔄 Interactive Demo")
 
+def show_interactive_demo():
     demo_choice = st.selectbox(
-        "Choose a Demo:", ["Kaplan-Meier Estimator", "Cox Proportional Hazards Model"]
+        "Choose a Demo:",
+        ["Kaplan-Meier Estimator", "Cox Proportional Hazards Model", "Quiz"],
     )
 
     if demo_choice == "Kaplan-Meier Estimator":
-        st.subheader("Kaplan-Meier Estimator")
-        st.write("Estimate the survival function from time-to-event data.")
-
-        data_source = st.radio(
-            "Data Source:", ["Use Example Dataset", "Upload CSV", "Paste CSV Data"]
-        )
-
-        if data_source == "Use Example Dataset":
-            data = load_rossi()
-            time_col = "week"
-            event_col = "arrest"
-            group_col = None
-
-        elif data_source == "Upload CSV":
-            uploaded_file = st.file_uploader("Upload a CSV file", type=["csv"])
-            if uploaded_file is not None:
-                try:
-                    data = pd.read_csv(uploaded_file)
-                except Exception as e:
-                    st.error(f"Error reading CSV: {e}")
-                    data = None
-            else:
-                data = None
-
-        else:  # data_source == "Paste CSV Data"
-            csv_data = st.text_area("Paste your CSV data here:", height=200)
-            if csv_data:
-                try:
-                    data = pd.read_csv(StringIO(csv_data))
-                except Exception as e:
-                    st.error(f"Error reading CSV data: {e}")
-                    data = None
-            else:
-                data = None
-
-        # 1. **Function for Data Loading and Validation:**  Improves code organization and reusability.
-        def load_and_validate_data(
-            data: Optional[pd.DataFrame], data_source: str
-        ) -> Optional[pd.DataFrame]:
-            if data is None:
-                return None
-
-            if data_source != "Use Example Dataset":
-                time_col = st.selectbox("Select Time Column:", data.columns)
-                event_col = st.selectbox(
-                    "Select Event Column (1=event, 0=censored):", data.columns
-                )
-                group_col = st.selectbox(
-                    "Select Grouping Column (optional):",
-                    ["None"] + list(data.columns),
-                    index=0,
-                )
-                if group_col == "None":
-                    group_col = None
-            else:
-                time_col = "week"  # For example dataset
-                event_col = "arrest"
-                group_col = None
-
-            st.write("Data Preview:")
-            st.dataframe(data.head())
-
-            # Data Validation (same as before, but now in the function)
-            if data[time_col].isnull().any() or data[event_col].isnull().any():
-                st.error(
-                    f"Missing values found in Time ({time_col}) or Event ({event_col}) columns.  Please clean your data."
-                )
-                return None
-
-            if not all(data[event_col].isin([0, 1])):
-                st.error(
-                    f"Event column ({event_col}) must contain only 0 (censored) and 1 (event)."
-                )
-                return None
-
-            if (data[time_col] < 0).any():
-                st.error(
-                    f"Time column ({time_col}) contains negative values. Time-to-event must be non-negative."
-                )
-                return None
-            return (
-                data,
-                time_col,
-                event_col,
-                group_col,
-            )  # Return all necessary variables.
-
-        data_and_cols = load_and_validate_data(data, data_source)
-        if data_and_cols is None:  # Check and stop the program.
-            st.stop()
-        else:
-            data, time_col, event_col, group_col = data_and_cols  # Unpack values
-
-        kmf = KaplanMeierFitter()
-
-        if group_col:
-            fig, ax = plt.subplots()
-            for name, grouped_data in data.groupby(group_col):
-                kmf.fit(grouped_data[time_col], grouped_data[event_col], label=name)
-                kmf.plot_survival_function(ax=ax)
-            plt.xlabel("Time")
-            plt.ylabel("Survival Probability")
-            plt.title("Kaplan-Meier Survival Curves by Group")
-            plt.ylim(0, 1)
-            plt.legend()
-            st.pyplot(fig)
-
-            st.write("Median Survival Times:")
-            for name, grouped_data in data.groupby(group_col):
-                kmf.fit(grouped_data[time_col], grouped_data[event_col], label=name)
-                # 2.  Clearer Median Survival Output:  Use f-strings for better formatting.
-                st.write(
-                    f"Group: {name}, Median Survival: {kmf.median_survival_time_ if kmf.median_survival_time_ != np.inf else 'Not reached'}"
-                )
-
-        else:
-            kmf.fit(data[time_col], data[event_col])
-            fig, ax = plt.subplots()
-            kmf.plot_survival_function(ax=ax)
-            plt.xlabel("Time")
-            plt.ylabel("Survival Probability")
-            plt.title("Kaplan-Meier Survival Curve")
-            plt.ylim(0, 1)
-            st.pyplot(fig)
-
-            median_survival = (
-                kmf.median_survival_time_
-                if kmf.median_survival_time_ != np.inf
-                else "Not reached"
-            )
-            st.write(f"Median Survival Time: {median_survival}")
-
-            conf_int = kmf.confidence_interval_survival_function_
-            st.write("95% Confidence Interval for Survival Function:")
-            st.dataframe(conf_int)
-
+        show_kaplan_meier_demo()
     elif demo_choice == "Cox Proportional Hazards Model":
-        st.subheader("Cox Proportional Hazards Model")
-        st.write("Analyze the impact of covariates on survival.")
+        show_cox_model_demo()
+    elif demo_choice == "Quiz":
+        show_quiz()
 
-        data_source = st.radio(
-            "Data Source:", ["Use Example Dataset", "Upload CSV", "Paste CSV Data"]
+
+def show_kaplan_meier_demo():
+    st.subheader("Kaplan-Meier Estimator")
+    st.write("Estimate the survival function from time-to-event data.")
+
+    data, time_col, event_col, group_col = load_kaplan_meier_data()
+    if data is None:
+        st.stop()
+
+    plot_kaplan_meier_results(data, time_col, event_col, group_col)
+
+
+def load_kaplan_meier_data():
+    data_source = st.radio(
+        "Data Source:", ["Use Example Dataset", "Upload CSV", "Paste CSV Data"]
+    )
+
+    data = load_data_by_source(data_source)
+    return validate_kaplan_meier_data(data, data_source)
+
+
+def load_data_by_source(data_source):
+    if data_source == "Use Example Dataset":
+        return load_rossi()
+    elif data_source == "Upload CSV":
+        uploaded_file = st.file_uploader("Upload a CSV file", type=["csv"])
+        if uploaded_file is not None:
+            try:
+                return pd.read_csv(uploaded_file)
+            except Exception as e:
+                st.error(f"Error reading CSV: {e}")
+        return None
+    else:  # data_source == "Paste CSV Data"
+        csv_data = st.text_area("Paste your CSV data here:", height=200)
+        if csv_data:
+            try:
+                return pd.read_csv(StringIO(csv_data))
+            except Exception as e:
+                st.error(f"Error reading CSV data: {e}")
+        return None
+
+
+def validate_kaplan_meier_data(data, data_source):
+    if data is None:
+        return None, None, None, None
+
+    if data_source != "Use Example Dataset":
+        time_col = st.selectbox("Select Time Column:", data.columns)
+        event_col = st.selectbox(
+            "Select Event Column (1=event, 0=censored):", data.columns
         )
+        group_col = st.selectbox(
+            "Select Grouping Column (optional):",
+            ["None"] + list(data.columns),
+            index=0,
+        )
+        if group_col == "None":
+            group_col = None
+    else:
+        time_col = "week"  # For example dataset
+        event_col = "arrest"
+        group_col = None
 
-        if data_source == "Use Example Dataset":
-            data = load_rossi()
-            time_col = "week"
-            event_col = "arrest"
-            covariate_cols = ["fin", "age", "race", "wexp", "mar", "paro", "prio"]
+    st.write("Data Preview:")
+    st.dataframe(data.head())
 
-        elif data_source == "Upload CSV":
-            uploaded_file = st.file_uploader("Upload a CSV file", type=["csv"])
-            if uploaded_file is not None:
-                try:
-                    data = pd.read_csv(uploaded_file)
+    # Data Validation
+    if data[time_col].isnull().any() or data[event_col].isnull().any():
+        st.error(
+            f"Missing values found in Time ({time_col}) or Event ({event_col}) columns.  Please clean your data."
+        )
+        return None, None, None, None
 
-                except Exception as e:
-                    st.error(f"Error: {e}")
-                    data = None
-            else:
-                data = None
-        else:  # Paste CSV data
-            csv_data = st.text_area("Paste your CSV data here:", height=200)
-            if csv_data:
-                try:
-                    data = pd.read_csv(StringIO(csv_data))
-                except Exception as e:
-                    st.error(f"Error reading pasted CSV data: {e}")
-                    data = None
-            else:
-                data = None
+    if not all(data[event_col].isin([0, 1])):
+        st.error(
+            f"Event column ({event_col}) must contain only 0 (censored) and 1 (event)."
+        )
+        return None, None, None, None
 
-        # 3. Reusing the data loading and validation logic
-        def load_and_validate_cox_data(
-            data: Optional[pd.DataFrame], data_source: str
-        ) -> Optional[pd.DataFrame]:
-            if data is None:
-                return None
+    if (data[time_col] < 0).any():
+        st.error(
+            f"Time column ({time_col}) contains negative values. Time-to-event must be non-negative."
+        )
+        return None, None, None, None
 
-            if data_source != "Use Example Dataset":
-                time_col = st.selectbox("Select Time Column:", data.columns)
-                event_col = st.selectbox(
-                    "Select Event Column (1=event, 0=censored):", data.columns
-                )
-                covariate_cols = st.multiselect(
-                    "Select Covariate Columns:", data.columns
-                )
-            else:
-                time_col = "week"  # For example dataset
-                event_col = "arrest"
-                covariate_cols = ["fin", "age", "race", "wexp", "mar", "paro", "prio"]
+    return data, time_col, event_col, group_col
 
-            st.write("Data Preview:")
-            st.dataframe(data.head())
 
-            if (
-                data[time_col].isnull().any()
-                or data[event_col].isnull().any()
-                or data[covariate_cols].isnull().any()
-            ):
-                st.error("Missing values found. Please clean your data.")
-                return None
+def plot_kaplan_meier_results(data, time_col, event_col, group_col):
+    kmf = KaplanMeierFitter()
 
-            if not all(data[event_col].isin([0, 1])):
-                st.error(f"Event column ({event_col}) must contain only 0 and 1.")
-                return None
+    if group_col:
+        fig, ax = plt.subplots()
+        for name, grouped_data in data.groupby(group_col):
+            kmf.fit(grouped_data[time_col], grouped_data[event_col], label=name)
+            kmf.plot_survival_function(ax=ax)
+        plt.xlabel("Time")
+        plt.ylabel("Survival Probability")
+        plt.title("Kaplan-Meier Survival Curves by Group")
+        plt.ylim(0, 1)
+        plt.legend()
+        st.pyplot(fig)
 
-            if (data[time_col] < 0).any():
-                st.error(f"Time column ({time_col}) contains negative values.")
-                return None
+        st.write("Median Survival Times:")
+        for name, grouped_data in data.groupby(group_col):
+            kmf.fit(grouped_data[time_col], grouped_data[event_col], label=name)
+            # 2.  Clearer Median Survival Output:  Use f-strings for better formatting.
+            st.write(
+                f"Group: {name}, Median Survival: {kmf.median_survival_time_ if kmf.median_survival_time_ != np.inf else 'Not reached'}"
+            )
 
-            return data, time_col, event_col, covariate_cols
+    else:
+        kmf.fit(data[time_col], data[event_col])
+        fig, ax = plt.subplots()
+        kmf.plot_survival_function(ax=ax)
+        plt.xlabel("Time")
+        plt.ylabel("Survival Probability")
+        plt.title("Kaplan-Meier Survival Curve")
+        plt.ylim(0, 1)
+        st.pyplot(fig)
 
-        cox_data_and_cols = load_and_validate_cox_data(data, data_source)
-        if cox_data_and_cols is None:
-            st.stop()
-        else:
-            data, time_col, event_col, covariate_cols = cox_data_and_cols
+        median_survival = (
+            kmf.median_survival_time_
+            if kmf.median_survival_time_ != np.inf
+            else "Not reached"
+        )
+        st.write(f"Median Survival Time: {median_survival}")
 
-        cph = CoxPHFitter()
+        conf_int = kmf.confidence_interval_survival_function_
+        st.write("95% Confidence Interval for Survival Function:")
+        st.dataframe(conf_int)
+
+
+def show_cox_model_demo():
+    st.subheader("Cox Proportional Hazards Model")
+    st.write("Analyze the impact of covariates on survival.")
+
+    data, time_col, event_col, covariate_cols = load_cox_model_data()
+    if data is None:
+        st.stop()
+
+    plot_cox_model_results(data, time_col, event_col, covariate_cols)
+
+
+def load_cox_model_data():
+    data_source = st.radio(
+        "Data Source:", ["Use Example Dataset", "Upload CSV", "Paste CSV Data"]
+    )
+
+    data = load_data_by_source(data_source)
+    return validate_cox_model_data(data, data_source)
+
+
+def validate_cox_model_data(data, data_source):
+    if data is None:
+        return None, None, None, None
+
+    if data_source != "Use Example Dataset":
+        time_col = st.selectbox("Select Time Column:", data.columns)
+        event_col = st.selectbox(
+            "Select Event Column (1=event, 0=censored):", data.columns
+        )
+        covariate_cols = st.multiselect(
+            "Select Covariate Columns:",
+            [col for col in data.columns if col not in [time_col, event_col]],
+        )
+    else:
+        time_col = "week"
+        event_col = "arrest"
+        covariate_cols = ["fin", "age", "race", "wexp", "mar", "paro", "prio"]
+
+    st.write("Data Preview:")
+    st.dataframe(data.head())
+
+    # Data validation
+    if data[time_col].isnull().any() or data[event_col].isnull().any():
+        st.error(
+            f"Missing values in Time ({time_col}) or Event ({event_col}) columns."
+        )
+        return None, None, None, None
+
+    if not all(data[event_col].isin([0, 1])):
+        st.error(f"Event column ({event_col}) must be 0/1.")
+        return None, None, None, None
+
+    if (data[time_col] < 0).any():
+        st.error("Time values must be non-negative.")
+        return None, None, None, None
+
+    if not covariate_cols:
+        st.error("Select at least one covariate.")
+        return None, None, None, None
+
+    return data, time_col, event_col, covariate_cols
+
+
+def plot_cox_model_results(data, time_col, event_col, covariate_cols):
+    # Fit Cox model
+    cph = CoxPHFitter()
+    cph.fit(data[[time_col, event_col] + covariate_cols], duration_col=time_col, event_col=event_col)
+
+    # Display results
+    st.write("Model Summary:")
+    st.dataframe(cph.summary)
+
+    # Plot hazard ratios
+    fig, ax = plt.subplots()
+    cph.plot(ax=ax)
+    plt.title("Hazard Ratios (log scale)")
+    st.pyplot(fig)
+
+    # Check proportional hazards assumption
+    if st.button("Check Proportional Hazards Assumption"):
         try:
-            cph.fit(
-                data[[time_col, event_col] + covariate_cols],
-                time_col,
-                event_col=event_col,
-            )
-
-            with st.expander("Model Summary"):
-                st.text(
-                    cph.print_summary(model="CoxPH Model", decimals=3)
-                )  # 4. Control Decimal Places
-
-            st.subheader("Hazard Ratios")
-            st.write(
-                "Hazard ratios (exponentiated coefficients) indicate the multiplicative effect on the hazard."
-            )
-            st.dataframe(
-                np.exp(cph.summary["coef"]).rename(columns={"coef": "Hazard Ratio"})
-            )
-
-            st.subheader("Survival Curves")
-            st.write(
-                "Plot survival curves for different covariate values (select one covariate to vary)."
-            )
-
-            if covariate_cols:
-                covariate_to_plot = st.selectbox(
-                    "Select Covariate to Plot:", covariate_cols
-                )
-                if pd.api.types.is_numeric_dtype(data[covariate_to_plot]):
-                    values_to_plot = st.slider(
-                        f"Select {covariate_to_plot} values:",
-                        data[covariate_to_plot].min(),
-                        data[covariate_to_plot].max(),
-                        (
-                            data[covariate_to_plot].quantile(0.25),
-                            data[covariate_to_plot].quantile(0.75),
-                        ),
-                    )
-
-                else:  # Categorical
-                    values_to_plot = data[covariate_to_plot].unique().tolist()
-
-                fig, ax = plt.subplots()
-                try:
-                    cph.plot_partial_effects_on_outcome(
-                        covariate_to_plot, values_to_plot, cmap="coolwarm", ax=ax
-                    )
-                    plt.xlabel("Time")
-                    plt.ylabel("Survival Probability")
-                    plt.title(f"Survival Curves by {covariate_to_plot}")
-                    plt.ylim(0, 1)
-                    st.pyplot(fig)
-                except Exception as e:
-                    st.error(f"Error plotting survival curves: {e}")
-
+            cph.check_assumptions(data[[time_col, event_col] + covariate_cols], p_value_threshold=0.05)
+            st.success("Proportional hazards assumption appears to hold.")
         except Exception as e:
-            st.error(f"Error fitting Cox model: {e}")
+            st.error(f"Proportional hazards assumption may be violated: {e}")
 
-    st.header("💪 Practice Exercises")
-    st.markdown(
-        """
-    1.  **Interpretation:** In the Kaplan-Meier example, what does a horizontal line at S(t) = 0.8 mean?
-    2.  **Censoring:** Give an example of right-censoring in a customer churn context.
-    3.  **Hazard Ratio:** If a Cox model shows a hazard ratio of 2 for a feature, what does that imply?
-        *   Bonus: What if the hazard ratio is 0.5?
-    """
-    )
-    if st.button("Show Answers"):
-        st.markdown(
-            """
-        1.  **Interpretation:**  A horizontal line at S(t) = 0.8 means that the estimated probability of surviving *longer than* that time point is 80%.
-        2.  **Censoring:**  A customer is still subscribed at the *end* of the observation period. We know they survived *at least* that long, but not their total subscription time (we don't see them churn).
-        3.  **Hazard Ratio:**
-            *   Hazard Ratio of 2:  Having that feature *doubles* the hazard (instantaneous risk of the event) compared to *not* having the feature, holding other variables constant.
-            *   Bonus: Hazard Ratio of 0.5: Having that feature *halves* the hazard (it's a *protective* factor).
-        """
-        )
 
-    st.header("🌍 Real-world Applications")
-    st.write(
-        """
-    Survival analysis is widely used in:
+def show_quiz():
+    st.subheader("Survival Analysis Quiz")
+    st.write("Test your understanding of survival analysis concepts!")
 
-    *   **Customer Churn:** Predicting when customers will unsubscribe (key for SaaS businesses).
-    *   **Predictive Maintenance:** Estimating time until equipment failure (critical for manufacturing).
-    *   **Medical Research:** Analyzing patient survival times after treatment (essential for clinical trials).
-    *   **Credit Risk:** Modeling time until loan default.
-    *   **Marketing:** Analyzing time until customer conversion or response to a campaign.
-    *   **Human Resources:** Studying employee retention and time-to-attrition.
-    """
-    )
-
-    st.header("✅ Knowledge Check")
-    # 9.  Better Quiz Questions: More conceptual, less tied to specific code, and include solutions.
     quiz_questions = [
         {
-            "question": "What does *right-censoring* mean in survival analysis?",
+            "question": "What is the primary difference between survival analysis and standard regression?",
             "options": [
-                "The event happened before the study started.",
-                "The event happened during the study, but at an unknown time.",
-                "The event hasn't happened yet by the end of the observation period.",
-                "The event will never happen.",
+                "Survival analysis uses different statistical tests.",
+                "Survival analysis deals with censored data.",
+                "Survival analysis requires larger sample sizes.",
+                "Survival analysis only works with time data.",
             ],
-            "answer": "The event hasn't happened yet by the end of the observation period.",
-            "solution": "Right-censoring is the most common type. We only know the subject survived *at least* until the censoring time, but we don't know their full survival time.",
+            "answer": "Survival analysis deals with censored data.",
+            "solution": "Survival analysis is specifically designed to handle censored observations, where the event of interest is not observed for all subjects within the study period.",
         },
         {
-            "question": "The survival function, S(t), gives the probability of...",
+            "question": "What does right-censoring mean?",
             "options": [
-                "Experiencing the event *at* time t.",
-                "Surviving *beyond* time t.",
-                "Experiencing the event *before* time t.",
-                "The instantaneous risk of the event at time t.",
+                "The event occurred before the study began.",
+                "The event occurred after the study ended.",
+                "The subject was removed from the study.",
+                "The data was recorded incorrectly.",
             ],
-            "answer": "Surviving *beyond* time t.",
-            "solution": "S(t) = P(T > t), where T is the survival time. It's the probability of *not* having the event before time t.",
+            "answer": "The event occurred after the study ended.",
+            "solution": "Right-censoring occurs when we know a subject survived at least until a certain time, but the event happens after our observation period ends.",
         },
         {
-            "question": "The hazard function, h(t), represents the...",
+            "question": "What does the survival function S(t) represent?",
             "options": [
-                "Probability of surviving beyond time t.",
-                "Probability of the event happening at time t.",
-                "Instantaneous risk of the event at time t, *given survival up to t*.",
-                "Total accumulated risk up to time t.",
+                "The probability of experiencing the event at time t.",
+                "The probability of surviving longer than time t.",
+                "The rate of events at time t.",
+                "The total number of events by time t.",
             ],
-            "answer": "Instantaneous risk of the event at time t, *given survival up to t*.",
-            "solution": "The hazard function is a *rate*, not a probability.  It's the *conditional* probability of the event happening in the next instant, given the subject has survived up to time t.",
+            "answer": "The probability of surviving longer than time t.",
+            "solution": "S(t) = P(T > t), where T is the survival time. It represents the probability that a subject survives beyond time t.",
         },
         {
-            "question": "The Kaplan-Meier estimator is:",
+            "question": "What is the hazard function h(t)?",
             "options": [
-                "A parametric method.",
-                "A non-parametric method.",
-                "A regression model.",
-                "Used only for small datasets.",
+                "The probability of the event at time t.",
+                "The instantaneous risk of the event at time t, given survival to t.",
+                "The cumulative risk up to time t.",
+                "The expected survival time.",
             ],
-            "answer": "A non-parametric method.",
-            "solution": "The Kaplan-Meier estimator makes *no* assumptions about the underlying distribution of survival times. This makes it very flexible.",
+            "answer": "The instantaneous risk of the event at time t, given survival to t.",
+            "solution": "The hazard function represents the instantaneous risk rate at time t for subjects who have survived up to that time.",
         },
         {
-            "question": "The Cox Proportional Hazards model is:",
+            "question": "What does a hazard ratio of 2.0 mean?",
             "options": [
-                "A non-parametric method.",
-                "Used only for estimating the survival function.",
-                "A regression model for the hazard function.",
-                "Only applicable when there is no censoring.",
+                "The event is twice as likely to occur.",
+                "The survival time is doubled.",
+                "The risk is doubled compared to the baseline.",
+                "The study lasted twice as long.",
             ],
-            "answer": "A regression model for the hazard function.",
-            "solution": "The Cox model allows us to analyze the impact of covariates (predictor variables) on the *hazard rate*.",
+            "answer": "The risk is doubled compared to the baseline.",
+            "solution": "A hazard ratio of 2.0 means the hazard (risk) is twice as high for that group compared to the reference group.",
         },
         {
-            "question": "A hazard ratio of 0.5 for a feature in a Cox model means:",
+            "question": "What is the Kaplan-Meier estimator used for?",
             "options": [
-                "The feature increases the hazard by 50%.",
-                "The feature decreases the hazard by 50%.",
-                "The feature has no effect on the hazard.",
-                "The feature increases survival time by 50%.",
+                "Estimating hazard ratios.",
+                "Estimating the survival function from data.",
+                "Testing proportional hazards.",
+                "Fitting parametric survival models.",
             ],
-            "answer": "The feature decreases the hazard by 50%.",
-            "solution": "A hazard ratio *less than 1* indicates a *protective* effect (reduced hazard). A hazard ratio of 0.5 means the hazard is halved.",
+            "answer": "Estimating the survival function from data.",
+            "solution": "The Kaplan-Meier estimator is a non-parametric method to estimate the survival function directly from observed data.",
         },
         {
-            "question": "What is the main advantage of the Kaplan-Meier estimator?",
+            "question": "What is a key assumption of the Cox proportional hazards model?",
             "options": [
-                "It can handle covariates.",
-                "It's very computationally efficient.",
-                "It doesn't assume a specific distribution for survival times.",
-                "It can predict future survival times accurately.",
+                "Survival times follow an exponential distribution.",
+                "The hazard ratio between groups remains constant over time.",
+                "All covariates are normally distributed.",
+                "The censoring rate is less than 50%.",
             ],
-            "answer": "It doesn't assume a specific distribution for survival times.",
-            "solution": "This non-parametric nature makes it very flexible and robust to different data patterns.",
+            "answer": "The hazard ratio between groups remains constant over time.",
+            "solution": "The proportional hazards assumption means that the relative risk between any two individuals remains constant over time.",
         },
         {
-            "question": "What is the primary assumption of the Cox Proportional Hazards model?",
+            "question": "What does it mean if the median survival time is 'not reached'?",
             "options": [
-                "Survival times are normally distributed.",
-                "The hazard function is constant over time.",
-                "The hazard ratio between individuals is constant over time.",
-                "There is no censoring.",
+                "The data was censored.",
+                "More than 50% of subjects experienced the event.",
+                "The study ended before 50% experienced the event.",
+                "The calculation was incorrect.",
             ],
-            "answer": "The hazard ratio between individuals is constant over time.",
-            "solution": "This is the 'proportional hazards' assumption. The *baseline* hazard can change, but the *relative* hazards between individuals with different covariate values remain proportional.",
+            "answer": "The study ended before 50% experienced the event.",
+            "solution": "When median survival time is 'not reached', it means that less than 50% of subjects experienced the event during the study period.",
         },
         {
-            "question": "In a customer churn context, what does right-censoring typically represent?",
+            "question": "In survival analysis, what does 'at risk' mean?",
             "options": [
-                "The customer churned at the beginning of the study.",
-                "The customer churned during the study.",
-                "The customer was still subscribed at the end of the study (or observation period).",
-                "The customer churned before the study began.",
+                "Subjects who have already experienced the event.",
+                "Subjects who are still being observed and haven't experienced the event yet.",
+                "Subjects who were censored.",
+                "Subjects with complete follow-up.",
             ],
-            "answer": "The customer was still subscribed at the end of the study (or observation period).",
+            "answer": "Subjects who are still being observed and haven't experienced the event yet.",
+            "solution": "'At risk' refers to subjects who are still under observation and have not yet experienced the event of interest.",
+        },
+        {
+            "question": "What is the customer was still subscribed at the end of the study (or observation period).",
+            "options": [
+                "Left censoring",
+                "Right censoring",
+                "Interval censoring",
+                "No censoring",
+            ],
+            "answer": "Right censoring",
             "solution": "Right-censoring means we don't observe the churn event (the event of interest) within our study period.  We only know they survived *at least* until the end of observation.",
         },
         {
@@ -565,6 +484,19 @@ def main():
                     st.success("Correct!")  # Immediate feedback
                 else:
                     st.error("Incorrect.")
+
+
+def main():
+    st.set_page_config(page_title="Survival Analysis", page_icon="⏳", layout="wide")
+
+    st.title("Survival Analysis: Time-to-Event Modeling")
+    st.write(
+        "Understand and predict the time until a specific event, like customer churn or equipment failure, using robust statistical methods."
+    )  # More concise intro
+
+    show_theoretical_concepts()
+
+    show_interactive_demo()
 
 
 if __name__ == "__main__":

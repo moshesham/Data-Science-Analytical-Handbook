@@ -79,12 +79,10 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20'
-      - name: Install markdown-link-check
-        run: npm install -g markdown-link
-      - name: Run markdown-link-check
+      - name: Run markdown-link-check (via npx)
         run: |
           if [ -f .markdown-link-check.json ]; then CFG="-c .markdown-link-check.json"; fi
-          find . -name '*.md' -print0 | xargs -0 -n1 -P4 markdown-link-check -q $CFG || exit 1
+          find . -name '*.md' -print0 | xargs -0 -n1 -P4 npx -y markdown-link-check -q $CFG || exit 1
 
   streamlit-smoke:
     runs-on: ubuntu-latest

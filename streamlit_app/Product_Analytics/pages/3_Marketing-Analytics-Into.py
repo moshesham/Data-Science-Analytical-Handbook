@@ -352,18 +352,7 @@ def generate_customer_journey_data(num_journeys=100):
     return pd.DataFrame(journey_data)
 
 
-def main():
-    st.set_page_config(
-        page_title="Marketing Analytics Guide", page_icon="📈", layout="wide"
-    )
-    st.title("Marketing Analytics: An In-Depth Guide 📈")
-    st.write(
-        """
-        Unlock the power of data in marketing! This interactive guide will walk you through the essentials of marketing analytics,
-        from fundamental concepts to real-world applications and future trends. Master data-driven marketing and elevate your strategies.
-    """
-    )
-
+def show_fundamentals():
     st.header("1. Understanding the Fundamentals of Marketing Analytics")
     with st.expander("1.1 Defining Marketing Analytics", expanded=True):
         st.subheader("1.1 Defining Marketing Analytics")
@@ -397,6 +386,8 @@ def main():
         """
         )
 
+
+def show_core_components():
     st.header("2. Core Components of Marketing Analytics")
     with st.expander("2.1 Types of Marketing Data", expanded=True):
         st.subheader("2.1 Types of Marketing Data")
@@ -450,6 +441,8 @@ def main():
         """
         )
 
+
+def show_types_of_analytics():
     st.header("3. Types of Marketing Analytics")
     with st.expander("3.1 By Analytical Approach", expanded=True):
         st.subheader("3.1 By Analytical Approach")
@@ -501,25 +494,8 @@ def main():
         """
         )
 
-    with st.expander(
-        "5. Tools and Technologies for Marketing Analytics", expanded=False
-    ):
-        st.header("5. Tools and Technologies for Marketing Analytics")
-        st.markdown(
-            """
-            The marketing analytics tech stack includes various tools:
 
-            *   **Analytics Platforms:** Google Analytics, Adobe Analytics, Matomo.
-            *   **Data Visualization & Dashboarding:** Tableau, Power BI, Qlik Sense, Google Data Studio.
-            *   **CRM Systems:** Salesforce, HubSpot CRM, Zoho CRM.
-            *   **Marketing Automation Platforms:** Marketo, Pardot, HubSpot Marketing Hub.
-            *   **Social Media Analytics Tools:** Sprout Social, Hootsuite, Brandwatch.
-            *   **SEO Tools:** SEMrush, Ahrefs, Google Search Console, Moz Pro.
-            *   **Programming & Statistical Software:** Python (Pandas, Scikit-learn), R, SPSS, SAS.
-            *   **Databases & Data Warehouses:** SQL Databases, NoSQL Databases, Cloud Data Warehouses (Redshift, BigQuery, Snowflake).
-        """
-        )
-
+def show_challenges_and_best_practices():
     st.header("6. Challenges and Best Practices in Marketing Analytics")
     with st.expander("6.1 Challenges", expanded=True):
         st.subheader("6.1 Challenges")
@@ -557,55 +533,25 @@ def main():
         """
         )
 
-    with st.expander("7. Future Trends in Marketing Analytics", expanded=False):
-        st.header("7. Future Trends in Marketing Analytics")
-        st.markdown(
-            """
-            Marketing analytics is constantly evolving, with key future trends:
 
-            *   **AI and Machine Learning Integration:** Enhanced predictive analytics, personalization, and automation.
-            *   **Predictive Customer Journeys:** AI-driven prediction and shaping of individual journeys in real-time.
-            *   **Hyper-Personalization at Scale:** Highly tailored experiences across all touchpoints via advanced analytics and AI.
-            *   **Voice and Conversational Analytics:** Analyzing voice data from assistants and chatbots.
-            *   **Privacy-Focused Analytics:** Techniques for privacy-preserving insights.
-            *   **Real-Time Analytics and Decision-Making:** Immediate data processing for instant adjustments.
-            *   **Marketing Mix Modeling Evolution:** More sophisticated models incorporating granular data and AI.
-            *   **Augmented Analytics:** AI-powered tools for automated insights and recommendations.
+def main():  # noqa: C901
+    st.set_page_config(
+        page_title="Marketing Analytics Guide", page_icon="📈", layout="wide"
+    )
+    st.title("Marketing Analytics: An In-Depth Guide 📈")
+    st.write(
         """
-        )
+        Unlock the power of data in marketing! This interactive guide will walk you through the essentials of marketing analytics,
+        from fundamental concepts to real-world applications and future trends. Master data-driven marketing and elevate your strategies.
+    """
+    )
 
-    with st.expander("📚 Further Reading and Resources", expanded=False):
-        st.header("📚 Further Reading and Resources")
-        st.markdown(
-            """
-            To deepen your knowledge, explore these resources:
-
-            **Books:**
-            *   "Marketing Analytics: Data-Driven Techniques with Microsoft Excel" by Wayne L. Winston
-            *   "Marketing Metrics: The Definitive Guide to Measuring Marketing Performance" by Farris, Bendle, Pfeifer, and Reibstein
-            *   "Data-Driven Marketing: The 15 Metrics Everyone in Marketing Should Know" by Mark Jeffery
-            *   "Digital Marketing Analytics: Making Sense of Consumer Data in a Digital World" by Hemann and Burbary
-
-            **Online Courses and Platforms:**
-            *   Coursera, edX, Udacity (search for "Marketing Analytics", "Digital Marketing", "Data Science")
-            *   Google Analytics Academy (Free courses on Google Analytics)
-            *   LinkedIn Learning (Courses on Marketing Analytics, Data Visualization)
-
-            **Industry Blogs and Publications:**
-            *   MarketingProfs, Marketing Land, HubSpot Marketing Blog, Neil Patel Blog
-            *   Harvard Business Review, Journal of Marketing Analytics
-
-            **Industry Associations and Communities:**
-            *   Digital Analytics Association (DAA), Marketing Analytics Summit
-            *   Online Marketing Communities and Forums
-        """
-        )
-
+    show_fundamentals()
+    show_core_components()
+    show_types_of_analytics()
+    show_challenges_and_best_practices()
     st.header("🕹️ Interactive Marketing Analytics Explorations")
-
-    with st.expander(
-        "📊 Website Traffic Dashboard (Descriptive Analytics)", expanded=True
-    ):
+    with st.expander("📊 Website Traffic Dashboard (Descriptive Analytics)", expanded=True):
         st.subheader("Interactive Website Traffic Dashboard")
         st.write(
             "Explore website performance across different dimensions and metrics. Use the filters below to investigate trends and patterns."
