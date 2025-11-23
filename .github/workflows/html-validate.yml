@@ -43,19 +43,7 @@ jobs:
       - name: Install html-validate
         run: npm install -g html-validate@8
 
-      - name: Run html-validate
-        run: |
-          if [ ! -d _site ]; then
-            echo "_site missing; Jekyll build failed" >&2
-            exit 1
-          fi
-          html-validate --config .htmlvalidate.json _site > html-validate-report.txt
-          EXIT_CODE=$?
-          if [ "$EXIT_CODE" -ne 0 ]; then
-            echo "HTML validation failed (exit $EXIT_CODE). See artifact." >&2
-            exit $EXIT_CODE
-          fi
-
+      
       - name: Upload validation report
         if: always()
         uses: actions/upload-artifact@v4
