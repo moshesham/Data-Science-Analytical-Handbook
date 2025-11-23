@@ -153,9 +153,9 @@ def main():
                 "Measurable": "✅" if kpi_formula else "❌",
                 "Achievable/Attributable": "❓ (Needs further analysis)",  # Placeholder, needs more context.
                 "Relevant": "✅" if objective else "❌",  # Basic check, needs context.
-                "Time-bound": "✅"
-                if collection_frequency and reporting_frequency
-                else "❌",
+                "Time-bound": (
+                    "✅" if collection_frequency and reporting_frequency else "❌"
+                ),
             }
 
             for key, value in smart_assessment.items():
@@ -241,9 +241,9 @@ def main():
                 "Measurable": "✅" if kri_formula else "❌",
                 "Achievable/Attributable": "❓ (Needs further analysis)",  # Placeholder.
                 "Relevant": "✅" if risk else "❌",  # Basic check, needs more context
-                "Time-bound": "✅"
-                if collection_frequency and reporting_frequency
-                else "❌",
+                "Time-bound": (
+                    "✅" if collection_frequency and reporting_frequency else "❌"
+                ),
             }
 
             for key, value in smart_assessment.items():

@@ -114,9 +114,9 @@ def generate_multi_channel_ads_data(
         ],
     )
     df_ads["CTR"] = df_ads.apply(
-        lambda row: (row["Clicks"] / row["Impressions"]) * 100
-        if row["Impressions"] > 0
-        else 0,
+        lambda row: (
+            (row["Clicks"] / row["Impressions"]) * 100 if row["Impressions"] > 0 else 0
+        ),
         axis=1,
     )
     df_ads["CPC"] = df_ads.apply(
@@ -694,7 +694,8 @@ def main():
         )
 
     with st.expander(
-        "💰 Multi-Channel Ad Campaign Analyzer (Performance & Diagnostic)", expanded=True
+        "💰 Multi-Channel Ad Campaign Analyzer (Performance & Diagnostic)",
+        expanded=True,
     ):
         st.subheader("Multi-Channel Advertising Campaign Performance Analyzer")
         st.write(

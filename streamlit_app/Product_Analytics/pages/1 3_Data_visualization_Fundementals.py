@@ -347,7 +347,7 @@ def data_visualization_page():
         orientation = st.radio(
             "Orientation:", ["Vertical", "Horizontal"], horizontal=True
         )
-    # 'orient' variable unused; orientation is checked inline when needed
+        # 'orient' variable unused; orientation is checked inline when needed
 
         if st.button("Plot Bar Chart", key="bar_button"):  # UNIQUE KEY
             if not cat_cols:
@@ -381,9 +381,11 @@ def data_visualization_page():
                         y=num_col,
                         title=f"{agg_func.capitalize()} of {num_col} by {cat_cols[0]}",
                         orientation="v" if orientation == "Vertical" else "h",
-                        color=cat_cols[0]
-                        if len(agg_data[cat_cols[0]].unique()) <= 10
-                        else None,
+                        color=(
+                            cat_cols[0]
+                            if len(agg_data[cat_cols[0]].unique()) <= 10
+                            else None
+                        ),
                     )
                 else:
                     agg_data["combined_categories"] = (
@@ -395,9 +397,11 @@ def data_visualization_page():
                         y=num_col,
                         title=f"{agg_func.capitalize()} of {num_col} by {', '.join(cat_cols)}",
                         orientation="v" if orientation == "Vertical" else "h",
-                        color="combined_categories"
-                        if len(agg_data["combined_categories"].unique()) <= 10
-                        else None,
+                        color=(
+                            "combined_categories"
+                            if len(agg_data["combined_categories"].unique()) <= 10
+                            else None
+                        ),
                     )
                     fig.update_xaxes(tickangle=-45)
                 st.plotly_chart(fig, use_container_width=True)
@@ -412,9 +416,11 @@ def data_visualization_page():
                         y="Count",
                         title=f"Counts of {cat_cols[0]}",
                         orientation="v" if orientation == "Vertical" else "h",
-                        color=cat_cols[0]
-                        if len(counts[cat_cols[0]].unique()) <= 10
-                        else None,
+                        color=(
+                            cat_cols[0]
+                            if len(counts[cat_cols[0]].unique()) <= 10
+                            else None
+                        ),
                     )
                 else:
                     counts = data.groupby(cat_cols).size().reset_index(name="Count")
@@ -427,9 +433,11 @@ def data_visualization_page():
                         y="Count",
                         title=f"Count by {', '.join(cat_cols)}",
                         orientation="v" if orientation == "Vertical" else "h",
-                        color="combined_categories"
-                        if len(counts["combined_categories"].unique()) <= 10
-                        else None,
+                        color=(
+                            "combined_categories"
+                            if len(counts["combined_categories"].unique()) <= 10
+                            else None
+                        ),
                     )
                     fig.update_xaxes(tickangle=-45)
                 st.plotly_chart(fig, use_container_width=True)
