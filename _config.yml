@@ -24,4 +24,3 @@ exclude:
   - .bundle
   - node_modules
   - streamlit_app
-  - streamlit_app/**
