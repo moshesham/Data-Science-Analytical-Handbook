@@ -5,9 +5,15 @@
     { "pattern": "^https://example.com" },
     { "pattern": "^https://dev.mysql.com/doc/" },
     { "pattern": "^https://manpages.ubuntu.com/" },
-  { "pattern": "\\{\\{[^}]+\\|\\s*relative_url\\s*\\}\\}" }
+    { "pattern": "\\{\\{[^}]+\\|\\s*relative_url\\s*\\}\\}" },
+    { "pattern": "^https?://platform\\.stratascratch\\.com/" },
+    { "pattern": "^https?://(www\\.)?medium\\.com/" },
+    { "pattern": "^https?://netflixtechblog\\.com/" },
+    { "pattern": "^https?://(www\\.)?indeed\\.com/" },
+    { "pattern": "^https?://leetcode\\.com/" },
+    { "pattern": "^https?://(www\\.)?metacareers\\.com/" }
   ],
   "retryOnHttpStatusCodes": [429, 500, 502, 503],
-  "retryCount": 2,
-  "timeout": "15s"
+  "retryCount": 3,
+  "timeout": "20s"
 }
