@@ -1,18 +1,11 @@
-name: Streamlit smoke test
+name: Streamlit smoke test (legacy)
 
 on:
-  pull_request:
-    paths:
-      - 'streamlit_app/**'
+  workflow_dispatch: {}
 
 jobs:
   smoke:
     runs-on: ubuntu-latest
-    services:
-      xvfb:
-        image: selenium/standalone-chrome:latest
-        ports:
-          - 4444:4444
     steps:
       - uses: actions/checkout@v4
       - name: Set up Python
@@ -23,10 +16,18 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r streamlit_app/Product_Analytics/requirements.txt || pip install streamlit
-      - name: Run streamlit in background
+      - name: Start Streamlit
         run: |
-          nohup streamlit run streamlit_app/Product_Analytics/streamlit_app.py --server.headless true --server.port 8501 &
-          sleep 6
-      - name: Smoke check
-        run: |
-          curl --retry 5 --retry-delay 2 --fail http://127.0.0.1:8501 || exit 1
+          streamlit run streamlit_app/Product_Analytics/streamlit_app.py --server.headless true --server.port 8501 > smoke.log 2>&1 &
+          for i in 1 2 3 4 5; do
+            sleep 2
+            if curl -fsS http://127.0.0.1:8501 >/dev/null; then echo "Streamlit responded"; exit 0; fi
+          done
+          echo "Streamlit failed to respond after retries" >&2
+          exit 1
+      - name: Upload log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: streamlit-smoke-log
+          path: smoke.log

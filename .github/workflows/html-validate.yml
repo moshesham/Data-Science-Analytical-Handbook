@@ -1,34 +1,73 @@
 name: HTML validate
 
 on:
-  workflow_dispatch: {}
   pull_request:
     paths:
+      - '**/*.md'
       - '**/*.html'
-      - '_site/**'
+      - '_config.yml'
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
 
 jobs:
   html-validate:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - name: Build Jekyll site (Docker)
-        run: |
-          if [ -f docker-compose.yml ]; then
-            docker compose -f docker-compose.yml run --rm jekyll jekyll build --destination /work/_site || true
-          else
-            echo 'No docker-compose.yml found, skipping build.'
-          fi
-      - name: Run HTML-validate (npm)
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Pages build (Jekyll)
+        uses: actions/configure-pages@v5
+
+      - name: Build with Jekyll (GitHub Pages environment)
+        uses: actions/jekyll-build-pages@v1
+        with:
+          source: ./
+          destination: ./_site
+
+      - name: Cache npm (html-validate)
+        uses: actions/cache@v4
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-npm-html-validate-8
+          restore-keys: |
+            ${{ runner.os }}-npm-
+
+      - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: '20'
+
       - name: Install html-validate
-        run: npm i -g html-validate@8
-      - name: Validate _site
+        run: npm install -g html-validate@8
+
+      - name: Run html-validate
         run: |
-          if [ -d _site ]; then
-            html-validate --config .htmlvalidate.json _site || true
+          if [ ! -d _site ]; then
+            echo "_site missing; Jekyll build failed" >&2
+            exit 1
+          fi
+          html-validate --config .htmlvalidate.json _site > html-validate-report.txt || EXIT_CODE=$?
+          if [ -n "$EXIT_CODE" ]; then
+            echo "HTML validation failed (exit $EXIT_CODE). See artifact." >&2
+            exit $EXIT_CODE
+          fi
+
+      - name: Upload validation report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: html-validate-report
+          path: html-validate-report.txt
+
+      - name: Summary
+        if: always()
+        run: |
+          echo "### HTML Validation Summary" >> $GITHUB_STEP_SUMMARY
+          if grep -q "error" html-validate-report.txt; then
+            echo "Errors detected. See artifact." >> $GITHUB_STEP_SUMMARY
           else
-            echo '_site not present, skipping html validation'
+            echo "No errors detected." >> $GITHUB_STEP_SUMMARY
           fi

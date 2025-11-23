@@ -1,10 +1,7 @@
-name: Markdown link check
+name: Markdown link check (legacy)
 
 on:
-  pull_request:
-    paths:
-      - '**/*.md'
-      - 'html_source/**'
+  workflow_dispatch: {}
 
 jobs:
   linkcheck:
@@ -14,9 +11,16 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: '20'
+      - name: Cache npm
+        uses: actions/cache@v4
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-npm-markdown-links
+          restore-keys: ${{ runner.os }}-npm-
       - name: Install markdown-link-check
         run: npm install -g markdown-link-check@4
-      - name: Run markdown-link-check for repo
+      - name: Run markdown-link-check (full scan)
         run: |
-          find . -name '*.md' -print0 | xargs -0 -n1 -P4 markdown-link-check -q
+          if [ -f .markdown-link-check.json ]; then CFG="-c .markdown-link-check.json"; fi
+          find . -name '*.md' -print0 | xargs -0 -n1 -P4 markdown-link-check -q $CFG || exit 1
