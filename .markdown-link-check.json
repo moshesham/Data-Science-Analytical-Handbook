@@ -4,7 +4,8 @@
     { "pattern": "^https://127.0.0.1" },
     { "pattern": "^https://example.com" },
     { "pattern": "^https://dev.mysql.com/doc/" },
-    { "pattern": "^https://manpages.ubuntu.com/" }
+    { "pattern": "^https://manpages.ubuntu.com/" },
+  { "pattern": "\\{\\{[^}]+\\|\\s*relative_url\\s*\\}\\}" }
   ],
   "retryOnHttpStatusCodes": [429, 500, 502, 503],
   "retryCount": 2,
