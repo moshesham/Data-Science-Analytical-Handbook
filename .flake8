@@ -1,5 +1,5 @@
 [flake8]
-exclude = _site, .venv, env, venv, .git, __pycache__, html_source
+exclude = _site, .venv, .venv-dev, .venv-streamlit, env, venv, .git, __pycache__, html_source
 max-line-length = 120
 extend-ignore = E203,W503
 # Relax line-length rule for Streamlit pages & simulation scripts (content-heavy)

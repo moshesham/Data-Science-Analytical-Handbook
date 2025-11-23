@@ -40,9 +40,9 @@ jobs:
             echo "Virtualenv cache hit - skipping bulk installs"
           fi
       - name: isort check
-        run: . .venv-dev/bin/activate && isort --profile black --check-only .
+        run: . .venv-dev/bin/activate && isort --profile black --check-only --skip-glob=".venv*" .
       - name: black check
-        run: . .venv-dev/bin/activate && black --check .
+        run: . .venv-dev/bin/activate && black --check --exclude="/(\.venv.*|\.git|__pycache__|_site|html_source)/" .
       - name: flake8 strict
         run: . .venv-dev/bin/activate && flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
       - name: Notebook tests (nbval)
