@@ -66,7 +66,7 @@ jobs:
         if: always()
         run: |
           echo "### HTML Validation Summary" >> $GITHUB_STEP_SUMMARY
-          if grep -q "error" html-validate-report.txt; then
+          if grep -qi "error" html-validate-report.txt; then
             echo "Errors detected. See artifact." >> $GITHUB_STEP_SUMMARY
           else
             echo "No errors detected." >> $GITHUB_STEP_SUMMARY
