@@ -4,13 +4,18 @@
 /* Import modern font families */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap');
 
-/* Performance optimizations */
-* {
-  box-sizing: border-box;
+/* Reset and Base Styles */
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 html {
-  scroll-behavior: smooth;
+    font-size: 16px;
+    scroll-behavior: smooth;
 }
 
 /* Design System Variables */
@@ -131,19 +136,6 @@ html {
 [data-theme="dark"] .site-header {
   background: var(--color-bg-primary);
   border-bottom-color: rgba(255, 255, 255, 0.1);
-}
-
-/* Reset and Base Styles */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-html {
-    font-size: 16px;
-    line-height: var(--leading-normal);
-    scroll-behavior: smooth;
 }
 
 body {
@@ -1059,8 +1051,8 @@ body {
     background: var(--color-bg-secondary);
 }
 
-/* Main content when sidebar is present */
-.has-sidebar .main-content {
+/* Main content when sidebar is present - using sibling selector */
+.sidebar ~ .main-content {
     margin-left: 280px;
 }
 
@@ -1210,7 +1202,7 @@ footer {
         border-bottom: 1px solid var(--color-bg-tertiary);
     }
 
-    .has-sidebar .main-content {
+    .sidebar ~ .main-content {
         margin-left: 0;
     }
 }

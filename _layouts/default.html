@@ -65,7 +65,7 @@
                     <button class="theme-toggle" aria-label="Toggle dark mode" title="Toggle theme">
                         <i class="fas fa-moon"></i>
                     </button>
-                    <a href="https://github.com/moshesham/Data-Science-Analytical-Handbook" class="btn btn-secondary" target="_blank">
+                    <a href="{{ site.github_url }}" class="btn btn-secondary" target="_blank">
                         <i class="fab fa-github"></i> GitHub
                     </a>
                 </div>
@@ -73,9 +73,9 @@
         </header>
 
         <!-- Sidebar (for pages that need it) -->
-        {% if page.layout == 'default' and page.url != '/' %}
+        {% unless page.url == '/' %}
         {% include sidebar.html %}
-        {% endif %}
+        {% endunless %}
 
         <!-- Main Content -->
         <main class="main-content" id="main-content">
@@ -108,9 +108,9 @@
                 <div class="footer-section">
                     <h4>Community</h4>
                     <ul>
-                        <li><a href="https://github.com/moshesham/Data-Science-Analytical-Handbook" target="_blank">GitHub Repository</a></li>
-                        <li><a href="https://github.com/moshesham/Data-Science-Analytical-Handbook/issues" target="_blank">Report Issues</a></li>
-                        <li><a href="https://github.com/moshesham/Data-Science-Analytical-Handbook/pulls" target="_blank">Contribute</a></li>
+                        <li><a href="{{ site.github_url }}" target="_blank">GitHub Repository</a></li>
+                        <li><a href="{{ site.issues_url }}" target="_blank">Report Issues</a></li>
+                        <li><a href="{{ site.github_url }}/pulls" target="_blank">Contribute</a></li>
                         <li><a href="{{ '/CODE_OF_CONDUCT/' | relative_url }}">Code of Conduct</a></li>
                     </ul>
                 </div>
