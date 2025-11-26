@@ -1,31 +1,178 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{ page.title | default: site.title }}</title>
-    <meta name="description" content="{{ page.description | default: site.description }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% if page.title %}{{ page.title }} | {% endif %}{{ site.title }}</title>
+    <meta name="description" content="{% if page.description %}{{ page.description }}{% else %}{{ site.description }}{% endif %}">
+
+    <!-- SEO Meta Tags -->
+    <meta name="keywords" content="Data Science, Analytics, Interview Preparation, SQL, Python, Statistics, Meta">
+    <meta name="author" content="Data Science Analytical Handbook">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ page.url | absolute_url }}">
+    <meta property="og:title" content="{% if page.title %}{{ page.title }} | {% endif %}{{ site.title }}">
+    <meta property="og:description" content="{% if page.description %}{{ page.description }}{% else %}{{ site.description }}{% endif %}">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="{{ page.url | absolute_url }}">
+    <meta property="twitter:title" content="{% if page.title %}{{ page.title }} | {% endif %}{{ site.title }}">
+    <meta property="twitter:description" content="{% if page.description %}{{ page.description }}{% else %}{{ site.description }}{% endif %}">
+
+    <!-- Font Preconnects -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <!-- MathJax -->
-    <script async src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+    <!-- RSS Feed -->
+    {% feed_meta %}
+</head>
+<body>
+    <div class="page-wrapper">
+        <!-- Skip to main content link -->
+        <a href="#main-content" class="skip-link">Skip to main content</a>
+        
+        <!-- Header -->
+        <header class="site-header">
+            <nav class="main-nav">
+                <div class="nav-brand">
+                    <a href="{{ '/' | relative_url }}">
+                        <i class="fas fa-chart-line"></i>
+                        <span>{{ site.title | default: "Data Science Handbook" }}</span>
+                    </a>
+                </div>
+                <button class="nav-toggle" aria-label="Open navigation menu" aria-expanded="false">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <ul class="nav-links">
+                    <li><a href="{{ '/' | relative_url }}" {% if page.url == '/' %}class="active"{% endif %}>Home</a></li>
+                    <li><a href="{{ '/introduction/' | relative_url }}" {% if page.url contains 'introduction' %}class="active"{% endif %}>Introduction</a></li>
+                    <li><a href="{{ '/foundational_knowledge/1/' | relative_url }}" {% if page.url contains 'foundational' %}class="active"{% endif %}>Foundation</a></li>
+                    <li><a href="{{ '/interview-preparation/technical-skills/' | relative_url }}" {% if page.url contains 'interview' %}class="active"{% endif %}>Interview Prep</a></li>
+                    <li><a href="{{ '/resources-practice/' | relative_url }}" {% if page.url contains 'resources' %}class="active"{% endif %}>Resources</a></li>
+                </ul>
+                <div class="nav-actions">
+                    <button class="theme-toggle" aria-label="Toggle dark mode" title="Toggle theme">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                    <a href="https://github.com/moshesham/Data-Science-Analytical-Handbook" class="btn btn-secondary" target="_blank">
+                        <i class="fab fa-github"></i> GitHub
+                    </a>
+                </div>
+            </nav>
+        </header>
 
-    <!-- Site CSS -->
-    <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
-  </head>
-  <body>
-    {% include sidebar.html %}
+        <!-- Sidebar (for pages that need it) -->
+        {% if page.layout == 'default' and page.url != '/' %}
+        {% include sidebar.html %}
+        {% endif %}
 
-    <div class="container">
-      <main class="main-content">
-        {{ content }}
-        <footer>
-          <p>© {{ site.time | date: "%Y" }} {{ site.author | default: "" }}</p>
+        <!-- Main Content -->
+        <main class="main-content" id="main-content">
+            <article class="content">
+                {{ content }}
+            </article>
+        </main>
+
+        <!-- Footer -->
+        <footer class="site-footer">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="{{ '/introduction/' | relative_url }}">Introduction</a></li>
+                        <li><a href="{{ '/foundational_knowledge/1/' | relative_url }}">Foundational Knowledge</a></li>
+                        <li><a href="{{ '/interview-preparation/technical-skills/' | relative_url }}">Interview Preparation</a></li>
+                        <li><a href="{{ '/resources-practice/' | relative_url }}">Resources & Practice</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Topics</h4>
+                    <ul>
+                        <li><a href="{{ '/foundational_knowledge/1/' | relative_url }}">Statistics & Probability</a></li>
+                        <li><a href="{{ '/foundational_knowledge/2-SQL/' | relative_url }}">SQL & Data</a></li>
+                        <li><a href="{{ '/foundational_knowledge/3/' | relative_url }}">Python for Analysis</a></li>
+                        <li><a href="{{ '/interview-preparation/analytical-reasoning/' | relative_url }}">Analytical Reasoning</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Community</h4>
+                    <ul>
+                        <li><a href="https://github.com/moshesham/Data-Science-Analytical-Handbook" target="_blank">GitHub Repository</a></li>
+                        <li><a href="https://github.com/moshesham/Data-Science-Analytical-Handbook/issues" target="_blank">Report Issues</a></li>
+                        <li><a href="https://github.com/moshesham/Data-Science-Analytical-Handbook/pulls" target="_blank">Contribute</a></li>
+                        <li><a href="{{ '/CODE_OF_CONDUCT/' | relative_url }}">Code of Conduct</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; {{ site.time | date: '%Y' }} {{ site.title }}. Built with ❤️ for aspiring data scientists.</p>
+                <p>Licensed under <a href="{{ '/LICENSE/' | relative_url }}">MIT License</a></p>
+            </div>
         </footer>
-      </main>
     </div>
-  </body>
+
+    <!-- Scripts -->
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <script>
+        // Mobile navigation toggle
+        document.addEventListener('DOMContentLoaded', function() {
+            const navToggle = document.querySelector('.nav-toggle');
+            const navLinks = document.querySelector('.nav-links');
+            
+            if (navToggle && navLinks) {
+                navToggle.addEventListener('click', function() {
+                    navLinks.classList.toggle('active');
+                    const expanded = navToggle.getAttribute('aria-expanded') === 'true';
+                    navToggle.setAttribute('aria-expanded', !expanded);
+                });
+            }
+
+            // Theme toggle
+            const themeToggle = document.querySelector('.theme-toggle');
+            if (themeToggle) {
+                themeToggle.addEventListener('click', function() {
+                    const currentTheme = document.documentElement.getAttribute('data-theme');
+                    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+                    document.documentElement.setAttribute('data-theme', newTheme);
+                    localStorage.setItem('theme', newTheme);
+                    
+                    const icon = themeToggle.querySelector('i');
+                    icon.className = newTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+                });
+
+                // Check for saved theme preference
+                const savedTheme = localStorage.getItem('theme');
+                if (savedTheme) {
+                    document.documentElement.setAttribute('data-theme', savedTheme);
+                    const icon = themeToggle.querySelector('i');
+                    icon.className = savedTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+                }
+            }
+
+            // Sticky header scroll effect
+            const header = document.querySelector('.site-header');
+            if (header) {
+                window.addEventListener('scroll', function() {
+                    if (window.scrollY > 50) {
+                        header.classList.add('scrolled');
+                    } else {
+                        header.classList.remove('scrolled');
+                    }
+                });
+            }
+        });
+    </script>
+</body>
 </html>

@@ -1,19 +1,46 @@
 <aside class="sidebar">
-  <h2>Contents</h2>
+  <h2><i class="fas fa-book"></i> Contents</h2>
   <ul class="nav-list">
-    <li><a href="{{ '/introduction/' | relative_url }}" class="{% if page.url == '/introduction/' %}active{% endif %}">I. Introduction</a>
+    <li>
+      <a href="{{ '/introduction/' | relative_url }}" class="{% if page.url == '/introduction/' %}active{% endif %}">
+        <i class="fas fa-play-circle"></i> I. Introduction
+      </a>
       <ul>
-        <li><a href="{{ '/introduction/#welcome' | relative_url }}">1. Welcome and Purpose of this Handbook</a></li>
-        <li><a href="{{ '/introduction/#meta-data-science-role' | relative_url }}">2. What to Expect: The Meta Data Science Role</a></li>
-        <li><a href="{{ '/introduction/#interview-process' | relative_url }}">3. Navigating the Meta Interview Process</a></li>
-        <li><a href="{{ '/introduction/#handbook-usage' | relative_url }}">4. How to Use This Handbook</a></li>
+        <li><a href="{{ '/introduction/#welcome' | relative_url }}">Welcome & Purpose</a></li>
+        <li><a href="{{ '/introduction/#meta-data-science-role' | relative_url }}">The Data Science Role</a></li>
+        <li><a href="{{ '/introduction/#interview-process' | relative_url }}">Interview Process</a></li>
+        <li><a href="{{ '/introduction/#handbook-usage' | relative_url }}">How to Use This Handbook</a></li>
       </ul>
     </li>
-  <li><a href="{{ '/foundational_knowledge/1/' | relative_url }}" class="{% if page.url contains '/foundational_knowledge/' %}active{% endif %}">II. Foundational Knowledge &amp; Skills</a></li>
-  <li><a href="{{ '/interview-preparation/technical-skills/' | relative_url }}" class="{% if page.url contains '/interview-preparation/' %}active{% endif %}">III. Interview Preparation</a></li>
-  <li><a href="{{ '/meta-specificity/' | relative_url }}" class="{% if page.url contains '/meta-specificity/' %}active{% endif %}">IV. Meta Specificity</a></li>
-  <li><a href="{{ '/resources-practice/' | relative_url }}" class="{% if page.url contains '/resources-practice/' %}active{% endif %}">V. Resources and Practice</a></li>
-  <li><a href="{{ '/conclusion/' | relative_url }}" class="{% if page.url contains '/conclusion/' %}active{% endif %}">VI. Conclusion</a></li>
-  <li><a href="{{ '/appendix/' | relative_url }}" class="{% if page.url contains '/appendix/' %}active{% endif %}">Appendix</a></li>
+    <li>
+      <a href="{{ '/foundational_knowledge/1/' | relative_url }}" class="{% if page.url contains '/foundational_knowledge/' %}active{% endif %}">
+        <i class="fas fa-graduation-cap"></i> II. Foundational Knowledge
+      </a>
+    </li>
+    <li>
+      <a href="{{ '/interview-preparation/technical-skills/' | relative_url }}" class="{% if page.url contains '/interview-preparation/' %}active{% endif %}">
+        <i class="fas fa-chalkboard-teacher"></i> III. Interview Preparation
+      </a>
+    </li>
+    <li>
+      <a href="{{ '/meta-specificity/' | relative_url }}" class="{% if page.url contains '/meta-specificity/' %}active{% endif %}">
+        <i class="fas fa-building"></i> IV. Meta Specificity
+      </a>
+    </li>
+    <li>
+      <a href="{{ '/resources-practice/' | relative_url }}" class="{% if page.url contains '/resources-practice/' %}active{% endif %}">
+        <i class="fas fa-book-open"></i> V. Resources & Practice
+      </a>
+    </li>
+    <li>
+      <a href="{{ '/conclusion/' | relative_url }}" class="{% if page.url contains '/conclusion/' %}active{% endif %}">
+        <i class="fas fa-flag-checkered"></i> VI. Conclusion
+      </a>
+    </li>
+    <li>
+      <a href="{{ '/appendix/' | relative_url }}" class="{% if page.url contains '/appendix/' %}active{% endif %}">
+        <i class="fas fa-paperclip"></i> Appendix
+      </a>
+    </li>
   </ul>
 </aside>

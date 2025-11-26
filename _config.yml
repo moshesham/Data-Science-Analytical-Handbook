@@ -1,23 +1,69 @@
+# Site settings
 title: "Data Science Analytical Handbook"
-description: "A handbook for preparing for analytical/data-science interviews"
-baseurl: "" # change if served from a subpath, e.g. /repo-name
-url: "" # set to your site URL, e.g. https://username.github.io
+description: "A comprehensive guide to data science interview preparation, analytical skills, and product analytics mastery"
+url: "https://moshesham.github.io"
+baseurl: "/Data-Science-Analytical-Handbook"
+repository: moshesham/Data-Science-Analytical-Handbook
+github_username: moshesham
 
+# Author information
+author: "Data Science Handbook Community"
+
+# Build settings
 markdown: kramdown
 kramdown:
   input: GFM
   auto_id_prefix: "id-"
-
-  # Prevent inline styles for table alignment
+  syntax_highlighter: rouge
   table_align_class: true
+
+highlighter: rouge
 
 permalink: /:categories/:title/
 
+# Plugins
 plugins:
   - jekyll-feed
   - jekyll-sitemap
+  - jekyll-seo-tag
 
+# Include files
+include:
+  - _pages
+  - _layouts
+  - _includes
+  - assets
+
+# Exclude files
 exclude:
+  - Gemfile
   - Gemfile.lock
+  - vendor/
+  - .bundle/
+  - .sass-cache/
+  - .jekyll-cache/
+  - node_modules/
+  - .git
+  - .github
+  - "*.pyc"
+  - "__pycache__/"
   - streamlit_app
   - streamlit_app/**
+
+# Custom variables
+github_url: "https://github.com/moshesham/Data-Science-Analytical-Handbook"
+issues_url: "https://github.com/moshesham/Data-Science-Analytical-Handbook/issues"
+
+# SEO and social
+social:
+  name: "Data Science Analytical Handbook"
+  links:
+    - https://github.com/moshesham/Data-Science-Analytical-Handbook
+
+# Defaults
+defaults:
+  - scope:
+      path: ""
+      type: "pages"
+    values:
+      layout: "default"
