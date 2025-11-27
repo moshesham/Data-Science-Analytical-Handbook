@@ -5,62 +5,49 @@ permalink: /
 ---
 
 <div class="header">
-  <h1>Master Product Data Analytics</h1>
-  <p>Your Guide To Data Analytics Mastery</p>
+  <h1>Data Science Analytical Interview Preparation for Meta</h1>
+  <p>Your comprehensive guide to acing Meta's Data Science interviews</p>
   <div class="button-group">
     <a class="button primary-button" href="{{ '/introduction/' | relative_url }}">Start Learning</a>
-    <a class="button" href="{{ '/streamlit_app/Product_Analytics/' | relative_url }}">Streamlit App</a>
   </div>
 </div>
 
 <div class="main-content">
   <div class="resources-grid">
-    <a href="{{ '/foundational_knowledge/1/' | relative_url }}" class="resource-card">
+    <a href="{{ '/introduction/' | relative_url }}" class="resource-card">
+      <div class="icon-container">👋</div>
+      <h3>Introduction</h3>
+      <p>Learn about Meta's interview process and how to use this handbook.</p>
+    </a>
+
+    <a href="{{ '/foundational-knowledge/' | relative_url }}" class="resource-card">
       <div class="icon-container">📊</div>
-      <h3>Statistics and Probability</h3>
-      <p>Master statistical concepts and probability theory.</p>
+      <h3>Foundational Knowledge</h3>
+      <p>Master statistics, SQL, and Python essentials for data science.</p>
     </a>
 
-    <a href="{{ '/foundational_knowledge/2-SQL/' | relative_url }}" class="resource-card">
-      <div class="icon-container">🗄️</div>
-      <h3>SQL & Data Manipulation</h3>
-      <p>Learn SQL for data processing and analysis, including advanced techniques.</p>
+    <a href="{{ '/interview-preparation/' | relative_url }}" class="resource-card">
+      <div class="icon-container">💼</div>
+      <h3>Interview Preparation</h3>
+      <p>Comprehensive guides for technical, analytical, and behavioral interviews.</p>
     </a>
 
-    <a href="{{ '/foundational_knowledge/3/' | relative_url }}" class="resource-card">
-      <div class="icon-container">🐍</div>
-      <h3>Python for Data Analysis</h3>
-      <p>Dive into Python with a focus on Pandas, NumPy, and data visualization.</p>
-    </a>
-
-  <a href="{{ '/interview-preparation/analytical-reasoning/' | relative_url }}" class="resource-card">
-      <div class="icon-container">🧠</div>
-      <h3>Analytical Reasoning/Product Sense</h3>
-      <p>Develop skills to tackle product-related data questions.</p>
-    </a>
-
-  <a href="{{ '/interview-preparation/analytical-execution/' | relative_url }}" class="resource-card">
-      <div class="icon-container">⚙️</div>
-      <h3>Analytical Execution</h3>
-      <p>Master the execution of complex analytical problems.</p>
-    </a>
-
-  <a href="{{ '/interview-preparation/behavioral-interview/' | relative_url }}" class="resource-card">
-      <div class="icon-container">💡</div>
-      <h3>Behavioral Interview</h3>
-      <p>Prepare for behavioral questions with the STAR method.</p>
-    </a>
-
-  <a href="{{ '/meta-specificity/' | relative_url }}" class="resource-card">
+    <a href="{{ '/meta-specificity/' | relative_url }}" class="resource-card">
       <div class="icon-container">🏛️</div>
       <h3>Meta Specificity</h3>
-      <p>Gain insights into Meta's interview process and culture.</p>
+      <p>Gain insights into Meta's interview process, culture, and values.</p>
     </a>
 
-  <a href="{{ '/resources-practice/' | relative_url }}" class="resource-card">
+    <a href="{{ '/resources-practice/' | relative_url }}" class="resource-card">
       <div class="icon-container">📚</div>
       <h3>Resources and Practice</h3>
-      <p>Explore a curated list of resources for continuous learning.</p>
+      <p>Explore curated resources, practice problems, and study guides.</p>
+    </a>
+
+    <a href="{{ '/conclusion/' | relative_url }}" class="resource-card">
+      <div class="icon-container">🎯</div>
+      <h3>Conclusion</h3>
+      <p>Final tips and next steps for your interview journey.</p>
     </a>
   </div>
 </div>

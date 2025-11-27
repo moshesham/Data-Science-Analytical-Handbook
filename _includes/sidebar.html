@@ -9,8 +9,21 @@
         <li><a href="{{ '/introduction/#handbook-usage' | relative_url }}">4. How to Use This Handbook</a></li>
       </ul>
     </li>
-  <li><a href="{{ '/foundational_knowledge/1/' | relative_url }}" class="{% if page.url contains '/foundational_knowledge/' %}active{% endif %}">II. Foundational Knowledge &amp; Skills</a></li>
-  <li><a href="{{ '/interview-preparation/technical-skills/' | relative_url }}" class="{% if page.url contains '/interview-preparation/' %}active{% endif %}">III. Interview Preparation</a></li>
+  <li><a href="{{ '/foundational-knowledge/' | relative_url }}" class="{% if page.url contains '/foundational_knowledge/' %}active{% endif %}">II. Foundational Knowledge &amp; Skills</a>
+    <ul>
+      <li><a href="{{ '/foundational_knowledge/1/' | relative_url }}">1. Statistics & Probability</a></li>
+      <li><a href="{{ '/foundational_knowledge/2-SQL/' | relative_url }}">2. SQL & Data Manipulation</a></li>
+      <li><a href="{{ '/foundational_knowledge/3/' | relative_url }}">3. Programming (Python/R)</a></li>
+    </ul>
+  </li>
+  <li><a href="{{ '/interview-preparation/' | relative_url }}" class="{% if page.url contains '/interview-preparation/' %}active{% endif %}">III. Interview Preparation</a>
+    <ul>
+      <li><a href="{{ '/interview-preparation/technical-skills/' | relative_url }}">Technical Skills</a></li>
+      <li><a href="{{ '/interview-preparation/analytical-execution/' | relative_url }}">Analytical Execution</a></li>
+      <li><a href="{{ '/interview-preparation/analytical-reasoning/' | relative_url }}">Analytical Reasoning</a></li>
+      <li><a href="{{ '/interview-preparation/behavioral-interview/' | relative_url }}">Behavioral Interview</a></li>
+    </ul>
+  </li>
   <li><a href="{{ '/meta-specificity/' | relative_url }}" class="{% if page.url contains '/meta-specificity/' %}active{% endif %}">IV. Meta Specificity</a></li>
   <li><a href="{{ '/resources-practice/' | relative_url }}" class="{% if page.url contains '/resources-practice/' %}active{% endif %}">V. Resources and Practice</a></li>
   <li><a href="{{ '/conclusion/' | relative_url }}" class="{% if page.url contains '/conclusion/' %}active{% endif %}">VI. Conclusion</a></li>
