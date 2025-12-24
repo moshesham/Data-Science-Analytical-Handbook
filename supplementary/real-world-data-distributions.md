@@ -202,10 +202,10 @@ import numpy as np
 
 def bootstrap_mean_ci(data, n_bootstrap=10000, ci=0.95):
     """Calculate bootstrap confidence interval for mean."""
-    boot_means = [np.mean(np.random.choice(data, len(data), replace=True)) 
-                  for _ in range(n_bootstrap)]
-    lower = np.percentile(boot_means, (1-ci)/2 * 100)
-    upper = np.percentile(boot_means, (1+ci)/2 * 100)
+    bootstrap_mean_samples = [np.mean(np.random.choice(data, len(data), replace=True)) 
+                              for _ in range(n_bootstrap)]
+    lower = np.percentile(bootstrap_mean_samples, (1-ci)/2 * 100)
+    upper = np.percentile(bootstrap_mean_samples, (1+ci)/2 * 100)
     return lower, upper
 ```
 
@@ -213,7 +213,7 @@ def bootstrap_mean_ci(data, n_bootstrap=10000, ci=0.95):
 
 ## Distribution Selection Decision Tree
 
-> **Note:** This is a simplified decision tree for initial guidance. Always complement these rules with domain knowledge, visual inspection of your data (histograms, Q-Q plots), and formal statistical tests for distribution fitting.
+> **Note:** This is a simplified decision tree for initial guidance. Always complement these rules with domain knowledge, visual inspection of your data (histograms, Q-Q plots), and formal statistical tests for distribution fitting (e.g., Shapiro–Wilk test for normality, Kolmogorov–Smirnov test, Anderson–Darling test).
 
 ```
 Is your data continuous?
