@@ -53,9 +53,9 @@ This intensive 21-day plan is structured to build your skills from the ground up
 ## Additional Helpful Resources
 
 You might also find these to be helpful practices:
-- For statistics practice: [Statistics & Probability Example Questions](Extra-Review-Problems/Statistics-Probability-Example-Questions.MD)
-- For SQL practice: [SQL Example Problems](Extra-Review-Problems/sql-example-problems.md)
-- For behavioral question practice: [Behavioral Mock Interview](Extra-Review-Problems/Behavioral-Mock-Interview.MD)
+- For statistics practice: [Statistics & Probability Example Questions](statistics-probability-example-questions.md)
+- For SQL practice: [SQL Example Problems](sql-example-problems.md)
+- For behavioral question practice: [Behavioral Mock Interview](behavioral-mock-interview.md)
 
 ## Daily Commitment
 
