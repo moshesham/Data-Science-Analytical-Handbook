@@ -854,7 +854,7 @@ Stream processing excels where real-time or near real-time responses are needed:
 
 *    **AWS Architecture Diagram**:
 
-![AWS Real-Time Processing](/resources/Realtime_processing.png)
+<!-- Image placeholder - to be added: AWS Real-Time Processing diagram -->
        
 
 ## 2.3 Change Data Capture (CDC)

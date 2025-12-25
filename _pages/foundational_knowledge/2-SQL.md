@@ -41,7 +41,7 @@ track: "Foundational Knowledge"
           <li><a href="https://sqlzoo.net/" target="_blank">SQLZOO</a></li>
           <li><a href="https://www.hackerrank.com/domains/sql" target="_blank">HackerRank SQL</a></li>
           <li><a href="https://leetcode.com/problemset/database/" target="_blank">LeetCode Database</a></li>
-          <li><a href="https://www.stratascratch.com/" target="_blank">StrataScratch</a></li>
+          <li><a href="https://platform.stratascratch.com/coding" target="_blank">StrataScratch</a></li>
         </ul>
       </li>
     </ul>

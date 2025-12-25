@@ -63,7 +63,7 @@ track: "Reference"
         <th>Description</th>
       </tr>
       <tr>
-        <td><a href="https://www.stratascratch.com/" target="_blank">StrataScratch</a></td>
+        <td><a href="https://platform.stratascratch.com/" target="_blank">StrataScratch</a></td>
         <td>Focus on business-oriented SQL questions from real companies</td>
       </tr>
       <tr>
@@ -113,7 +113,7 @@ track: "Reference"
         <td>Comprehensive coverage of core statistical concepts</td>
       </tr>
       <tr>
-        <td><a href="https://www.openintro.org/book/os/" target="_blank">OpenIntro Statistics</a></td>
+        <td><a href="https://www.openintro.org/" target="_blank">OpenIntro Statistics</a></td>
         <td>Free textbook focused on real-world applications</td>
       </tr>
     </table>
@@ -204,7 +204,7 @@ track: "Reference"
       <li><a href="https://medium.com/airbnb-engineering" target="_blank">Airbnb Engineering</a></li>
       <li><a href="https://netflixtechblog.com/" target="_blank">Netflix Technology Blog</a></li>
       <li><a href="https://engineering.atspotify.com/" target="_blank">Spotify Engineering</a></li>
-      <li><a href="https://eng.uber.com/" target="_blank">Uber Engineering</a></li>
+      <li><a href="https://www.uber.com/blog/engineering/" target="_blank">Uber Engineering</a></li>
       <li><a href="https://engineering.linkedin.com/blog" target="_blank">LinkedIn Engineering</a></li>
     </ul>
   </div>

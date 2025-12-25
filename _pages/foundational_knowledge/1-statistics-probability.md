@@ -48,7 +48,7 @@ track: "Foundational Knowledge"
       <li>Focus on understanding p-values, confidence intervals, and how to design and interpret A/B tests.</li>
       <li><strong>Resources:</strong>
         <ul>
-          <li><a href="https://www.openintro.org/book/os/" target="_blank">OpenIntro Statistics</a></li>
+          <li><a href="https://www.openintro.org/book/stat/" target="_blank">OpenIntro Statistics</a></li>
           <li><a href="https://www.khanacademy.org/math/statistics-probability" target="_blank">Khan Academy Statistics</a></li>
           <li><a href="https://www.youtube.com/@statquest" target="_blank">StatQuest YouTube channel</a></li>
           <li><a href="https://www.optimizely.com/sample-size-calculator/" target="_blank">Optimizely's sample size calculator</a></li>
