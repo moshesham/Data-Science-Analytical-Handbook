@@ -2,6 +2,10 @@
 layout: default
 title: "Technical Skills Interview"
 permalink: /interview-preparation/technical-skills/
+difficulty: "Advanced"
+estimated_time: "60 mins"
+tags: [Interview, Technical Skills, Problem Solving]
+track: "Interview Preparation"
 ---
 
 <div class="breadcrumb">

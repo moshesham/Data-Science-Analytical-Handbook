@@ -1,3 +1,13 @@
+---
+layout: page
+title: "21-Day Preparation Guide"
+permalink: /supplementary/21-day-prep-guide/
+difficulty: "Intermediate"
+estimated_time: "45 mins"
+tags: [Study Plan, Interview Prep, SQL, Statistics]
+track: "Getting Started"
+---
+
 # The Ultimate 21-Day Analytical Interview Prep Plan
 
 This intensive 21-day plan is structured to build your skills from the ground up, moving from core technical abilities to strategic product thinking and, finally, to interview execution. Each day includes a primary focus, a specific "Do This" action, and targeted resources.

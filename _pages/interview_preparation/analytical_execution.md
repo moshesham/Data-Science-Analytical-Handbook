@@ -2,6 +2,10 @@
 layout: default
 title: "Analytical Execution Interview"
 permalink: /interview-preparation/analytical-execution/
+difficulty: "Intermediate"
+estimated_time: "45 mins"
+tags: [Interview, Case Study, Analytical Execution, A/B Testing]
+track: "Interview Preparation"
 ---
 
 <div class="breadcrumb">

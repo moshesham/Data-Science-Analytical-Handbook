@@ -2,6 +2,10 @@
 layout: default
 title: "Conclusion"
 permalink: /conclusion/
+difficulty: "Intermediate"
+estimated_time: "20 mins"
+tags: [Conclusion, Career Advice, Next Steps]
+track: "Getting Started"
 ---
 
 <div class="breadcrumb">

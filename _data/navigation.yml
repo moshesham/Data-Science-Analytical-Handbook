@@ -1,0 +1,63 @@
+- title: "I. Introduction"
+  url: "/introduction/"
+  icon: "fas fa-play-circle"
+  children:
+    - title: "Welcome & Purpose"
+      url: "/introduction/#welcome"
+    - title: "The Data Science Role"
+      url: "/introduction/#meta-data-science-role"
+    - title: "Interview Process"
+      url: "/introduction/#interview-process"
+    - title: "How to Use This Handbook"
+      url: "/introduction/#handbook-usage"
+
+- title: "II. Foundational Knowledge"
+  url: "/foundational-knowledge/"
+  icon: "fas fa-graduation-cap"
+  children:
+    - title: "Statistics & Probability"
+      url: "/foundational_knowledge/1/"
+    - title: "SQL & Data Manipulation"
+      url: "/foundational_knowledge/2-SQL/"
+    - title: "Programming (Python/R)"
+      url: "/foundational_knowledge/3/"
+
+- title: "III. Interview Preparation"
+  url: "/interview-preparation/"
+  icon: "fas fa-chalkboard-teacher"
+  children:
+    - title: "Technical Skills"
+      url: "/interview-preparation/technical-skills/"
+    - title: "Analytical Execution"
+      url: "/interview-preparation/analytical-execution/"
+    - title: "Analytical Reasoning"
+      url: "/interview-preparation/analytical-reasoning/"
+    - title: "Behavioral Interview"
+      url: "/interview-preparation/behavioral-interview/"
+    - title: "Interview Day Checklist"
+      url: "/interview-preparation/interview-day-checklist/"
+
+- title: "IV. Learning Paths"
+  url: "/tracks/"
+  icon: "fas fa-route"
+  children:
+    - title: "Learning Tracks"
+      url: "/tracks/"
+    - title: "Skills Matrix"
+      url: "/skills/"
+
+- title: "V. Meta Specificity"
+  url: "/meta-specificity/"
+  icon: "fas fa-building"
+
+- title: "VI. Resources & Practice"
+  url: "/resources-practice/"
+  icon: "fas fa-book-open"
+
+- title: "VII. Conclusion"
+  url: "/conclusion/"
+  icon: "fas fa-flag-checkered"
+
+- title: "Appendix"
+  url: "/appendix/"
+  icon: "fas fa-paperclip"

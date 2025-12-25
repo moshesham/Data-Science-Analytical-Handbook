@@ -1,3 +1,13 @@
+---
+layout: page
+title: "Key Insights & Tips for Meta"
+permalink: /supplementary/key-insights-tips-meta/
+difficulty: "Intermediate"
+estimated_time: "20 mins"
+tags: [Meta, Interview Tips, Strategy]
+track: "Interview Preparation"
+---
+
 ## Key Insights & Tips for Meta (Summary)
 
 This section summarizes the key insights and tips specific to Meta, categorized by the foundational skill areas.

@@ -2,6 +2,10 @@
 layout: default
 title: "Meta Specificity"
 permalink: /meta-specificity/
+difficulty: "Intermediate"
+estimated_time: "20 mins"
+tags: [Meta, Interview Tips, Company Specific]
+track: "Interview Preparation"
 ---
 
 <div class="breadcrumb">

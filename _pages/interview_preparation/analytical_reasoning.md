@@ -2,6 +2,10 @@
 layout: default
 title: "Analytical Reasoning / Product Sense"
 permalink: /interview-preparation/analytical-reasoning/
+difficulty: "Intermediate"
+estimated_time: "45 mins"
+tags: [Interview, Product Sense, Metrics, Strategy]
+track: "Interview Preparation"
 ---
 
 <div class="breadcrumb">

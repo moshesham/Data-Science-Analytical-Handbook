@@ -62,6 +62,10 @@
                     <li><a href="{{ '/resources-practice/' | relative_url }}" {% if page.url contains 'resources' %}class="active"{% endif %}>Resources</a></li>
                 </ul>
                 <div class="nav-actions">
+                    <div class="search-container">
+                        <input type="text" id="search-input" placeholder="Search..." aria-label="Search">
+                        <i class="fas fa-search search-icon"></i>
+                    </div>
                     <button class="theme-toggle" aria-label="Toggle dark mode" title="Toggle theme">
                         <i class="fas fa-moon"></i>
                     </button>
@@ -82,6 +86,25 @@
             <article class="content">
                 {{ content }}
             </article>
+            
+            <!-- Progress Tracking (only for content pages) -->
+            {% unless page.url == '/' %}
+            <div class="page-progress">
+                <button id="mark-complete-btn" class="btn btn-primary">
+                    <i class="fas fa-check"></i> Mark as Complete
+                </button>
+                {% if page.estimated_time %}
+                <span class="page-time">
+                    <i class="fas fa-clock"></i> {{ page.estimated_time }}
+                </span>
+                {% endif %}
+                {% if page.difficulty %}
+                <span class="page-difficulty {{ page.difficulty | downcase }}">
+                    {{ page.difficulty }}
+                </span>
+                {% endif %}
+            </div>
+            {% endunless %}
         </main>
 
         <!-- Footer -->
@@ -126,6 +149,17 @@
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
     <script>
+        const SITE_BASEURL = "{{ site.baseurl }}";
+
+        function normalizeSitePath(pathname) {
+            if (!pathname) return pathname;
+            if (SITE_BASEURL && SITE_BASEURL !== '/' && pathname.startsWith(SITE_BASEURL)) {
+                const stripped = pathname.slice(SITE_BASEURL.length);
+                return stripped.startsWith('/') ? stripped : `/${stripped}`;
+            }
+            return pathname;
+        }
+
         // Mobile navigation toggle
         document.addEventListener('DOMContentLoaded', function() {
             const navToggle = document.querySelector('.nav-toggle');
@@ -172,6 +206,124 @@
                     }
                 });
             }
+        });
+
+        // Simple search functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchInput = document.getElementById('search-input');
+            const searchIcon = document.querySelector('.search-icon');
+            
+            if (searchInput) {
+                let searchData = [];
+                
+                // Load search data
+                fetch('{{ "/search.json" | relative_url }}')
+                    .then(response => response.json())
+                    .then(data => {
+                        searchData = data;
+                    })
+                    .catch(error => console.error('Error loading search data:', error));
+                
+                // Search function
+                function performSearch(query) {
+                    if (!query.trim()) return [];
+                    
+                    const results = searchData.filter(item => {
+                        const titleMatch = item.title.toLowerCase().includes(query.toLowerCase());
+                        const contentMatch = item.content.toLowerCase().includes(query.toLowerCase());
+                        return titleMatch || contentMatch;
+                    });
+                    
+                    return results.slice(0, 10); // Limit to 10 results
+                }
+                
+                // Show search results
+                function showResults(results) {
+                    // Remove existing results
+                    const existingResults = document.querySelector('.search-results');
+                    if (existingResults) existingResults.remove();
+                    
+                    if (results.length === 0) return;
+                    
+                    const resultsDiv = document.createElement('div');
+                    resultsDiv.className = 'search-results';
+                    resultsDiv.innerHTML = `
+                        <div class="search-results-header">
+                            <h4>Search Results</h4>
+                        </div>
+                        <ul>
+                            ${results.map(result => `
+                                <li>
+                                    <a href="${result.url}">
+                                        <strong>${result.title}</strong>
+                                        <p>${result.content.substring(0, 100)}...</p>
+                                    </a>
+                                </li>
+                            `).join('')}
+                        </ul>
+                    `;
+                    
+                    searchInput.parentNode.appendChild(resultsDiv);
+                }
+                
+                // Hide results
+                function hideResults() {
+                    const results = document.querySelector('.search-results');
+                    if (results) results.remove();
+                }
+                
+                // Event listeners
+                searchInput.addEventListener('input', function(e) {
+                    const query = e.target.value;
+                    if (query.length > 2) {
+                        const results = performSearch(query);
+                        showResults(results);
+                    } else {
+                        hideResults();
+                    }
+                });
+                
+                searchInput.addEventListener('blur', function() {
+                    setTimeout(hideResults, 200); // Delay to allow clicking on results
+                });
+                
+                if (searchIcon) {
+                    searchIcon.addEventListener('click', function() {
+                        searchInput.focus();
+                    });
+                }
+            }
+        });
+        // Page progress tracking
+        document.addEventListener('DOMContentLoaded', function() {
+            const markCompleteBtn = document.getElementById('mark-complete-btn');
+            if (!markCompleteBtn) return;
+
+            const pageUrl = "{{ page.url }}";
+            const pageKey = normalizeSitePath(pageUrl);
+            const completedPages = JSON.parse(localStorage.getItem('completed_pages') || '[]');
+
+            if (completedPages.includes(pageKey)) {
+                markCompleteBtn.classList.add('completed');
+                markCompleteBtn.innerHTML = '<i class="fas fa-check-circle"></i> Completed';
+            }
+
+            markCompleteBtn.addEventListener('click', function() {
+                const completedPages = JSON.parse(localStorage.getItem('completed_pages') || '[]');
+
+                if (completedPages.includes(pageKey)) {
+                    const index = completedPages.indexOf(pageKey);
+                    completedPages.splice(index, 1);
+                    this.classList.remove('completed');
+                    this.innerHTML = '<i class="fas fa-check"></i> Mark as Complete';
+                } else {
+                    completedPages.push(pageKey);
+                    this.classList.add('completed');
+                    this.innerHTML = '<i class="fas fa-check-circle"></i> Completed';
+                }
+
+                localStorage.setItem('completed_pages', JSON.stringify(completedPages));
+            });
         });
     </script>
 </body>

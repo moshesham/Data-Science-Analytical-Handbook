@@ -2,6 +2,10 @@
 layout: default
 title: "SQL & Data Manipulation"
 permalink: /foundational_knowledge/2-SQL/
+difficulty: "Beginner"
+estimated_time: "30 mins"
+tags: [SQL, Data Manipulation, Query Optimization]
+track: "Foundational Knowledge"
 ---
 
 <div class="breadcrumb">

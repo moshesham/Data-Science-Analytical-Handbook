@@ -2,6 +2,10 @@
 layout: default
 title: "Resources and Practice"
 permalink: /resources-practice/
+difficulty: "Beginner"
+estimated_time: "30 mins"
+tags: [Resources, Practice, Learning]
+track: "Reference"
 ---
 
 <div class="breadcrumb">
@@ -19,8 +23,8 @@ permalink: /resources-practice/
   <div class="card">
     <h2>Study Guides</h2>
     <ul>
-      <li><a href="https://github.com/moshesham/Data-Science-Analytical-Handbook/blob/main/supplementary/21-day-prep-guide.md" target="_blank">📅 21-Day Preparation Guide</a> - Structured 3-week study plan covering all essential topics</li>
-      <li><a href="https://github.com/moshesham/Data-Science-Analytical-Handbook/blob/main/supplementary/key-insights-tips-meta.md" target="_blank">💡 Key Insights & Tips for Meta</a> - Meta-specific advice and common pitfalls to avoid</li>
+      <li><a href="{{ '/supplementary/21-day-prep-guide/' | relative_url }}">📅 21-Day Preparation Guide</a> - Structured 3-week study plan covering all essential topics</li>
+      <li><a href="{{ '/supplementary/key-insights-tips-meta/' | relative_url }}">💡 Key Insights & Tips for Meta</a> - Meta-specific advice and common pitfalls to avoid</li>
     </ul>
   </div>
 

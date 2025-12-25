@@ -2,6 +2,10 @@
 layout: default
 title: "Foundational Knowledge Overview"
 permalink: /foundational-knowledge/
+difficulty: "Beginner"
+estimated_time: "10 mins"
+tags: [Overview, Foundations]
+track: "Foundational Knowledge"
 ---
 
 <div class="breadcrumb">

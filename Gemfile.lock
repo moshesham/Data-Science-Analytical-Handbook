@@ -276,6 +276,7 @@ PLATFORMS
 DEPENDENCIES
   github-pages
   jekyll-feed
+  jekyll-seo-tag
   jekyll-sitemap
 
 BUNDLED WITH

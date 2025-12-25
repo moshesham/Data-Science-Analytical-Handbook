@@ -2,6 +2,10 @@
 layout: default
 title: "Appendix"
 permalink: /appendix/
+difficulty: "Beginner"
+estimated_time: "30 mins"
+tags: [Glossary, Reference, Terms]
+track: "Reference"
 ---
 
 <div class="breadcrumb">
