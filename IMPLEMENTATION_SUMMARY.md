@@ -118,20 +118,20 @@ Conducted comprehensive end-to-end UI/UX review and restructuring of the Data Sc
 #### Updated Sidebar (`_includes/sidebar.html`):
 **Before:**
 ```html
-<li><a href="/foundational_knowledge/1/">II. Foundational Knowledge</a></li>
-<li><a href="/interview-preparation/technical-skills/">III. Interview Preparation</a></li>
+<li><a href="{{ '/foundational_knowledge/1/' | relative_url }}">II. Foundational Knowledge</a></li>
+<li><a href="{{ '/interview-preparation/technical-skills/' | relative_url }}">III. Interview Preparation</a></li>
 ```
 
 **After:**
 ```html
-<li><a href="/foundational-knowledge/">II. Foundational Knowledge & Skills</a>
+<li><a href="{{ '/foundational-knowledge/' | relative_url }}">II. Foundational Knowledge & Skills</a>
   <ul>
     <li>1. Statistics & Probability</li>
     <li>2. SQL & Data Manipulation</li>
     <li>3. Programming (Python/R)</li>
   </ul>
 </li>
-<li><a href="/interview-preparation/">III. Interview Preparation</a>
+<li><a href="{{ '/interview-preparation/' | relative_url }}">III. Interview Preparation</a>
   <ul>
     <li>Technical Skills</li>
     <li>Analytical Execution</li>
