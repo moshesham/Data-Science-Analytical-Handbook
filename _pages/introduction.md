@@ -2,6 +2,10 @@
 layout: default
 title: "Introduction"
 permalink: /introduction/
+difficulty: "Beginner"
+estimated_time: "15 mins"
+tags: [Introduction, Overview]
+track: "Getting Started"
 ---
 
 <!-- Using original HTML inside a Jekyll page to preserve complex structure and anchors -->

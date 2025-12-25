@@ -1,46 +1,23 @@
 <aside class="sidebar">
   <h2><i class="fas fa-book"></i> Contents</h2>
   <ul class="nav-list">
+    {% for item in site.data.navigation %}
     <li>
-      <a href="{{ '/introduction/' | relative_url }}" class="{% if page.url == '/introduction/' %}active{% endif %}">
-        <i class="fas fa-play-circle"></i> I. Introduction
+      <a href="{{ item.url | relative_url }}" class="{% if page.url == item.url or page.url contains item.url %}active{% endif %}">
+        {% if item.icon %}<i class="{{ item.icon }}"></i>{% endif %} {{ item.title }}
       </a>
+      {% if item.children %}
       <ul>
-        <li><a href="{{ '/introduction/#welcome' | relative_url }}">Welcome & Purpose</a></li>
-        <li><a href="{{ '/introduction/#meta-data-science-role' | relative_url }}">The Data Science Role</a></li>
-        <li><a href="{{ '/introduction/#interview-process' | relative_url }}">Interview Process</a></li>
-        <li><a href="{{ '/introduction/#handbook-usage' | relative_url }}">How to Use This Handbook</a></li>
+        {% for child in item.children %}
+        <li>
+          <a href="{{ child.url | relative_url }}" class="{% if page.url == child.url %}active{% endif %}">
+            {{ child.title }}
+          </a>
+        </li>
+        {% endfor %}
       </ul>
+      {% endif %}
     </li>
-    <li>
-      <a href="{{ '/foundational_knowledge/1/' | relative_url }}" class="{% if page.url contains '/foundational_knowledge/' %}active{% endif %}">
-        <i class="fas fa-graduation-cap"></i> II. Foundational Knowledge
-      </a>
-    </li>
-    <li>
-      <a href="{{ '/interview-preparation/technical-skills/' | relative_url }}" class="{% if page.url contains '/interview-preparation/' %}active{% endif %}">
-        <i class="fas fa-chalkboard-teacher"></i> III. Interview Preparation
-      </a>
-    </li>
-    <li>
-      <a href="{{ '/meta-specificity/' | relative_url }}" class="{% if page.url contains '/meta-specificity/' %}active{% endif %}">
-        <i class="fas fa-building"></i> IV. Meta Specificity
-      </a>
-    </li>
-    <li>
-      <a href="{{ '/resources-practice/' | relative_url }}" class="{% if page.url contains '/resources-practice/' %}active{% endif %}">
-        <i class="fas fa-book-open"></i> V. Resources & Practice
-      </a>
-    </li>
-    <li>
-      <a href="{{ '/conclusion/' | relative_url }}" class="{% if page.url contains '/conclusion/' %}active{% endif %}">
-        <i class="fas fa-flag-checkered"></i> VI. Conclusion
-      </a>
-    </li>
-    <li>
-      <a href="{{ '/appendix/' | relative_url }}" class="{% if page.url contains '/appendix/' %}active{% endif %}">
-        <i class="fas fa-paperclip"></i> Appendix
-      </a>
-    </li>
+    {% endfor %}
   </ul>
 </aside>

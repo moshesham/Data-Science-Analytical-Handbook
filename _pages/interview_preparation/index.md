@@ -2,6 +2,10 @@
 layout: default
 title: "Interview Preparation Overview"
 permalink: /interview-preparation/
+difficulty: "Beginner"
+estimated_time: "10 mins"
+tags: [Overview, Interview]
+track: "Interview Preparation"
 ---
 
 <div class="breadcrumb">

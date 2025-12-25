@@ -1,3 +1,13 @@
+---
+layout: page
+title: "Real-World Data Distributions"
+permalink: /supplementary/real-world-data-distributions/
+difficulty: "Intermediate"
+estimated_time: "35 mins"
+tags: [Statistics, Distributions, A/B Testing, Product Analytics]
+track: "Product Analytics Mastery"
+---
+
 # Real-World Data Distributions in Product Analytics
 
 Understanding data distributions is crucial for choosing the right statistical tests, designing experiments, and interpreting results correctly. This guide covers common distributions you'll encounter in product analytics and data science interviews.

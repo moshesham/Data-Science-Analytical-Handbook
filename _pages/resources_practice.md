@@ -2,6 +2,10 @@
 layout: default
 title: "Resources and Practice"
 permalink: /resources-practice/
+difficulty: "Beginner"
+estimated_time: "30 mins"
+tags: [Resources, Practice, Learning]
+track: "Reference"
 ---
 
 <div class="breadcrumb">
@@ -19,8 +23,8 @@ permalink: /resources-practice/
   <div class="card">
     <h2>Study Guides</h2>
     <ul>
-      <li><a href="https://github.com/moshesham/Data-Science-Analytical-Handbook/blob/main/supplementary/21-day-prep-guide.md" target="_blank">📅 21-Day Preparation Guide</a> - Structured 3-week study plan covering all essential topics</li>
-      <li><a href="https://github.com/moshesham/Data-Science-Analytical-Handbook/blob/main/supplementary/key-insights-tips-meta.md" target="_blank">💡 Key Insights & Tips for Meta</a> - Meta-specific advice and common pitfalls to avoid</li>
+      <li><a href="{{ '/supplementary/21-day-prep-guide/' | relative_url }}">📅 21-Day Preparation Guide</a> - Structured 3-week study plan covering all essential topics</li>
+      <li><a href="{{ '/supplementary/key-insights-tips-meta/' | relative_url }}">💡 Key Insights & Tips for Meta</a> - Meta-specific advice and common pitfalls to avoid</li>
     </ul>
   </div>
 
@@ -59,7 +63,7 @@ permalink: /resources-practice/
         <th>Description</th>
       </tr>
       <tr>
-        <td><a href="https://www.stratascratch.com/" target="_blank">StrataScratch</a></td>
+        <td><a href="https://platform.stratascratch.com/" target="_blank">StrataScratch</a></td>
         <td>Focus on business-oriented SQL questions from real companies</td>
       </tr>
       <tr>
@@ -109,7 +113,7 @@ permalink: /resources-practice/
         <td>Comprehensive coverage of core statistical concepts</td>
       </tr>
       <tr>
-        <td><a href="https://www.openintro.org/book/os/" target="_blank">OpenIntro Statistics</a></td>
+        <td><a href="https://www.openintro.org/" target="_blank">OpenIntro Statistics</a></td>
         <td>Free textbook focused on real-world applications</td>
       </tr>
     </table>
@@ -200,7 +204,7 @@ permalink: /resources-practice/
       <li><a href="https://medium.com/airbnb-engineering" target="_blank">Airbnb Engineering</a></li>
       <li><a href="https://netflixtechblog.com/" target="_blank">Netflix Technology Blog</a></li>
       <li><a href="https://engineering.atspotify.com/" target="_blank">Spotify Engineering</a></li>
-      <li><a href="https://eng.uber.com/" target="_blank">Uber Engineering</a></li>
+      <li><a href="https://www.uber.com/blog/engineering/" target="_blank">Uber Engineering</a></li>
       <li><a href="https://engineering.linkedin.com/blog" target="_blank">LinkedIn Engineering</a></li>
     </ul>
   </div>

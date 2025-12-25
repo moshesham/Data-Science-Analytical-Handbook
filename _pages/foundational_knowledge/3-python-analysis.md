@@ -2,6 +2,10 @@
 layout: default
 title: "Programming (Python/R) for Data Analysis"
 permalink: /foundational_knowledge/3/
+difficulty: "Intermediate"
+estimated_time: "45 mins"
+tags: [Python, Data Analysis, Pandas, NumPy]
+track: "Foundational Knowledge"
 ---
 
 <div class="breadcrumb">

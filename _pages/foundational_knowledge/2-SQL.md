@@ -2,6 +2,10 @@
 layout: default
 title: "SQL & Data Manipulation"
 permalink: /foundational_knowledge/2-SQL/
+difficulty: "Beginner"
+estimated_time: "30 mins"
+tags: [SQL, Data Manipulation, Query Optimization]
+track: "Foundational Knowledge"
 ---
 
 <div class="breadcrumb">
@@ -37,7 +41,7 @@ permalink: /foundational_knowledge/2-SQL/
           <li><a href="https://sqlzoo.net/" target="_blank">SQLZOO</a></li>
           <li><a href="https://www.hackerrank.com/domains/sql" target="_blank">HackerRank SQL</a></li>
           <li><a href="https://leetcode.com/problemset/database/" target="_blank">LeetCode Database</a></li>
-          <li><a href="https://www.stratascratch.com/" target="_blank">StrataScratch</a></li>
+          <li><a href="https://platform.stratascratch.com/coding" target="_blank">StrataScratch</a></li>
         </ul>
       </li>
     </ul>

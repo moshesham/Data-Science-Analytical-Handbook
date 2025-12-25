@@ -1298,6 +1298,627 @@ footer {
     }
 }
 
+/* Tracks and Skills Styles */
+.tracks-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+    margin: 2rem 0;
+}
+
+.track-card {
+    background: var(--color-bg-primary);
+    border: 1px solid var(--color-border);
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.track-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.track-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.track-icon {
+    font-size: 2rem;
+    color: var(--color-primary);
+}
+
+.track-meta {
+    text-align: right;
+}
+
+.track-duration {
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+    font-weight: 500;
+}
+
+.track-difficulty {
+    display: inline-block;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-top: 0.25rem;
+}
+
+.track-difficulty.beginner {
+    background: var(--color-success);
+    color: white;
+}
+
+.track-difficulty.intermediate {
+    background: var(--color-warning);
+    color: white;
+}
+
+.track-difficulty.advanced {
+    background: var(--color-error);
+    color: white;
+}
+
+.track-card h3 {
+    margin: 0 0 0.5rem 0;
+    color: var(--color-text-primary);
+}
+
+.track-description {
+    color: var(--color-text-secondary);
+    margin-bottom: 1rem;
+    line-height: 1.5;
+}
+
+.track-audience {
+    font-size: 0.875rem;
+    color: var(--color-text-tertiary);
+    margin-bottom: 1rem;
+    font-style: italic;
+}
+
+.track-content h4 {
+    margin: 1rem 0 0.5rem 0;
+    font-size: 1rem;
+    color: var(--color-text-primary);
+}
+
+.track-modules {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.track-modules li {
+    padding: 0.25rem 0;
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+}
+
+.track-modules a {
+    color: var(--color-primary);
+    text-decoration: none;
+}
+
+.track-modules a:hover {
+    text-decoration: underline;
+}
+
+.track-actions {
+    margin-top: 1.5rem;
+    display: flex;
+    gap: 0.5rem;
+}
+
+.track-start-btn {
+    flex: 1;
+}
+
+.track-progress-btn {
+    background: transparent;
+    border: 1px solid var(--color-border);
+    color: var(--color-text-primary);
+}
+
+.track-progress-btn.has-progress {
+    background: var(--color-success);
+    color: white;
+    border-color: var(--color-success);
+}
+
+.tracks-info {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin: 3rem 0;
+}
+
+.info-card {
+    background: var(--color-bg-secondary);
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    border-left: 4px solid var(--color-primary);
+}
+
+.info-card h3 {
+    margin: 0 0 1rem 0;
+    color: var(--color-text-primary);
+}
+
+.info-card ul {
+    margin: 0;
+    padding-left: 1.5rem;
+}
+
+.info-card li {
+    margin-bottom: 0.5rem;
+    color: var(--color-text-secondary);
+}
+
+/* Skills Matrix Styles */
+.skills-overview {
+    background: var(--color-bg-secondary);
+    padding: 2rem;
+    border-radius: 0.75rem;
+    margin: 2rem 0;
+}
+
+.skills-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.stat-card {
+    text-align: center;
+    padding: 1rem;
+    background: var(--color-bg-primary);
+    border-radius: 0.5rem;
+    border: 1px solid var(--color-border);
+}
+
+.stat-number {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--color-primary);
+    display: block;
+}
+
+.stat-label {
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+    margin-top: 0.5rem;
+}
+
+.skills-cloud {
+    margin: 2rem 0;
+}
+
+.skills-cloud h3 {
+    margin-bottom: 1rem;
+    color: var(--color-text-primary);
+}
+
+.tags-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.skill-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: var(--color-bg-primary);
+    border: 1px solid var(--color-border);
+    border-radius: 2rem;
+    text-decoration: none;
+    color: var(--color-text-primary);
+    font-size: 0.875rem;
+    transition: all 0.2s ease;
+}
+
+.skill-tag:hover {
+    background: var(--color-primary);
+    color: white;
+    transform: translateY(-1px);
+}
+
+.tag-count {
+    background: var(--color-primary-light);
+    color: var(--color-primary-dark);
+    padding: 0.125rem 0.375rem;
+    border-radius: 1rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.skill-tag:hover .tag-count {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+}
+
+.skill-section {
+    margin: 3rem 0;
+    padding: 2rem;
+    background: var(--color-bg-secondary);
+    border-radius: 0.75rem;
+    border: 1px solid var(--color-border);
+}
+
+.skill-section h3 {
+    margin: 0 0 1.5rem 0;
+    color: var(--color-text-primary);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.skill-count {
+    font-size: 0.875rem;
+    color: var(--color-text-tertiary);
+    font-weight: normal;
+}
+
+.skill-difficulty-tabs {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.tab-btn {
+    padding: 0.75rem 1.5rem;
+    background: transparent;
+    border: 1px solid var(--color-border);
+    border-bottom: none;
+    border-radius: 0.5rem 0.5rem 0 0;
+    cursor: pointer;
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+    transition: all 0.2s ease;
+}
+
+.tab-btn.active {
+    background: var(--color-primary);
+    color: white;
+    border-color: var(--color-primary);
+}
+
+.tab-btn:hover:not(.active) {
+    background: var(--color-bg-primary);
+    color: var(--color-text-primary);
+}
+
+.skill-content-tabs .tab-content {
+    display: none;
+}
+
+.skill-content-tabs .tab-content.active {
+    display: block;
+}
+
+.skill-modules {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1rem;
+}
+
+.skill-module-card {
+    background: var(--color-bg-primary);
+    border: 1px solid var(--color-border);
+    border-radius: 0.5rem;
+    padding: 1rem;
+    transition: box-shadow 0.2s ease;
+}
+
+.skill-module-card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.module-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 0.5rem;
+}
+
+.module-header h4 {
+    margin: 0;
+    font-size: 1rem;
+    flex: 1;
+}
+
+.module-header h4 a {
+    color: var(--color-text-primary);
+    text-decoration: none;
+}
+
+.module-header h4 a:hover {
+    color: var(--color-primary);
+}
+
+.module-time {
+    font-size: 0.75rem;
+    color: var(--color-text-tertiary);
+    white-space: nowrap;
+    margin-left: 0.5rem;
+}
+
+.skill-module-card p {
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+    margin: 0.5rem 0;
+    line-height: 1.4;
+}
+
+.module-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1rem;
+}
+
+.module-track {
+    font-size: 0.75rem;
+    color: var(--color-primary);
+    font-weight: 500;
+}
+
+.mark-complete-btn {
+    padding: 0.375rem 0.75rem;
+    border: 1px solid var(--color-border);
+    background: transparent;
+    color: var(--color-text-primary);
+    border-radius: 0.25rem;
+    cursor: pointer;
+    font-size: 0.75rem;
+    transition: all 0.2s ease;
+}
+
+.mark-complete-btn:hover {
+    background: var(--color-primary);
+    color: white;
+    border-color: var(--color-primary);
+}
+
+.mark-complete-btn.completed {
+    background: var(--color-success);
+    color: white;
+    border-color: var(--color-success);
+}
+
+/* Modal Styles */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.modal-overlay > div {
+    background: var(--color-bg-primary);
+    padding: 2rem;
+    border-radius: 0.75rem;
+    max-width: 500px;
+    width: 90%;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+.progress-modal h3 {
+    margin: 0 0 1.5rem 0;
+    color: var(--color-text-primary);
+}
+
+.progress-modules {
+    margin-bottom: 1.5rem;
+}
+
+.progress-item {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.progress-item:last-child {
+    border-bottom: none;
+}
+
+.progress-item.completed {
+    color: var(--color-success);
+}
+
+.progress-item input[type="checkbox"] {
+    margin-right: 0.75rem;
+}
+
+.checkmark {
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--color-border);
+    border-radius: 3px;
+    display: inline-block;
+    position: relative;
+    margin-right: 0.5rem;
+    cursor: pointer;
+}
+
+.progress-item input[type="checkbox"]:checked + .checkmark {
+    background: var(--color-success);
+    border-color: var(--color-success);
+}
+
+.progress-item input[type="checkbox"]:checked + .checkmark::after {
+    content: '✓';
+    position: absolute;
+    top: -2px;
+    left: 2px;
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.page-progress {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background: var(--color-bg-secondary);
+    border-radius: 0.5rem;
+    border: 1px solid var(--color-border);
+}
+
+.page-time,
+.page-difficulty {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.page-time {
+    color: var(--color-text-secondary);
+}
+
+.page-difficulty.beginner {
+    color: var(--color-success);
+}
+
+.page-difficulty.intermediate {
+    color: var(--color-warning);
+}
+
+.skill-section.highlight {
+    background: var(--color-bg-secondary);
+    border-radius: 0.5rem;
+}
+
+.page-difficulty.advanced {
+    color: var(--color-error);
+}
+
+#mark-complete-btn.completed {
+    background: var(--color-success);
+    border-color: var(--color-success);
+}
+
+/* Search Styles */
+.search-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin-right: 1rem;
+}
+
+#search-input {
+    padding: 0.5rem 2.5rem 0.5rem 1rem;
+    border: 2px solid var(--color-border);
+    border-radius: 0.5rem;
+    background: var(--color-bg-primary);
+    color: var(--color-text-primary);
+    font-size: 0.875rem;
+    width: 200px;
+    transition: all 0.2s ease;
+}
+
+#search-input:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+}
+
+.search-icon {
+    position: absolute;
+    right: 0.75rem;
+    color: var(--color-text-tertiary);
+    pointer-events: none;
+}
+
+.search-results {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    width: 300px;
+    max-height: 400px;
+    background: var(--color-bg-primary);
+    border: 1px solid var(--color-border);
+    border-radius: 0.5rem;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    overflow-y: auto;
+    margin-top: 0.5rem;
+}
+
+.search-results-header {
+    padding: 1rem;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.search-results-header h4 {
+    margin: 0;
+    font-size: 1rem;
+    color: var(--color-text-primary);
+}
+
+.search-results ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.search-results li {
+    border-bottom: 1px solid var(--color-border);
+}
+
+.search-results li:last-child {
+    border-bottom: none;
+}
+
+.search-results a {
+    display: block;
+    padding: 1rem;
+    text-decoration: none;
+    color: var(--color-text-primary);
+    transition: background-color 0.2s ease;
+}
+
+.search-results a:hover {
+    background: var(--color-bg-secondary);
+}
+
+.search-results strong {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+}
+
+.search-results p {
+    font-size: 0.875rem;
+    color: var(--color-text-tertiary);
+    margin: 0;
+    line-height: 1.4;
+}
+
 /* Print Styles */
 @media print {
     .site-header,

@@ -1,0 +1,14 @@
+---
+layout: null
+---
+[
+  {% for page in site.pages %}
+  {% if page.title %}
+  {
+    "title": "{{ page.title | escape }}",
+    "url": "{{ page.url | relative_url }}",
+    "content": {{ page.content | strip_html | strip_newlines | jsonify }}
+  }{% unless forloop.last %},{% endunless %}
+  {% endif %}
+  {% endfor %}
+]

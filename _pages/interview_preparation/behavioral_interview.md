@@ -2,6 +2,10 @@
 layout: default
 title: "Behavioral Interview"
 permalink: /interview-preparation/behavioral-interview/
+difficulty: "Beginner"
+estimated_time: "35 mins"
+tags: [Interview, Behavioral, Communication]
+track: "Interview Preparation"
 ---
 
 <div class="breadcrumb">
