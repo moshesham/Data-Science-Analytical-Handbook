@@ -639,7 +639,11 @@ This section focuses on aspects specific to Meta's interview process and technol
 
 ## Practice Problems
 
-[Extra Review Problems](https://github.com/moshesham/Data-Science-Analytical-Handbook/tree/main/Extra-Review-Problems) 
+Additional practice materials are available in the [`supplementary/`](supplementary/) folder:
+- [SQL Example Problems](supplementary/sql-example-problems.md)
+- [Statistics & Probability Examples](supplementary/statistics-probability-example-questions.md)
+- [Advanced SQL Patterns](supplementary/Advanced-SQL-Patterns+Techniques.md)
+- [Behavioral Mock Interview](supplementary/behavioral-mock-interview.md) 
 
 ## Resources & Communities
 

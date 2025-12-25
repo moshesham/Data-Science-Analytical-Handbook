@@ -2,65 +2,69 @@
 
 This repository provides a comprehensive handbook designed to assist in preparing for data science analytical interviews, with a specific focus on Meta.
 
-## Repository Content and Structure
+## 🌐 GitHub Pages
 
-This repository is organized into the following sections and files:
+The GitHub Pages for this repository is available at: **[Data Science Analytical Handbook](https://moshesham.github.io/Data-Science-Analytical-Handbook/)**
 
-### 1. Handbook (Data-Science-Analytical-Interview-Preparation-Handbook.MD)
+## 📁 Repository Content and Structure
 
-This is the core document providing a comprehensive guide to Meta's data science interview process. It covers:
+This repository is organized into the following sections:
 
-* **Introduction:** Overview of Meta's interview process and values.
-* **Foundational Knowledge & Skills:** In-depth review of essential topics including statistics, probability, SQL, and data analysis with Python/R.
-* **Interview-Specific Preparation:** Guidance on tackling each stage of the interview process, from technical screens to behavioral questions.
-* **Analytical Execution/Case Study Interview:** Techniques for data analysis, hypothesis generation, and communication.
-* **Analytical Reasoning/Product Sense Interview:** Strategies for clarifying problems, developing product sense, defining metrics, and designing experiments.
-* **Resources & Communities:** Curated list of learning materials, online communities, and helpful resources.
+### Core Content
 
-### 2. Statistics and Probability Examples (Statistics-Probability-Example-Questions.MD)
+| Section | Location | Description |
+|---------|----------|-------------|
+| **Main Handbook** | [`Data-Science-Analytical-Interview-Preparation-Handbook.MD`](Data-Science-Analytical-Interview-Preparation-Handbook.MD) | Comprehensive guide to Meta's data science interview process |
+| **Jekyll Pages** | [`_pages/`](_pages/) | Web-ready content for GitHub Pages site |
+| **Hands-On Projects** | [`Analytical-HandsOn-Projects/`](Analytical-HandsOn-Projects/) | Practical data analysis projects |
+| **Simulations** | [`Simulations/`](Simulations/) | Interactive statistics notebooks |
 
-This file provides detailed examples and solutions to common statistics and probability questions encountered in data science interviews. It covers:
+### Supplementary Materials
 
-* **Descriptive Statistics:** Questions on measures of central tendency, variability, and data visualization.
-* **Probability:** Questions on Bayes' theorem, probability distributions, and sampling techniques.
-* **Inferential Statistics:** Questions on hypothesis testing, p-values, confidence intervals, and significance testing.
-* **Statistical Modeling:** Questions on regression analysis, A/B testing, and experimentation.
+| Resource | Location | Description |
+|----------|----------|-------------|
+| **21-Day Prep Guide** | [`supplementary/21-day-prep-guide.md`](supplementary/21-day-prep-guide.md) | Structured interview preparation plan |
+| **SQL Example Problems** | [`supplementary/sql-example-problems.md`](supplementary/sql-example-problems.md) | Complex SQL problems for practice |
+| **Statistics Examples** | [`supplementary/statistics-probability-example-questions.md`](supplementary/statistics-probability-example-questions.md) | Statistics and probability practice questions |
+| **Advanced SQL Patterns** | [`supplementary/Advanced-SQL-Patterns+Techniques.md`](supplementary/Advanced-SQL-Patterns+Techniques.md) | Advanced SQL techniques and patterns |
+| **Behavioral Interview** | [`supplementary/behavioral-mock-interview.md`](supplementary/behavioral-mock-interview.md) | Behavioral interview preparation guide |
+| **Key Insights** | [`supplementary/key-insights-tips-meta.md`](supplementary/key-insights-tips-meta.md) | Meta-specific tips and insights |
 
-### 3. SQL Example Problems (sql-example-problems.md, sql-example-problems.pdf)
+### Best Practices (Data Engineering)
 
-This file presents a collection of complex SQL problems designed to simulate real-world scenarios at Meta. The problems cover a wide range of SQL concepts and techniques, including joins, aggregations, subqueries, window functions, and more.
+| Topic | Location |
+|-------|----------|
+| Strategy & Architecture | [`Best-Practices/Deep_Dive/1_Strategy+Architecture.md`](Best-Practices/Deep_Dive/1_Strategy+Architecture.md) |
+| Data Architecture | [`Best-Practices/Deep_Dive/2_Data_Architecture.md`](Best-Practices/Deep_Dive/2_Data_Architecture.md) |
+| Data Governance | [`Best-Practices/Deep_Dive/3_Data_Governance.md`](Best-Practices/Deep_Dive/3_Data_Governance.md) |
+| Version Control | [`Best-Practices/Deep_Dive/4_Version_Control.md`](Best-Practices/Deep_Dive/4_Version_Control.md) |
+| Data Quality Management | [`Best-Practices/Deep_Dive/5_Data_Quality_Management.md`](Best-Practices/Deep_Dive/5_Data_Quality_Management.md) |
+| Data Storage Management | [`Best-Practices/Deep_Dive/6_Data_Storage_Management.md`](Best-Practices/Deep_Dive/6_Data_Storage_Management.md) |
+| ETL Processing Frameworks | [`Best-Practices/Deep_Dive/7_ETL_Processing_Frameworks.md`](Best-Practices/Deep_Dive/7_ETL_Processing_Frameworks.md) |
+| Orchestration & Workflow | [`Best-Practices/Deep_Dive/8_Orchestration_Workflow_Fundamentals.md`](Best-Practices/Deep_Dive/8_Orchestration_Workflow_Fundamentals.md) |
+| Data Transformation | [`Best-Practices/Deep_Dive/9_Transformation_Fundamentals.md`](Best-Practices/Deep_Dive/9_Transformation_Fundamentals.md) |
+| Data Acquisition & Ingestion | [`Best-Practices/Deep_Dive/Data_Acquisition_and_Ingestion.md`](Best-Practices/Deep_Dive/Data_Acquisition_and_Ingestion.md) |
 
-### 4. Analytical Hands-On Projects (Analytical-HandsOn-Projects/overview.md)
+## 🚀 How to Use This Material
 
-This section provides practical, hands-on experience in data analysis using open-source tools and data. The projects are structured in Jupyter Notebooks and guide you through each step of the analysis process.
+1. **Start with the Handbook:** Begin by reading [`Data-Science-Analytical-Interview-Preparation-Handbook.MD`](Data-Science-Analytical-Interview-Preparation-Handbook.MD) for a comprehensive overview.
 
-### 5. Key Insights and Tips (Key-Insights-Tips-Meta.md)
+2. **Follow the 21-Day Prep Guide:** Use [`supplementary/21-day-prep-guide.md`](supplementary/21-day-prep-guide.md) for a structured preparation plan.
 
-This document provides a concise summary of key insights and tips for navigating the Meta data science interview process.
+3. **Review Foundational Knowledge:** Study statistics concepts in [`supplementary/statistics-probability-example-questions.md`](supplementary/statistics-probability-example-questions.md).
 
-### 6. Extra Review Problems (Extra-Review-Problems/*.md)
+4. **Practice SQL:** Work through problems in [`supplementary/sql-example-problems.md`](supplementary/sql-example-problems.md).
 
-This section contains additional SQL and analytical problems, including advanced SQL patterns and techniques.
+5. **Run Interactive Simulations:** Explore Jupyter notebooks in [`Simulations/`](Simulations/) for hands-on statistics practice.
 
-### 7. Future Features (Future_fetures.md)
+6. **Prepare for Behavioral Questions:** Review [`supplementary/behavioral-mock-interview.md`](supplementary/behavioral-mock-interview.md).
 
-This file outlines potential additions and improvements to the handbook in the future.
+7. **Visit the Website:** Explore the full content at [GitHub Pages](https://moshesham.github.io/Data-Science-Analytical-Handbook/).
 
-### 8. GitHub Pages
-
-The GitHub Pages for this repository is available at: [GitHub Pages URL](https://moshesham.github.io/Data-Science-Analytical-Handbook/)
-
-## How to Use This Material
-
-1. **Start with the Handbook:** Begin by reading the `Data-Science-Analytical-Interview-Preparation-Handbook.MD` file to gain a comprehensive understanding of Meta's interview process and the key skills assessed.
-2. **Review Foundational Knowledge:** Use the handbook and the `Statistics-Probability-Example-Questions.MD` file to review and strengthen your understanding of core statistical concepts.
-3. **Practice SQL:** Work through the problems in the `sql-example-problems.md` or `sql-example-problems.pdf` file to hone your SQL skills.
-4. **Work on Hands-On Projects:** Engage with the projects in the `Analytical-HandsOn-Projects` directory to apply your knowledge in practical scenarios.
-5. **Prepare for Behavioral Questions:** Review the `Behavioral-Mock-Interview.MD` file and practice answering behavioral questions.
-6. **Utilize the Resources:** Explore the curated list of resources in the handbook to further enhance your preparation.
-
-By following this approach, you can effectively utilize the materials in this repository to prepare for your Meta data science analytical interview. Good luck!
-
-## Contributing and Working Together
+## 🤝 Contributing
 
 This handbook is a collaborative effort, and contributions are welcome! If you have suggestions, find errors, or want to add more content, please feel free to open an issue or submit a pull request.
+
+## 📄 License
+
+See [LICENSE](LICENSE) for details.

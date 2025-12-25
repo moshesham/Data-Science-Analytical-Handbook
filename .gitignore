@@ -1,10 +1,37 @@
 # Jekyll build output
 _site/
+.jekyll-cache/
+.sass-cache/
 
 # Ruby & Bundler
 .bundle/
 vendor/bundle/
+vendor/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.ipynb_checkpoints/
+.venv/
+venv/
+*.egg-info/
 
 # OS files
 Thumbs.db
 .DS_Store
+*.swp
+*~
+
+# IDE files
+.idea/
+.vscode/
+*.sublime-*
+
+# Environment and secrets
+.env
+.env.local
+*.log
+
+# Test output
+html-validate-report-*.json
