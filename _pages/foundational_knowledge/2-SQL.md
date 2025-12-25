@@ -71,6 +71,11 @@ GROUP BY u.user_id;</code></pre>
 
 </div>
 
+<div class="section">
+  <h2>Test Your Knowledge</h2>
+  {% include quiz_widget.html quiz_id="sql_basics" %}
+</div>
+
 <div class="navigation-buttons">
   <a href="{{ '/foundational_knowledge/1/' | relative_url }}">Previous: Statistics & Probability</a>
   <a href="{{ '/foundational_knowledge/3/' | relative_url }}">Next: Programming (Python/R) for Data Analysis</a>

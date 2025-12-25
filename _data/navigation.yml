@@ -46,15 +46,24 @@
     - title: "Skills Matrix"
       url: "/skills/"
 
-- title: "V. Meta Specificity"
+- title: "V. Interactive Tools"
+  url: "/tools/sample-size-calculator/"
+  icon: "fas fa-calculator"
+  children:
+    - title: "Sample Size Calculator"
+      url: "/tools/sample-size-calculator/"
+    - title: "Distribution Visualizations"
+      url: "/simulations/distributions/"
+
+- title: "VI. Meta Specificity"
   url: "/meta-specificity/"
   icon: "fas fa-building"
 
-- title: "VI. Resources & Practice"
+- title: "VII. Resources & Practice"
   url: "/resources-practice/"
   icon: "fas fa-book-open"
 
-- title: "VII. Conclusion"
+- title: "VIII. Conclusion"
   url: "/conclusion/"
   icon: "fas fa-flag-checkered"
 

@@ -1,0 +1,220 @@
+{% assign quiz = site.data.quizzes[include.quiz_id] %}
+
+<div class="quiz-container" id="quiz-{{ include.quiz_id }}" style="margin: 30px 0; padding: 25px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+  <div style="background-color: white; padding: 25px; border-radius: 8px;">
+    <h3 style="margin-top: 0; color: #333; display: flex; align-items: center;">
+      <span style="font-size: 24px; margin-right: 10px;">🧠</span>
+      {{ quiz.title }}
+    </h3>
+    <p style="color: #666; margin-bottom: 25px;">{{ quiz.description }}</p>
+    
+    <div id="quiz-questions-{{ include.quiz_id }}">
+      {% for question in quiz.questions %}
+      <div class="quiz-question" data-question-id="{{ forloop.index }}" style="margin-bottom: 25px; padding: 20px; background-color: #f8f9fa; border-radius: 6px; border-left: 4px solid #667eea;">
+        <p style="font-weight: bold; margin-bottom: 15px; color: #333;">
+          <span style="display: inline-block; width: 28px; height: 28px; background-color: #667eea; color: white; border-radius: 50%; text-align: center; line-height: 28px; margin-right: 10px; font-size: 14px;">{{ forloop.index }}</span>
+          {{ question.question }}
+        </p>
+        
+        <div class="quiz-options" style="margin-left: 38px;">
+          {% for option in question.options %}
+          <label style="display: block; padding: 12px 15px; margin-bottom: 10px; background-color: white; border: 2px solid #e1e4e8; border-radius: 4px; cursor: pointer; transition: all 0.2s; position: relative;">
+            <input type="radio" name="quiz-{{ include.quiz_id }}-q{{ forloop.parentloop.index }}" value="{{ forloop.index0 }}" style="margin-right: 10px;">
+            <span>{{ option }}</span>
+          </label>
+          {% endfor %}
+        </div>
+        
+        <div class="quiz-feedback" style="display: none; margin-top: 15px; margin-left: 38px; padding: 12px; border-radius: 4px;"></div>
+      </div>
+      {% endfor %}
+    </div>
+    
+    <div style="text-align: center; margin-top: 25px;">
+      <button onclick="submitQuiz('{{ include.quiz_id }}')" 
+              style="padding: 12px 30px; background-color: #667eea; color: white; border: none; border-radius: 4px; font-size: 16px; font-weight: bold; cursor: pointer; transition: background-color 0.3s; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+        Check Answers
+      </button>
+      <button onclick="resetQuiz('{{ include.quiz_id }}')" 
+              style="padding: 12px 30px; background-color: #6c757d; color: white; border: none; border-radius: 4px; font-size: 16px; font-weight: bold; cursor: pointer; transition: background-color 0.3s; margin-left: 10px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+        Reset
+      </button>
+    </div>
+    
+    <div id="quiz-score-{{ include.quiz_id }}" style="display: none; margin-top: 25px; padding: 20px; border-radius: 6px; text-align: center; font-size: 18px; font-weight: bold;"></div>
+  </div>
+</div>
+
+<script>
+// Store quiz data in JavaScript
+if (typeof quizData === 'undefined') {
+  var quizData = {};
+}
+
+quizData['{{ include.quiz_id }}'] = {
+  questions: [
+    {% for question in quiz.questions %}
+    {
+      question: {{ question.question | jsonify }},
+      correct: {{ question.correct }},
+      explanation: {{ question.explanation | jsonify }}
+    }{% unless forloop.last %},{% endunless %}
+    {% endfor %}
+  ]
+};
+
+function submitQuiz(quizId) {
+  const quiz = quizData[quizId];
+  let score = 0;
+  let total = quiz.questions.length;
+  
+  quiz.questions.forEach((question, index) => {
+    const questionNum = index + 1;
+    const selected = document.querySelector(`input[name="quiz-${quizId}-q${questionNum}"]:checked`);
+    const feedbackDiv = document.querySelector(`#quiz-${quizId} .quiz-question[data-question-id="${questionNum}"] .quiz-feedback`);
+    
+    if (selected) {
+      const answer = parseInt(selected.value);
+      const isCorrect = answer === question.correct;
+      
+      if (isCorrect) {
+        score++;
+        feedbackDiv.style.backgroundColor = '#d4edda';
+        feedbackDiv.style.borderLeft = '4px solid #28a745';
+        feedbackDiv.style.color = '#155724';
+        feedbackDiv.innerHTML = `
+          <div style="display: flex; align-items: start;">
+            <span style="font-size: 20px; margin-right: 10px;">✅</span>
+            <div>
+              <strong>Correct!</strong><br>
+              <span style="font-size: 14px;">${question.explanation}</span>
+            </div>
+          </div>
+        `;
+      } else {
+        feedbackDiv.style.backgroundColor = '#f8d7da';
+        feedbackDiv.style.borderLeft = '4px solid #dc3545';
+        feedbackDiv.style.color = '#721c24';
+        feedbackDiv.innerHTML = `
+          <div style="display: flex; align-items: start;">
+            <span style="font-size: 20px; margin-right: 10px;">❌</span>
+            <div>
+              <strong>Incorrect.</strong><br>
+              <span style="font-size: 14px;">${question.explanation}</span>
+            </div>
+          </div>
+        `;
+      }
+      
+      feedbackDiv.style.display = 'block';
+      
+      // Highlight correct/incorrect options
+      const labels = document.querySelectorAll(`#quiz-${quizId} .quiz-question[data-question-id="${questionNum}"] label`);
+      labels.forEach((label, idx) => {
+        if (idx === question.correct) {
+          label.style.borderColor = '#28a745';
+          label.style.backgroundColor = '#d4edda';
+        } else if (idx === answer && !isCorrect) {
+          label.style.borderColor = '#dc3545';
+          label.style.backgroundColor = '#f8d7da';
+        }
+      });
+    } else {
+      feedbackDiv.style.backgroundColor = '#fff3cd';
+      feedbackDiv.style.borderLeft = '4px solid #ffc107';
+      feedbackDiv.style.color = '#856404';
+      feedbackDiv.innerHTML = `
+        <div style="display: flex; align-items: start;">
+          <span style="font-size: 20px; margin-right: 10px;">⚠️</span>
+          <div>
+            <strong>No answer selected.</strong><br>
+            <span style="font-size: 14px;">${question.explanation}</span>
+          </div>
+        </div>
+      `;
+      feedbackDiv.style.display = 'block';
+    }
+  });
+  
+  const scoreDiv = document.getElementById(`quiz-score-${quizId}`);
+  const percentage = Math.round((score / total) * 100);
+  let message, bgColor, emoji;
+  
+  if (percentage === 100) {
+    message = 'Perfect! You nailed it! 🎉';
+    bgColor = '#d4edda';
+    emoji = '🏆';
+  } else if (percentage >= 70) {
+    message = 'Great job! You\'re on the right track! 👍';
+    bgColor = '#d1ecf1';
+    emoji = '⭐';
+  } else if (percentage >= 50) {
+    message = 'Good effort! Review the explanations and try again. 📚';
+    bgColor = '#fff3cd';
+    emoji = '💪';
+  } else {
+    message = 'Keep studying! Practice makes perfect. 📖';
+    bgColor = '#f8d7da';
+    emoji = '📝';
+  }
+  
+  scoreDiv.innerHTML = `
+    <div style="font-size: 36px; margin-bottom: 10px;">${emoji}</div>
+    <div>You scored ${score} out of ${total} (${percentage}%)</div>
+    <div style="font-size: 16px; margin-top: 10px; font-weight: normal;">${message}</div>
+  `;
+  scoreDiv.style.backgroundColor = bgColor;
+  scoreDiv.style.display = 'block';
+  
+  // Disable all inputs after submission
+  document.querySelectorAll(`#quiz-${quizId} input[type="radio"]`).forEach(input => {
+    input.disabled = true;
+  });
+  
+  // Scroll to score
+  scoreDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+function resetQuiz(quizId) {
+  // Reset all radio buttons
+  document.querySelectorAll(`#quiz-${quizId} input[type="radio"]`).forEach(input => {
+    input.checked = false;
+    input.disabled = false;
+  });
+  
+  // Hide all feedback
+  document.querySelectorAll(`#quiz-${quizId} .quiz-feedback`).forEach(feedback => {
+    feedback.style.display = 'none';
+  });
+  
+  // Reset label styles
+  document.querySelectorAll(`#quiz-${quizId} label`).forEach(label => {
+    label.style.borderColor = '#e1e4e8';
+    label.style.backgroundColor = 'white';
+  });
+  
+  // Hide score
+  document.getElementById(`quiz-score-${quizId}`).style.display = 'none';
+  
+  // Scroll to top of quiz
+  document.getElementById(`quiz-${quizId}`).scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+// Add hover effects
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll('.quiz-container label').forEach(label => {
+    label.addEventListener('mouseenter', function() {
+      if (!this.querySelector('input').disabled) {
+        this.style.borderColor = '#667eea';
+        this.style.backgroundColor = '#f6f8ff';
+      }
+    });
+    label.addEventListener('mouseleave', function() {
+      if (!this.querySelector('input').disabled && !this.querySelector('input').checked) {
+        this.style.borderColor = '#e1e4e8';
+        this.style.backgroundColor = 'white';
+      }
+    });
+  });
+});
+</script>

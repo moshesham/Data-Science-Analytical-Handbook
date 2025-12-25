@@ -121,6 +121,11 @@ print(f"Std: {np.std(arr)}")</code></pre>
 
 </div>
 
+<div class="section">
+  <h2>Test Your Knowledge</h2>
+  {% include quiz_widget.html quiz_id="python_data_analysis" %}
+</div>
+
 <div class="navigation-buttons">
   <a href="{{ '/foundational_knowledge/2-SQL/' | relative_url }}">Previous: SQL & Data Manipulation</a>
   <a href="{{ '/interview-preparation/technical-skills/' | relative_url }}">Next: Interview Preparation</a>

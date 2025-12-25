@@ -1,0 +1,195 @@
+sql_basics:
+  title: "SQL Fundamentals Quiz"
+  description: "Test your understanding of core SQL concepts including JOINs, aggregations, and window functions."
+  questions:
+    - question: "Which JOIN type returns all rows from the left table and matching rows from the right table?"
+      options:
+        - "INNER JOIN"
+        - "LEFT JOIN"
+        - "RIGHT JOIN"
+        - "FULL OUTER JOIN"
+      correct: 1
+      explanation: "LEFT JOIN returns all rows from the left table and matching rows from the right table. Unmatched rows from the right table will have NULL values."
+
+    - question: "What is the difference between WHERE and HAVING clauses?"
+      options:
+        - "They are identical and interchangeable"
+        - "WHERE filters rows before grouping, HAVING filters after grouping"
+        - "HAVING filters rows before grouping, WHERE filters after grouping"
+        - "WHERE is used with SELECT, HAVING is used with UPDATE"
+      correct: 1
+      explanation: "WHERE filters individual rows before GROUP BY is applied, while HAVING filters grouped results after aggregation."
+
+    - question: "Which window function assigns a unique sequential integer to rows within a partition?"
+      options:
+        - "RANK()"
+        - "DENSE_RANK()"
+        - "ROW_NUMBER()"
+        - "NTILE()"
+      correct: 2
+      explanation: "ROW_NUMBER() assigns a unique sequential integer to each row. RANK() and DENSE_RANK() can assign the same rank to tied values."
+
+    - question: "What does a Common Table Expression (CTE) allow you to do?"
+      options:
+        - "Create a permanent table in the database"
+        - "Define a temporary named result set that can be referenced in the main query"
+        - "Optimize query performance automatically"
+        - "Execute multiple queries simultaneously"
+      correct: 1
+      explanation: "A CTE (WITH clause) creates a temporary named result set that exists only for the duration of the query, making complex queries more readable and maintainable."
+
+    - question: "If you want to find the second highest salary in an employee table, which approach would work?"
+      options:
+        - "SELECT MAX(salary) FROM employees WHERE salary < MAX(salary)"
+        - "SELECT salary FROM employees ORDER BY salary DESC LIMIT 1 OFFSET 1"
+        - "SELECT AVG(salary) FROM employees"
+        - "SELECT MIN(salary) FROM employees"
+      correct: 1
+      explanation: "Using ORDER BY with LIMIT and OFFSET (or equivalent in your SQL dialect) allows you to get the Nth highest value. The first option has a syntax error."
+
+python_data_analysis:
+  title: "Python Data Analysis Quiz"
+  description: "Test your knowledge of Pandas, NumPy, and Python data manipulation techniques."
+  questions:
+    - question: "Which Pandas method is used to remove duplicate rows from a DataFrame?"
+      options:
+        - "df.remove_duplicates()"
+        - "df.drop_duplicates()"
+        - "df.unique()"
+        - "df.deduplicate()"
+      correct: 1
+      explanation: "df.drop_duplicates() removes duplicate rows from a DataFrame. df.unique() is for Series, not DataFrames."
+
+    - question: "What is the primary difference between a Pandas Series and a DataFrame?"
+      options:
+        - "Series is 1-dimensional, DataFrame is 2-dimensional"
+        - "Series can only store integers, DataFrame can store any type"
+        - "Series is faster than DataFrame"
+        - "There is no difference"
+      correct: 0
+      explanation: "A Series is a one-dimensional labeled array (like a single column), while a DataFrame is a two-dimensional labeled data structure (like a table)."
+
+    - question: "Which NumPy function calculates the standard deviation of an array?"
+      options:
+        - "np.var()"
+        - "np.mean()"
+        - "np.std()"
+        - "np.median()"
+      correct: 2
+      explanation: "np.std() calculates the standard deviation. np.var() calculates variance (standard deviation squared)."
+
+    - question: "How do you select rows in a DataFrame where the 'Age' column is greater than 25?"
+      options:
+        - "df[df.Age > 25]"
+        - "df.filter(Age > 25)"
+        - "df.select(Age > 25)"
+        - "df.where['Age' > 25]"
+      correct: 0
+      explanation: "Boolean indexing with df[df.Age > 25] or df[df['Age'] > 25] is the standard way to filter rows in Pandas."
+
+    - question: "What does the groupby() method in Pandas do?"
+      options:
+        - "Removes groups of rows"
+        - "Groups rows by one or more columns for aggregation"
+        - "Creates a new DataFrame"
+        - "Sorts the DataFrame"
+      correct: 1
+      explanation: "groupby() splits data into groups based on column values, allowing you to apply aggregate functions (sum, mean, count, etc.) to each group."
+
+statistics_probability:
+  title: "Statistics & Probability Quiz"
+  description: "Test your understanding of statistical concepts, distributions, and hypothesis testing."
+  questions:
+    - question: "What is the Central Limit Theorem?"
+      options:
+        - "All data follows a normal distribution"
+        - "The sampling distribution of the mean approaches normality as sample size increases"
+        - "The mean and median are always equal"
+        - "Larger samples always have smaller variance"
+      correct: 1
+      explanation: "The Central Limit Theorem states that the distribution of sample means approaches a normal distribution as the sample size increases, regardless of the population's distribution."
+
+    - question: "In hypothesis testing, what is a Type I error?"
+      options:
+        - "Failing to reject a false null hypothesis"
+        - "Rejecting a true null hypothesis (false positive)"
+        - "Using the wrong statistical test"
+        - "Having too small a sample size"
+      correct: 1
+      explanation: "A Type I error (α) is rejecting the null hypothesis when it's actually true (false positive). Type II error (β) is failing to reject a false null hypothesis."
+
+    - question: "What p-value threshold is commonly used for statistical significance?"
+      options:
+        - "p < 0.50"
+        - "p < 0.10"
+        - "p < 0.05"
+        - "p < 0.01"
+      correct: 2
+      explanation: "p < 0.05 is the most common threshold, meaning there's less than a 5% probability of observing the result if the null hypothesis is true. Some fields use 0.01 for more stringent testing."
+
+    - question: "What does a 95% confidence interval mean?"
+      options:
+        - "95% of data points fall within this range"
+        - "There's a 95% probability the true parameter is in this range"
+        - "If we repeat the sampling process, 95% of constructed intervals will contain the true parameter"
+        - "The margin of error is 5%"
+      correct: 2
+      explanation: "A 95% confidence interval means that if we repeated the sampling process many times, 95% of the intervals we construct would contain the true population parameter."
+
+    - question: "Which distribution is most appropriate for modeling the number of events in a fixed interval?"
+      options:
+        - "Normal distribution"
+        - "Binomial distribution"
+        - "Poisson distribution"
+        - "Uniform distribution"
+      correct: 2
+      explanation: "The Poisson distribution models the number of events occurring in a fixed interval of time or space (e.g., number of customers per hour, defects per batch)."
+
+ab_testing:
+  title: "A/B Testing Quiz"
+  description: "Test your knowledge of experimental design, A/B testing, and causal inference."
+  questions:
+    - question: "What is the primary purpose of randomization in A/B testing?"
+      options:
+        - "To make the test run faster"
+        - "To ensure equal sample sizes"
+        - "To eliminate selection bias and create comparable groups"
+        - "To reduce the cost of experimentation"
+      correct: 2
+      explanation: "Randomization ensures that the only systematic difference between groups is the treatment, eliminating selection bias and allowing for causal inference."
+
+    - question: "What is statistical power in the context of A/B testing?"
+      options:
+        - "The probability of detecting a real effect when it exists"
+        - "The size of the effect you're testing"
+        - "The confidence level of the test"
+        - "The number of users in the experiment"
+      correct: 0
+      explanation: "Statistical power (1 - β) is the probability of correctly detecting a real effect when it exists. Common target is 80% power."
+
+    - question: "What is a 'guardrail metric' in A/B testing?"
+      options:
+        - "The primary metric you want to improve"
+        - "A metric that ensures the experiment doesn't harm other important aspects"
+        - "The sample size calculation"
+        - "The significance level threshold"
+      correct: 1
+      explanation: "Guardrail metrics protect against unintended negative consequences. For example, if testing a new feature to increase revenue, you'd have guardrail metrics for user satisfaction and system performance."
+
+    - question: "What problem does the Minimum Detectable Effect (MDE) address?"
+      options:
+        - "How long to run the test"
+        - "The smallest change that's worth detecting and has practical significance"
+        - "The probability of a Type I error"
+        - "Which metrics to track"
+      correct: 1
+      explanation: "MDE defines the smallest effect size that would be meaningful to your business, helping determine required sample size. A smaller MDE requires a larger sample."
+
+    - question: "Why is it problematic to stop an A/B test early when you see statistical significance?"
+      options:
+        - "It wastes resources"
+        - "It increases the risk of false positives due to peeking"
+        - "It makes the test less accurate"
+        - "It violates privacy regulations"
+      correct: 1
+      explanation: "Continuously checking for significance and stopping early (p-hacking or peeking) inflates the false positive rate above your chosen α level. Use sequential testing methods if you need early stopping rules."

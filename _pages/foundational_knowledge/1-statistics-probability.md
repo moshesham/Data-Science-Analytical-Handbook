@@ -261,9 +261,17 @@ track: "Foundational Knowledge"
     </ol>
   </div>
 
+</div>
+
+<div class="section">
+  <h2>Test Your Knowledge</h2>
+  {% include quiz_widget.html quiz_id="statistics_probability" %}
+</div>
+
+<div class="section">
   <div class="navigation-buttons">
     <a href="{{ '/introduction/' | relative_url }}">Previous: Introduction</a>
     <a href="{{ '/foundational_knowledge/2-SQL/' | relative_url }}">Next: SQL & Data Manipulation</a>
   </div>
-
 </div>
+
