@@ -8,6 +8,12 @@ on:
   pull_request:
     paths:
       - '**/*.ipynb'
+  workflow_dispatch:
+
+# Prevent multiple runs for the same ref
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 permissions:
   contents: write
@@ -15,14 +21,18 @@ permissions:
 jobs:
   convert:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
+          cache: 'pip'
 
       - name: Install nbconvert
         run: |
@@ -67,12 +77,17 @@ jobs:
         with:
           name: notebooks-md
           path: notebooks_md
+          retention-days: 30
 
       - name: Commit converted notebooks
-        if: github.event_name == 'push'
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         run: |
-          git config user.name "github-actions"
-          git config user.email "actions@users.noreply.github.com"
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
           git add notebooks_md
-          git commit -m "chore: update converted notebooks" || echo "No changes to commit"
-          git push
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "chore: update converted notebooks [skip ci]"
+            git push
+          fi

@@ -4,14 +4,14 @@ on:
   issues:
     types: [opened]
 
+permissions:
+  issues: write
+  contents: read
+
 jobs:
   summary:
     runs-on: ubuntu-latest
-    permissions:
-      issues: write
-      models: read
-      contents: read
-
+    timeout-minutes: 5
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -24,8 +24,10 @@ jobs:
             Summarize the following GitHub issue in one paragraph:
             Title: ${{ github.event.issue.title }}
             Body: ${{ github.event.issue.body }}
+        continue-on-error: true
 
       - name: Comment with AI summary
+        if: steps.inference.outcome == 'success'
         run: |
           gh issue comment $ISSUE_NUMBER --body '${{ steps.inference.outputs.response }}'
         env:
