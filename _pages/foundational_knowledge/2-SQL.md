@@ -22,8 +22,8 @@ track: "Foundational Knowledge"
 <div class="section">
   <div class="card">
     <h3>Want the Data Engineering version?</h3>
-    <p>Go deeper on incremental loads, deduplication, SCD2, and data quality checks:</p>
-    <p><a href="{{ '/foundational_knowledge/2-SQL/advanced/' | relative_url }}" class="button">Advanced SQL for Data Engineering →</a></p>
+    <p>Go deeper on incremental loads, deduplication, SCD2, and data quality checks in the <strong>Analytical Engineering</strong> track:</p>
+    <p><a href="{{ '/analytical-engineering/advanced-sql-postgres/' | relative_url }}" class="button">Advanced SQL (Postgres) for Analytical Engineering →</a></p>
   </div>
 </div>
 
@@ -354,5 +354,5 @@ WHERE rn = 1;</code></pre>
 
 <div class="navigation-buttons">
   <a href="{{ '/foundational_knowledge/1/' | relative_url }}">Previous: Statistics & Probability</a>
-  <a href="{{ '/foundational_knowledge/2-SQL/advanced/' | relative_url }}">Next: Advanced SQL for Data Engineering</a>
+  <a href="{{ '/analytical-engineering/' | relative_url }}">Next: Analytical Engineering</a>
 </div>

@@ -22,7 +22,16 @@
     - title: "Programming (Python/R)"
       url: "/foundational_knowledge/3/"
 
-- title: "III. Interview Preparation"
+- title: "III. Analytical Engineering"
+  url: "/analytical-engineering/"
+  icon: "fas fa-cubes"
+  children:
+    - title: "Overview"
+      url: "/analytical-engineering/"
+    - title: "Advanced SQL (Postgres)"
+      url: "/analytical-engineering/advanced-sql-postgres/"
+
+- title: "IV. Interview Preparation"
   url: "/interview-preparation/"
   icon: "fas fa-chalkboard-teacher"
   children:
@@ -37,7 +46,7 @@
     - title: "Interview Day Checklist"
       url: "/interview-preparation/interview-day-checklist/"
 
-- title: "IV. Learning Paths"
+- title: "V. Learning Paths"
   url: "/tracks/"
   icon: "fas fa-route"
   children:
@@ -46,7 +55,7 @@
     - title: "Skills Matrix"
       url: "/skills/"
 
-- title: "V. Hands-On Projects"
+- title: "VI. Hands-On Projects"
   url: "/analytical-projects/"
   icon: "fas fa-project-diagram"
   children:
@@ -59,7 +68,7 @@
     - title: "A/B Testing"
       url: "/analytical-projects/#ab-testing"
 
-- title: "VI. Interactive Tools"
+- title: "VII. Interactive Tools"
   url: "/tools/sample-size-calculator/"
   icon: "fas fa-calculator"
   children:
@@ -70,15 +79,15 @@
     - title: "Streamlit App (Product Analytics)"
       url: "/streamlit-app/"
 
-- title: "VII. Meta Specificity"
+- title: "VIII. Meta Specificity"
   url: "/meta-specificity/"
   icon: "fas fa-building"
 
-- title: "VIII. Resources & Practice"
+- title: "IX. Resources & Practice"
   url: "/resources-practice/"
   icon: "fas fa-book-open"
 
-- title: "IX. Conclusion"
+- title: "X. Conclusion"
   url: "/conclusion/"
   icon: "fas fa-flag-checkered"
 

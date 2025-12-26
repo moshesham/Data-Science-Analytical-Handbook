@@ -41,10 +41,10 @@ track: "Foundational Knowledge"
   </div>
 
   <div class="card">
-    <h3><a href="{{ '/foundational_knowledge/2-SQL/advanced/' | relative_url }}">2a. Advanced SQL for Data Engineering</a></h3>
-    <p>Apply SQL to real pipeline problems: incremental loads, de-duplication, SCD2, data quality checks, and warehouse performance patterns.</p>
-    <p><strong>Key Topics:</strong> MERGE/UPSERT, watermarks, SCD2, QA checks, partition pruning, star schema</p>
-    <p><a href="{{ '/foundational_knowledge/2-SQL/advanced/' | relative_url }}" class="button">Learn More →</a></p>
+    <h3><a href="{{ '/analytical-engineering/' | relative_url }}">2a. Analytical Engineering</a></h3>
+    <p>Turn raw data into trustworthy analytics tables with versioned SQL models, tests, and clear definitions.</p>
+    <p><strong>Key Topics:</strong> facts/dims, incremental loads, SCD2, QA checks, semantic definitions</p>
+    <p><a href="{{ '/analytical-engineering/' | relative_url }}" class="button">Learn More →</a></p>
   </div>
 
   <div class="card">
