@@ -1,5 +1,10 @@
 # Data Science Analytical Interview Preparation Handbook
 
+![CI](https://github.com/moshesham/Data-Science-Analytical-Handbook/actions/workflows/ci.yml/badge.svg)
+![HTML Validate](https://github.com/moshesham/Data-Science-Analytical-Handbook/actions/workflows/html-validate.yml/badge.svg)
+![Markdown Links](https://github.com/moshesham/Data-Science-Analytical-Handbook/actions/workflows/markdown-links-only.yml/badge.svg)
+![Notebooks to Markdown](https://github.com/moshesham/Data-Science-Analytical-Handbook/actions/workflows/notebooks-to-markdown.yml/badge.svg)
+
 This repository provides a comprehensive handbook designed to assist in preparing for data science analytical interviews, with a specific focus on Meta.
 
 ## 🌐 GitHub Pages

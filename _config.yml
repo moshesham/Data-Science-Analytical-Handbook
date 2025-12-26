@@ -9,6 +9,9 @@ github_username: moshesham
 # Author information
 author: "Data Science Handbook Community"
 
+# Analytics (set to your GA4 measurement ID, e.g., G-XXXXXXXXXX)
+google_analytics: ""
+
 # Build settings
 markdown: kramdown
 kramdown:

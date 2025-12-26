@@ -46,7 +46,20 @@
     - title: "Skills Matrix"
       url: "/skills/"
 
-- title: "V. Interactive Tools"
+- title: "V. Hands-On Projects"
+  url: "/analytical-projects/"
+  icon: "fas fa-project-diagram"
+  children:
+    - title: "Projects Overview"
+      url: "/analytical-projects/"
+    - title: "Customer Churn"
+      url: "/analytical-projects/#customer-churn"
+    - title: "Cohort Analysis"
+      url: "/analytical-projects/#cohort-analysis"
+    - title: "A/B Testing"
+      url: "/analytical-projects/#ab-testing"
+
+- title: "VI. Interactive Tools"
   url: "/tools/sample-size-calculator/"
   icon: "fas fa-calculator"
   children:
@@ -54,16 +67,18 @@
       url: "/tools/sample-size-calculator/"
     - title: "Distribution Visualizations"
       url: "/simulations/distributions/"
+    - title: "Streamlit App (Product Analytics)"
+      url: "/streamlit-app/"
 
-- title: "VI. Meta Specificity"
+- title: "VII. Meta Specificity"
   url: "/meta-specificity/"
   icon: "fas fa-building"
 
-- title: "VII. Resources & Practice"
+- title: "VIII. Resources & Practice"
   url: "/resources-practice/"
   icon: "fas fa-book-open"
 
-- title: "VIII. Conclusion"
+- title: "IX. Conclusion"
   url: "/conclusion/"
   icon: "fas fa-flag-checkered"
 
