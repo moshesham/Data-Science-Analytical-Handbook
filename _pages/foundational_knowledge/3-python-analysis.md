@@ -31,6 +31,17 @@ track: "Foundational Knowledge"
   </div>
 
   <div class="card">
+    <h3>Interview-Grade Python: What "Good" Looks Like</h3>
+    <ul>
+      <li><strong>Correctness first:</strong> handle missing values, duplicate keys, timezone/date quirks, and edge cases.</li>
+      <li><strong>Readable & modular:</strong> small functions, clear variable names, explicit assumptions.</li>
+      <li><strong>Vectorized when it matters:</strong> prefer pandas operations over Python loops for large data.</li>
+      <li><strong>Reproducible:</strong> fixed seeds, deterministic sorts, and saved intermediate outputs when useful.</li>
+      <li><strong>Communicates insight:</strong> code answers a question; narrative explains why the result matters.</li>
+    </ul>
+  </div>
+
+  <div class="card">
     <h3>How to Prep</h3>
     <ul>
       <li><strong>Practice Regularly:</strong> Consistent practice is key. Work through coding exercises on platforms like HackerRank, LeetCode (Database section), and StrataScratch, focusing on data manipulation and analysis problems.</li>
@@ -101,6 +112,109 @@ track: "Foundational Knowledge"
   </div>
 
   <div class="card">
+    <h3>Core Pandas Patterns (Most Frequently Tested)</h3>
+    <ul>
+      <li><strong>Join/merge:</strong> <code>pd.merge(left, right, on=..., how='left')</code> + verify key uniqueness.</li>
+      <li><strong>Groupby aggregates:</strong> <code>groupby(...).agg(...)</code> for multi-metric tables.</li>
+      <li><strong>Reshape:</strong> <code>pivot_table</code>, <code>melt</code>, wide-to-long and long-to-wide.</li>
+      <li><strong>Time series:</strong> <code>dt</code> accessors, resampling, rolling windows.</li>
+      <li><strong>Conditional logic:</strong> <code>np.where</code>, boolean masks, and <code>DataFrame.assign</code>.</li>
+      <li><strong>Safe counts:</strong> <code>nunique</code>, <code>value_counts(dropna=False)</code>, and explicit denominators.</li>
+    </ul>
+
+    <p><strong>Key-check pattern (prevents silent join explosions):</strong></p>
+    <pre><code>def assert_unique(df, cols, name="df"):
+    dupes = df.duplicated(cols).sum()
+    if dupes:
+        raise ValueError(f"{name}: {dupes} duplicate keys on {cols}")
+
+assert_unique(users, ["user_id"], "users")
+assert_unique(orders, ["order_id"], "orders")
+
+df = users.merge(orders, on="user_id", how="left")</code></pre>
+  </div>
+
+  <div class="card">
+    <h3>Data Cleaning Checklist (Fast + Practical)</h3>
+    <ul>
+      <li><strong>Schema:</strong> <code>df.info()</code>, dtypes, parse dates at read time.</li>
+      <li><strong>Missingness:</strong> quantify per column; decide <em>drop</em>, <em>impute</em>, or <em>model as signal</em>.</li>
+      <li><strong>Duplicates:</strong> define a primary key; dedupe with a rule (latest timestamp wins).</li>
+      <li><strong>Outliers:</strong> define a rule (winsorize, cap, remove) and justify it.</li>
+      <li><strong>Units:</strong> verify currency, percent vs fraction, and timezones.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h3>Example: EDA Template You Can Reuse</h3>
+    <pre><code>import pandas as pd
+import numpy as np
+
+def quick_eda(df: pd.DataFrame, target: str | None = None) -> None:
+    print("shape:", df.shape)
+    display(df.head(3))
+    display(df.describe(include="all").T)
+    missing = df.isna().mean().sort_values(ascending=False)
+    display(missing[missing &gt; 0].to_frame("missing_rate"))
+    if target and target in df.columns:
+        display(df[target].value_counts(dropna=False).head(20))
+
+quick_eda(df, target=None)</code></pre>
+  </div>
+
+  <div class="card">
+    <h3>Example: Cohort Retention in Pandas (Interview Favorite)</h3>
+    <p><em>Input:</em> events with <code>user_id</code> and <code>event_date</code>. <em>Output:</em> retention table by cohort month.</p>
+    <pre><code>import pandas as pd
+
+events = events.copy()
+events["event_date"] = pd.to_datetime(events["event_date"], errors="coerce")
+events = events.dropna(subset=["event_date"])
+events["event_month"] = events["event_date"].dt.to_period("M")
+
+cohort = events.groupby("user_id")["event_month"].min().rename("cohort")
+events = events.join(cohort, on="user_id")
+events["period"] = (events["event_month"] - events["cohort"]).apply(lambda p: p.n)
+
+active = events.drop_duplicates(["user_id", "period"])
+ret = active.pivot_table(index="cohort", columns="period", values="user_id", aggfunc="nunique")
+ret_rate = ret.div(ret[0], axis=0)
+
+ret_rate</code></pre>
+  </div>
+
+  <div class="card">
+    <h3>Example: A/B Test Metric + Bootstrap CI</h3>
+    <p><em>Input:</em> user-level table with <code>group</code> and numeric <code>metric</code>.</p>
+    <pre><code>import numpy as np
+
+control = df.loc[df["group"] == "control", "metric"].astype(float)
+treat = df.loc[df["group"] == "treatment", "metric"].astype(float)
+
+ate = treat.mean() - control.mean()
+
+rng = np.random.default_rng(42)
+boot = []
+for _ in range(3000):
+    boot.append(rng.choice(treat, len(treat), replace=True).mean() - rng.choice(control, len(control), replace=True).mean())
+
+ci = np.percentile(boot, [2.5, 97.5])
+print({"ate": ate, "ci_low": ci[0], "ci_high": ci[1]})</code></pre>
+    <p><strong>Tip:</strong> In interviews, say whether your CI is for the mean difference and what assumptions you are making (IID users, stable assignment, etc.).</p>
+  </div>
+
+  <div class="card">
+    <h3>Common Pitfalls (And How to Avoid Them)</h3>
+    <ul>
+      <li><strong>Chained assignment:</strong> prefer <code>df = df.assign(...)</code> or <code>df.loc[mask, col] = ...</code>.</li>
+      <li><strong>SettingWithCopy warnings:</strong> use <code>.copy()</code> when subsetting.</li>
+      <li><strong>Silent type issues:</strong> parse numerics with <code>pd.to_numeric(..., errors='coerce')</code>.</li>
+      <li><strong>Timezone bugs:</strong> standardize to UTC before grouping by day.</li>
+      <li><strong>Speed:</strong> avoid row-wise <code>apply</code> when vectorization exists.</li>
+    </ul>
+  </div>
+
+  <div class="card">
     <h3>Example: Creating a DataFrame</h3>
     <pre><code>import pandas as pd
 data = {'Name': ['Alice', 'Bob', 'Charlie'], 
@@ -117,6 +231,17 @@ arr = np.array([1, 2, 3, 4, 5])
 print(arr)
 print(f"Mean: {np.mean(arr)}")
 print(f"Std: {np.std(arr)}")</code></pre>
+  </div>
+
+  <div class="card">
+    <h3>Practice Drills (Try Without Looking)</h3>
+    <ul>
+      <li><strong>Groupby:</strong> compute DAU by day and platform from an events table.</li>
+      <li><strong>Join:</strong> left-join orders to users and compute conversion rate by signup week.</li>
+      <li><strong>Time series:</strong> compute a 7-day rolling average of revenue.</li>
+      <li><strong>Outliers:</strong> cap metric at 99th percentile per country, then recompute mean.</li>
+      <li><strong>Debugging:</strong> fix a merge that unexpectedly triples row count.</li>
+    </ul>
   </div>
 
 </div>

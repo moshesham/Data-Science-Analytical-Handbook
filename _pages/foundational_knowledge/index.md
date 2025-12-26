@@ -41,6 +41,13 @@ track: "Foundational Knowledge"
   </div>
 
   <div class="card">
+    <h3><a href="{{ '/foundational_knowledge/2-SQL/advanced/' | relative_url }}">2a. Advanced SQL for Data Engineering</a></h3>
+    <p>Apply SQL to real pipeline problems: incremental loads, de-duplication, SCD2, data quality checks, and warehouse performance patterns.</p>
+    <p><strong>Key Topics:</strong> MERGE/UPSERT, watermarks, SCD2, QA checks, partition pruning, star schema</p>
+    <p><a href="{{ '/foundational_knowledge/2-SQL/advanced/' | relative_url }}" class="button">Learn More →</a></p>
+  </div>
+
+  <div class="card">
     <h3><a href="{{ '/foundational_knowledge/3/' | relative_url }}">3. Programming (Python/R) for Data Analysis</a></h3>
     <p>Learn to use Python and R for data manipulation, analysis, and visualization. Master core libraries like Pandas, NumPy, Matplotlib, and Seaborn.</p>
     <p><strong>Key Topics:</strong> Pandas DataFrames, NumPy arrays, data cleaning, visualization, statistical modeling</p>
