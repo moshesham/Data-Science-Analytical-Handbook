@@ -58,8 +58,23 @@
       url: "/tracks/"
     - title: "Skills Matrix"
       url: "/skills/"
+    - title: "Exercises"
+      url: "/exercises/"
 
-- title: "VI. Hands-On Projects"
+- title: "VI. Step-by-Step Exercises"
+  url: "/exercises/"
+  icon: "fas fa-dumbbell"
+  children:
+    - title: "All Exercises"
+      url: "/exercises/"
+    - title: "Beginner Exercises"
+      url: "/exercises/beginner/"
+    - title: "Intermediate Exercises"
+      url: "/exercises/intermediate/"
+    - title: "Advanced Exercises"
+      url: "/exercises/advanced/"
+
+- title: "VII. Hands-On Projects"
   url: "/analytical-projects/"
   icon: "fas fa-project-diagram"
   children:
@@ -72,7 +87,7 @@
     - title: "A/B Testing"
       url: "/analytical-projects/#ab-testing"
 
-- title: "VII. Interactive Tools"
+- title: "VIII. Interactive Tools"
   url: "/tools/sample-size-calculator/"
   icon: "fas fa-calculator"
   children:
@@ -83,15 +98,15 @@
     - title: "Streamlit App (Product Analytics)"
       url: "/streamlit-app/"
 
-- title: "VIII. Meta Specificity"
+- title: "IX. Meta Specificity"
   url: "/meta-specificity/"
   icon: "fas fa-building"
 
-- title: "IX. Resources & Practice"
+- title: "X. Resources & Practice"
   url: "/resources-practice/"
   icon: "fas fa-book-open"
 
-- title: "X. Conclusion"
+- title: "XI. Conclusion"
   url: "/conclusion/"
   icon: "fas fa-flag-checkered"
 
