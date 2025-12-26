@@ -34,8 +34,15 @@ track: "Reference"
     
     <h3>SQL Practice</h3>
     <ul>
+      <li><a href="{{ '/interview-preparation/sql-interview-problems/' | relative_url }}">📊 SQL Interview Problems (15 Curated)</a> - Graded problems with full solutions in Postgres</li>
       <li><a href="https://github.com/moshesham/Data-Science-Analytical-Handbook/blob/main/supplementary/sql-example-problems.md" target="_blank">📊 SQL Example Problems</a> - Comprehensive SQL practice questions with solutions</li>
       <li><a href="https://github.com/moshesham/Data-Science-Analytical-Handbook/blob/main/supplementary/Advanced-SQL-Patterns+Techniques.md" target="_blank">🔥 Advanced SQL Patterns & Techniques</a> - Expert-level SQL patterns and optimization techniques</li>
+    </ul>
+    
+    <h3>A/B Testing & Experimentation</h3>
+    <ul>
+      <li><a href="{{ '/foundational_knowledge/4-ab-testing/' | relative_url }}">🧪 A/B Testing Deep Dive</a> - Complete guide to experiment design, analysis, and pitfalls</li>
+      <li><a href="{{ '/tools/sample-size-calculator/' | relative_url }}">🔢 Sample Size Calculator</a> - Interactive tool with explanations</li>
     </ul>
     
     <h3>Statistics & Probability</h3>
@@ -46,13 +53,15 @@ track: "Reference"
     
     <h3>Analytical & Case Studies</h3>
     <ul>
-      <li><a href="https://github.com/moshesham/Data-Science-Analytical-Handbook/blob/main/supplementary/example-analytical-execution.md" target="_blank">⚙️ Analytical Execution Examples</a> - Detailed case study walkthroughs</li>
+      <li><a href="{{ '/interview-preparation/analytical-execution/' | relative_url }}">📊 Analytical Execution (with Full Case Study)</a> - Complete Instagram Reels case study walkthrough</li>
+      <li><a href="https://github.com/moshesham/Data-Science-Analytical-Handbook/blob/main/supplementary/example-analytical-execution.md" target="_blank">⚙️ Analytical Execution Examples</a> - Additional case study walkthroughs</li>
       <li><a href="https://github.com/moshesham/Data-Science-Analytical-Handbook/blob/main/supplementary/analytical-patterns.md" target="_blank">🧠 Analytical Patterns</a> - Common analytical frameworks and approaches</li>
     </ul>
     
     <h3>Behavioral Interview</h3>
     <ul>
-      <li><a href="https://github.com/moshesham/Data-Science-Analytical-Handbook/blob/main/supplementary/behavioral-mock-interview.md" target="_blank">💬 Behavioral Mock Interview</a> - Practice behavioral questions with sample responses</li>
+      <li><a href="{{ '/interview-preparation/behavioral-interview/' | relative_url }}">💬 Behavioral Interview (with 5 STAR Examples)</a> - Complete STAR stories you can study and adapt</li>
+      <li><a href="https://github.com/moshesham/Data-Science-Analytical-Handbook/blob/main/supplementary/behavioral-mock-interview.md" target="_blank">💬 Behavioral Mock Interview</a> - Additional practice questions with sample responses</li>
     </ul>
   </div>
 

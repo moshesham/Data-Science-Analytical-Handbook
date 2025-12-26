@@ -21,6 +21,8 @@
       url: "/foundational_knowledge/2-SQL/"
     - title: "Programming (Python/R)"
       url: "/foundational_knowledge/3/"
+    - title: "A/B Testing & Experimentation"
+      url: "/foundational_knowledge/4-ab-testing/"
 
 - title: "III. Analytical Engineering"
   url: "/analytical-engineering/"
@@ -37,6 +39,8 @@
   children:
     - title: "Technical Skills"
       url: "/interview-preparation/technical-skills/"
+    - title: "SQL Interview Problems"
+      url: "/interview-preparation/sql-interview-problems/"
     - title: "Analytical Execution"
       url: "/interview-preparation/analytical-execution/"
     - title: "Analytical Reasoning"
