@@ -1,0 +1,16 @@
+customer_id,name,signup_date,email,country
+1,Alice Johnson,2024-01-15,alice@example.com,USA
+2,Bob Smith,2024-06-01,bob@example.com,USA
+3,Carol Williams,2024-03-10,carol@example.com,Canada
+4,David Brown,2024-07-22,david@example.com,UK
+5,Emma Davis,2024-02-28,emma@example.com,USA
+6,Frank Miller,2024-08-15,frank@example.com,Germany
+7,Grace Wilson,2024-04-05,grace@example.com,Canada
+8,Henry Taylor,2024-09-01,henry@example.com,UK
+9,Ivy Anderson,2024-05-20,ivy@example.com,USA
+10,Jack Thomas,2024-10-10,jack@example.com,Australia
+11,Kate Jackson,2024-01-25,kate@example.com,USA
+12,Liam White,2024-11-05,liam@example.com,Canada
+13,Mia Harris,2024-06-18,mia@example.com,UK
+14,Noah Martin,2024-12-01,noah@example.com,USA
+15,Olivia Garcia,2024-02-14,olivia@example.com,Germany

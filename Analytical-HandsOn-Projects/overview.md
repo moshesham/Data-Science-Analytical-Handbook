@@ -1,52 +1,70 @@
-## Open-Source Data Analysis Project: A Hands-on Learning Experience
+# Analytical Hands-On Projects
 
-thtese project aims to provide practical, hands-on experience in data analysis using open-source tools and data. By working through a real-world example, the aim is to solidify understanding of key concepts covered in the data analytical handbook and develop essential skills in data manipulation, analysis, visualization, and interpretation.
+This folder provides practical, hands-on experience in data analysis using open-source tools and data. By working through these real-world examples, you'll solidify understanding of key concepts covered in the [2026 Analytics Challenge](../supplementary/2026-new-year-challenge.md) and develop essential skills in data manipulation, analysis, visualization, and interpretation.
 
-**Project Structure:**
+## 🎯 Project Portfolio
 
-The projects will be structured in  Jupyter Notebook, guiding readers through each step of the analysis process.
+Each project is designed to build specific skills aligned with the 2026 Analytics Challenge:
 
-**1. Introduction:**
+| Project | Challenge Week | Key Skills |
+|---------|---------------|------------|
+| [A/B Testing](./AB_Test_Project/) | Week 4 | Experiment design, statistical testing, guardrails |
+| [Cohort Analysis](./Cohort_Analysis_Project/) | Week 2 | Window functions, retention metrics, heatmaps |
+| [Customer Churn](./Customer_Churn_Project/) | Week 5-6 | EDA, classification, feature engineering |
+| [Demand Forecasting](./Demand_Forecasting_Project/) | Capstone | Time series, Prophet, business recommendations |
+| [Fraud Detection](./Fraud_Detection_Project/) | Advanced | Imbalanced data, precision-recall, thresholds |
+| [Pricing Elasticity](./Pricing_Elasticity_Project/) | Week 6 | Regression, elasticity, revenue simulation |
+| [Movie Reviews](./Movie_Reviews_Project/) | Beginner | Basic EDA, visualization |
 
-* **Project Overview:** A concise description of the project's goals and objectives.
-* **Dataset Description:** Detailed information about the dataset used, including its source, format, and relevant variables.
-* **Context and Background:** Relevant background information and context to help students understand the significance of the analysis.
+## 🆕 2026 Enhancements
 
-**2. Data Acquisition and Cleaning:**
+All projects now include:
+- **One-click environments:** Open directly in Google Colab or GitHub Codespaces
+- **Polars examples:** High-performance alternative to Pandas
+- **AI-augmented challenges:** Learn to use LLMs as analysis co-pilots
+- **Video walkthrough requirement:** Practice explaining technical work
 
-* **Data Acquisition:** Code for downloading and loading the dataset into the Jupyter Notebook environment.
-* **Data Exploration:** Initial exploration of the dataset using descriptive statistics and summary tables to understand its structure and content.
-* **Data Cleaning:** Steps taken to clean the data, including handling missing values, removing duplicates, and addressing inconsistencies.
+## 📁 Project Structure
 
-**3. Exploratory Data Analysis:**
+Each project follows a consistent Jupyter Notebook structure:
 
-* **Visualizations:** Creating insightful visualizations using libraries like Matplotlib and Seaborn to explore relationships between variables, identify patterns, and uncover trends.
-* **Statistical Analysis:** Performing descriptive statistics and hypothesis testing to gain a deeper understanding of the data.
+### 1. Introduction
+- **Project Overview:** Goals and objectives
+- **Dataset Description:** Source, format, and key variables
+- **Business Context:** Why this analysis matters
 
-**4. Modeling and Analysis:**
+### 2. Data Acquisition and Cleaning
+- **Data Loading:** Code for downloading and loading data
+- **Exploration:** Descriptive statistics, data types, missing values
+- **Cleaning:** Handling nulls, duplicates, inconsistencies
 
-* **Model Selection:** Choosing appropriate analytical techniques based on the project objectives and the nature of the data.
-* **Model Implementation:** Implementing the chosen model using Python libraries like scikit-learn.
-* **Model Evaluation:** Evaluating the performance of the model using relevant metrics and techniques.
+### 3. Exploratory Data Analysis
+- **Visualizations:** Charts using Matplotlib, Seaborn, Plotly
+- **Statistical Analysis:** Hypothesis testing, correlations
 
-**5. Deployment Considerations (For ML Projects):**
+### 4. Modeling and Analysis
+- **Model Selection:** Appropriate techniques for the problem
+- **Implementation:** Using scikit-learn, statsmodels, etc.
+- **Evaluation:** Relevant metrics (AUC, RMSE, precision, etc.)
 
-* **Legal and Compliance:** Discussing relevant legal and regulatory considerations, such as data privacy (GDPR, CCPA), bias and fairness, and model explainability regulations.
-* **Explainability:** Exploring techniques for making ML models more interpretable and understandable to stakeholders, such as feature importance analysis, SHAP values, and LIME.
-* **Ethical Considerations:** Addressing ethical implications of deploying ML models, such as potential bias, discrimination, and unintended consequences.
-* **Monitoring and Maintenance:** Highlighting the importance of ongoing monitoring and maintenance of deployed models to ensure accuracy, fairness, and performance over time.
+### 5. Business Recommendations
+- **Key Findings:** Top 3-5 actionable insights
+- **Recommendations:** What should the business do?
+- **Next Steps:** Follow-up experiments or analyses
 
-**6. Visualization and Communication:**
+### 6. Communication (NEW for 2026)
+- **5-Slide Summary:** Presentation-ready slides
+- **3-Minute Video:** Loom walkthrough explaining the analysis
 
-* **Data Storytelling:** Creating compelling visualizations and narratives to communicate key findings and insights to a wider audience.
-* **Report Generation:** Summarizing the analysis process, results, and conclusions in a clear and concise report.
+## 🚀 Getting Started
 
-**7. Further Exploration:**
+1. **Choose a project** based on your skill level and interests
+2. **Read the project README** for learning objectives and setup
+3. **Open the notebook** in Colab or locally
+4. **Work through the analysis** step by step
+5. **Complete the challenges** and share in [GitHub Discussions](https://github.com/moshesham/Data-Science-Analytical-Handbook/discussions)
 
-* **Suggestions for Extensions:** Providing ideas for further analysis and extensions to the project, encouraging students to explore new avenues and deepen their understanding.
-* **Resources and Documentation:** Linking to relevant resources, documentation, and tutorials to support further learning and exploration.
-
-**Project Ideas (Increasing Difficulty):**
+## 📊 Free Dataset Suggestions
 
 **1. Analyzing Movie Ratings:**
 
