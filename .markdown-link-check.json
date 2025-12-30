@@ -11,7 +11,13 @@
     { "pattern": "^https?://netflixtechblog\\.com/" },
     { "pattern": "^https?://(www\\.)?indeed\\.com/" },
     { "pattern": "^https?://leetcode\\.com/" },
-    { "pattern": "^https?://(www\\.)?metacareers\\.com/" }
+    { "pattern": "^https?://(www\\.)?metacareers\\.com/" },
+    { "pattern": "^mailto:" },
+    { "pattern": "^/" },
+    { "pattern": "^#" },
+    { "pattern": "^https?://(www\\.)?amazon\\.com/" },
+    { "pattern": "^https?://(www\\.)?uber\\.com/" },
+    { "pattern": "^https?://(www\\.)?kaggle\\.com/" }
   ],
   "retryOnHttpStatusCodes": [429, 500, 502, 503],
   "retryCount": 3,
