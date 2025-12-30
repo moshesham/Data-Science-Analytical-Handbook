@@ -155,6 +155,7 @@ CREATE TABLE dim_customer (
 
 **Type 2 SCD Implementation in dbt:**
 
+{% raw %}
 ```sql
 -- dbt snapshot for Type 2 SCD
 {% snapshot customer_snapshot %}
@@ -179,6 +180,7 @@ FROM {{ source('crm', 'customers') }}
 
 {% endsnapshot %}
 ```
+{% endraw %}
 
 ---
 
