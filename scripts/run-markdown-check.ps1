@@ -4,7 +4,7 @@ Param(
 
 $files = @(
   "Best-Practices\Deep_Dive\1_Strategy+Architecture.md",
-  "Extra-Review-Problems\sql-example-problems.md",
+  "supplementary\sql-example-problems.md",
   "index.md"
 )
 
