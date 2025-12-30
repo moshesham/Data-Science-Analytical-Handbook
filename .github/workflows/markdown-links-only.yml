@@ -3,21 +3,31 @@ name: Markdown Links (manual)
 on:
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 jobs:
   markdown-links:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
-      - name: Cache npm
-        uses: actions/cache@v4
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-npm-markdown-links
-          restore-keys: ${{ runner.os }}-npm-
+      
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: '20'
+          cache: 'npm'
+      
+      - name: Cache npm
+        uses: actions/cache@v4
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-npm-markdown-links-${{ hashFiles('package*.json') }}
+          restore-keys: |
+            ${{ runner.os }}-npm-markdown-links-
+            ${{ runner.os }}-npm-
+      
       - name: Run markdown-link-check (via npx)
         run: |
           if [ -f .markdown-link-check.json ]; then CFG="-c .markdown-link-check.json"; fi

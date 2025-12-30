@@ -8,12 +8,18 @@ on:
       - '_config.yml'
   workflow_dispatch: {}
 
+# Prevent multiple runs for the same ref
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 permissions:
   contents: read
 
 jobs:
   html-validate:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -27,22 +33,34 @@ jobs:
           source: ./
           destination: ./_site
 
-      - name: Cache npm (html-validate)
-        uses: actions/cache@v4
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-npm-html-validate-8
-          restore-keys: |
-            ${{ runner.os }}-npm-
-
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: '20'
+          cache: 'npm'
+
+      - name: Cache npm (html-validate)
+        uses: actions/cache@v4
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-npm-html-validate-8-${{ hashFiles('package*.json') }}
+          restore-keys: |
+            ${{ runner.os }}-npm-html-validate-8-
+            ${{ runner.os }}-npm-
 
       - name: Install html-validate
         run: npm install -g html-validate@8
 
+      - name: Run html-validate
+        id: validate
+        run: |
+          if [ -f .htmlvalidate.json ]; then
+            html-validate './_site/**/*.html' --config .htmlvalidate.json > html-validate-report.txt 2>&1 || true
+          else
+            html-validate './_site/**/*.html' > html-validate-report.txt 2>&1 || true
+          fi
+          cat html-validate-report.txt
+        continue-on-error: true
       
       - name: Upload validation report
         if: always()
@@ -50,13 +68,17 @@ jobs:
         with:
           name: html-validate-report
           path: html-validate-report.txt
+          retention-days: 7
 
       - name: Summary
         if: always()
         run: |
           echo "### HTML Validation Summary" >> $GITHUB_STEP_SUMMARY
           if grep -qi "error" html-validate-report.txt; then
-            echo "Errors detected. See artifact." >> $GITHUB_STEP_SUMMARY
+            echo "❌ Errors detected. See artifact for details." >> $GITHUB_STEP_SUMMARY
+            echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
+            grep -i "error" html-validate-report.txt | head -20 >> $GITHUB_STEP_SUMMARY || true
+            echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
           else
-            echo "No errors detected." >> $GITHUB_STEP_SUMMARY
+            echo "✅ No errors detected." >> $GITHUB_STEP_SUMMARY
           fi

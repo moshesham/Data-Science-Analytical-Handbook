@@ -5,29 +5,41 @@ on:
     branches: [ main, workflow-fix ]
   pull_request:
     branches: [ main, workflow-fix ]
+  workflow_dispatch:
+
+# Prevent multiple CI runs for the same ref
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
 
 jobs:
   python-quality:
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
+      
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
-          python-version: '3.10'
-      - name: Cache Python virtualenv
+          python-version: '3.11'
+          cache: 'pip'
+          cache-dependency-path: |
+            requirements-dev.txt
+            requirements-notebooks.txt
+      
+      - name: Cache virtualenv
         id: cache-venv
         uses: actions/cache@v4
         with:
           path: .venv-dev
-          key: ${{ runner.os }}-venv-dev-${{ hashFiles('**/requirements*.txt') }}
-          restore-keys: ${{ runner.os }}-venv-dev-
-      - name: Cache pip
-        uses: actions/cache@v4
-        with:
-          path: ~/.cache/pip
-          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements*.txt') }}
-          restore-keys: ${{ runner.os }}-pip-
+          key: ${{ runner.os }}-python-3.11-venv-dev-${{ hashFiles('**/requirements*.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-python-3.11-venv-dev-
+      
       - name: Install dependencies
         run: |
           if [ ! -d .venv-dev ]; then python -m venv .venv-dev; fi
@@ -39,12 +51,20 @@ jobs:
           else
             echo "Virtualenv cache hit - skipping bulk installs"
           fi
+      
       - name: isort check
         run: . .venv-dev/bin/activate && isort --profile black --check-only --skip-glob=".venv-*" .
+      
       - name: black check
         run: . .venv-dev/bin/activate && black --check --exclude="/(\.venv-.*|\.git|__pycache__|_site|html_source)/" .
+      
       - name: flake8 strict
         run: . .venv-dev/bin/activate && flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+      
+      - name: flake8 warnings
+        run: . .venv-dev/bin/activate && flake8 . --count --exit-zero --max-complexity=10 --statistics
+        continue-on-error: true
+      
       - name: Notebook tests (nbval)
         run: |
           if find . -name '*.ipynb' -print -quit | grep -q .; then
@@ -57,6 +77,7 @@ jobs:
           else
             echo "No notebooks found; skipping." > notebook-skip.log
           fi
+      
       - name: Upload notebook logs
         if: always()
         uses: actions/upload-artifact@v4
@@ -65,21 +86,29 @@ jobs:
           path: |
             notebook-fail.log
             notebook-skip.log
+          retention-days: 7
 
   markdown-links:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
-      - name: Cache npm
-        uses: actions/cache@v4
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-npm-markdown-links
-          restore-keys: ${{ runner.os }}-npm-
+      
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: '20'
+          cache: 'npm'
+      
+      - name: Cache npm packages
+        uses: actions/cache@v4
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-npm-markdown-links-${{ hashFiles('package*.json') }}
+          restore-keys: |
+            ${{ runner.os }}-npm-markdown-links-
+            ${{ runner.os }}-npm-
+      
       - name: Run markdown-link-check (via npx)
         run: |
           if [ -f .markdown-link-check.json ]; then
@@ -90,19 +119,26 @@ jobs:
 
   streamlit-smoke:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
+      
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
-          python-version: '3.10'
+          python-version: '3.11'
+          cache: 'pip'
+          cache-dependency-path: 'streamlit_app/Product_Analytics/requirements.txt'
+      
       - name: Cache Streamlit virtualenv
         id: cache-venv-streamlit
         uses: actions/cache@v4
         with:
           path: .venv-streamlit
-          key: ${{ runner.os }}-venv-streamlit-${{ hashFiles('streamlit_app/Product_Analytics/requirements.txt') }}
-          restore-keys: ${{ runner.os }}-venv-streamlit-
+          key: ${{ runner.os }}-python-3.11-venv-streamlit-${{ hashFiles('streamlit_app/Product_Analytics/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-python-3.11-venv-streamlit-
+      
       - name: Install dependencies
         run: |
           if [ ! -d .venv-streamlit ]; then python -m venv .venv-streamlit; fi
@@ -113,6 +149,7 @@ jobs:
           else
             echo "Streamlit virtualenv cache hit - skipping installs"
           fi
+      
       - name: Start Streamlit (background)
         run: |
           . .venv-streamlit/bin/activate
@@ -122,13 +159,16 @@ jobs:
             if curl -fsS http://127.0.0.1:8501 >/dev/null; then echo "Streamlit up"; exit 0; fi
           done
           echo "Streamlit failed to start" >&2
+          cat streamlit.log
           exit 1
+      
       - name: Upload Streamlit log
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: streamlit-log
           path: streamlit.log
+          retention-days: 7
   summary:
     runs-on: ubuntu-latest
     if: always()

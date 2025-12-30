@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: GitHub Discussions
+    url: https://github.com/moshesham/Data-Science-Analytical-Handbook/discussions
+    about: Ask questions and discuss topics with the community
+  - name: Security Issues
+    url: https://github.com/moshesham/Data-Science-Analytical-Handbook/security
+    about: Report security vulnerabilities

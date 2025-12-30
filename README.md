@@ -1,9 +1,10 @@
 # Data Science Analytical Interview Preparation Handbook
 
-![CI](https://github.com/moshesham/Data-Science-Analytical-Handbook/actions/workflows/ci.yml/badge.svg)
-![HTML Validate](https://github.com/moshesham/Data-Science-Analytical-Handbook/actions/workflows/html-validate.yml/badge.svg)
-![Markdown Links](https://github.com/moshesham/Data-Science-Analytical-Handbook/actions/workflows/markdown-links-only.yml/badge.svg)
-![Notebooks to Markdown](https://github.com/moshesham/Data-Science-Analytical-Handbook/actions/workflows/notebooks-to-markdown.yml/badge.svg)
+[![CI](https://github.com/moshesham/Data-Science-Analytical-Handbook/actions/workflows/ci.yml/badge.svg)](https://github.com/moshesham/Data-Science-Analytical-Handbook/actions/workflows/ci.yml)
+[![CodeQL](https://github.com/moshesham/Data-Science-Analytical-Handbook/actions/workflows/codeql.yml/badge.svg)](https://github.com/moshesham/Data-Science-Analytical-Handbook/actions/workflows/codeql.yml)
+[![HTML Validate](https://github.com/moshesham/Data-Science-Analytical-Handbook/actions/workflows/html-validate.yml/badge.svg)](https://github.com/moshesham/Data-Science-Analytical-Handbook/actions/workflows/html-validate.yml)
+[![Markdown Links](https://github.com/moshesham/Data-Science-Analytical-Handbook/actions/workflows/markdown-links-only.yml/badge.svg)](https://github.com/moshesham/Data-Science-Analytical-Handbook/actions/workflows/markdown-links-only.yml)
+[![Notebooks to Markdown](https://github.com/moshesham/Data-Science-Analytical-Handbook/actions/workflows/notebooks-to-markdown.yml/badge.svg)](https://github.com/moshesham/Data-Science-Analytical-Handbook/actions/workflows/notebooks-to-markdown.yml)
 
 This repository provides a comprehensive handbook designed to assist in preparing for data science analytical interviews, with a specific focus on Meta.
 
@@ -69,6 +70,30 @@ This repository is organized into the following sections:
 ## 🤝 Contributing
 
 This handbook is a collaborative effort, and contributions are welcome! If you have suggestions, find errors, or want to add more content, please feel free to open an issue or submit a pull request.
+
+### Getting Started
+
+1. **Fork the repository** and clone it locally
+2. **Install pre-commit hooks** (recommended):
+   ```bash
+   pip install pre-commit
+   pre-commit install
+   ```
+3. **Make your changes** and test them locally
+4. **Submit a pull request** using our PR template
+
+For more details, see [CONTRIBUTING.md](CONTRIBUTING.md).
+
+### CI/CD and Quality Standards
+
+This project uses automated CI/CD pipelines to maintain code quality:
+
+- **Automated Testing**: Python linting, formatting checks, notebook validation
+- **Security Scanning**: CodeQL analysis for vulnerabilities
+- **Dependency Management**: Automated updates via Dependabot
+- **Documentation**: Automated Jekyll site deployment and HTML validation
+
+For detailed information about our CI/CD setup, see [CI/CD Documentation](.github/CI_CD_DOCUMENTATION.md).
 
 ## 📄 License
 
