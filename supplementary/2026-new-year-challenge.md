@@ -10,10 +10,12 @@ track: "Getting Started"
 
 # 🎯 2026 New Year Resolution Challenge: Level Up Your Analytical Skills
 
-**Start Date:** January 1, 2026  
-**Duration:** 8 weeks (January – February)  
+**Official Cohort Start Dates:** January 1, 2026 | April 1, 2026 | September 1, 2026  
+**Duration:** 8 weeks  
 **Commitment:** ~1 hour/day on weekdays; flexible weekends for catch-up/projects  
-**Goal:** Enter Q2 2026 with demonstrably stronger analytics, SQL, Python, statistics, and storytelling skills.
+**Goal:** Enter Q2 2026 with demonstrably stronger analytics, SQL, Python, statistics, **AI-augmented skills**, and storytelling abilities.
+
+> 💡 **New for 2026:** This challenge now includes an **AI-Augmented Analyst Track** — learn to leverage GenAI tools as a force multiplier, not a crutch.
 
 ---
 
@@ -25,6 +27,78 @@ track: "Getting Started"
     📝 Sign Up & Introduce Yourself
   </a>
 </div>
+
+---
+
+## 🚀 Quick Start & Environment Setup
+
+### One-Click Environments (Zero Local Setup)
+
+Skip the `pip install` struggles! Use these browser-based environments:
+
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/moshesham/Data-Science-Analytical-Handbook)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/moshesham/Data-Science-Analytical-Handbook/blob/main/Simulations/Hands-On-Statistics.ipynb)
+[![Try DuckDB in Browser](https://img.shields.io/badge/SQL-DuckDB_WASM-FEF0CD?style=for-the-badge&logo=duckdb)](https://shell.duckdb.org/)
+
+**For SQL Practice (Weeks 1-2):**
+- Use [DuckDB WASM Shell](https://shell.duckdb.org/) — runs SQL in your browser, no setup!
+- Load our sample data: `CREATE TABLE customers AS SELECT * FROM 'https://raw.githubusercontent.com/moshesham/Data-Science-Analytical-Handbook/main/supplementary/challenge-2026/data/customers.csv';`
+
+**For Python Practice (Weeks 5, 8):**
+- Use Google Colab — free Jupyter notebooks in the cloud
+- Or GitHub Codespaces — full VS Code in browser
+
+### Local Setup (Optional)
+
+If you prefer local development:
+
+```bash
+# Clone the repository
+git clone https://github.com/moshesham/Data-Science-Analytical-Handbook.git
+cd Data-Science-Analytical-Handbook/supplementary/challenge-2026
+
+# Option 1: pip
+pip install -r requirements.txt
+
+# Option 2: conda
+conda env create -f environment.yml
+conda activate analytics-challenge-2026
+```
+
+### Sample Data
+
+We've included ready-to-use datasets in [`data/`](./challenge-2026/data/):
+- `customers.csv`, `orders.csv`, `products.csv` — for SQL practice
+- `user_activity.csv` — for cohort analysis
+- `daily_metrics.csv`, `monthly_revenue.csv` — for time series analysis
+
+---
+
+## 🤖 The AI-Augmented Analyst Track (NEW)
+
+In 2026, analysts who can **leverage AI tools effectively** will have a massive advantage. This track teaches you to use GenAI as a force multiplier — not a replacement for critical thinking.
+
+### How It Works
+
+Every week includes an **optional AI challenge** that teaches responsible AI-augmented analysis:
+
+| Week | Traditional Skill | AI-Augmented Challenge |
+|------|------------------|----------------------|
+| 1 | SQL Fundamentals | **Prompt Engineering for SQL** — Write a complex query, then ask Copilot/ChatGPT to optimize it. Compare execution plans using `EXPLAIN ANALYZE`. |
+| 2 | Window Functions | **SQL Review with AI** — Generate window function queries with AI, then critique and fix the errors it makes. |
+| 3 | Statistics | **Synthetic Data Generation** — Use Python `faker` or an LLM to generate a dataset with specific statistical properties. |
+| 4 | A/B Testing | **Experiment Design Review** — Use AI to critique your experiment design doc. Challenge its suggestions. |
+| 5 | Pandas/EDA | **Refactoring with AI** — Take your "spaghetti code" from Day 30 and use an AI agent to modularize it. |
+| 6 | Product Metrics | **Simulated Stakeholder** — Submit your case study answer to ChatGPT playing the role of a skeptical PM. |
+| 7 | Analytical Engineering | **dbt Model Generation** — Use AI to scaffold a dbt project, then customize and validate. |
+| 8 | Capstone | **AI-Assisted Storytelling** — Use AI to critique your presentation structure, then improve it. |
+
+### Key Principles for AI-Augmented Analysis
+
+1. **AI as Co-Pilot, Not Autopilot** — Always verify AI outputs; it makes confident mistakes.
+2. **Prompt Engineering is a Skill** — Learn to write precise prompts that constrain the output.
+3. **Domain Knowledge Matters More** — AI doesn't know your business context; you do.
+4. **Show Your Reasoning** — In interviews, explain how you validated AI-generated code.
 
 ---
 
@@ -58,7 +132,18 @@ Complete the challenge and showcase your achievement! Add this badge to your Git
 ![Statistics Pro](https://img.shields.io/badge/Statistics-Pro-success?style=flat-square&logo=python&logoColor=white)
 ![Python Pandas](https://img.shields.io/badge/Pandas-Expert-150458?style=flat-square&logo=pandas&logoColor=white)
 ![A/B Testing](https://img.shields.io/badge/A%2FB_Testing-Certified-blueviolet?style=flat-square)
+![AI-Augmented](https://img.shields.io/badge/AI_Augmented-Analyst-FF6F61?style=flat-square&logo=openai&logoColor=white)
 ```
+
+### 📜 Digital Certificate
+
+Upon completing the capstone (Week 8), you'll receive a **digital certificate** to showcase on your LinkedIn profile:
+
+1. **Post your capstone** to the Week 8 Discussion thread
+2. **Include these components:** GitHub repo link, presentation slides/video, key insights
+3. **Receive your certificate** — we'll generate a personalized PDF certificate for verified completions
+
+> 🎓 Certificates include your name, completion date, capstone project title, and a verification link.
 
 ---
 
@@ -114,16 +199,16 @@ Every Monday, a new weekly thread goes live. Use it to:
 
 ## Challenge Overview
 
-| Week | Theme | Outcome |
-|------|-------|---------|
-| 1 | SQL Fundamentals Refresher | Solve 15 SQL problems, from easy → medium |
-| 2 | SQL Mastery: Window Functions & CTEs | Complete 10 advanced problems; build a cohort/retention query |
-| 3 | Statistics for Product Analytics | Explain p-values, CI, power; design a sample size calculator |
-| 4 | A/B Testing & Experimentation | Design & analyze a mock experiment end-to-end |
-| 5 | Python (Pandas) for Analysis | Clean, explore, and visualize a real dataset |
-| 6 | Product Metrics & Case Studies | Define metrics frameworks; crack 3 case studies |
-| 7 | Analytical Engineering Basics | Build a staging → mart pipeline in SQL |
-| 8 | Capstone & Storytelling | Deliver a 5-slide insight presentation |
+| Week | Theme | Outcome | 🆕 2026 Innovation |
+|------|-------|---------|-------------------|
+| 1 | SQL Fundamentals Refresher | Solve 15 SQL problems, from easy → medium | **Query Cost Optimization** with `EXPLAIN ANALYZE` |
+| 2 | SQL Mastery: Window Functions & CTEs | Complete 10 advanced problems; build a cohort/retention query | **Visual SQL** — see query results as charts |
+| 3 | Statistics for Product Analytics | Explain p-values, CI, power; design a sample size calculator | **Peeking Simulation** — visualize why peeking is bad |
+| 4 | A/B Testing & Experimentation | Design & analyze a mock experiment end-to-end | **Multi-Armed Bandits** — modern alternative to A/B |
+| 5 | Python (Pandas) for Analysis | Clean, explore, and visualize a real dataset | **Polars** — high-performance DataFrame alternative |
+| 6 | Product Metrics & Case Studies | Define metrics frameworks; crack 3 case studies | **Metric Trees** — hierarchical metric visualization |
+| 7 | Analytical Engineering Basics | Build a staging → mart pipeline in SQL | **dbt Core** — industry-standard transformation tool |
+| 8 | Capstone & Storytelling | Deliver a 5-slide insight presentation | **Video Walkthrough** — 3-min Loom requirement |
 
 ---
 
@@ -131,14 +216,49 @@ Every Monday, a new weekly thread goes live. Use it to:
 
 **Goal:** Knock the rust off core SQL and solve problems quickly.
 
+> 📂 **Sample Data:** Use our ready-to-use datasets in [`challenge-2026/data/`](./challenge-2026/data/) — no downloading required!
+
 | Day | Focus | Do This | Resource |
 |-----|-------|---------|----------|
 | 1 | SELECT, WHERE, ORDER | Solve 3 easy SQL problems on DataLemur or LeetCode | [DataLemur](https://datalemur.com/questions) |
 | 2 | JOINs (INNER, LEFT) | Diagram how LEFT JOIN works; solve 3 join problems | [SQLBolt](https://sqlbolt.com/lesson/select_queries_with_joins) |
 | 3 | GROUP BY, HAVING | Solve 3 aggregation problems; explain the difference from WHERE | [Mode Tutorial](https://mode.com/sql-tutorial/sql-aggregate-functions/) |
 | 4 | Subqueries | Rewrite a subquery as a CTE; solve 2 problems both ways | [LeetCode](https://leetcode.com/problemset/database/) |
-| 5 | CTEs | Solve 3 problems using CTEs for readability | [DataLemur](https://datalemur.com/questions) |
+| 5 | CTEs + **EXPLAIN ANALYZE** | Solve 3 CTE problems; learn to read execution plans | [DataLemur](https://datalemur.com/questions) |
 | 6–7 | Catch-up / Mini-project | Write a single CTE-based query that answers a business question on a public dataset (e.g., Kaggle) | [Kaggle Datasets](https://www.kaggle.com/datasets) |
+
+### 🆕 Query Cost Optimization (Distinguishes Senior Analysts)
+
+Learning to read `EXPLAIN ANALYZE` output early sets you apart. Here's why it matters:
+
+```sql
+-- Run this on any query to see its execution plan
+EXPLAIN ANALYZE
+SELECT c.name, COUNT(o.order_id) as order_count
+FROM customers c
+LEFT JOIN orders o ON c.customer_id = o.customer_id
+GROUP BY c.name
+ORDER BY order_count DESC;
+```
+
+**What to look for:**
+- **Seq Scan vs Index Scan** — Index scans are usually faster for filtered queries
+- **Nested Loop vs Hash Join** — Hash joins are better for large tables
+- **Actual Time** — The "actual time" tells you how long each step took
+- **Rows** — Compare "estimated" vs "actual" rows to spot statistics issues
+
+**Pro Tip:** In DuckDB (browser-based), use `EXPLAIN` to see the logical plan:
+```sql
+EXPLAIN SELECT * FROM orders WHERE amount > 100;
+```
+
+### 🤖 AI-Augmented Challenge (Week 1)
+
+**Prompt Engineering for SQL:**
+1. Write a complex query with 3+ JOINs and aggregations
+2. Ask ChatGPT/Copilot: *"Optimize this query for performance. Explain what you changed and why."*
+3. Compare the AI's version to yours using `EXPLAIN ANALYZE`
+4. **Reflection:** Did the AI improve performance? Did it break correctness?
 
 ### 🧠 Week 1 Challenge Problems
 
@@ -290,6 +410,50 @@ Before moving to Week 2, can you:
 | 11 | NTILE, PERCENT_RANK | Bucket users into deciles; explain use case | [Mode Tutorial](https://mode.com/sql-tutorial/sql-window-functions/) |
 | 12 | Cohort & Retention Query | Build a retention matrix query for a sample events table | [Handbook: Cohort Analysis]({{ '/analytical-projects/#cohort-analysis' | relative_url }}) |
 | 13–14 | Catch-up / Mini-project | Publish a cohort retention query + heatmap visual (Python or Sheets) | Your GitHub |
+
+### 🆕 Visual SQL (See Your Data Immediately)
+
+Don't just write queries — **visualize the results** to build intuition. Window functions are much easier to understand when you can see the data change.
+
+**Option 1: DuckDB + Python (Recommended)**
+```python
+import duckdb
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# Load data and run window function query
+con = duckdb.connect()
+df = con.execute("""
+    SELECT 
+        dt,
+        dau,
+        AVG(dau) OVER (ORDER BY dt ROWS BETWEEN 6 PRECEDING AND CURRENT ROW) AS trailing_7d_avg
+    FROM 'data/daily_metrics.csv'
+    ORDER BY dt
+""").fetchdf()
+
+# Visualize immediately
+fig, ax = plt.subplots(figsize=(12, 6))
+ax.plot(df['dt'], df['dau'], label='Daily DAU', alpha=0.7)
+ax.plot(df['dt'], df['trailing_7d_avg'], label='7-Day Trailing Avg', linewidth=2)
+ax.legend()
+ax.set_title('Daily Active Users with 7-Day Moving Average')
+plt.show()
+```
+
+**Option 2: Metabase (Free, Local)**
+- Run `docker run -d -p 3000:3000 metabase/metabase`
+- Connect to your local database
+- Build charts directly from SQL queries
+
+### 🤖 AI-Augmented Challenge (Week 2)
+
+**SQL Code Review with AI:**
+1. Write a complex window function query (e.g., cohort retention)
+2. Ask ChatGPT: *"Review this SQL query for correctness, performance, and readability. Point out any edge cases I might have missed."*
+3. **Critical step:** Test the AI's suggestions! Does the query still produce correct results?
+4. **Reflection:** What did the AI catch that you missed? What did it get wrong?
 
 ### 🧠 Week 2 Challenge Problems
 
@@ -525,6 +689,78 @@ Before moving to Week 3, can you:
 | 19 | Power & Sample Size | Use the handbook calculator or write your own formula | [Sample Size Calculator]({{ '/tools/sample-size-calculator/' | relative_url }}) |
 | 20–21 | Catch-up / Mini-project | Create a Python script or notebook that computes sample size given α, β, baseline, MDE | Your GitHub |
 
+### 🆕 The Peeking Simulation (Why Early Stopping is Dangerous)
+
+This visual simulation proves why "peeking" at A/B test results inflates false positive rates. **Run it yourself to build intuition.**
+
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy import stats
+
+def simulate_peeking(n_simulations=1000, true_effect=0, 
+                     sample_size_per_peek=100, n_peeks=10, alpha=0.05):
+    """
+    Simulate A/B tests with peeking vs waiting for full sample.
+    true_effect=0 means there's NO real effect (null hypothesis is true).
+    """
+    false_positives_peeking = 0
+    false_positives_proper = 0
+    
+    for _ in range(n_simulations):
+        # Generate full dataset for both groups
+        control = np.random.normal(0, 1, sample_size_per_peek * n_peeks)
+        treatment = np.random.normal(true_effect, 1, sample_size_per_peek * n_peeks)
+        
+        # Peeking: check at each peek point, stop if significant
+        peeking_significant = False
+        for peek in range(1, n_peeks + 1):
+            n = sample_size_per_peek * peek
+            _, p_value = stats.ttest_ind(control[:n], treatment[:n])
+            if p_value < alpha:
+                peeking_significant = True
+                break  # Stop at first significant result
+        
+        if peeking_significant:
+            false_positives_peeking += 1
+        
+        # Proper: wait for full sample
+        _, p_value_full = stats.ttest_ind(control, treatment)
+        if p_value_full < alpha:
+            false_positives_proper += 1
+    
+    return {
+        'peeking_fp_rate': false_positives_peeking / n_simulations,
+        'proper_fp_rate': false_positives_proper / n_simulations
+    }
+
+# Run simulation
+results = simulate_peeking(n_simulations=1000, true_effect=0, n_peeks=10)
+print(f"False Positive Rate (Peeking): {results['peeking_fp_rate']:.1%}")
+print(f"False Positive Rate (Proper):  {results['proper_fp_rate']:.1%}")
+print(f"Expected (α=0.05):             5.0%")
+```
+
+**Expected Output:**
+```
+False Positive Rate (Peeking): ~20-30%  ← Much higher than expected!
+False Positive Rate (Proper):  ~5%      ← As expected
+Expected (α=0.05):             5.0%
+```
+
+**The Insight:** With 10 peeks, your false positive rate can inflate to 20-30% even though you're using α=0.05. This is why pre-registration and sequential testing methods matter.
+
+### 🤖 AI-Augmented Challenge (Week 3)
+
+**Synthetic Data Generation:**
+1. Use Python's `faker` library or an LLM to generate a dataset with specific properties:
+   - 10,000 users
+   - Conversion rate of 3.5% with a specific distribution
+   - Include confounding variables (e.g., users from paid ads convert higher)
+2. **Prompt for LLM:** *"Generate Python code to create a synthetic A/B test dataset with 10,000 users, a control group with 3% conversion and treatment with 3.5% conversion, including user attributes like signup source and device type that correlate with conversion."*
+3. Run your hypothesis testing code on the synthetic data
+4. **Reflection:** Did you detect the 0.5 percentage point difference? What sample size did you need?
+
 ### 🧠 Week 3 Challenge Problems
 
 <details>
@@ -692,6 +928,73 @@ Before moving to Week 4, can you:
 | 25 | Interpreting Edge Cases | What if success metric up but guardrail down? Write decision framework | Own notes |
 | 26 | Common Pitfalls (peeking, SRM) | List 5 mistakes and how to avoid them | [Trustworthy Online Experiments (book)](https://www.goodreads.com/book/show/48570077-trustworthy-online-controlled-experiments) |
 | 27–28 | Catch-up / Mini-project | Write up a full experiment doc: hypothesis → design → analysis → decision | Your GitHub |
+
+### 🆕 Multi-Armed Bandits (Modern Alternative to A/B Testing)
+
+Traditional A/B tests run to a fixed sample size. **Multi-Armed Bandits (MAB)** dynamically allocate traffic to better-performing variants, reducing regret (the cost of showing worse variants).
+
+**When to Use MAB vs A/B:**
+
+| Scenario | Best Approach | Why |
+|----------|--------------|-----|
+| High stakes, need statistical rigor | A/B Test | Fixed sample, clean interpretation |
+| Low stakes, want to minimize regret | MAB | Adaptive allocation, faster "winner" |
+| Short-lived (< 2 weeks) | MAB | Less time to waste on losers |
+| Long-term, need precise effect size | A/B Test | MAB doesn't give clean CIs |
+| Many variants (5+) | MAB | Efficiently prunes losers |
+
+**Simple Thompson Sampling Example:**
+
+```python
+import numpy as np
+from scipy import stats
+
+class ThompsonSampling:
+    """Simple Thompson Sampling for Bernoulli bandits (conversions)."""
+    
+    def __init__(self, n_variants):
+        # Beta(1,1) = uniform prior
+        self.successes = np.ones(n_variants)  # alpha
+        self.failures = np.ones(n_variants)   # beta
+    
+    def choose_variant(self):
+        """Sample from posterior and pick the best."""
+        samples = [np.random.beta(s, f) for s, f in zip(self.successes, self.failures)]
+        return np.argmax(samples)
+    
+    def update(self, variant, converted):
+        """Update posterior with new observation."""
+        if converted:
+            self.successes[variant] += 1
+        else:
+            self.failures[variant] += 1
+    
+    def get_conversion_rates(self):
+        """Get estimated conversion rates (posterior mean)."""
+        return self.successes / (self.successes + self.failures)
+
+# Simulate a campaign with 3 variants
+bandit = ThompsonSampling(n_variants=3)
+true_rates = [0.03, 0.035, 0.04]  # Variant 2 is best
+
+for _ in range(10000):
+    chosen = bandit.choose_variant()
+    converted = np.random.random() < true_rates[chosen]
+    bandit.update(chosen, converted)
+
+print("Estimated rates:", bandit.get_conversion_rates())
+print("True rates:     ", true_rates)
+```
+
+**Key Insight:** Over time, Thompson Sampling naturally allocates more traffic to the best variant while still exploring others.
+
+### 🤖 AI-Augmented Challenge (Week 4)
+
+**Experiment Design Review with AI:**
+1. Write a complete experiment design document (hypothesis, metrics, sample size, etc.)
+2. Submit it to ChatGPT with this prompt: *"You are a skeptical Staff Data Scientist reviewing this experiment design. Ask me 5 challenging questions about potential flaws, edge cases, or metrics I might have missed."*
+3. Answer each question thoughtfully
+4. **Reflection:** Did the AI raise concerns you hadn't considered? Were any of its concerns misguided?
 
 ### 🧠 Week 4 Challenge Problems
 
@@ -935,9 +1238,11 @@ Before moving to Week 5, can you:
 
 ---
 
-## Week 5: Python (Pandas) for Analysis
+## Week 5: Python (Pandas & Polars) for Analysis
 
-**Goal:** Confidently clean, explore, and visualize a messy dataset.
+**Goal:** Confidently clean, explore, and visualize a messy dataset. **New for 2026:** Learn Polars as a high-performance alternative.
+
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/moshesham/Data-Science-Analytical-Handbook/blob/main/Simulations/Hands-On-Statistics.ipynb)
 
 | Day | Focus | Do This | Resource |
 |-----|-------|---------|----------|
@@ -947,6 +1252,64 @@ Before moving to Week 5, can you:
 | 32 | Merging & Joining | Merge 2 tables; assert key uniqueness before join | [Handbook: Python Patterns]({{ '/foundational_knowledge/3/' | relative_url }}) |
 | 33 | Visualization (Matplotlib/Seaborn) | Create bar, line, histogram, heatmap for your dataset | [Seaborn Gallery](https://seaborn.pydata.org/examples/index.html) |
 | 34–35 | Catch-up / Mini-project | Publish an EDA notebook with insights and 3+ charts | Your GitHub |
+
+### 🆕 Polars: The High-Performance Alternative (2026 Must-Know)
+
+**Polars** is gaining massive traction as a faster, more memory-efficient alternative to Pandas. It uses Rust under the hood and supports lazy evaluation — essential for large datasets.
+
+**Why Learn Polars in 2026?**
+- **10-100x faster** than Pandas for many operations
+- **Lazy execution** — builds an optimized query plan before running
+- **Parallel by default** — uses all CPU cores automatically
+- **Growing industry adoption** — increasingly mentioned in job postings
+
+**Pandas vs Polars Comparison:**
+
+```python
+# ----- PANDAS -----
+import pandas as pd
+
+df_pd = pd.read_csv('data/orders.csv')
+result_pd = (
+    df_pd[df_pd['amount'] > 50]
+    .groupby('customer_id')['amount']
+    .sum()
+    .reset_index()
+    .sort_values('amount', ascending=False)
+)
+
+# ----- POLARS -----
+import polars as pl
+
+df_pl = pl.read_csv('data/orders.csv')
+result_pl = (
+    df_pl.lazy()  # Enable lazy evaluation
+    .filter(pl.col('amount') > 50)
+    .group_by('customer_id')
+    .agg(pl.col('amount').sum())
+    .sort('amount', descending=True)
+    .collect()  # Execute the query plan
+)
+```
+
+**Key Differences:**
+| Feature | Pandas | Polars |
+|---------|--------|--------|
+| Execution | Eager (immediate) | Lazy (optimized plan) |
+| Parallelism | Single-threaded | Multi-threaded by default |
+| Memory | Often copies data | Zero-copy when possible |
+| Syntax | `.loc`, `.iloc`, chaining | Method chaining, expressions |
+| Null handling | NaN (float) | Native null type |
+
+**Week 5 Polars Challenge:** Re-implement your Day 30-31 Pandas code in Polars. Compare performance on a larger dataset.
+
+### 🤖 AI-Augmented Challenge (Week 5)
+
+**Refactoring with AI:**
+1. Write your EDA code in a "quick and dirty" way (it's okay to have spaghetti code!)
+2. Once it works, ask an AI: *"Refactor this Pandas code into clean, modular functions with proper docstrings. Use best practices for data analysis code."*
+3. **Critical step:** Review and test the refactored code. Does it produce the same results?
+4. **Reflection:** What improvements did the AI make? What did you disagree with?
 
 ### 🧠 Week 5 Challenge Problems
 
@@ -1316,6 +1679,63 @@ Before moving to Week 6, can you:
 | 40 | Case Study Walk-Through | Crack a metrics definition case | StrataScratch |
 | 41–42 | Catch-up / Mini-project | Write a 1-page case study answer doc with structure | Your GitHub |
 
+### 🆕 Metric Trees (Hierarchical Metric Visualization)
+
+**Metric Trees** help you visualize how metrics relate to each other hierarchically. This is essential for:
+- Understanding which input metrics drive your North Star
+- Diagnosing drops (which branch of the tree is affected?)
+- Communicating metric strategy to stakeholders
+
+**Example: E-Commerce Revenue Metric Tree**
+
+```
+                    ┌─────────────────────────────────────┐
+                    │        NORTH STAR: Revenue          │
+                    │         = Orders × AOV              │
+                    └─────────────────────────────────────┘
+                                      │
+            ┌─────────────────────────┴─────────────────────────┐
+            ▼                                                   ▼
+    ┌───────────────────┐                           ┌───────────────────┐
+    │      Orders       │                           │ Average Order Val │
+    │ = Visitors × CVR  │                           │   = Revenue/Orders│
+    └───────────────────┘                           └───────────────────┘
+            │                                               │
+    ┌───────┴───────┐                               ┌───────┴───────┐
+    ▼               ▼                               ▼               ▼
+┌─────────┐   ┌─────────┐                     ┌─────────┐   ┌─────────┐
+│Visitors │   │   CVR   │                     │Units per│   │Unit     │
+│         │   │         │                     │  Order  │   │ Price   │
+└─────────┘   └─────────┘                     └─────────┘   └─────────┘
+    │               │
+    ▼               ▼
+┌─────────────┐ ┌─────────────┐
+│Organic      │ │Add-to-Cart  │
+│Paid         │ │Cart→Checkout│
+│Direct       │ │Checkout→Pay │
+└─────────────┘ └─────────────┘
+```
+
+**How to Use Metric Trees:**
+1. **Start at the top** with your North Star (Revenue, DAU, etc.)
+2. **Decompose mathematically** — use multiplications and additions
+3. **Go 3-4 levels deep** until you reach actionable levers
+4. **Color-code for diagnosis** — red for declining, green for improving
+
+**Tools for Creating Metric Trees:**
+- [Miro](https://miro.com/) — drag-and-drop diagrams
+- [Excalidraw](https://excalidraw.com/) — hand-drawn style, great for presentations
+- [Whimsical](https://whimsical.com/) — clean flowcharts
+
+### 🤖 AI-Augmented Challenge (Week 6): Simulated Stakeholder Bot
+
+**Practice Case Study Defense:**
+1. Write your case study answer for "DAU dropped 5%"
+2. Submit it to ChatGPT with this prompt:
+   > *"You are a skeptical VP of Product. I'm presenting my analysis of why DAU dropped 5%. Challenge my findings with tough questions like: 'But how do you know it's not just seasonality?' or 'What's the confidence level on that conclusion?' Be specific and push back on weak logic."*
+3. Defend your analysis in a back-and-forth conversation
+4. **Reflection:** What gaps in your analysis did the "VP" expose?
+
 ### 🧠 Week 6 Challenge Problems
 
 <details>
@@ -1581,7 +2001,7 @@ Before moving to Week 7, can you:
 
 ## Week 7: Analytical Engineering Basics
 
-**Goal:** Understand how analysts and AEs model data for reliability.
+**Goal:** Understand how analysts and AEs model data for reliability. **New for 2026:** Get hands-on with dbt Core.
 
 | Day | Focus | Do This | Resource |
 |-----|-------|---------|----------|
@@ -1591,6 +2011,116 @@ Before moving to Week 7, can you:
 | 46 | Data Quality Checks | Write 3 test queries (uniqueness, not-null, referential) | [Handbook: AE Checks]({{ '/analytical-engineering/advanced-sql-postgres/' | relative_url }}) |
 | 47 | Date Spines & Completeness | Generate a date spine; LEFT JOIN to fill gaps | [Handbook: Date Spine]({{ '/analytical-engineering/advanced-sql-postgres/' | relative_url }}) |
 | 48–49 | Catch-up / Mini-project | Commit a small pipeline (staging view + mart table + test queries) | Your GitHub |
+
+### 🆕 dbt Core Tutorial (Industry-Standard Transformation Tool)
+
+**dbt (data build tool)** is the industry standard for transforming data in the warehouse. Even if you don't become an Analytics Engineer, understanding dbt is valuable for:
+- Reading and contributing to data models at your company
+- Understanding how modern data teams operate
+- Speaking the same language as your AE counterparts
+
+**Quick Start with dbt + DuckDB (No Cloud Required):**
+
+```bash
+# Install dbt with DuckDB adapter
+pip install dbt-core dbt-duckdb
+
+# Initialize a new dbt project
+dbt init my_analytics_project
+cd my_analytics_project
+```
+
+**Project Structure:**
+```
+my_analytics_project/
+├── models/
+│   ├── staging/           # Clean, rename, dedupe raw data
+│   │   ├── stg_orders.sql
+│   │   ├── stg_products.sql
+│   │   └── _staging.yml   # Schema tests
+│   ├── intermediate/      # Business logic, joins
+│   │   └── int_order_items_enriched.sql
+│   └── marts/             # Final aggregations
+│       └── mart_daily_revenue.sql
+├── tests/                 # Custom data tests
+├── macros/                # Reusable SQL snippets
+├── dbt_project.yml        # Project configuration
+└── profiles.yml           # Database connections
+```
+
+**Example Staging Model (`models/staging/stg_orders.sql`):**
+```sql
+-- stg_orders.sql
+-- This model deduplicates raw orders and standardizes column types
+
+with source as (
+    select * from {{ source('raw', 'orders') }}
+),
+
+deduplicated as (
+    select
+        *,
+        row_number() over (
+            partition by order_id 
+            order by _loaded_at desc
+        ) as row_num
+    from source
+)
+
+select
+    order_id,
+    customer_id,
+    order_date::date as order_date,
+    amount::numeric(12,2) as amount,
+    status
+from deduplicated
+where row_num = 1
+  and status != 'cancelled'
+```
+
+**Add Tests (`models/staging/_staging.yml`):**
+```yaml
+version: 2
+
+models:
+  - name: stg_orders
+    description: "Cleaned and deduplicated orders"
+    columns:
+      - name: order_id
+        tests:
+          - unique
+          - not_null
+      - name: customer_id
+        tests:
+          - not_null
+      - name: amount
+        tests:
+          - not_null
+          - dbt_utils.accepted_range:
+              min_value: 0
+              max_value: 100000
+```
+
+**Run dbt:**
+```bash
+# Build all models
+dbt run
+
+# Run tests
+dbt test
+
+# Generate documentation
+dbt docs generate
+dbt docs serve  # Opens in browser at localhost:8080
+```
+
+### 🤖 AI-Augmented Challenge (Week 7)
+
+**dbt Model Generation with AI:**
+1. Describe your data source to ChatGPT: *"I have a raw_orders table with columns (order_id, customer_id, order_date, amount, status, _loaded_at). Generate a dbt staging model that deduplicates by order_id, filters cancelled orders, and casts types appropriately."*
+2. Review the generated SQL — does it follow dbt best practices?
+3. Add tests and run `dbt test` to validate
+4. **Reflection:** What did the AI get right? What did you need to customize?
 
 ### 🧠 Week 7 Challenge Problems
 
@@ -2053,7 +2583,7 @@ Before moving to Week 8, can you:
 
 ## Week 8: Capstone & Storytelling
 
-**Goal:** Synthesize everything into a portfolio-quality deliverable.
+**Goal:** Synthesize everything into a portfolio-quality deliverable. **New for 2026:** Required 3-minute video walkthrough.
 
 | Day | Focus | Do This | Resource |
 |-----|-------|---------|----------|
@@ -2061,8 +2591,40 @@ Before moving to Week 8, can you:
 | 51 | Data Prep & EDA | Clean and explore; note 3 hypotheses | Your notebook |
 | 52 | Analysis & Insight | Run stats/SQL/Python; validate or reject hypotheses | Your notebook |
 | 53 | Build Presentation | Create 5 slides: Problem → Approach → Key Insight → Recommendation → Next Steps | Google Slides / Canva |
-| 54 | Record or Present | Present to a friend or record a Loom; get feedback | [Loom](https://www.loom.com/) |
-| 55–56 | Polish & Publish | Finalize notebook + slides; post on LinkedIn/GitHub | Your portfolio |
+| 54 | **Record Video Walkthrough** | Record a 3-minute Loom explaining your project (required!) | [Loom](https://www.loom.com/) |
+| 55–56 | Polish & Publish | Finalize notebook + slides + video; post on LinkedIn/GitHub | Your portfolio |
+
+### 🆕 Video Walkthrough Requirement (Communication is 50% of the Job)
+
+**Why This Matters:**
+- In real jobs, you'll present findings to stakeholders who won't read your notebook
+- Video communication is increasingly expected (remote work, async updates)
+- This is your chance to practice explaining technical work to non-technical audiences
+
+**3-Minute Video Structure:**
+1. **0:00-0:30 — The Hook:** What question did you answer? Why does it matter?
+2. **0:30-1:30 — The Method:** How did you approach it? (Keep it high-level, avoid code details)
+3. **1:30-2:30 — The Insight:** What did you find? Show your key visualization.
+4. **2:30-3:00 — The Recommendation:** What should the business do? What's the next step?
+
+**Tools for Recording:**
+- [Loom](https://www.loom.com/) — Free, easy screen + camera recording
+- [OBS Studio](https://obsproject.com/) — Free, more control (local recording)
+- Zoom — Record yourself presenting
+
+**Pro Tips:**
+- Write a script first (or at least bullet points)
+- Practice once before recording
+- It's okay to do multiple takes!
+- Include your face in the corner — builds trust
+
+### 🤖 AI-Augmented Challenge (Week 8)
+
+**Presentation Critique with AI:**
+1. Write your 5-slide presentation outline
+2. Submit it to ChatGPT: *"You are a presentation coach. Critique this data presentation structure. What's confusing? What's missing? How can I make the story more compelling?"*
+3. Revise based on feedback
+4. **Reflection:** What storytelling improvements did the AI suggest?
 
 ### 🎯 Week 8 Capstone Framework
 
@@ -2073,9 +2635,10 @@ Your capstone should demonstrate **every skill** you've built:
 | 1-2 | SQL mastery | Include a complex query (CTEs, window functions) |
 | 3 | Statistics | Include a statistical test with CI |
 | 4 | A/B testing mindset | Frame a "next steps" experiment |
-| 5 | Python/Pandas | Show clean data pipeline code |
-| 6 | Product metrics | Track a North Star metric |
+| 5 | Python/Pandas (or Polars!) | Show clean data pipeline code |
+| 6 | Product metrics | Track a North Star metric with metric tree |
 | 7 | AE fundamentals | Document your data transformation logic |
+| 8 | **Communication** | 3-minute video + clear slides |
 
 ### 🧠 Week 8 Challenge: Example Capstone Project
 
@@ -2485,6 +3048,64 @@ Thanks to @Data-Science-Analytical-Handbook for the structure!
 | Staging → mart pipeline | Analytical engineering proof |
 | Capstone presentation | Storytelling & executive presence |
 | **GitHub Challenge Badge** | Visible proof of commitment |
+| **3-Minute Video** | Demonstrates communication skills |
+| **Digital Certificate** | LinkedIn-ready proof of completion |
+
+---
+
+## 📣 Community & Marketing
+
+### Cohort Start Dates (Join a Community)
+
+Instead of going it alone, join an official cohort for accountability and community:
+
+| Cohort | Start Date | Registration Deadline |
+|--------|------------|-----------------------|
+| **Winter 2026** | January 1, 2026 | December 25, 2025 |
+| **Spring 2026** | April 1, 2026 | March 25, 2026 |
+| **Fall 2026** | September 1, 2026 | August 25, 2026 |
+
+**Why Join a Cohort?**
+- Weekly live AMAs (Twitter Spaces / LinkedIn Audio)
+- Dedicated Slack/Discord channel for your cohort
+- Peer accountability partners
+- Weekly "Spotlight" features for best submissions
+
+### The "Commitment Contract" (Social Accountability)
+
+Want to 10x your chances of completing the challenge? Make a public commitment:
+
+1. **Download this image** and post it to LinkedIn/Twitter:
+   > 🎯 I'm committed to the 2026 Analytics Challenge!
+   > For the next 8 weeks, I'll be leveling up my SQL, Python, statistics, and storytelling skills.
+   > Follow my journey: #2026AnalyticsChallenge
+   > github.com/moshesham/Data-Science-Analytical-Handbook
+
+2. **Star the repo** ⭐ — helps others discover the challenge and unlocks bonus materials!
+
+3. **Post weekly updates** with #2026AnalyticsChallenge
+
+### Weekly Live AMAs
+
+Every Friday during the challenge, join a 30-minute live session:
+
+- **Platform:** Twitter Spaces or LinkedIn Audio (links posted in Discussions)
+- **Format:** 10-min recap of the week + 20-min Q&A
+- **Topics:** That week's content, common struggles, career advice
+
+### Spotlight Rewards
+
+Each week, we feature the best submissions:
+
+- **Best SQL Query** (Week 1-2)
+- **Best Statistical Explanation** (Week 3)
+- **Best Experiment Design** (Week 4)
+- **Best EDA Notebook** (Week 5)
+- **Best Case Study Answer** (Week 6)
+- **Best Pipeline** (Week 7)
+- **Best Capstone** (Week 8)
+
+Winners get featured in the main README and earn a special "Spotlight" badge!
 
 ---
 

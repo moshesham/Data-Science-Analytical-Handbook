@@ -1,0 +1,52 @@
+# 2026 Analytics Challenge - Conda Environment
+# Create environment: conda env create -f environment.yml
+# Activate: conda activate analytics-challenge-2026
+
+name: analytics-challenge-2026
+channels:
+  - conda-forge
+  - defaults
+
+dependencies:
+  # Python version
+  - python>=3.10
+
+  # Core Data Science
+  - numpy>=1.24.0
+  - pandas>=2.0.0
+  - scipy>=1.11.0
+  - statsmodels>=0.14.0
+
+  # High-Performance DataFrame (Modern Alternative to Pandas)
+  - polars>=0.20.0
+
+  # Visualization
+  - matplotlib>=3.7.0
+  - seaborn>=0.12.0
+  - plotly>=5.18.0
+
+  # Machine Learning
+  - scikit-learn>=1.3.0
+
+  # Notebooks
+  - jupyter>=1.0.0
+  - jupyterlab>=4.0.0
+  - ipywidgets>=8.0.0
+
+  # SQL Practice
+  - duckdb>=0.9.0
+
+  # Synthetic Data Generation
+  - faker>=22.0.0
+
+  # Code Quality
+  - black>=23.0.0
+  - isort>=5.12.0
+  - flake8>=6.0.0
+
+  # pip dependencies (not available on conda-forge)
+  - pip
+  - pip:
+      # Optional: dbt for Analytical Engineering (Week 7)
+      # - dbt-core>=1.7.0
+      # - dbt-duckdb>=1.7.0

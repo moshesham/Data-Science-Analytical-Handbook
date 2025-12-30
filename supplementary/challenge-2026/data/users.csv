@@ -1,0 +1,16 @@
+user_id,name,referred_by_user_id,signup_date
+1,Alice Johnson,,2024-01-01
+2,Bob Smith,1,2024-01-15
+3,Carol Williams,1,2024-02-01
+4,David Brown,1,2024-02-10
+5,Emma Davis,2,2024-03-01
+6,Frank Miller,2,2024-03-15
+7,Grace Wilson,3,2024-04-01
+8,Henry Taylor,4,2024-04-15
+9,Ivy Anderson,4,2024-05-01
+10,Jack Thomas,,2024-05-15
+11,Kate Jackson,10,2024-06-01
+12,Liam White,10,2024-06-15
+13,Mia Harris,10,2024-07-01
+14,Noah Martin,,2024-07-15
+15,Olivia Garcia,14,2024-08-01
