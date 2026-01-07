@@ -3,3 +3,4 @@ black
 isort
 pytest
 nbval
+pre-commit

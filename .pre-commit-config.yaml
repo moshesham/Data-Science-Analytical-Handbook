@@ -1,0 +1,68 @@
+# Pre-commit hooks for local development
+# Install: pip install pre-commit && pre-commit install
+# Run manually: pre-commit run --all-files
+
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.5.0
+    hooks:
+      - id: trailing-whitespace
+        exclude: '\.md$'
+      - id: end-of-file-fixer
+        exclude: '\.ipynb$'
+      - id: check-yaml
+        args: ['--allow-multiple-documents']
+      - id: check-added-large-files
+        args: ['--maxkb=1000']
+      - id: check-merge-conflict
+      - id: check-json
+      - id: detect-private-key
+      - id: mixed-line-ending
+        args: ['--fix=lf']
+
+  - repo: https://github.com/psf/black
+    rev: 24.1.1
+    hooks:
+      - id: black
+        language_version: python3
+        exclude: '^(\.venv|_site|html_source)/'
+
+  - repo: https://github.com/PyCQA/isort
+    rev: 5.13.2
+    hooks:
+      - id: isort
+        args: ['--profile', 'black']
+        exclude: '^\.venv-'
+
+  - repo: https://github.com/PyCQA/flake8
+    rev: 7.0.0
+    hooks:
+      - id: flake8
+        args:
+          - '--config=.flake8'
+        exclude: '^(\.venv|_site|html_source)/'
+
+  - repo: https://github.com/nbQA-dev/nbQA
+    rev: 1.7.1
+    hooks:
+      - id: nbqa-black
+        additional_dependencies: [black==24.1.1]
+      - id: nbqa-isort
+        additional_dependencies: [isort==5.13.2]
+        args: ['--profile', 'black']
+
+  - repo: https://github.com/kynan/nbstripout
+    rev: 0.6.1
+    hooks:
+      - id: nbstripout
+        args: ['--extra-keys', 'metadata.kernel_spec metadata.language_info']
+
+ci:
+  autofix_commit_msg: |
+    [pre-commit.ci] auto fixes from pre-commit hooks
+  autofix_prs: true
+  autoupdate_branch: ''
+  autoupdate_commit_msg: '[pre-commit.ci] pre-commit autoupdate'
+  autoupdate_schedule: weekly
+  skip: []
+  submodules: false

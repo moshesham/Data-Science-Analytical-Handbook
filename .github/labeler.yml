@@ -1,0 +1,58 @@
+# Configuration for PR labeler
+# Add labels to pull requests based on file patterns
+
+# Documentation changes
+documentation:
+  - changed-files:
+    - any-glob-to-any-file:
+      - '**/*.md'
+      - 'docs/**/*'
+
+# Python code changes
+python:
+  - changed-files:
+    - any-glob-to-any-file:
+      - '**/*.py'
+      - 'requirements*.txt'
+
+# Jupyter notebooks
+notebooks:
+  - changed-files:
+    - any-glob-to-any-file:
+      - '**/*.ipynb'
+
+# CI/CD and workflows
+ci-cd:
+  - changed-files:
+    - any-glob-to-any-file:
+      - '.github/**/*.yml'
+      - '.github/**/*.yaml'
+      - 'docker-compose.yml'
+
+# Jekyll and web content
+jekyll:
+  - changed-files:
+    - any-glob-to-any-file:
+      - '_config.yml'
+      - '_layouts/**/*'
+      - '_includes/**/*'
+      - '_pages/**/*'
+      - 'Gemfile*'
+      - '**/*.scss'
+      - '**/*.css'
+
+# Streamlit app
+streamlit:
+  - changed-files:
+    - any-glob-to-any-file:
+      - 'streamlit_app/**/*'
+
+# Configuration files
+config:
+  - changed-files:
+    - any-glob-to-any-file:
+      - '**/*.json'
+      - '**/*.yml'
+      - '**/*.yaml'
+      - '.flake8'
+      - '.gitignore'

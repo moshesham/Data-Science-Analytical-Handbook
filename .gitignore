@@ -14,8 +14,14 @@ __pycache__/
 *.pyo
 .ipynb_checkpoints/
 .venv/
+.venv-*/
 venv/
 *.egg-info/
+.pytest_cache/
+.coverage
+htmlcov/
+dist/
+build/
 
 # OS files
 Thumbs.db
@@ -35,3 +41,11 @@ Thumbs.db
 
 # Test output
 html-validate-report-*.json
+html-validate-report.txt
+notebook-fail.log
+notebook-skip.log
+streamlit.log
+
+# Temporary files
+/tmp/
+.tmp/
