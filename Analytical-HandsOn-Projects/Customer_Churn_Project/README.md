@@ -15,9 +15,34 @@ By completing this project, you will be able to:
 
 | File | Description |
 |------|-------------|
-| `Customer_Churn.ipynb` | Main analysis notebook (in progress) |
-| `data/` | Customer data with churn labels |
+| `Customer_Churn.ipynb` | Complete end-to-end analysis notebook (9 sections) |
+| `data/` | Auto-created on first run; caches the downloaded CSV |
 | `README.md` | This file |
+
+## 📓 What's in the Notebook
+
+| Section | Content |
+|---------|---------|
+| **0. Setup & Data Loading** | Auto-downloads IBM Telco CSV from GitHub; falls back to realistic synthetic data |
+| **1. Data Cleaning** | Fix `TotalCharges` dtype, drop `customerID`, encode target |
+| **2. EDA** | 6 charts: churn distribution, tenure, monthly charges, contract type, internet service, correlation heatmap |
+| **3. Feature Engineering** | 30+ features: binary encoding, NumServices, HasFullProtection, ChargePerService, TenureBucket, one-hot encoding |
+| **4. Model Building** | 3 pipelines: Logistic Regression, Random Forest, Gradient Boosting |
+| **5. Evaluation & Threshold Tuning** | ROC + PR curves, confusion matrix, optimal F1 threshold |
+| **6. Feature Importance** | Built-in MDI importance + permutation importance on validation set |
+| **7. Risk Scoring & ROI** | Customer risk tiers (Low/Medium/High) + retention campaign ROI model |
+| **8. Business Recommendations** | Executive summary, key findings, interventions, ethics, next steps |
+| **9. Polars Comparison** | Same EDA in Polars with side-by-side code + Lazy API example |
+
+## 🚀 Quick Results Preview
+
+Typical performance on the IBM Telco dataset (may vary slightly):
+
+| Model | ROC AUC | PR AUC | F1 (optimal threshold) |
+|-------|---------|--------|------------------------|
+| Logistic Regression | ~0.84 | ~0.63 | ~0.62 |
+| Random Forest | ~0.84 | ~0.65 | ~0.63 |
+| Gradient Boosting | ~0.84 | ~0.64 | ~0.62 |
 
 ## 🔧 Skills Practiced
 
@@ -27,21 +52,27 @@ By completing this project, you will be able to:
 - **Product Sense:** Translating model outputs to business recommendations
 - **Ethics:** Considering bias and fairness in churn models
 
-## 📊 Free Dataset Suggestions
+## 📊 Dataset
+
+The notebook **automatically** tries to download the IBM Telco Customer Churn CSV from a public GitHub mirror:
+
+```
+https://raw.githubusercontent.com/IBM/telco-customer-churn-on-icp4d/master/data/Telco-Customer-Churn.csv
+```
+
+If the download fails (no internet, firewall, etc.) it falls back to a **statistically representative synthetic dataset** with the same 21-column schema, ~7 043 rows, and ~26.5% churn rate — so you can run the full notebook offline with realistic results.
 
 | Dataset | Description | Link |
 |---------|-------------|------|
-| IBM Telco Customer Churn | Classic churn dataset with demographics and usage | [Kaggle](https://www.kaggle.com/datasets/blastchar/telco-customer-churn) |
-| Cell2Cell Churn | Larger dataset with more features | [Kaggle](https://www.kaggle.com/datasets/ktisha/cell2cell) |
+| IBM Telco Customer Churn | Classic dataset — auto-downloaded by notebook | [Kaggle mirror](https://www.kaggle.com/datasets/blastchar/telco-customer-churn) |
+| Cell2Cell Churn | Larger dataset for further challenge | [Kaggle](https://www.kaggle.com/datasets/ktisha/cell2cell) |
 
 ## 🚀 Getting Started
 
-1. **Download the IBM Telco dataset** from Kaggle
-2. **Explore the data:** What features are available? What's the churn rate?
-3. **Feature engineering:** Create tenure buckets, usage ratios, etc.
-4. **Build models:** Start with logistic regression, then try Random Forest
-5. **Evaluate:** Use AUC, precision-recall curves, confusion matrix
-6. **Interpret:** Which features matter most? What can the business do?
+1. **Open the notebook** — `Customer_Churn.ipynb`
+2. **Run all cells** — data loads automatically (no manual download needed)
+3. **Follow the sections** in order; each builds on the previous
+4. **Answer the challenge questions** at the end of the notebook
 
 ## 💡 Key Questions to Answer
 
