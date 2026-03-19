@@ -1,0 +1,39 @@
+[project]
+name = "ds-interview-mcp"
+version = "1.0.0"
+description = "MCP server for Data Science Analytical Interview Preparation Handbook"
+authors = [{ name = "DS Interview Prep Team" }]
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "mcp>=1.0.0",
+    "pydantic>=2.0.0",
+    "pyyaml>=6.0",
+    "sqlparse>=0.5.0",
+    "scipy>=1.11.0",
+    "numpy>=1.24.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-asyncio>=0.21.0",
+    "black>=23.0.0",
+    "ruff>=0.1.0",
+    "mypy>=1.5.0",
+]
+
+[project.scripts]
+ds-interview-mcp = "ds_interview_mcp.server:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.mypy]
+python_version = "3.10"
+strict = true
