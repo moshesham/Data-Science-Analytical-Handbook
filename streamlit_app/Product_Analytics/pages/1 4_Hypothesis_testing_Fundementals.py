@@ -336,6 +336,45 @@ def main():
         "Hypothesis testing is the cornerstone of A/B testing and other statistical analyses in product development. By understanding these concepts, we are able to quantify our findings and know if our data is statistically significant, or if it's just random noise."
     )
 
+    # ── MCP-Powered Practice ──────────────────────────────────────────────────
+    st.markdown("---")
+    st.header("🤖 AI-Powered Practice")
+    st.caption("Powered by DS Interview MCP — live tools for applied practice")
+
+    import sys as _sys
+    from pathlib import Path as _Path
+    _sys.path.insert(0, str(_Path(__file__).parent.parent))
+
+    try:
+        from mcp_integration import render_quiz_interface, render_ab_analysis_panel, MCP_AVAILABLE
+
+        mcp_tab_quiz, mcp_tab_ab = st.tabs([
+            "📝 Knowledge Check",
+            "🔬 Live A/B Result Analyzer",
+        ])
+
+        with mcp_tab_quiz:
+            st.markdown(
+                "Test your understanding of hypothesis testing with AI-generated "
+                "multiple-choice questions."
+            )
+            # Pre-select the statistics_probability topic
+            import streamlit as _st
+            if "quiz_topic" not in _st.session_state:
+                _st.session_state["quiz_topic"] = "statistics_probability"
+            render_quiz_interface()
+
+        with mcp_tab_ab:
+            st.markdown(
+                "Enter your A/B test numbers below and get instant statistical "
+                "interpretation — significance test, confidence interval, and "
+                "a plain-English shipping recommendation."
+            )
+            render_ab_analysis_panel()
+
+    except ImportError:
+        st.info("Install the DS Interview MCP package to enable AI-powered practice tools.")
+
 
 if __name__ == "__main__":
     main()

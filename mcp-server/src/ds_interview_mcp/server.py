@@ -135,6 +135,17 @@ class DSInterviewMCPServer:
                             required=False
                         )
                     ]
+                ),
+                Prompt(
+                    name="skills_discovery",
+                    description="Find relevant Claude Skills for a data science topic using the claude-skills-mcp server",
+                    arguments=[
+                        PromptArgument(
+                            name="topic",
+                            description="Data science topic to find skills for (e.g. 'ab-testing', 'sql', 'statistics')",
+                            required=True
+                        )
+                    ]
                 )
             ]
         
@@ -184,6 +195,30 @@ Use the DS Interview Prep MCP tools to create:
 4. One quiz question
 
 Present each one at a time and wait for my answer before moving to the next."""
+                            )
+                        )
+                    ]
+                )
+            elif name == "skills_discovery":
+                topic = args.get("topic", "data science")
+                return GetPromptResult(
+                    description=f"Skills discovery for '{topic}'",
+                    messages=[
+                        PromptMessage(
+                            role="user",
+                            content=TextContent(
+                                type="text",
+                                text=f"""I want to learn about '{topic}' in data science.
+
+Please use the claude-skills-mcp tools (find_helpful_skills, list_skills, read_skill_document) to:
+1. Search for skills relevant to '{topic}'
+2. List the top 3–5 most relevant skills
+3. For each skill, briefly describe what it covers and when to use it
+4. Recommend which skill document to read first based on my learning goal
+
+After discovering the relevant skills, also use the DS Interview Prep MCP tools to:
+- Generate a quiz question on '{topic}' to assess my current understanding
+- Suggest a practical exercise or scenario to solidify my knowledge"""
                             )
                         )
                     ]
