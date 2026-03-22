@@ -177,7 +177,7 @@ Track points weekly to keep momentum through the full 8 weeks:
 
 **Recovery Mechanics (anti-dropout by design)**
 - Missed week? Use a **Reset Token**: complete one focused catch-up session and resume without losing level.
-- Overloaded week? Switch to **MVDW Mode** for 3 days (25-minute minimum tasks) to preserve streak continuity.
+- Overloaded week? Switch to **Minimum Viable Daily Win (MVDW) Mode** for 3 days (25-minute minimum tasks) to preserve streak continuity.
 - Behind on capstone? Split into micro-milestones and earn partial completion points.
 
 ### 📜 Digital Certificate
