@@ -194,7 +194,7 @@ Choose your path to mastery. Each track is designed for specific goals and exper
         <li><a href="/interview-preparation/behavioral-interview/">Behavioral Interview</a></li>
         <li><a href="/interview-preparation/technical-skills/">Technical Skills</a></li>
         <li><a href="/interview-preparation/interview-day-checklist/">Interview Day Checklist</a></li>
-        <li><a href="/supplementary/2026-new-year-challenge/">2026 New Year Challenge</a></li>
+        <li><a href="/supplementary/2026-new-year-challenge/">2026 Analytical Skills Challenge (Year-Round)</a></li>
       </ul>
     </div>
   </details>

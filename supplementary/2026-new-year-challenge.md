@@ -1,32 +1,53 @@
 ---
 layout: page
-title: "2026 New Year Analytical Skills Challenge"
+title: "2026 Analytical Skills Challenge (Year-Round)"
 permalink: /supplementary/2026-new-year-challenge/
 difficulty: "Intermediate"
 estimated_time: "60 mins"
-tags: [Challenge, New Year, Analytics, Data Science, Skill Building]
+tags: [Challenge, Analytics, Data Science, Skill Building, Cohort Learning, Gamification]
 track: "Getting Started"
 ---
 
-# 🎯 2026 New Year Resolution Challenge: Level Up Your Analytical Skills
+# 🎯 2026 Analytical Skills Challenge: Level Up Your Analytical Skills (Anytime)
 
-**Official Cohort Start Dates:** January 1, 2026 | April 1, 2026 | September 1, 2026  
+**Cohort Start Dates:** Monthly rolling cohorts (plus Jan/Apr/Sep flagship cohorts)  
 **Duration:** 8 weeks  
 **Commitment:** ~1 hour/day on weekdays; flexible weekends for catch-up/projects  
-**Goal:** Enter Q2 2026 with demonstrably stronger analytics, SQL, Python, statistics, **AI-augmented skills**, and storytelling abilities.
+**Goal:** Build demonstrably stronger analytics, SQL, Python, statistics, **AI-augmented skills**, and storytelling abilities with a repeatable system you can start any month.
 
-> 💡 **New for 2026:** This challenge now includes an **AI-Augmented Analyst Track** — learn to leverage GenAI tools as a force multiplier, not a crutch.
+> 💡 **Built for sustained adoption:** This program is designed as a year-round learning system, not a one-time New Year resolution.
 
 ---
 
 <div class="cta-box" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 2rem; border-radius: 12px; color: white; text-align: center; margin: 2rem 0;">
-  <h2 style="color: white; margin-top: 0;">🚀 Ready to Transform Your 2026?</h2>
-  <p style="font-size: 1.1rem;">Join hundreds of aspiring data professionals in this 8-week challenge.</p>
+  <h2 style="color: white; margin-top: 0;">🚀 Ready to Start Your Next 8-Week Sprint?</h2>
+  <p style="font-size: 1.1rem;">Join a rolling cohort, build momentum, and ship weekly deliverables you can show.</p>
   <a href="https://github.com/moshesham/Data-Science-Analytical-Handbook/discussions/new?category=2026-challenge" 
      style="display: inline-block; background: white; color: #667eea; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: bold; margin-top: 1rem;">
-    📝 Sign Up & Introduce Yourself
+    📝 Join the Next Cohort & Introduce Yourself
   </a>
 </div>
+
+---
+
+## 🧭 Year-Round Syllabus (Designed for Retention, Not Resolution Hype)
+
+Use the same 8-week structure in any month. The curriculum is organized into four repeatable phases:
+
+| Phase | Weeks | Objective | Output |
+|------|-------|-----------|--------|
+| **Phase 1: Foundations** | 1-2 | Build SQL fluency and statistical intuition | SQL problem set + retention query |
+| **Phase 2: Experimentation** | 3-4 | Design and interpret product experiments | Experiment design doc + analysis memo |
+| **Phase 3: Execution** | 5-6 | Perform practical analysis in Python + product contexts | EDA notebook + metric tree + case write-up |
+| **Phase 4: Portfolio & Communication** | 7-8 | Package analytical work for interviews and hiring signals | Capstone repo + 5-slide narrative + short walkthrough |
+
+### Adoption Playbook (How to Stay Consistent Beyond Week 1)
+
+1. **Minimum Viable Daily Win (MVDW):** Complete one 25-minute task daily, even on busy days.
+2. **Weekly Ship Ritual:** Publish one visible artifact every week (query, notebook, memo, slide).
+3. **Catch-up Buffer:** Reserve weekends for make-up tasks, not net-new scope.
+4. **Public Accountability:** Post progress in weekly discussion threads.
+5. **Reflection Loop:** End each week with one improvement action for the next sprint.
 
 ---
 
@@ -134,6 +155,30 @@ Complete the challenge and showcase your achievement! Add this badge to your Git
 ![A/B Testing](https://img.shields.io/badge/A%2FB_Testing-Certified-blueviolet?style=flat-square)
 ![AI-Augmented](https://img.shields.io/badge/AI_Augmented-Analyst-FF6F61?style=flat-square&logo=openai&logoColor=white)
 ```
+
+### 🎮 Gamification System for Long-Term Adoption
+
+Track points weekly to keep momentum through the full 8 weeks:
+
+| Activity | Points |
+|----------|--------|
+| Daily check-in posted | +2 |
+| Daily task completed | +3 |
+| Weekly deliverable shipped | +10 |
+| Peer feedback on someone else's work | +4 |
+| Reflection + next-week plan | +5 |
+| Streak bonus (5 consecutive days) | +6 |
+
+**Level Thresholds**
+- **Level 1 — Starter Analyst:** 0-39 points
+- **Level 2 — Consistent Builder:** 40-89 points
+- **Level 3 — Insight Operator:** 90-149 points
+- **Level 4 — Portfolio Finisher:** 150+ points
+
+**Recovery Mechanics (anti-dropout by design)**
+- Missed week? Use a **Reset Token**: complete one focused catch-up session and resume without losing level.
+- Overloaded week? Switch to **Minimum Viable Daily Win (MVDW) Mode** for 3 days (25-minute minimum tasks) to preserve streak continuity.
+- Behind on capstone? Split into micro-milestones and earn partial completion points.
 
 ### 📜 Digital Certificate
 
