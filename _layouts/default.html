@@ -53,6 +53,11 @@
                         <input type="text" id="search-input" placeholder="Search..." aria-label="Search">
                         <i class="fas fa-search search-icon"></i>
                     </div>
+                    <!-- Persistent job-level selector -->
+                    <a href="{{ '/learning-path/' | relative_url }}" class="level-selector-nav" title="Set your target role level" aria-label="Set your target role level">
+                        <i class="fas fa-crosshairs"></i>
+                        <span id="header-level-badge" class="level-nav-badge">Level</span>
+                    </a>
                     <button class="theme-toggle" aria-label="Toggle dark mode" title="Toggle theme">
                         <i class="fas fa-moon"></i>
                     </button>
@@ -312,6 +317,50 @@
                 localStorage.setItem('completed_pages', JSON.stringify(completedPages));
             });
         });
+
+        // Job-level badge: restore from localStorage on every page
+        document.addEventListener('DOMContentLoaded', function() {
+            const badge = document.getElementById('header-level-badge');
+            if (!badge) return;
+            const saved = localStorage.getItem('target_job_level');
+            if (saved) {
+                badge.textContent = saved.toUpperCase();
+                badge.classList.add('level-set');
+            }
+        });
     </script>
+
+    <style>
+        /* Level selector in nav */
+        .level-selector-nav {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            padding: 0.35rem 0.65rem;
+            border-radius: 20px;
+            border: 1.5px solid var(--color-bg-tertiary, #e5e7eb);
+            text-decoration: none;
+            color: var(--color-text-secondary, #374151);
+            font-size: 0.8rem;
+            font-weight: 600;
+            transition: all 0.15s ease;
+            white-space: nowrap;
+        }
+        .level-selector-nav:hover {
+            border-color: var(--color-primary, #4F46E5);
+            color: var(--color-primary, #4F46E5);
+            text-decoration: none;
+        }
+        .level-nav-badge {
+            font-size: 0.75rem;
+        }
+        .level-nav-badge.level-set {
+            color: var(--color-primary, #4F46E5);
+        }
+        [data-theme="dark"] .level-selector-nav {
+            border-color: var(--color-bg-tertiary, #374151);
+            color: var(--color-text-secondary, #9ca3af);
+        }
+    </style>
 </body>
 </html>

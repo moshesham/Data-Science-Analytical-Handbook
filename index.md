@@ -34,6 +34,18 @@ permalink: /
 
 <!-- Features Grid -->
 <section id="features" class="features-grid">
+    <a href="{{ '/learning-path/' | relative_url }}" class="feature-card feature-card-highlight">
+        <div class="feature-icon">
+            <i class="fas fa-crosshairs"></i>
+        </div>
+        <h3 class="feature-title">📍 Role-Level Learning Path</h3>
+        <p class="feature-description">Tell us your target level (E3 → E6) and get a personalized study plan, curated exercises, and examples matched to your interview bar.</p>
+        <span class="feature-link">
+            <span>Set My Level</span>
+            <i class="fas fa-arrow-right"></i>
+        </span>
+    </a>
+
     <a href="{{ '/foundational_knowledge/1/' | relative_url }}" class="feature-card">
         <div class="feature-icon">
             <i class="fas fa-calculator"></i>
@@ -126,6 +138,18 @@ permalink: /
         <p class="feature-description">Explore a curated list of resources, practice problems, and continuous learning materials.</p>
         <span class="feature-link">
             <span>View Resources</span>
+            <i class="fas fa-arrow-right"></i>
+        </span>
+    </a>
+
+    <a href="{{ '/interview-preparation/staff-data-engineer/' | relative_url }}" class="feature-card">
+        <div class="feature-icon">
+            <i class="fas fa-server"></i>
+        </div>
+        <h3 class="feature-title">Staff Data Engineer (E6)</h3>
+        <p class="feature-description">Six-module syllabus targeting the Meta Staff Data Engineer bar: exabyte-scale SQL, production ETL, dimensional modeling, distributed systems, metrics, and leadership.</p>
+        <span class="feature-link">
+            <span>Study E6 Guide</span>
             <i class="fas fa-arrow-right"></i>
         </span>
     </a>

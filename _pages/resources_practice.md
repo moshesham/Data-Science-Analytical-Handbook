@@ -141,7 +141,7 @@ track: "Reference"
         <td>Create interactive visualizations and dashboards</td>
       </tr>
       <tr>
-        <td><a href="https://datastudio.google.com/" target="_blank">Google Data Studio</a></td>
+        <td><a href="https://lookerstudio.google.com/" target="_blank">Looker Studio</a></td>
         <td>Free tool for creating reports and dashboards</td>
       </tr>
       <tr>

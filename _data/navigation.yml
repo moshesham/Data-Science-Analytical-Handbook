@@ -56,6 +56,8 @@
   children:
     - title: "Learning Tracks"
       url: "/tracks/"
+    - title: "Role-Level Learning Path"
+      url: "/learning-path/"
     - title: "Skills Matrix"
       url: "/skills/"
     - title: "Exercises"
