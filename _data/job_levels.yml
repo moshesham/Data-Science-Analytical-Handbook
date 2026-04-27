@@ -326,7 +326,7 @@
     - "Data modeling — grain, SCD, Star vs OBT, mini-dimensions"
     - "Distributed systems design — Lambda/Kappa/Medallion, exactly-once"
     - "Product sense + metrics — North Star, RCA framework"
-    - "Leadership & ownership — SPSIL stories, architectural defense"
+    - "Leadership & ownership — SPSIL (Situation, Problem, Solution, Impact, Lessons) stories, architectural defense"
   key_skills:
     sql:
       label: "SQL — Exabyte-Scale Velocity"

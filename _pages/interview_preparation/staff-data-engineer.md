@@ -447,8 +447,6 @@ CREATE TABLE fact_ad_impressions (
   ad_key          BIGINT,           -- FK to dim_ad
   placement_key   INT,              -- FK to dim_placement
   user_demo_key   INT,              -- FK to mini_dim_user_demographics
-  ds              DATE,             -- Hive partition key
-  hour            TINYINT,          -- sub-partition
   impression_ts   BIGINT,           -- epoch ms
   is_click        BOOLEAN,
   revenue_usd     DECIMAL(12,6)

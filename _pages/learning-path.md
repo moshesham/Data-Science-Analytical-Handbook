@@ -467,7 +467,9 @@ track: "Reference"
       localStorage.setItem(STORAGE_KEY, levelId);
     }
 
-    // Update global indicator in header (if present)
+    // Update global indicator in header (if present).
+    // short_label is always levelId.toUpperCase() (e.g. 'e3' -> 'E3'),
+    // matching the short_label values defined in _data/job_levels.yml.
     const headerBadge = document.getElementById('header-level-badge');
     if (headerBadge) {
       headerBadge.textContent = levelId ? levelId.toUpperCase() : '—';
