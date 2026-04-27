@@ -129,6 +129,18 @@ permalink: /
             <i class="fas fa-arrow-right"></i>
         </span>
     </a>
+
+    <a href="{{ '/interview-preparation/staff-data-engineer/' | relative_url }}" class="feature-card">
+        <div class="feature-icon">
+            <i class="fas fa-server"></i>
+        </div>
+        <h3 class="feature-title">Staff Data Engineer (E6)</h3>
+        <p class="feature-description">Six-module syllabus targeting the Meta Staff Data Engineer bar: exabyte-scale SQL, production ETL, dimensional modeling, distributed systems, metrics, and leadership.</p>
+        <span class="feature-link">
+            <span>Study E6 Guide</span>
+            <i class="fas fa-arrow-right"></i>
+        </span>
+    </a>
 </section>
 
 <!-- Stats Section -->
