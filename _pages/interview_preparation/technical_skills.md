@@ -223,7 +223,15 @@ FROM session_counts s
 JOIN purchase_stats p USING (user_id);</code></pre>
     
     <h4>Pattern:</h4>
-    <p>Use CTEs to calculate each criterion separately, then JOIN to find users meeting ALL criteria.</p>
+    <p>Use CTEs to calculate each criterion separately, then JOIN to find users meeting ALL criteria. Using <code>HAVING</code> inside each CTE pre-filters before the final join, which is more efficient than filtering afterward.</p>
+
+    <h4>Expected Output (sample data):</h4>
+    <pre><code> user_id | sessions_30d | purchases_30d | total_amount
+---------+--------------+---------------+--------------
+     102 |           14 |             4 |       620.00
+     287 |           11 |             3 |       510.00
+     341 |           22 |             6 |      1340.00</code></pre>
+    <p>Only users meeting ALL three thresholds appear. If the result is empty, verify the date window matches your data and that HAVING filters are correct.</p>
     </details>
     </details>
   </div>
@@ -438,6 +446,15 @@ P-value: 0.0164
 95% CI for difference: [0.57%, 5.43%]
 
 ✅ Result is statistically significant at α=0.05</code></pre>
+
+    <h4>How to Interpret This in an Interview:</h4>
+    <p>Don't stop at "statistically significant." An interviewer will ask <em>"So should we ship?"</em> Here's how to answer:</p>
+    <ul>
+      <li><strong>Lift (37.5%):</strong> The treatment group converted at 11% vs 8% control — a 3 percentage point absolute lift, or 37.5% relative improvement. This is large and practically meaningful.</li>
+      <li><strong>P-value (0.0164):</strong> There is a 1.64% probability of observing a difference this large by chance alone, assuming no real effect. Since 0.0164 &lt; 0.05 (our significance threshold), we reject the null hypothesis.</li>
+      <li><strong>95% CI [0.57%, 5.43%]:</strong> The true lift is somewhere between 0.57% and 5.43%. The lower bound (0.57%) is your conservative business estimate. Even in the worst case, there is a real positive effect.</li>
+      <li><strong>Recommendation:</strong> "With 1,000 users per variant, p = 0.0164, and a conservative minimum lift of 0.57%, I would recommend shipping. I would also verify the experiment ran for at least one full weekly cycle and that guardrail metrics (e.g., refund rate, support tickets) did not regress."</li>
+    </ul>
     </details>
     </details>
   </div>

@@ -316,3 +316,25 @@
 - Learning Organization: Knowledge sharing and skill development
 
 This expanded handbook provides a more comprehensive framework that addresses modern data engineering practices while maintaining focus on business value delivery. Each section balances strategic considerations with tactical implementation guidance.
+
+---
+
+## Deep Dive Files
+
+The `Deep_Dive/` folder contains detailed implementations of selected handbook sections. Not all sections have a deep dive file yet — planned files are marked below.
+
+| # | File | Status | Covers |
+|---|------|--------|--------|
+| 1 | `Deep_Dive/1_Strategy+Architecture.md` | ✅ Available | Data strategy, maturity model, value chain |
+| 2 | `Deep_Dive/2_Data_Architecture.md` | ✅ Available | Architecture patterns, data modeling, lakehouse |
+| 3 | `Deep_Dive/3_Data_Governance.md` | ✅ Available | Ownership, policies, catalog, access control |
+| 4 | `Deep_Dive/4_Version_Control.md` | ✅ Available | Git workflows, CI/CD for data, IaC |
+| 5 | `Deep_Dive/5_Data_Quality_Management.md` | ✅ Available | Validation, SLAs, data contracts |
+| 6 | `Deep_Dive/6_Data_Storage_Management.md` | ✅ Available | Storage tiers, partitioning, lifecycle management |
+| 7 | `Deep_Dive/7_ETL_Processing_Frameworks.md` | ✅ Available | Batch, stream, serverless, GPU-accelerated frameworks |
+| 8 | `Deep_Dive/8_Orchestration_Workflow_Fundamentals.md` | ✅ Available | DAG-based orchestration, Airflow, best practices |
+| 9 | `Deep_Dive/9_Transformation_Fundamentals.md` | ✅ Available | dbt, SQL transformation patterns, testing |
+| — | `Deep_Dive/Data_Acquisition_and_Ingestion.md` | ✅ Available | Ingestion patterns, CDC, Kafka, Fivetran |
+| — | Cost Optimization deep dive | 📋 Planned | Sections X–XII: Cost, DataOps, Business Alignment |
+
+> **Note**: The outline in sections I–XII above covers the full recommended scope. The deep dive files provide worked examples, code snippets, and quiz questions for the sections where they exist.

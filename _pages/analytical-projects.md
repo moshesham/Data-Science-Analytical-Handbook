@@ -21,6 +21,7 @@ tags: [Projects, Portfolio, Hands-On]
   <div class="card">
     <h3>How This Works</h3>
     <p>Each project folder contains a Jupyter Notebook (or placeholder) plus a README with scope and next steps. Our CI converts notebooks to Markdown in <code>notebooks_md/</code> so they render nicely on GitHub.</p>
+    <p><strong>Status guide:</strong> Projects marked <em>Placeholder README ready</em> have a defined scope and folder structure but the notebook and dataset are not yet included. Projects marked <strong>Planned</strong> are queued for a future release. All projects are designed to produce a portfolio-ready artifact you can present in interviews.</p>
   </div>
 
   <div class="card" id="customer-churn">
@@ -69,7 +70,7 @@ tags: [Projects, Portfolio, Hands-On]
     <ul>
       <li>Location: <code>Analytical-HandsOn-Projects/Fraud_Detection_Project/</code></li>
       <li>Outputs: Notebook (feature engineering, PR AUC, recall@k, threshold curves), cost/benefit notes</li>
-      <li>Status: Placeholder README ready; add data + notebook</li>
+      <li>Status: <strong>Planned</strong> — notebook and data coming soon</li>
     </ul>
   </div>
 
@@ -79,7 +80,7 @@ tags: [Projects, Portfolio, Hands-On]
     <ul>
       <li>Location: <code>Analytical-HandsOn-Projects/Pricing_Elasticity_Project/</code></li>
       <li>Outputs: Notebook (elasticity modeling, demand curves, scenario sims), revenue impact summary</li>
-      <li>Status: Placeholder README ready; add data + notebook</li>
+      <li>Status: <strong>Planned</strong> — notebook and data coming soon</li>
     </ul>
   </div>
 

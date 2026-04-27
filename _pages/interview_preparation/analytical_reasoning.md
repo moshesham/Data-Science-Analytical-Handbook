@@ -51,14 +51,16 @@ track: "Interview Preparation"
     <ul>
       <li><strong>Interference/Contagion:</strong> Control users exposed to the treatment via connections</li>
       <li><strong>Clustering:</strong> Users cluster with similar users, hindering random sampling</li>
-      <li><strong>Spillover Effects:</strong> Treatment "spills over" to the control group</li>
+      <li><strong>Spillover Effects:</strong> Treatment "spills over" to the control group — the feature reaches control users indirectly through their treated friends, making the control group look better than a true baseline, which <em>underestimates</em> the true effect</li>
     </ul>
     <p><strong>Mitigation Strategies:</strong></p>
     <ul>
-      <li>Cluster Randomized Trials: Randomize clusters (regions, communities)</li>
-      <li>Egocentric Network Design: Focus on direct connections of treated users</li>
-      <li>Graph Cluster Randomization: Partition the social graph to minimize connections between treatment and control</li>
-      <li>"Ghost" or "Holdout" Accounts: Synthetic/isolated accounts for initial testing</li>
+      <li><strong>Cluster Randomized Trials:</strong> Randomize entire clusters (geographic regions, communities) rather than individual users. All users within a cluster get the same treatment. This prevents treated and control users from being in the same social circle.</li>
+      <li><strong>Egocentric Network Design:</strong> For each treated user, also place their direct connections into the treatment group (their "ego-network"). This prevents the immediate spillover path: if user A is treated, A's friends B and C are also treated — so B and C can't contaminate the control group. The control group consists of users with no treated connections at all.<br>
+        <em>Analogy:</em> Think of a treated user (A) at the center of a small circle. Egocentric design draws that circle around A and everyone immediately connected — all of them see the treatment. Users outside all circles are the true control.
+      </li>
+      <li><strong>Graph Cluster Randomization:</strong> Use a graph partitioning algorithm (e.g., balanced min-cut) to divide the social graph into clusters that minimize cross-cluster connections, then randomize at the cluster level. Best interference control, but technically complex.</li>
+      <li><strong>"Ghost" or "Holdout" Accounts:</strong> Synthetic/isolated accounts for initial testing — no social connections, so no spillover. Useful for early validation, not for measuring social features.</li>
     </ul>
     
     <h4>5. Metric Frameworks</h4>

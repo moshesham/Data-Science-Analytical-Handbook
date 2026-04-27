@@ -24,6 +24,15 @@ track: "Foundational Knowledge"
     <h3>Overview</h3>
     <p>This section covers the fundamental concepts and skills required for a Data Science (Analytical) role at Meta. These building blocks form the foundation for all technical and analytical work you'll do.</p>
     <p>At Meta, Data Scientists play a crucial role in driving product development and business strategy through rigorous data analysis and statistical reasoning. Working at scale with billions of users and petabytes of data, statistical rigor and technical proficiency are paramount.</p>
+    <h4>Why This Order?</h4>
+    <p>The four topics are sequenced deliberately:</p>
+    <ol>
+      <li><strong>Statistics & Probability</strong> — the conceptual foundation. Everything else (SQL queries, Python analysis, A/B tests) is meaningless without understanding what you're measuring and why.</li>
+      <li><strong>SQL & Data Manipulation</strong> — how you access and shape data. In interviews and on the job, SQL is the first tool you reach for to explore a dataset or answer a product question.</li>
+      <li><strong>Python for Analysis</strong> — how you go deeper than SQL allows: cleaning messy data, building models, running simulations. Python extends what SQL can do.</li>
+      <li><strong>A/B Testing & Experimentation</strong> — how you prove an effect is real. A/B testing brings together statistics (hypothesis tests), SQL (pulling experiment data), and Python (analysis) into a complete decision-making workflow.</li>
+    </ol>
+    <p>If you are short on time, prioritize <strong>Statistics → SQL → A/B Testing</strong> as these three topics appear most frequently in Meta DS interviews.</p>
   </div>
 
   <div class="card">

@@ -45,6 +45,8 @@
       url: "/interview-preparation/analytical-execution/"
     - title: "Analytical Reasoning"
       url: "/interview-preparation/analytical-reasoning/"
+    - title: "Product Analytics Agent Framework"
+      url: "/interview-preparation/product-analytics-agent-framework/"
     - title: "Behavioral Interview"
       url: "/interview-preparation/behavioral-interview/"
     - title: "Interview Day Checklist"
@@ -58,8 +60,6 @@
       url: "/tracks/"
     - title: "Skills Matrix"
       url: "/skills/"
-    - title: "Exercises"
-      url: "/exercises/"
 
 - title: "VI. Step-by-Step Exercises"
   url: "/exercises/"

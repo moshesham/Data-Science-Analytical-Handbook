@@ -22,7 +22,7 @@ This intensive 21-day plan is structured to build your skills from the ground up
 | 2 | Intermediate SQL | Solve 5 medium-difficulty problems on DataLemur involving GROUP BY, HAVING, and subqueries. | [SQL & Data Manipulation]({{ '/foundational_knowledge/2-SQL/' | relative_url }}) | [DataLemur Questions](https://datalemur.com/questions) |
 | 3 | Advanced SQL: Window Functions | Read Mode's guide on Window Functions. Then, solve 3 problems on StrataScratch that specifically require RANK(), LAG(), or ROW_NUMBER(). | [SQL & Data Manipulation]({{ '/foundational_knowledge/2-SQL/' | relative_url }}) | [Mode's Window Functions Guide](https://mode.com/sql-tutorial/sql-window-functions/), [StrataScratch](https://platform.stratascratch.com/coding) |
 | 4 | Applied Statistics: Probability & Distributions | Watch the StatQuest videos on Probability, Binomial, and Poisson distributions. For each, write down one product-related example. | [Statistics & Probability]({{ '/foundational_knowledge/1/' | relative_url }}) | [StatQuest: Probability](https://www.youtube.com/watch?v=uzkc-qNVoOk), [Binomial](https://www.youtube.com/watch?v=qIzC1-9PwQo), [Poisson](https://www.youtube.com/watch?v=cxqkenTyZ-Q) |
-| 5 | Applied Statistics: Hypothesis Testing | Read the "Trustworthy Online Controlled Experiments" book summary. Explain p-values, confidence intervals, and statistical power out loud. | [Hypothesis Testing]({{ '/foundational_knowledge/1/#hypothesis-testing' | relative_url }}) | [Summary of "Trustworthy Online Controlled Experiments"](https://www.goodreads.com/book/show/48570077-trustworthy-online-controlled-experiments) |
+| 5 | Applied Statistics: Hypothesis Testing | Read the "Trustworthy Online Controlled Experiments" overview (link →). Explain p-values, confidence intervals, and statistical power out loud to yourself or a practice partner — speaking forces you to surface gaps. | [Hypothesis Testing]({{ '/foundational_knowledge/1/#hypothesis-testing' | relative_url }}) | [Kohavi et al. overview paper (free PDF)](https://exp-platform.com/Documents/2017-08%20KDD%20Industry%20Summit%20Keynote.pdf), [KDnuggets summary](https://www.kdnuggets.com/2019/08/trustworthy-online-controlled-experiments-book-review.html) |
 | 6 | Python for Data Analysis | Complete a full data cleaning and exploration project using Pandas to load, clean, and analyze a dataset. | [Programming (Python/R)]({{ '/foundational_knowledge/3/' | relative_url }}) | [Kaggle: "Data Cleaning Challenge"](https://www.kaggle.com/learn/data-cleaning) |
 | 7 | Week 1 Review & Synthesis | Write a SQL query using a window function. Then, use Python to calculate the statistical significance of a hypothetical A/B test result. | [Foundational Knowledge]({{ '/foundational-knowledge/' | relative_url }}) | Use your own project or a [Kaggle dataset](https://www.kaggle.com/datasets) |
 
@@ -72,3 +72,12 @@ You might also find these to be helpful practices:
 - **Time Investment:** 2-3 hours per day
 - **Focus Areas:** Technical skills → Product thinking → Interview execution
 - **Practice Method:** Active learning with real projects and mock interviews
+
+## If You Fall Behind
+
+Life happens. If you miss days or fall behind:
+
+1. **Prioritize the core three:** SQL (Days 1–3) + Hypothesis Testing (Day 5) + A/B Testing (Days 11–12). These topics appear in nearly every Meta DS interview.
+2. **Skip:** Days 6 (Python), 16 (Storytelling), and 20 (rest day) are lower priority if you are time-constrained.
+3. **Compress Week 3:** If you only have 5 days before your interview, do Days 15 (STAR stories), 17 (timed challenge), 18–19 (mocks), and 21 (final review). Skip everything else.
+4. **Never skip the mocks:** Mock interviews on Days 18–19 surface more gaps than any amount of reading. Even one mock on Day 20 is better than no mocks at all.

@@ -112,9 +112,20 @@ GROUP BY 1;</code></pre>
 
     <h4>4) Set logic: <code>UNION ALL</code> vs <code>UNION</code></h4>
     <ul>
-      <li><strong><code>UNION ALL</code> keeps duplicates</strong> (faster, preferred unless you need de-dup).</li>
-      <li><strong><code>UNION</code> removes duplicates</strong> (extra sort/dedup cost).</li>
+      <li><strong><code>UNION ALL</code> keeps duplicates</strong> (faster, preferred unless you need de-dup). The database just concatenates result sets without sorting.</li>
+      <li><strong><code>UNION</code> removes duplicates</strong> (slower: requires a sort or hash dedup pass across all rows).</li>
     </ul>
+    <pre><code>-- ✅ Use UNION ALL when you know rows are distinct (e.g., two non-overlapping date ranges)
+SELECT user_id, 'Jan' AS month FROM events WHERE event_date &lt; '2024-02-01'
+UNION ALL
+SELECT user_id, 'Feb' AS month FROM events WHERE event_date &gt;= '2024-02-01';
+
+-- ⚠️ Use UNION only when you need deduplication (e.g., combining two user lists that may overlap)
+SELECT user_id FROM mobile_users
+UNION
+SELECT user_id FROM web_users;
+-- This is equivalent to: SELECT DISTINCT user_id FROM (... UNION ALL ...) — slower</code></pre>
+    <p><strong>Interview tip:</strong> Default to <code>UNION ALL</code> and explain why. If an interviewer asks "what if you need distinct results?" — then use <code>UNION</code> or wrap <code>UNION ALL</code> in a <code>SELECT DISTINCT</code>.</p>
   </div>
 
   <div class="card">
@@ -279,6 +290,46 @@ ORDER BY store_id, rn;</code></pre>
       <li><strong>Distinct counting with conditions:</strong> use <code>COUNT(DISTINCT CASE WHEN ... THEN id END)</code>.</li>
       <li><strong>Many-to-many joins:</strong> beware silent row multiplication; aggregate before joining when appropriate.</li>
     </ul>
+
+    <h4>Many-to-Many Join: The Silent Row Multiplication Bug</h4>
+    <p>This is one of the most common interview traps. If you join two tables where both sides have multiple rows per key, SQL multiplies them — producing more rows than you expect without any error or warning.</p>
+
+    <p><strong>Problem scenario:</strong> You want total order revenue per user. Each user has 2 orders, and each order has 2 items.</p>
+    <pre><code>-- orders: (user_id=1, order_id=A), (user_id=1, order_id=B)
+-- order_items: (order_id=A, amount=10), (order_id=A, amount=20),
+--              (order_id=B, amount=30), (order_id=B, amount=40)
+
+-- ❌ WRONG — joins items to orders, then sums: correct
+-- But if you were joining users to BOTH orders AND items directly:
+SELECT u.user_id, SUM(oi.amount)
+FROM users u
+JOIN orders o ON u.user_id = o.user_id      -- 1 user → 2 orders
+JOIN order_items oi ON o.order_id = oi.order_id  -- 2 orders × 2 items = 4 rows
+GROUP BY u.user_id;
+-- Result: 100 ✅ (happens to be correct here because keys align)
+
+-- 🚨 THE REAL TRAP — joining two aggregates to users:
+-- If you had a "reviews" table also keyed by user_id (not order_id),
+-- joining orders AND reviews to users would cross-multiply:
+-- 2 orders × 3 reviews = 6 rows per user → SUM is inflated 3×
+
+-- ✅ FIX — aggregate each side to user_id FIRST, then join
+WITH order_totals AS (
+    SELECT user_id, SUM(amount) AS total_revenue
+    FROM orders
+    GROUP BY user_id
+),
+review_counts AS (
+    SELECT user_id, COUNT(*) AS review_count
+    FROM reviews
+    GROUP BY user_id
+)
+SELECT u.user_id, ot.total_revenue, rc.review_count
+FROM users u
+LEFT JOIN order_totals ot USING (user_id)
+LEFT JOIN review_counts rc USING (user_id);</code></pre>
+
+    <p><strong>Interview tip:</strong> When you see a question asking you to combine metrics from multiple tables, always ask: "What is the grain of each table?" Aggregate to the same grain before joining, or use separate CTEs per metric.</p>
   </div>
 
   <div class="card">

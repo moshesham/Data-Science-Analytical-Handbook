@@ -789,6 +789,245 @@ ORDER BY mutual_friends DESC;</code></pre>
 </div>
 
 <div class="section">
+  <h2>🌐 Meta-Specific Problems</h2>
+  <p>These problems use social media schemas that mirror real Meta analytical work. Each tests multi-table analysis, product metrics, and scale reasoning.</p>
+
+  <div class="card">
+    <h3>Problem 16: Engagement Rate by Content Type</h3>
+    <p><strong>Difficulty:</strong> 🟡 Medium | <strong>Pattern:</strong> Multi-table aggregation + date trunc</p>
+    <p><strong>Context:</strong> The product team is considering investing in more video content. Determine if this is worthwhile by analyzing engagement across content types by month.</p>
+
+    <p><strong>Tables:</strong></p>
+    <pre><code>posts (post_id, user_id, content_type, created_at, impressions)
+reactions (reaction_id, post_id, reaction_type)  -- reaction_type: 'like', 'comment', 'share'</code></pre>
+
+    <details>
+    <summary>✅ Solution</summary>
+    <pre><code>SELECT
+    TO_CHAR(DATE_TRUNC('month', p.created_at), 'YYYY-MM') AS month,
+    p.content_type,
+    COUNT(DISTINCT p.post_id) AS total_posts,
+    COUNT(r.reaction_id) AS total_reactions,
+    ROUND(
+        COUNT(r.reaction_id)::numeric / NULLIF(SUM(p.impressions), 0),
+        6
+    ) AS avg_engagement_rate
+FROM posts p
+LEFT JOIN reactions r ON p.post_id = r.post_id
+GROUP BY DATE_TRUNC('month', p.created_at), p.content_type
+ORDER BY month, avg_engagement_rate DESC;</code></pre>
+
+    <h4>Why <code>NULLIF</code>?</h4>
+    <p>Prevents division by zero when a post has no impressions.</p>
+
+    <h4>Follow-up:</h4>
+    <p>"Filter to just video posts and compare to last month" — wrap in a CTE with a <code>WHERE content_type = 'video'</code> and <code>LAG(avg_engagement_rate)</code>.</p>
+    </details>
+  </div>
+
+  <div class="card">
+    <h3>Problem 17: Churn Rate by User Signup Segment</h3>
+    <p><strong>Difficulty:</strong> 🟡 Medium | <strong>Pattern:</strong> Cohort + conditional aggregation</p>
+    <p><strong>Context:</strong> Calculate monthly churn rate split by whether users signed up in the first or second half of the month. Churn = active in month N but not in month N+1.</p>
+
+    <p><strong>Tables:</strong></p>
+    <pre><code>users (user_id, signup_date)
+user_activity (user_id, activity_date)</code></pre>
+
+    <details>
+    <summary>✅ Solution</summary>
+    <pre><code>WITH monthly_active AS (
+    SELECT DISTINCT
+        user_id,
+        DATE_TRUNC('month', activity_date) AS active_month
+    FROM user_activity
+),
+user_segments AS (
+    SELECT
+        user_id,
+        CASE
+            WHEN EXTRACT(DAY FROM signup_date) <= 15 THEN 'First Half'
+            ELSE 'Second Half'
+        END AS signup_segment
+    FROM users
+),
+churn_calc AS (
+    SELECT
+        m1.user_id,
+        m1.active_month,
+        m2.user_id IS NULL AS is_churned
+    FROM monthly_active m1
+    LEFT JOIN monthly_active m2
+        ON m1.user_id = m2.user_id
+        AND m2.active_month = m1.active_month + INTERVAL '1 month'
+)
+SELECT
+    us.signup_segment,
+    TO_CHAR(cc.active_month, 'YYYY-MM') AS month,
+    COUNT(*) AS active_users,
+    SUM(is_churned::int) AS churned_users,
+    ROUND(AVG(is_churned::numeric) * 100, 2) AS churn_rate_pct
+FROM churn_calc cc
+JOIN user_segments us ON cc.user_id = us.user_id
+GROUP BY us.signup_segment, cc.active_month
+ORDER BY month, signup_segment;</code></pre>
+
+    <h4>Key Insight:</h4>
+    <p>Early adopters (first half) often churn less — if your data shows this, recommend product changes target second-half signups who may have weaker activation.</p>
+    </details>
+  </div>
+
+  <div class="card">
+    <h3>Problem 18: Average Time Between Posts</h3>
+    <p><strong>Difficulty:</strong> 🟡 Medium | <strong>Pattern:</strong> LAG + interval arithmetic</p>
+    <p><strong>Context:</strong> Identify creator posting cadence. Used to segment creators and recommend optimal posting frequency.</p>
+
+    <p><strong>Table:</strong> <code>posts (post_id, user_id, created_at)</code></p>
+
+    <details>
+    <summary>✅ Solution</summary>
+    <pre><code>WITH post_gaps AS (
+    SELECT
+        user_id,
+        created_at,
+        LAG(created_at) OVER (
+            PARTITION BY user_id
+            ORDER BY created_at
+        ) AS prev_post_time
+    FROM posts
+),
+gap_days AS (
+    SELECT
+        user_id,
+        EXTRACT(EPOCH FROM (created_at - prev_post_time)) / 86400.0 AS gap_days
+    FROM post_gaps
+    WHERE prev_post_time IS NOT NULL
+)
+SELECT
+    user_id,
+    COUNT(*) + 1 AS total_posts,
+    ROUND(AVG(gap_days)::numeric, 2) AS avg_days_between_posts
+FROM gap_days
+GROUP BY user_id
+HAVING COUNT(*) >= 1  -- Users with at least 2 posts
+ORDER BY avg_days_between_posts;</code></pre>
+
+    <h4>Note:</h4>
+    <p><code>EXTRACT(EPOCH FROM interval) / 86400</code> converts a Postgres interval to days. Alternatively use <code>created_at::date - prev_post_time::date</code> for whole-day precision.</p>
+    </details>
+  </div>
+
+  <div class="card">
+    <h3>Problem 19: Most Popular Hashtags by Week</h3>
+    <p><strong>Difficulty:</strong> 🔴 Hard | <strong>Pattern:</strong> String parsing + window ranking</p>
+    <p><strong>Context:</strong> Identify trending content topics by ranking hashtag usage per week.</p>
+
+    <p><strong>Table:</strong> <code>posts (post_id, content TEXT, created_at)</code></p>
+
+    <details>
+    <summary>💡 Hint</summary>
+    <p>Use <code>regexp_matches</code> to extract hashtags from content text, then unnest and aggregate by week.</p>
+    </details>
+
+    <details>
+    <summary>✅ Solution</summary>
+    <pre><code>WITH hashtag_extracted AS (
+    SELECT
+        post_id,
+        created_at,
+        UNNEST(
+            regexp_matches(content, '#\w+', 'g')
+        ) AS hashtag
+    FROM posts
+),
+weekly_counts AS (
+    SELECT
+        DATE_TRUNC('week', created_at) AS week_start,
+        LOWER(hashtag) AS hashtag,
+        COUNT(*) AS post_count
+    FROM hashtag_extracted
+    GROUP BY DATE_TRUNC('week', created_at), LOWER(hashtag)
+),
+ranked AS (
+    SELECT
+        week_start,
+        hashtag,
+        post_count,
+        ROW_NUMBER() OVER (
+            PARTITION BY week_start
+            ORDER BY post_count DESC
+        ) AS rnk
+    FROM weekly_counts
+)
+SELECT
+    TO_CHAR(week_start, 'YYYY-MM-DD') AS week_start,
+    hashtag,
+    post_count
+FROM ranked
+WHERE rnk <= 5  -- Top 5 per week
+ORDER BY week_start, post_count DESC;</code></pre>
+
+    <h4>Postgres Detail:</h4>
+    <p><code>regexp_matches(text, pattern, 'g')</code> with <code>'g'</code> flag returns all matches. <code>UNNEST</code> expands the array into rows.</p>
+    </details>
+  </div>
+
+  <div class="card">
+    <h3>Problem 20: Mutual Connections</h3>
+    <p><strong>Difficulty:</strong> 🔴 Hard | <strong>Pattern:</strong> Graph traversal + self-join</p>
+    <p><strong>Context:</strong> Core to Facebook's friend recommendation engine — find pairs of users who share many mutual connections.</p>
+
+    <p><strong>Table:</strong> <code>connections (user_id1, user_id2)</code> — undirected (only one direction stored)</p>
+
+    <details>
+    <summary>💡 Hint</summary>
+    <p>First normalize to bidirectional, then for each pair of users find their shared neighbors.</p>
+    </details>
+
+    <details>
+    <summary>✅ Solution</summary>
+    <pre><code>WITH all_connections AS (
+    -- Normalize to bidirectional
+    SELECT user_id1 AS user_id, user_id2 AS friend_id FROM connections
+    UNION
+    SELECT user_id2, user_id1 FROM connections
+),
+user_pairs AS (
+    -- All pairs who are NOT already connected
+    SELECT DISTINCT
+        a.user_id AS user1,
+        b.user_id AS user2
+    FROM all_connections a
+    JOIN all_connections b ON a.friend_id = b.friend_id
+    WHERE a.user_id < b.user_id  -- Avoid duplicates
+      AND NOT EXISTS (
+        SELECT 1 FROM all_connections ac
+        WHERE ac.user_id = a.user_id AND ac.friend_id = b.user_id
+      )
+),
+mutual_counts AS (
+    SELECT
+        up.user1,
+        up.user2,
+        COUNT(*) AS mutual_connection_count
+    FROM user_pairs up
+    JOIN all_connections a ON up.user1 = a.user_id
+    JOIN all_connections b ON up.user2 = b.user_id AND a.friend_id = b.friend_id
+    GROUP BY up.user1, up.user2
+)
+SELECT user1, user2, mutual_connection_count
+FROM mutual_counts
+WHERE mutual_connection_count >= 3
+ORDER BY mutual_connection_count DESC;</code></pre>
+
+    <h4>Real-World Application:</h4>
+    <p>Facebook's "People You May Know" uses a variant of this. At scale, this runs on graph processing systems (GraphX, PyG), not raw SQL — but the logic is identical.</p>
+    </details>
+  </div>
+
+</div>
+
+<div class="section">
   <div class="card">
     <h3>✅ SQL Interview Checklist</h3>
     <p>Before your interview, confirm you can:</p>
@@ -801,6 +1040,8 @@ ORDER BY mutual_friends DESC;</code></pre>
       <li>☐ Handle point-in-time lookups (SCD2)</li>
       <li>☐ Explain the difference between <code>WHERE</code> and <code>HAVING</code></li>
       <li>☐ Know when to use <code>LEFT JOIN</code> vs <code>NOT EXISTS</code></li>
+      <li>☐ Extract text patterns with <code>regexp_matches</code> and <code>UNNEST</code></li>
+      <li>☐ Write graph traversal queries with self-joins and bidirectional normalization</li>
     </ul>
   </div>
 </div>

@@ -23,18 +23,19 @@ track: "Reference"
   <div class="card">
     <h2>📖 Glossary of Terms</h2>
     <p>Quick reference definitions for key concepts used throughout the handbook.</p>
+    <p><span style="background:#fff3cd;padding:2px 6px;border-radius:3px;font-size:0.85em;font-weight:bold;">⭐ CRITICAL</span> marks the terms that appear most frequently in Meta DS interviews. If you are short on time, prioritize these.</p>
   </div>
 
   <div class="card">
     <h3>A</h3>
     <dl>
-      <dt><strong>A/B Testing</strong></dt>
+      <dt><strong>A/B Testing</strong> <span style="background:#fff3cd;padding:1px 5px;border-radius:3px;font-size:0.8em;">⭐ CRITICAL</span></dt>
       <dd>A randomized controlled experiment comparing two versions (A and B) to determine which performs better on a defined metric. Also called split testing.</dd>
       
       <dt><strong>Accuracy</strong></dt>
       <dd>The proportion of correct predictions (true positives + true negatives) among the total number of cases examined. Formula: (TP + TN) / (TP + TN + FP + FN)</dd>
       
-      <dt><strong>Alpha (α)</strong></dt>
+      <dt><strong>Alpha (α)</strong> <span style="background:#fff3cd;padding:1px 5px;border-radius:3px;font-size:0.8em;">⭐ CRITICAL</span></dt>
       <dd>The significance level in hypothesis testing; the probability of rejecting the null hypothesis when it's actually true (Type I error rate). Commonly set at 0.05.</dd>
       
       <dt><strong>ANOVA (Analysis of Variance)</strong></dt>
@@ -51,8 +52,8 @@ track: "Reference"
       <dt><strong>Bayes' Theorem</strong></dt>
       <dd>A formula for calculating conditional probabilities: P(A|B) = P(B|A) × P(A) / P(B). Used for updating beliefs based on new evidence.</dd>
       
-      <dt><strong>Beta (β)</strong></dt>
-      <dd>In hypothesis testing, the probability of failing to reject the null hypothesis when it's actually false (Type II error rate). Statistical power = 1 - β.</dd>
+      <dt><strong>Beta (β)</strong> <span style="background:#fff3cd;padding:1px 5px;border-radius:3px;font-size:0.8em;">⭐ CRITICAL</span></dt>
+      <dd>In hypothesis testing, the probability of failing to reject the null hypothesis when it's actually false (Type II error rate). Statistical power = 1 - β. Commonly β = 0.20, meaning 80% power.</dd>
       
       <dt><strong>Binomial Distribution</strong></dt>
       <dd>A probability distribution for the number of successes in n independent trials, each with probability p of success.</dd>
@@ -77,8 +78,8 @@ track: "Reference"
       <dt><strong>Cohort Analysis</strong></dt>
       <dd>A type of analysis that groups users by shared characteristics (often acquisition date) to track behavior over time.</dd>
       
-      <dt><strong>Confidence Interval</strong></dt>
-      <dd>A range of values that likely contains the true population parameter with a specified probability (e.g., 95% CI).</dd>
+      <dt><strong>Confidence Interval</strong> <span style="background:#fff3cd;padding:1px 5px;border-radius:3px;font-size:0.8em;">⭐ CRITICAL</span></dt>
+      <dd>A range of values that likely contains the true population parameter with a specified probability (e.g., 95% CI). The interval does NOT mean there is a 95% chance the true value falls in this specific range — it means that 95% of intervals constructed this way will contain the true parameter.</dd>
       
       <dt><strong>Confounding Variable</strong></dt>
       <dd>A variable that influences both the dependent and independent variables, potentially creating a spurious association.</dd>
@@ -252,7 +253,7 @@ track: "Reference"
       <dt><strong>Overfitting</strong></dt>
       <dd>When a model learns noise in training data, performing well on training data but poorly on new data.</dd>
       
-      <dt><strong>P-value</strong></dt>
+      <dt><strong>P-value</strong> <span style="background:#fff3cd;padding:1px 5px;border-radius:3px;font-size:0.8em;">⭐ CRITICAL</span></dt>
       <dd>The probability of observing results at least as extreme as the actual results, assuming the null hypothesis is true.</dd>
       
       <dt><strong>Poisson Distribution</strong></dt>
@@ -298,8 +299,8 @@ track: "Reference"
       <dt><strong>Standard Error</strong></dt>
       <dd>The standard deviation of a sampling distribution. For means: SE = σ/√n.</dd>
       
-      <dt><strong>Statistical Significance</strong></dt>
-      <dd>When the p-value is less than the chosen significance level (α), indicating the result is unlikely due to chance alone.</dd>
+      <dt><strong>Statistical Significance</strong> <span style="background:#fff3cd;padding:1px 5px;border-radius:3px;font-size:0.8em;">⭐ CRITICAL</span></dt>
+      <dd>When the p-value is less than the chosen significance level (α), indicating the result is unlikely due to chance alone. Note: statistical significance does NOT equal practical significance — always check effect size and CI alongside the p-value.</dd>
       
       <dt><strong>Subquery</strong></dt>
       <dd>A query nested inside another SQL query. Can be used in SELECT, FROM, WHERE, or HAVING clauses.</dd>

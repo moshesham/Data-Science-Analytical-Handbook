@@ -164,9 +164,11 @@ track: "Foundational Knowledge"
       </li>
       <li><strong>Confidence Intervals:</strong> Your A/B test shows a 2% absolute lift with 95% CI of [1.2%, 2.8%]. How do you interpret this?
         <ul>
-          <li>The true lift is likely between 1.2% and 2.8%</li>
-          <li>Since the CI doesn't include 0, the result is statistically significant</li>
-          <li>You can be 95% confident the true lift is at least 1.2%</li>
+          <li>The true lift is likely between 1.2% and 2.8% — you are 95% confident the true effect falls in this range</li>
+          <li>Since the CI does not include 0, the result is statistically significant (p &lt; 0.05)</li>
+          <li>The lower bound (1.2%) is the <em>conservative estimate</em> — this is what you use for business planning</li>
+          <li><strong>Business interpretation:</strong> "Even in the worst likely case, we get a 1.2% lift. If our baseline conversion is 5% and we have 10M users, that's at minimum 120,000 additional conversions. Given the implementation cost, this is worth shipping."</li>
+          <li><strong>Key interview insight:</strong> Don't just say "statistically significant." Explain the minimum expected business impact using the CI lower bound. Interviewers want to see you connect statistics to decisions.</li>
         </ul>
       </li>
     </ol>
@@ -174,28 +176,45 @@ track: "Foundational Knowledge"
 
   <div class="card" id="regression-analysis">
     <h3>4. Regression Analysis</h3>
-    <p><strong>Explanation:</strong> Regression analysis models relationships between variables. Linear regression assumes a linear relationship, while logistic regression is used for binary outcomes.</p>
+    <p><strong>Explanation:</strong> Regression analysis models relationships between variables. <strong>Linear regression</strong> predicts a continuous outcome (e.g., revenue, session length). <strong>Logistic regression</strong> predicts a binary outcome (e.g., churned/not churned, clicked/not clicked) by modeling the probability that the outcome equals 1.</p>
     
     <h4>Linear Regression:</h4>
     <ul>
       <li><strong>Equation:</strong> Y = β₀ + β₁X₁ + β₂X₂ + ... + ε</li>
-      <li><strong>Coefficient Interpretation:</strong> β₁ represents the change in Y for a 1-unit increase in X₁</li>
-      <li><strong>R-squared:</strong> Proportion of variance in Y explained by the model</li>
+      <li><strong>Coefficient Interpretation:</strong> β₁ represents the change in Y for a 1-unit increase in X₁, holding all other variables constant</li>
+      <li><strong>R-squared:</strong> Proportion of variance in Y explained by the model (0 = no fit, 1 = perfect fit)</li>
+    </ul>
+
+    <h4>Logistic Regression:</h4>
+    <p>Used when the outcome is binary (0 or 1). Instead of predicting Y directly, it predicts the <em>log-odds</em> of Y = 1, then converts to a probability via the sigmoid function.</p>
+    <ul>
+      <li><strong>Equation:</strong> log(p / (1−p)) = β₀ + β₁X₁ + ... (where p = probability of outcome = 1)</li>
+      <li><strong>Output:</strong> A probability between 0 and 1. Apply a threshold (commonly 0.5) to classify.</li>
+      <li><strong>Coefficient Interpretation:</strong> e^β₁ is the <em>odds ratio</em> — how much the odds of the outcome change for a 1-unit increase in X₁. If e^β₁ = 1.3, the odds increase 30%.</li>
+      <li><strong>Evaluation:</strong> Use AUC-ROC, precision/recall, or F1 score — <em>not</em> R-squared (which is for linear regression)</li>
+    </ul>
+
+    <h4>Interview Example — Logistic Regression:</h4>
+    <p>You build a churn prediction model where outcome Y = 1 means the user churned within 30 days. The model produces: <code>log-odds = −2.5 + 0.8 × (days_inactive)</code></p>
+    <ul>
+      <li>β₁ = 0.8 → each additional inactive day increases the log-odds of churn by 0.8 (odds ratio = e^0.8 ≈ 2.2)</li>
+      <li>For a user with 5 inactive days: log-odds = −2.5 + 0.8×5 = 1.5 → probability = 1/(1+e^−1.5) ≈ 82% chance of churn</li>
+      <li><strong>Business interpretation:</strong> "Users inactive for 5+ days are at high churn risk — consider a re-engagement push notification"</li>
     </ul>
     
-    <h4>Worked Examples:</h4>
+    <h4>Linear Regression Worked Examples:</h4>
     <ol>
       <li><strong>Simple Linear Regression:</strong> You model user engagement (Y) as a function of time spent on app (X). The equation is Y = 10 + 2X. Interpret the coefficients.
         <ul>
-          <li>β₀ = 10: Expected engagement when time spent = 0</li>
+          <li>β₀ = 10: Expected engagement when time spent = 0 (baseline)</li>
           <li>β₁ = 2: Each additional minute increases engagement by 2 units</li>
         </ul>
       </li>
-      <li><strong>Multiple Regression:</strong> Predicting revenue with price and marketing spend. Revenue = 1000 + 50×Price - 2×Spend. R² = 0.75.
+      <li><strong>Multiple Regression:</strong> Predicting revenue with price and marketing spend. Revenue = 1000 + 50×Price − 2×Spend. R² = 0.75.
         <ul>
-          <li>$50 increase in price → $50,000 more revenue</li>
-          <li>$1,000 more marketing spend → $2,000 less revenue</li>
-          <li>Model explains 75% of revenue variance</li>
+          <li>$50 increase in price → $50,000 more revenue (holding spend constant)</li>
+          <li>$1,000 more marketing spend → $2,000 less revenue (negative coefficient; may indicate diminishing returns)</li>
+          <li>Model explains 75% of revenue variance — reasonably strong fit</li>
         </ul>
       </li>
     </ol>
