@@ -45,7 +45,7 @@ track: "Interview Preparation"
     <h4>1.1 Advanced Analytical Patterns</h4>
     <ul>
       <li><strong>Window Functions:</strong> Mastery of <code>RANK</code>, <code>DENSE_RANK</code>, <code>ROW_NUMBER</code>, <code>LAG</code>, and <code>LEAD</code> for sessionization, retention curves, and growth metrics.</li>
-      <li><strong>CTEs:</strong> Use Common Table Expressions to decompose complex logic into named, readable steps — interviewers penalise monolithic, nested queries.</li>
+      <li><strong>CTEs:</strong> Use Common Table Expressions to decompose complex logic into named, readable steps — interviewers penalize monolithic, nested queries.</li>
     </ul>
 
     <h4>1.2 Scale Optimization Techniques</h4>
@@ -141,7 +141,7 @@ ORDER BY total_count DESC;</code></pre>
     <details>
     <summary><strong>Challenge 3 — Week-over-Week Retention with LEAD</strong> 🔴 Hard</summary>
     <p><strong>Table:</strong> <code>weekly_active(user_id, week_start, ds)</code></p>
-    <p><strong>Task:</strong> For each week W, compute the fraction of W's active users who were also active in W+1.</p>
+    <p><strong>Task:</strong> For each week W, compute the fraction of W's active users who were also active in W+1 (the immediately following 7-day period).</p>
     <details>
     <summary>✅ Solution</summary>
     <pre><code>WITH next_week AS (
