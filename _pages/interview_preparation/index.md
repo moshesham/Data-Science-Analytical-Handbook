@@ -59,6 +59,13 @@ track: "Interview Preparation"
     <p><a href="{{ '/interview-preparation/behavioral-interview/' | relative_url }}" class="button">Learn More →</a></p>
   </div>
 
+  <div class="card">
+    <h3><a href="{{ '/interview-preparation/staff-data-engineer/' | relative_url }}">Staff Data Engineer (E6) Syllabus</a></h3>
+    <p>A six-module deep dive targeting the Meta Staff Data Engineer (E6) bar — covering exabyte-scale SQL, production ETL patterns, dimensional modeling, distributed systems design, product metrics, and Staff-level leadership signals.</p>
+    <p><strong>Key Topics:</strong> Window functions, partition pruning, salting, broadcast joins, JSON flattening, SCD Type 2, Star vs OBT, Lambda/Kappa/Medallion architectures, exactly-once processing, CDC, North Star metrics, RCA framework, SPSIL storytelling</p>
+    <p><a href="{{ '/interview-preparation/staff-data-engineer/' | relative_url }}" class="button">Study E6 Guide →</a></p>
+  </div>
+
 </div>
 
 <div class="navigation-buttons">
