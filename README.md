@@ -19,7 +19,7 @@ This repository is organized into the following sections:
 
 | Section | Location | Description |
 |---------|----------|-------------|
-| **Main Handbook** | [`Data-Science-Analytical-Interview-Preparation-Handbook.MD`](Data-Science-Analytical-Interview-Preparation-Handbook.MD) | Comprehensive guide to Meta's data science interview process |
+| **Main Handbook** | [`Data-Science-Analytical-Interview-Preparation-Handbook.MD`](https://moshesham.github.io/Data-Science-Analytical-Handbook/) | Comprehensive guide to Meta's data science interview process |
 | **Jekyll Pages** | [`_pages/`](_pages/) | Web-ready content for GitHub Pages site |
 | **Hands-On Projects** | [`Analytical-HandsOn-Projects/`](Analytical-HandsOn-Projects/) | Practical data analysis projects |
 | **Simulations** | [`Simulations/`](Simulations/) | Interactive statistics notebooks |
