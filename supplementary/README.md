@@ -25,6 +25,6 @@ This directory contains additional study materials and practice problems for dat
 
 ## 🔗 Related Resources
 
-- [Main Handbook](../Data-Science-Analytical-Interview-Preparation-Handbook.MD)
+- [Main Handbook](../archive/Data-Science-Analytical-Interview-Preparation-Handbook.MD)
 - [GitHub Pages Site](https://moshesham.github.io/Data-Science-Analytical-Handbook/)
 - [Hands-On Projects](../Analytical-HandsOn-Projects/)
