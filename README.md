@@ -19,7 +19,7 @@ This repository is organized into the following sections:
 
 | Section | Location | Description |
 |---------|----------|-------------|
-| **Main Handbook** | [`Data-Science-Analytical-Interview-Preparation-Handbook.MD`](Data-Science-Analytical-Interview-Preparation-Handbook.MD) | Comprehensive guide to Meta's data science interview process |
+| **Main Handbook** | [`Data-Science-Analytical-Interview-Preparation-Handbook.MD`](archive/Data-Science-Analytical-Interview-Preparation-Handbook.MD) | Comprehensive guide to Meta's data science interview process |
 | **Jekyll Pages** | [`_pages/`](_pages/) | Web-ready content for GitHub Pages site |
 | **Hands-On Projects** | [`Analytical-HandsOn-Projects/`](Analytical-HandsOn-Projects/) | Practical data analysis projects |
 | **Simulations** | [`Simulations/`](Simulations/) | Interactive statistics notebooks |
@@ -52,7 +52,7 @@ This repository is organized into the following sections:
 
 ## 🚀 How to Use This Material
 
-1. **Start with the Handbook:** Begin by reading [`Data-Science-Analytical-Interview-Preparation-Handbook.MD`](Data-Science-Analytical-Interview-Preparation-Handbook.MD) for a comprehensive overview.
+1. **Start with the Handbook:** Begin by reading [`Data-Science-Analytical-Interview-Preparation-Handbook.MD`](archive/Data-Science-Analytical-Interview-Preparation-Handbook.MD) for a comprehensive overview.
 
 2. **Follow the 21-Day Prep Guide:** Use [`supplementary/21-day-prep-guide.md`](supplementary/21-day-prep-guide.md) for a structured preparation plan.
 
