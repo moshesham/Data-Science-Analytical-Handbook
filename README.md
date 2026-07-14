@@ -11,74 +11,18 @@ A comprehensive, open-source interview preparation handbook for data science ana
 
 **[? Data Science Analytical Handbook](https://moshesham.github.io/Data-Science-Analytical-Handbook/)**
 
-## ?? Repository Structure
+## 📁 Repository Content and Structure
 
-```
-Data-Science-Analytical-Handbook/
-??? _pages/                          # Jekyll content (GitHub Pages)
-?   ??? foundational_knowledge/      # Statistics, SQL, Python, A/B Testing
-?   ??? interview_preparation/       # All 4 interview types + checklists
-?   ??? exercises/                   # Beginner ? Intermediate ? Advanced
-?   ??? analytical_engineering/      # Advanced SQL & data engineering
-?   ??? best-practices/              # Strategy and architecture
-?   ??? tracks/                      # Role-level learning paths (E3�E6)
-?   ??? tools/                       # Sample size calculator & more
-?   ??? simulations/                 # Interactive distribution visualizer
-??? Analytical-HandsOn-Projects/     # 7 portfolio-ready Jupyter projects
-??? supplementary/                   # Cheat sheets, mock interviews, challenges
-?   ??? challenge-2026/              # 8-week cohort datasets and setup
-??? Best-Practices/                  # 10-module data engineering deep dives
-?   ??? Deep_Dive/
-??? Simulations/                     # Interactive statistics notebooks
-??? streamlit_app/                   # Local Product Analytics Streamlit app
-??? mcp-server/                      # MCP server for AI-assisted prep
-??? scripts/                         # CI and validation utilities
-??? assets/                          # CSS, diagrams, images
-```
+This repository is organized into the following sections:
 
-## ??? Learning Paths
+### Core Content
 
-| Role Level | Starting Point |
-|------------|----------------|
-| **Entry (E3)** | [Foundational Knowledge](https://moshesham.github.io/Data-Science-Analytical-Handbook/foundational_knowledge/) ? [Exercises](https://moshesham.github.io/Data-Science-Analytical-Handbook/exercises/) |
-| **Mid-level (E4�E5)** | [Interview Preparation](https://moshesham.github.io/Data-Science-Analytical-Handbook/interview-preparation/) ? [Hands-On Projects](Analytical-HandsOn-Projects/) |
-| **Senior/Staff (E6+)** | [Staff Data Engineer Guide](_pages/interview_preparation/staff-data-engineer.md) ? [Best Practices](Best-Practices/Deep_Dive/) |
-| **21-Day Sprint** | [21-Day Prep Guide](supplementary/21-day-prep-guide.md) |
-| **Year-Round** | [2026 Analytics Challenge](supplementary/2026-new-year-challenge.md) � 8-week cohort program |
-
-## ?? Core Content
-
-### Foundational Knowledge
-
-| Topic | Location |
-|-------|----------|
-| Statistics & Probability | [`_pages/foundational_knowledge/1-statistics-probability.md`](_pages/foundational_knowledge/1-statistics-probability.md) |
-| SQL (Core) | [`_pages/foundational_knowledge/2-SQL.md`](_pages/foundational_knowledge/2-SQL.md) |
-| Python for Analysis | [`_pages/foundational_knowledge/3-python-analysis.md`](_pages/foundational_knowledge/3-python-analysis.md) |
-| A/B Testing & Experimentation | [`_pages/foundational_knowledge/4-ab-testing.md`](_pages/foundational_knowledge/4-ab-testing.md) |
-
-### Interview Preparation
-
-| Topic | Location |
-|-------|----------|
-| SQL Interview Problems (15 curated) | [`_pages/interview_preparation/sql-interview-problems.md`](_pages/interview_preparation/sql-interview-problems.md) |
-| Analytical Execution (with case study) | [`_pages/interview_preparation/analytical_execution.md`](_pages/interview_preparation/analytical_execution.md) |
-| Analytical Reasoning & Product Sense | [`_pages/interview_preparation/analytical_reasoning.md`](_pages/interview_preparation/analytical_reasoning.md) |
-| Behavioral Interview (STAR examples) | [`_pages/interview_preparation/behavioral_interview.md`](_pages/interview_preparation/behavioral_interview.md) |
-| Staff Data Engineer (E6) Guide | [`_pages/interview_preparation/staff-data-engineer.md`](_pages/interview_preparation/staff-data-engineer.md) |
-| Interview Day Checklist | [`_pages/interview_preparation/interview-day-checklist.md`](_pages/interview_preparation/interview-day-checklist.md) |
-
-### Hands-On Projects
-
-| Project | Skills | Status |
-|---------|--------|--------|
-| [A/B Testing](Analytical-HandsOn-Projects/AB_Test_Project/) | Experiment design, power analysis, SRM | ? Notebook ready |
-| [Customer Churn](Analytical-HandsOn-Projects/Customer_Churn_Project/) | EDA, classification, feature engineering | ? Complete |
-| [Movie Reviews](Analytical-HandsOn-Projects/Movie_Reviews_Project/) | EDA, visualization | ? Notebook ready |
-| [Cohort Analysis](Analytical-HandsOn-Projects/Cohort_Analysis_Project/) | Retention, window functions, heatmaps | ?? Coming Soon |
-| [Demand Forecasting](Analytical-HandsOn-Projects/Demand_Forecasting_Project/) | Time series, Prophet, ARIMA | ?? Coming Soon |
-| [Fraud Detection](Analytical-HandsOn-Projects/Fraud_Detection_Project/) | Imbalanced data, precision-recall | ?? Coming Soon |
-| [Pricing Elasticity](Analytical-HandsOn-Projects/Pricing_Elasticity_Project/) | Regression, revenue simulation | ?? Coming Soon |
+| Section | Location | Description |
+|---------|----------|-------------|
+| **Main Handbook** | [`Data-Science-Analytical-Interview-Preparation-Handbook.MD`](https://moshesham.github.io/Data-Science-Analytical-Handbook/) | Comprehensive guide to Meta's data science interview process |
+| **Jekyll Pages** | [`_pages/`](_pages/) | Web-ready content for GitHub Pages site |
+| **Hands-On Projects** | [`Analytical-HandsOn-Projects/`](Analytical-HandsOn-Projects/) | Practical data analysis projects |
+| **Simulations** | [`Simulations/`](Simulations/) | Interactive statistics notebooks |
 
 ### Supplementary Materials
 
