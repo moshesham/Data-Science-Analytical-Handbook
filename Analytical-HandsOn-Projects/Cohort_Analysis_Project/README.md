@@ -1,5 +1,7 @@
 # Cohort Analysis Project
 
+> 🚧 **Status: Coming Soon** — The Jupyter notebook for this project is under development. The README and learning objectives are ready. Check back soon, or [watch the repository](https://github.com/moshesham/Data-Science-Analytical-Handbook) for updates.
+
 This folder hosts a hands-on cohort analysis project aligned with **Week 2** of the [2026 Analytics Challenge](../../supplementary/2026-new-year-challenge.md).
 
 ## 🎯 Learning Objectives

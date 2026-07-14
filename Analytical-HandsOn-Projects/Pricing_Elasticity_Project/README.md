@@ -1,5 +1,7 @@
 # Pricing Elasticity Project
 
+> 🚧 **Status: Coming Soon** — The Jupyter notebook for this project is under development. The README and learning objectives are ready. Check back soon, or [watch the repository](https://github.com/moshesham/Data-Science-Analytical-Handbook) for updates.
+
 This folder hosts a pricing elasticity analysis project aligned with the [2026 Analytics Challenge](../../supplementary/2026-new-year-challenge.md) capstone.
 
 ## 🎯 Learning Objectives

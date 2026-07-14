@@ -1,3 +1,10 @@
+<!-- DEPRECATED: This file is a legacy monolith from an earlier version of this handbook.
+All content has been migrated and significantly expanded in the `_pages/` directory and
+the live GitHub Pages site: https://moshesham.github.io/Data-Science-Analytical-Handbook/
+
+This file is retained for historical reference only. Please use the current materials instead.
+Some links in this document may be broken. -->
+
 # Data Science Analytical Interview Preparation Handbook for Meta
 
 This repo has all the resources you need to ace your Meta Data Science interviews!

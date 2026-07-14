@@ -43,7 +43,7 @@ Data-Science-Analytical-Handbook/
 │   ├── foundational_knowledge/  # Statistics, SQL, Python content
 │   └── interview_preparation/   # Interview guides
 ├── supplementary/             # Additional study materials
-│   ├── sql-example-problems.md
+│   ├── Advanced-SQL-Patterns+Techniques.md
 │   ├── statistics-probability-example-questions.md
 │   └── ...
 ├── Best-Practices/            # Data engineering best practices
