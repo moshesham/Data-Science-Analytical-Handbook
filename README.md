@@ -21,7 +21,7 @@ Data-Science-Analytical-Handbook/
 ?   ??? exercises/                   # Beginner ? Intermediate ? Advanced
 ?   ??? analytical_engineering/      # Advanced SQL & data engineering
 ?   ??? best-practices/              # Strategy and architecture
-?   ??? tracks/                      # Role-level learning paths (E3–E6)
+?   ??? tracks/                      # Role-level learning paths (E3ï¿½E6)
 ?   ??? tools/                       # Sample size calculator & more
 ?   ??? simulations/                 # Interactive distribution visualizer
 ??? Analytical-HandsOn-Projects/     # 7 portfolio-ready Jupyter projects
@@ -41,10 +41,10 @@ Data-Science-Analytical-Handbook/
 | Role Level | Starting Point |
 |------------|----------------|
 | **Entry (E3)** | [Foundational Knowledge](https://moshesham.github.io/Data-Science-Analytical-Handbook/foundational_knowledge/) ? [Exercises](https://moshesham.github.io/Data-Science-Analytical-Handbook/exercises/) |
-| **Mid-level (E4–E5)** | [Interview Preparation](https://moshesham.github.io/Data-Science-Analytical-Handbook/interview-preparation/) ? [Hands-On Projects](Analytical-HandsOn-Projects/) |
+| **Mid-level (E4ï¿½E5)** | [Interview Preparation](https://moshesham.github.io/Data-Science-Analytical-Handbook/interview-preparation/) ? [Hands-On Projects](Analytical-HandsOn-Projects/) |
 | **Senior/Staff (E6+)** | [Staff Data Engineer Guide](_pages/interview_preparation/staff-data-engineer.md) ? [Best Practices](Best-Practices/Deep_Dive/) |
 | **21-Day Sprint** | [21-Day Prep Guide](supplementary/21-day-prep-guide.md) |
-| **Year-Round** | [2026 Analytics Challenge](supplementary/2026-new-year-challenge.md) — 8-week cohort program |
+| **Year-Round** | [2026 Analytics Challenge](supplementary/2026-new-year-challenge.md) ï¿½ 8-week cohort program |
 
 ## ?? Core Content
 
