@@ -19,7 +19,7 @@ This repository is organized into the following sections:
 
 | Section | Location | Description |
 |---------|----------|-------------|
-| **Main Handbook** | [`Data-Science-Analytical-Interview-Preparation-Handbook.MD`](https://moshesham.github.io/Data-Science-Analytical-Handbook/) | Comprehensive guide to Meta's data science interview process |
+| **Main Handbook** | [`Data-Science-Analytical-Interview-Preparation-Handbook.MD`](archive/Data-Science-Analytical-Interview-Preparation-Handbook.MD) | Comprehensive guide to Meta's data science interview process |
 | **Jekyll Pages** | [`_pages/`](_pages/) | Web-ready content for GitHub Pages site |
 | **Hands-On Projects** | [`Analytical-HandsOn-Projects/`](Analytical-HandsOn-Projects/) | Practical data analysis projects |
 | **Simulations** | [`Simulations/`](Simulations/) | Interactive statistics notebooks |
@@ -67,6 +67,7 @@ An MCP server is available at [`mcp-server/`](mcp-server/) and separately at [ds
 
 See [`claude-skills-mcp-config.json`](claude-skills-mcp-config.json) for VS Code configuration.
 
+1. **Start with the Handbook:** Begin by reading [`Data-Science-Analytical-Interview-Preparation-Handbook.MD`](archive/Data-Science-Analytical-Interview-Preparation-Handbook.MD) for a comprehensive overview.
 ### Streamlit App (local)
 
 A companion Product Analytics app lives in [`streamlit_app/`](streamlit_app/). Run it locally:
