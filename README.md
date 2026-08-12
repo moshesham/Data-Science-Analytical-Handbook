@@ -5,11 +5,11 @@
 ![Markdown Links](https://github.com/moshesham/Data-Science-Analytical-Handbook/actions/workflows/markdown-links-only.yml/badge.svg)
 ![Notebooks to Markdown](https://github.com/moshesham/Data-Science-Analytical-Handbook/actions/workflows/notebooks-to-markdown.yml/badge.svg)
 
-This repository provides a comprehensive handbook designed to assist in preparing for data science analytical interviews, with a specific focus on Meta.
+A comprehensive, open-source interview preparation handbook for data science analytical roles, with a focused track for Meta. Covers the full interview process: statistics, SQL, Python, A/B testing, product sense, behavioral, and hands-on projects.
 
-## 🌐 GitHub Pages
+## ?? Live Site
 
-The GitHub Pages for this repository is available at: **[Data Science Analytical Handbook](https://moshesham.github.io/Data-Science-Analytical-Handbook/)**
+**[? Data Science Analytical Handbook](https://moshesham.github.io/Data-Science-Analytical-Handbook/)**
 
 ## 📁 Repository Content and Structure
 
@@ -28,17 +28,21 @@ This repository is organized into the following sections:
 
 | Resource | Location | Description |
 |----------|----------|-------------|
-| **21-Day Prep Guide** | [`supplementary/21-day-prep-guide.md`](supplementary/21-day-prep-guide.md) | Structured interview preparation plan |
-| **SQL Example Problems** | [`supplementary/sql-example-problems.md`](supplementary/sql-example-problems.md) | Complex SQL problems for practice |
+| **21-Day Prep Guide** | [`supplementary/21-day-prep-guide.md`](supplementary/21-day-prep-guide.md) | Structured 3-week interview preparation plan |
+| **Advanced SQL Patterns** | [`supplementary/Advanced-SQL-Patterns+Techniques.md`](supplementary/Advanced-SQL-Patterns+Techniques.md) | Expert-level SQL patterns and practice problems |
 | **Statistics Examples** | [`supplementary/statistics-probability-example-questions.md`](supplementary/statistics-probability-example-questions.md) | Statistics and probability practice questions |
-| **Advanced SQL Patterns** | [`supplementary/Advanced-SQL-Patterns+Techniques.md`](supplementary/Advanced-SQL-Patterns+Techniques.md) | Advanced SQL techniques and patterns |
-| **Behavioral Interview** | [`supplementary/behavioral-mock-interview.md`](supplementary/behavioral-mock-interview.md) | Behavioral interview preparation guide |
-| **Key Insights** | [`supplementary/key-insights-tips-meta.md`](supplementary/key-insights-tips-meta.md) | Meta-specific tips and insights |
+| **Behavioral Interview** | [`supplementary/behavioral-mock-interview.md`](supplementary/behavioral-mock-interview.md) | STAR method practice with sample answers |
+| **Key Insights (Meta)** | [`supplementary/key-insights-tips-meta.md`](supplementary/key-insights-tips-meta.md) | Meta-specific advice and common pitfalls |
+| **SQL Cheat Sheet** | [`supplementary/sql-cheat-sheet.md`](supplementary/sql-cheat-sheet.md) | Quick-reference SQL guide |
+| **Statistics Cheat Sheet** | [`supplementary/statistics-cheat-sheet.md`](supplementary/statistics-cheat-sheet.md) | Quick-reference statistics guide |
+| **2026 Analytics Challenge** | [`supplementary/2026-new-year-challenge.md`](supplementary/2026-new-year-challenge.md) | 8-week cohort-based curriculum with datasets |
 
 ### Best Practices (Data Engineering)
 
-| Topic | Location |
-|-------|----------|
+10 deep-dive modules covering the full data engineering stack:
+
+| Module | Location |
+|--------|----------|
 | Strategy & Architecture | [`Best-Practices/Deep_Dive/1_Strategy+Architecture.md`](Best-Practices/Deep_Dive/1_Strategy+Architecture.md) |
 | Data Architecture | [`Best-Practices/Deep_Dive/2_Data_Architecture.md`](Best-Practices/Deep_Dive/2_Data_Architecture.md) |
 | Data Governance | [`Best-Practices/Deep_Dive/3_Data_Governance.md`](Best-Practices/Deep_Dive/3_Data_Governance.md) |
@@ -50,26 +54,54 @@ This repository is organized into the following sections:
 | Data Transformation | [`Best-Practices/Deep_Dive/9_Transformation_Fundamentals.md`](Best-Practices/Deep_Dive/9_Transformation_Fundamentals.md) |
 | Data Acquisition & Ingestion | [`Best-Practices/Deep_Dive/Data_Acquisition_and_Ingestion.md`](Best-Practices/Deep_Dive/Data_Acquisition_and_Ingestion.md) |
 
-## 🚀 How to Use This Material
+## ??? Tools & Integrations
+
+### MCP Server (AI-assisted prep)
+
+An MCP server is available at [`mcp-server/`](mcp-server/) and separately at [ds-interview-mcp-server](https://github.com/moshesham/ds-interview-mcp-server). It integrates with Claude Desktop and VS Code to provide:
+
+- Quiz generation (SQL, statistics, Python, A/B testing)
+- SQL validation and optimization
+- A/B test design and result analysis
+- Case study and mock interview generation
+
+See [`claude-skills-mcp-config.json`](claude-skills-mcp-config.json) for VS Code configuration.
 
 1. **Start with the Handbook:** Begin by reading [`Data-Science-Analytical-Interview-Preparation-Handbook.MD`](archive/Data-Science-Analytical-Interview-Preparation-Handbook.MD) for a comprehensive overview.
+### Streamlit App (local)
 
-2. **Follow the 21-Day Prep Guide:** Use [`supplementary/21-day-prep-guide.md`](supplementary/21-day-prep-guide.md) for a structured preparation plan.
+A companion Product Analytics app lives in [`streamlit_app/`](streamlit_app/). Run it locally:
 
-3. **Review Foundational Knowledge:** Study statistics concepts in [`supplementary/statistics-probability-example-questions.md`](supplementary/statistics-probability-example-questions.md).
+```bash
+pip install -r streamlit_app/Product_Analytics/requirements.txt
+cd streamlit_app/Product_Analytics
+streamlit run streamlit_app.py
+# Open http://localhost:8501
+```
 
-4. **Practice SQL:** Work through problems in [`supplementary/sql-example-problems.md`](supplementary/sql-example-problems.md).
+### Local Jekyll Development
 
-5. **Run Interactive Simulations:** Explore Jupyter notebooks in [`Simulations/`](Simulations/) for hands-on statistics practice.
+```bash
+# Using Docker (recommended)
+docker-compose up
+# Visit http://localhost:4000
+```
 
-6. **Prepare for Behavioral Questions:** Review [`supplementary/behavioral-mock-interview.md`](supplementary/behavioral-mock-interview.md).
+## ?? How to Use This Material
 
-7. **Visit the Website:** Explore the full content at [GitHub Pages](https://moshesham.github.io/Data-Science-Analytical-Handbook/).
+1. **Pick your level:** Use the Learning Paths table above to find your starting point.
+2. **Follow the 21-Day Guide:** [`supplementary/21-day-prep-guide.md`](supplementary/21-day-prep-guide.md) gives a day-by-day structured plan.
+3. **Master foundational topics:** Statistics ? SQL ? Python ? A/B Testing in [`_pages/foundational_knowledge/`](_pages/foundational_knowledge/).
+4. **Practice SQL:** Work through [`supplementary/Advanced-SQL-Patterns+Techniques.md`](supplementary/Advanced-SQL-Patterns+Techniques.md) and the curated [`_pages/interview_preparation/sql-interview-problems.md`](_pages/interview_preparation/sql-interview-problems.md).
+5. **Build portfolio projects:** Complete the hands-on projects in [`Analytical-HandsOn-Projects/`](Analytical-HandsOn-Projects/).
+6. **Run interactive simulations:** Explore [`Simulations/`](Simulations/) for statistics practice with real code.
+7. **Prepare for behavioral:** Review [`supplementary/behavioral-mock-interview.md`](supplementary/behavioral-mock-interview.md) with STAR stories.
+8. **Join the 2026 Challenge:** 8-week cohort curriculum at [`supplementary/2026-new-year-challenge.md`](supplementary/2026-new-year-challenge.md).
 
-## 🤝 Contributing
+## ?? Contributing
 
-This handbook is a collaborative effort, and contributions are welcome! If you have suggestions, find errors, or want to add more content, please feel free to open an issue or submit a pull request.
+Contributions are welcome! If you find errors, want to add practice problems, or improve explanations, please open an issue or submit a pull request. See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
 
-## 📄 License
+## ?? License
 
 See [LICENSE](LICENSE) for details.

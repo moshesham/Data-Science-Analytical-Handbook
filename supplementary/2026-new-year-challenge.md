@@ -3173,7 +3173,7 @@ Completed the challenge? Get recognized!
 ## Additional Resources
 
 - [21-Day Preparation Guide]({{ '/supplementary/21-day-prep-guide/' | relative_url }})
-- [SQL Example Problems]({{ '/supplementary/sql-example-problems/' | relative_url }})
+- [Advanced SQL Patterns & Techniques]({{ '/supplementary/Advanced-SQL-Patterns+Techniques/' | relative_url }})
 - [Statistics & Probability Example Questions]({{ '/supplementary/statistics-probability-example-questions/' | relative_url }})
 - [Behavioral Mock Interview]({{ '/supplementary/behavioral-mock-interview/' | relative_url }})
 

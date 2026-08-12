@@ -6,15 +6,15 @@ This folder provides practical, hands-on experience in data analysis using open-
 
 Each project is designed to build specific skills aligned with the 2026 Analytics Challenge:
 
-| Project | Challenge Week | Key Skills |
-|---------|---------------|------------|
-| [A/B Testing](./AB_Test_Project/) | Week 4 | Experiment design, statistical testing, guardrails |
-| [Cohort Analysis](./Cohort_Analysis_Project/) | Week 2 | Window functions, retention metrics, heatmaps |
-| [Customer Churn](./Customer_Churn_Project/) | Week 5-6 | EDA, classification, feature engineering |
-| [Demand Forecasting](./Demand_Forecasting_Project/) | Capstone | Time series, Prophet, business recommendations |
-| [Fraud Detection](./Fraud_Detection_Project/) | Advanced | Imbalanced data, precision-recall, thresholds |
-| [Pricing Elasticity](./Pricing_Elasticity_Project/) | Week 6 | Regression, elasticity, revenue simulation |
-| [Movie Reviews](./Movie_Reviews_Project/) | Beginner | Basic EDA, visualization |
+| Project | Challenge Week | Key Skills | Status |
+|---------|---------------|------------|--------|
+| [A/B Testing](./AB_Test_Project/) | Week 4 | Experiment design, statistical testing, guardrails | ✅ Notebook ready |
+| [Cohort Analysis](./Cohort_Analysis_Project/) | Week 2 | Window functions, retention metrics, heatmaps | 🚧 Coming Soon |
+| [Customer Churn](./Customer_Churn_Project/) | Week 5-6 | EDA, classification, feature engineering | ✅ Complete |
+| [Demand Forecasting](./Demand_Forecasting_Project/) | Capstone | Time series, Prophet, business recommendations | 🚧 Coming Soon |
+| [Fraud Detection](./Fraud_Detection_Project/) | Advanced | Imbalanced data, precision-recall, thresholds | 🚧 Coming Soon |
+| [Pricing Elasticity](./Pricing_Elasticity_Project/) | Week 6 | Regression, elasticity, revenue simulation | 🚧 Coming Soon |
+| [Movie Reviews](./Movie_Reviews_Project/) | Beginner | Basic EDA, visualization | ✅ Notebook ready |
 
 ## 🆕 2026 Enhancements
 

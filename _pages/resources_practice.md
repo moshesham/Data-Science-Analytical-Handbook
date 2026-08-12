@@ -35,7 +35,7 @@ track: "Reference"
     <h3>SQL Practice</h3>
     <ul>
       <li><a href="{{ '/interview-preparation/sql-interview-problems/' | relative_url }}">📊 SQL Interview Problems (15 Curated)</a> - Graded problems with full solutions in Postgres</li>
-      <li><a href="https://github.com/moshesham/Data-Science-Analytical-Handbook/blob/main/supplementary/sql-example-problems.md" target="_blank">📊 SQL Example Problems</a> - Comprehensive SQL practice questions with solutions</li>
+      <li><a href="https://github.com/moshesham/Data-Science-Analytical-Handbook/blob/main/supplementary/Advanced-SQL-Patterns+Techniques.md" target="_blank">📊 Advanced SQL Patterns &amp; Techniques</a> - Comprehensive SQL patterns, practice questions, and optimization techniques</li>
       <li><a href="https://github.com/moshesham/Data-Science-Analytical-Handbook/blob/main/supplementary/Advanced-SQL-Patterns+Techniques.md" target="_blank">🔥 Advanced SQL Patterns & Techniques</a> - Expert-level SQL patterns and optimization techniques</li>
     </ul>
     

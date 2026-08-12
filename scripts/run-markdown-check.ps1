@@ -4,7 +4,7 @@ Param(
 
 $files = @(
   "Best-Practices\Deep_Dive\1_Strategy+Architecture.md",
-  "supplementary\sql-example-problems.md",
+  "supplementary\Advanced-SQL-Patterns+Techniques.md",
   "index.md"
 )
 
@@ -19,7 +19,8 @@ foreach ($f in $files) {
   if ($LASTEXITCODE -ne 0) {
     Write-Host "FAILED: $f" -ForegroundColor Red
     $failed += $f
-  } else {
+  }
+  else {
     Write-Host "OK: $f" -ForegroundColor Green
   }
 }
@@ -29,6 +30,7 @@ if ($failed.Count -gt 0) {
   Write-Host "$($failed.Count) file(s) failed link check" -ForegroundColor Red
   $failed | ForEach-Object { Write-Host " - $_" }
   exit 1
-} else {
+}
+else {
   Write-Host "Summary: All checks passed" -ForegroundColor Green
 }

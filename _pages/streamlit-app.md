@@ -19,18 +19,15 @@ tags: [Streamlit, Product Analytics, App]
 
 <div class="section">
   <div class="card">
-    <h3>Live App</h3>
-    <p>If deployed, the app will be accessible at the link below.</p>
-    <p><strong>URL:</strong> <span style="color:#666;">(update after deployment)</span></p>
-  </div>
-
-  <div class="card">
-    <h3>Deploy Instructions</h3>
+    <h3>Run Locally</h3>
+    <p>This app is not currently deployed to a public URL. To run it locally:</p>
     <ol>
-      <li>Create a Streamlit Cloud app pointing to <code>streamlit_app/Product_Analytics/streamlit_app.py</code>.</li>
-      <li>Set any required secrets or environment variables in Streamlit Cloud.</li>
-      <li>Update the "Live App" URL above once deployed.</li>
+      <li>Clone the repository: <code>git clone https://github.com/moshesham/Data-Science-Analytical-Handbook.git</code></li>
+      <li>Install dependencies: <code>pip install -r streamlit_app/Product_Analytics/requirements.txt</code></li>
+      <li>Launch: <code>cd streamlit_app/Product_Analytics &amp;&amp; streamlit run streamlit_app.py</code></li>
+      <li>Open <code>http://localhost:8501</code> in your browser</li>
     </ol>
+    <p>See <a href="https://github.com/moshesham/Data-Science-Analytical-Handbook/blob/main/streamlit_app/README.md">streamlit_app/README.md</a> for optional Streamlit Cloud deployment instructions.</p>
   </div>
 
   <div class="card">
